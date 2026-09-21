@@ -1,0 +1,96 @@
+<?xml version="1.0" ?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://www.omg.org/spec/BPMN/20100524/MODEL">
+  <process id="Process_1" name="05" isExecutable="false">
+    <task id="GEN_Task_1" name="Conduct site visit">
+      <incoming>SequenceFlow_11</incoming>
+      <outgoing>SequenceFlow_1</outgoing>
+    </task>
+    <task id="GEN_Task_2" name="Conduct interview">
+      <incoming>SequenceFlow_3</incoming>
+      <outgoing>SequenceFlow_9</outgoing>
+    </task>
+    <task id="GEN_Task_3" name="Select supplier">
+      <incoming>SequenceFlow_4</incoming>
+      <outgoing>SequenceFlow_18</outgoing>
+    </task>
+    <task id="GEN_Task_4" name="Execute contract">
+      <incoming>SequenceFlow_16</incoming>
+      <outgoing>SequenceFlow_5</outgoing>
+    </task>
+    <task id="GEN_Task_5" name="Receive supplier proposals">
+      <incoming>SequenceFlow_14</incoming>
+      <outgoing>SequenceFlow_6</outgoing>
+    </task>
+    <task id="GEN_Task_6" name="Identify need for new supplier or vendor">
+      <incoming>SequenceFlow_7</incoming>
+      <outgoing>SequenceFlow_19</outgoing>
+    </task>
+    <task id="GEN_Task_7" name="Evaluate proposal">
+      <incoming>SequenceFlow_8</incoming>
+      <outgoing>SequenceFlow_15</outgoing>
+    </task>
+    <task id="GEN_Task_8" name="Begin contract negotiations">
+      <incoming>SequenceFlow_18</incoming>
+      <outgoing>SequenceFlow_10</outgoing>
+    </task>
+    <task id="GEN_Task_9" name="Sign contract">
+      <incoming>SequenceFlow_10</incoming>
+      <outgoing>SequenceFlow_13</outgoing>
+    </task>
+    <task id="GEN_Task_10" name="Onboard supplier">
+      <incoming>SequenceFlow_13</incoming>
+      <outgoing>SequenceFlow_16</outgoing>
+    </task>
+    <task id="GEN_Task_11" name="Issue request for proposals (RFP)">
+      <incoming>SequenceFlow_19</incoming>
+      <outgoing>SequenceFlow_14</outgoing>
+    </task>
+    <exclusiveGateway id="GEN_ExclusiveGateway_1" name="X">
+      <incoming>SequenceFlow_1</incoming>
+      <incoming>SequenceFlow_2</incoming>
+      <incoming>SequenceFlow_9</incoming>
+      <outgoing>SequenceFlow_12</outgoing>
+    </exclusiveGateway>
+    <exclusiveGateway id="GEN_ExclusiveGateway_2" name="X">
+      <incoming>SequenceFlow_15</incoming>
+      <outgoing>SequenceFlow_2</outgoing>
+      <outgoing>SequenceFlow_3</outgoing>
+      <outgoing>SequenceFlow_11</outgoing>
+    </exclusiveGateway>
+    <exclusiveGateway id="GEN_ExclusiveGateway_3" name="X">
+      <incoming>SequenceFlow_12</incoming>
+      <outgoing>SequenceFlow_4</outgoing>
+      <outgoing>SequenceFlow_17</outgoing>
+    </exclusiveGateway>
+    <exclusiveGateway id="GEN_ExclusiveGateway_4" name="X">
+      <incoming>SequenceFlow_6</incoming>
+      <incoming>SequenceFlow_17</incoming>
+      <outgoing>SequenceFlow_8</outgoing>
+    </exclusiveGateway>
+    <endEvent id="GEN_EndEvent_1" name="end">
+      <incoming>SequenceFlow_5</incoming>
+    </endEvent>
+    <startEvent id="GEN_StartEvent_1" name="start">
+      <outgoing>SequenceFlow_7</outgoing>
+    </startEvent>
+    <sequenceFlow id="SequenceFlow_1" sourceRef="GEN_Task_1" targetRef="GEN_ExclusiveGateway_1"/>
+    <sequenceFlow id="SequenceFlow_2" sourceRef="GEN_ExclusiveGateway_2" targetRef="GEN_ExclusiveGateway_1"/>
+    <sequenceFlow id="SequenceFlow_3" sourceRef="GEN_ExclusiveGateway_2" targetRef="GEN_Task_2"/>
+    <sequenceFlow id="SequenceFlow_4" sourceRef="GEN_ExclusiveGateway_3" targetRef="GEN_Task_3"/>
+    <sequenceFlow id="SequenceFlow_5" sourceRef="GEN_Task_4" targetRef="GEN_EndEvent_1"/>
+    <sequenceFlow id="SequenceFlow_6" sourceRef="GEN_Task_5" targetRef="GEN_ExclusiveGateway_4"/>
+    <sequenceFlow id="SequenceFlow_7" sourceRef="GEN_StartEvent_1" targetRef="GEN_Task_6"/>
+    <sequenceFlow id="SequenceFlow_8" sourceRef="GEN_ExclusiveGateway_4" targetRef="GEN_Task_7"/>
+    <sequenceFlow id="SequenceFlow_9" sourceRef="GEN_Task_2" targetRef="GEN_ExclusiveGateway_1"/>
+    <sequenceFlow id="SequenceFlow_10" sourceRef="GEN_Task_8" targetRef="GEN_Task_9"/>
+    <sequenceFlow id="SequenceFlow_11" sourceRef="GEN_ExclusiveGateway_2" targetRef="GEN_Task_1"/>
+    <sequenceFlow id="SequenceFlow_12" sourceRef="GEN_ExclusiveGateway_1" targetRef="GEN_ExclusiveGateway_3"/>
+    <sequenceFlow id="SequenceFlow_13" sourceRef="GEN_Task_9" targetRef="GEN_Task_10"/>
+    <sequenceFlow id="SequenceFlow_14" sourceRef="GEN_Task_11" targetRef="GEN_Task_5"/>
+    <sequenceFlow id="SequenceFlow_15" sourceRef="GEN_Task_7" targetRef="GEN_ExclusiveGateway_2"/>
+    <sequenceFlow id="SequenceFlow_16" sourceRef="GEN_Task_10" targetRef="GEN_Task_4"/>
+    <sequenceFlow id="SequenceFlow_17" sourceRef="GEN_ExclusiveGateway_3" targetRef="GEN_ExclusiveGateway_4"/>
+    <sequenceFlow id="SequenceFlow_18" sourceRef="GEN_Task_3" targetRef="GEN_Task_8"/>
+    <sequenceFlow id="SequenceFlow_19" sourceRef="GEN_Task_6" targetRef="GEN_Task_11"/>
+  </process>
+</definitions>

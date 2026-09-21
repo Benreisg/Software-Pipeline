@@ -1,0 +1,100 @@
+digraph G {
+  rankdir=LR;  
+  node [shape=box];
+
+  "User_1" [label="Send requirements"];
+  "User_2" [label="Collect requirements"];
+  "User_3" [label="Refine requirements"];
+  "User_4" [label="Create order list"];
+  "User_5" [label="Place order"];
+  "Service_1" [label="Report for builing\npermit"];
+  "Service_2" [label="Calculate effort"];
+  "Service_3" [label="Check feasibility"];
+  "Manual_1" [label="Call friends"];
+  "Manual_2" [label="Build house"];
+  "Manual_3" [label="Hire building\ncompany"];
+  "StartNoneEvent_1" [shape=circle, label="wish to build a\nhouse"];
+  "EndNoneEvent_1" [shape=circle, penwidth=4, label="finished house"];
+  "IntermediateMessageEventCatching_1" [shape=doublecircle, label="draft received"];
+  "IntermediateMessageEventCatching_2" [shape=doublecircle, label="Get order"];
+  "ExclusiveGateway_1" [shape=diamond, label="Draft sufficient?"];
+  "ExclusiveGateway_2" [shape=diamond, label="X"];
+  "ExclusiveGateway_3" [shape=diamond, label="Subject to approval?"];
+  "ExclusiveGateway_4" [shape=diamond, label="X"];
+  "ExclusiveGateway_5" [shape=diamond, label="Affordable?"];
+  "ExclusiveGateway_6" [shape=diamond, label="X"];
+  "ParallelGateway_1" [shape=diamond, label="+"];
+  "ParallelGateway_2" [shape=diamond, label="+"];
+
+  "StartNoneEvent_1" -> "User_2";
+  "User_1" -> "IntermediateMessageEventCatching_1";
+  "User_4" -> "User_5";
+  "IntermediateMessageEventCatching_1" -> "Service_3";
+  "User_3" -> "ExclusiveGateway_2";
+  "ExclusiveGateway_2" -> "User_1";
+  "User_2" -> "ExclusiveGateway_2";
+  "ExclusiveGateway_3" -> "Service_1" [label="Yes"];
+  "ExclusiveGateway_1" -> "ExclusiveGateway_3" [label="Yes"];
+  "ExclusiveGateway_1" -> "User_3" [label="No"];
+  "Service_1" -> "ExclusiveGateway_4";
+  "ExclusiveGateway_3" -> "ExclusiveGateway_4" [label="No"];
+  "ExclusiveGateway_4" -> "User_4";
+  "User_5" -> "Service_2";
+  "Service_2" -> "ParallelGateway_1";
+  "Service_3" -> "ExclusiveGateway_1";
+  "ParallelGateway_1" -> "IntermediateMessageEventCatching_2";
+  "ParallelGateway_1" -> "ExclusiveGateway_5";
+  "ExclusiveGateway_5" -> "Manual_1" [label="No"];
+  "ExclusiveGateway_5" -> "Manual_3" [label="Yes"];
+  "Manual_1" -> "ExclusiveGateway_6";
+  "IntermediateMessageEventCatching_2" -> "ParallelGateway_2";
+  "ExclusiveGateway_6" -> "ParallelGateway_2";
+  "ParallelGateway_2" -> "Manual_2";
+  "Manual_2" -> "EndNoneEvent_1";
+  "Manual_3" -> "ExclusiveGateway_6";
+  "User_1" -> "Pool_2" [style=dashed, arrowhead=open];
+  "Pool_2" -> "IntermediateMessageEventCatching_1" [style=dashed, arrowhead=open];
+  "Pool_3" -> "IntermediateMessageEventCatching_2" [style=dashed, arrowhead=open];
+  "User_5" -> "Pool_3" [style=dashed, arrowhead=open];
+
+  subgraph "cluster_Pool_1" {
+    label="Customer";
+
+    subgraph "cluster_Lane_1" {
+      label="";
+      "User_1";
+      "User_2";
+      "StartNoneEvent_1";
+      "User_3";
+      "User_4";
+      "IntermediateMessageEventCatching_1";
+      "User_5";
+      "ExclusiveGateway_1";
+      "ExclusiveGateway_2";
+      "Service_1";
+      "ExclusiveGateway_3";
+      "ExclusiveGateway_4";
+      "Service_2";
+      "Service_3";
+      "ParallelGateway_1";
+      "ExclusiveGateway_5";
+      "Manual_1";
+      "IntermediateMessageEventCatching_2";
+      "ParallelGateway_2";
+      "Manual_2";
+      "EndNoneEvent_1";
+      "ExclusiveGateway_6";
+      "Manual_3";
+    }
+  }
+
+  subgraph "cluster_Pool_2" {
+    label="Architect";
+    "Pool_2" [shape=point, style=invis];
+  }
+
+  subgraph "cluster_Pool_3" {
+    label="Online stores";
+    "Pool_3" [shape=point, style=invis];
+  }
+}

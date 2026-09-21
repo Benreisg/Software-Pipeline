@@ -1,0 +1,157 @@
+<?xml version="1.0" ?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://www.omg.org/spec/BPMN/20100524/MODEL">
+  <process id="Process_1" name="44" isExecutable="false">
+    <task id="GEN_Task_1" name="Select type of order">
+      <incoming>SequenceFlow_1</incoming>
+      <outgoing>SequenceFlow_2</outgoing>
+    </task>
+    <task id="GEN_Task_2" name="Select type of beverage">
+      <incoming>SequenceFlow_13</incoming>
+      <outgoing>SequenceFlow_3</outgoing>
+    </task>
+    <task id="GEN_Task_3" name="Prepare beverage">
+      <incoming>SequenceFlow_4</incoming>
+      <outgoing>SequenceFlow_6</outgoing>
+    </task>
+    <task id="GEN_Task_4" name="Select side">
+      <incoming>SequenceFlow_5</incoming>
+      <outgoing>SequenceFlow_7</outgoing>
+    </task>
+    <task id="GEN_Task_5" name="Prepare potato wedges">
+      <incoming>SequenceFlow_10</incoming>
+      <outgoing>SequenceFlow_8</outgoing>
+    </task>
+    <task id="GEN_Task_6" name="Prepare French fries">
+      <incoming>SequenceFlow_11</incoming>
+      <outgoing>SequenceFlow_9</outgoing>
+    </task>
+    <task id="GEN_Task_7" name="Select menu">
+      <incoming>SequenceFlow_15</incoming>
+      <outgoing>SequenceFlow_13</outgoing>
+    </task>
+    <task id="GEN_Task_8" name="Select burger">
+      <incoming>SequenceFlow_26</incoming>
+      <outgoing>SequenceFlow_14</outgoing>
+    </task>
+    <task id="GEN_Task_9" name="Check status">
+      <incoming>SequenceFlow_18</incoming>
+      <outgoing>SequenceFlow_19</outgoing>
+    </task>
+    <task id="GEN_Task_10" name="Prepare burger">
+      <incoming>SequenceFlow_29</incoming>
+      <outgoing>SequenceFlow_20</outgoing>
+    </task>
+    <task id="GEN_Task_11" name="Deliver via conveyor belt">
+      <incoming>SequenceFlow_25</incoming>
+      <outgoing>SequenceFlow_21</outgoing>
+    </task>
+    <task id="GEN_Task_12" name="Update status">
+      <incoming>SequenceFlow_22</incoming>
+      <outgoing>SequenceFlow_23</outgoing>
+    </task>
+    <task id="GEN_Task_13" name="Notify customer">
+      <incoming>SequenceFlow_24</incoming>
+      <outgoing>SequenceFlow_25</outgoing>
+    </task>
+    <task id="GEN_Task_14" name="Make payment">
+      <incoming>SequenceFlow_32</incoming>
+      <outgoing>SequenceFlow_30</outgoing>
+    </task>
+    <task id="GEN_Task_15" name="Enter customer's name">
+      <incoming>SequenceFlow_30</incoming>
+      <outgoing>SequenceFlow_31</outgoing>
+    </task>
+    <exclusiveGateway id="GEN_ExclusiveGateway_1" name="Menu or just the burger ?">
+      <incoming>SequenceFlow_2</incoming>
+      <outgoing>SequenceFlow_15</outgoing>
+      <outgoing>SequenceFlow_26</outgoing>
+    </exclusiveGateway>
+    <parallelGateway id="GEN_ParallelGateway_1" name="+">
+      <incoming>SequenceFlow_3</incoming>
+      <outgoing>SequenceFlow_4</outgoing>
+      <outgoing>SequenceFlow_5</outgoing>
+    </parallelGateway>
+    <parallelGateway id="GEN_ParallelGateway_2" name="+">
+      <incoming>SequenceFlow_6</incoming>
+      <incoming>SequenceFlow_7</incoming>
+      <outgoing>SequenceFlow_12</outgoing>
+    </parallelGateway>
+    <exclusiveGateway id="GEN_ExclusiveGateway_2" name="X">
+      <incoming>SequenceFlow_8</incoming>
+      <incoming>SequenceFlow_9</incoming>
+      <outgoing>SequenceFlow_16</outgoing>
+    </exclusiveGateway>
+    <exclusiveGateway id="GEN_ExclusiveGateway_3" name="Fries or wedges ?">
+      <incoming>SequenceFlow_12</incoming>
+      <outgoing>SequenceFlow_10</outgoing>
+      <outgoing>SequenceFlow_11</outgoing>
+    </exclusiveGateway>
+    <exclusiveGateway id="GEN_ExclusiveGateway_4" name="X">
+      <incoming>SequenceFlow_14</incoming>
+      <incoming>SequenceFlow_16</incoming>
+      <outgoing>SequenceFlow_32</outgoing>
+    </exclusiveGateway>
+    <parallelGateway id="GEN_ParallelGateway_3" name="+">
+      <incoming>SequenceFlow_31</incoming>
+      <outgoing>SequenceFlow_17</outgoing>
+      <outgoing>SequenceFlow_29</outgoing>
+    </parallelGateway>
+    <exclusiveGateway id="GEN_ExclusiveGateway_5" name="X">
+      <incoming>SequenceFlow_17</incoming>
+      <incoming>SequenceFlow_27</incoming>
+      <outgoing>SequenceFlow_22</outgoing>
+    </exclusiveGateway>
+    <exclusiveGateway id="GEN_ExclusiveGateway_6" name="Is burger ready ?">
+      <incoming>SequenceFlow_19</incoming>
+      <outgoing>SequenceFlow_27</outgoing>
+      <outgoing>SequenceFlow_28</outgoing>
+    </exclusiveGateway>
+    <parallelGateway id="GEN_ParallelGateway_4" name="+">
+      <incoming>SequenceFlow_20</incoming>
+      <incoming>SequenceFlow_28</incoming>
+      <outgoing>SequenceFlow_24</outgoing>
+    </parallelGateway>
+    <startEvent id="GEN_StartEvent_1" name="Food order decided">
+      <outgoing>SequenceFlow_1</outgoing>
+    </startEvent>
+    <intermediateCatchEvent id="GEN_IntermediateCatchEvent_1" name="30 seconds">
+      <incoming>SequenceFlow_23</incoming>
+      <outgoing>SequenceFlow_18</outgoing>
+    </intermediateCatchEvent>
+    <endEvent id="GEN_EndEvent_1" name="Food delivered">
+      <incoming>SequenceFlow_21</incoming>
+    </endEvent>
+    <sequenceFlow id="SequenceFlow_1" sourceRef="GEN_StartEvent_1" targetRef="GEN_Task_1"/>
+    <sequenceFlow id="SequenceFlow_2" sourceRef="GEN_Task_1" targetRef="GEN_ExclusiveGateway_1"/>
+    <sequenceFlow id="SequenceFlow_3" sourceRef="GEN_Task_2" targetRef="GEN_ParallelGateway_1"/>
+    <sequenceFlow id="SequenceFlow_4" sourceRef="GEN_ParallelGateway_1" targetRef="GEN_Task_3"/>
+    <sequenceFlow id="SequenceFlow_5" sourceRef="GEN_ParallelGateway_1" targetRef="GEN_Task_4"/>
+    <sequenceFlow id="SequenceFlow_6" sourceRef="GEN_Task_3" targetRef="GEN_ParallelGateway_2"/>
+    <sequenceFlow id="SequenceFlow_7" sourceRef="GEN_Task_4" targetRef="GEN_ParallelGateway_2"/>
+    <sequenceFlow id="SequenceFlow_8" sourceRef="GEN_Task_5" targetRef="GEN_ExclusiveGateway_2"/>
+    <sequenceFlow id="SequenceFlow_9" sourceRef="GEN_Task_6" targetRef="GEN_ExclusiveGateway_2"/>
+    <sequenceFlow id="SequenceFlow_10" sourceRef="GEN_ExclusiveGateway_3" targetRef="GEN_Task_5"/>
+    <sequenceFlow id="SequenceFlow_11" sourceRef="GEN_ExclusiveGateway_3" targetRef="GEN_Task_6"/>
+    <sequenceFlow id="SequenceFlow_12" sourceRef="GEN_ParallelGateway_2" targetRef="GEN_ExclusiveGateway_3"/>
+    <sequenceFlow id="SequenceFlow_13" sourceRef="GEN_Task_7" targetRef="GEN_Task_2"/>
+    <sequenceFlow id="SequenceFlow_14" sourceRef="GEN_Task_8" targetRef="GEN_ExclusiveGateway_4"/>
+    <sequenceFlow id="SequenceFlow_15" sourceRef="GEN_ExclusiveGateway_1" targetRef="GEN_Task_7"/>
+    <sequenceFlow id="SequenceFlow_16" sourceRef="GEN_ExclusiveGateway_2" targetRef="GEN_ExclusiveGateway_4"/>
+    <sequenceFlow id="SequenceFlow_17" sourceRef="GEN_ParallelGateway_3" targetRef="GEN_ExclusiveGateway_5"/>
+    <sequenceFlow id="SequenceFlow_18" sourceRef="GEN_IntermediateCatchEvent_1" targetRef="GEN_Task_9"/>
+    <sequenceFlow id="SequenceFlow_19" sourceRef="GEN_Task_9" targetRef="GEN_ExclusiveGateway_6"/>
+    <sequenceFlow id="SequenceFlow_20" sourceRef="GEN_Task_10" targetRef="GEN_ParallelGateway_4"/>
+    <sequenceFlow id="SequenceFlow_21" sourceRef="GEN_Task_11" targetRef="GEN_EndEvent_1"/>
+    <sequenceFlow id="SequenceFlow_22" sourceRef="GEN_ExclusiveGateway_5" targetRef="GEN_Task_12"/>
+    <sequenceFlow id="SequenceFlow_23" sourceRef="GEN_Task_12" targetRef="GEN_IntermediateCatchEvent_1"/>
+    <sequenceFlow id="SequenceFlow_24" sourceRef="GEN_ParallelGateway_4" targetRef="GEN_Task_13"/>
+    <sequenceFlow id="SequenceFlow_25" sourceRef="GEN_Task_13" targetRef="GEN_Task_11"/>
+    <sequenceFlow id="SequenceFlow_26" sourceRef="GEN_ExclusiveGateway_1" targetRef="GEN_Task_8"/>
+    <sequenceFlow id="SequenceFlow_27" sourceRef="GEN_ExclusiveGateway_6" targetRef="GEN_ExclusiveGateway_5"/>
+    <sequenceFlow id="SequenceFlow_28" sourceRef="GEN_ExclusiveGateway_6" targetRef="GEN_ParallelGateway_4"/>
+    <sequenceFlow id="SequenceFlow_29" sourceRef="GEN_ParallelGateway_3" targetRef="GEN_Task_10"/>
+    <sequenceFlow id="SequenceFlow_30" sourceRef="GEN_Task_14" targetRef="GEN_Task_15"/>
+    <sequenceFlow id="SequenceFlow_31" sourceRef="GEN_Task_15" targetRef="GEN_ParallelGateway_3"/>
+    <sequenceFlow id="SequenceFlow_32" sourceRef="GEN_ExclusiveGateway_4" targetRef="GEN_Task_14"/>
+  </process>
+</definitions>

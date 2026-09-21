@@ -1,0 +1,21 @@
+graph LR
+	classDef endEvent stroke-width:4px
+	
+	Task_8["Send order\nconfirmation to\ncustomer"] --> ExclusiveGateway_1{"X"}
+	ExclusiveGateway_3{"X"} --> EndNoneEvent_1(("end")):::endEvent
+	ParallelGateway_2{"+"} --> Task_7["Address customer\nconcerns or\nquestions"]
+	Task_1["Record order in\nsystem"] --> Task_8
+	Task_7 --> ParallelGateway_1{"+"}
+	ParallelGateway_1 --> ExclusiveGateway_4{"X"}
+	ExclusiveGateway_1 --> ExclusiveGateway_3
+	Task_2["Collect customer\ninformation"] --> ParallelGateway_1
+	StartNoneEvent_1(("start")) --> Task_5["Receive customer\ninquiry"]
+	ParallelGateway_2 --> Task_2
+	ExclusiveGateway_4 --> ExclusiveGateway_3
+	ExclusiveGateway_2{"X"} --> ExclusiveGateway_1
+	Task_6["Place order"] --> Task_1
+	ExclusiveGateway_4 --> Task_3["Guide customer in\nselecting\nproduct/service"]
+	Task_4["Provide quote"] --> ExclusiveGateway_2
+	ExclusiveGateway_2 --> Task_6
+	Task_5 --> ParallelGateway_2
+	Task_3 --> Task_4

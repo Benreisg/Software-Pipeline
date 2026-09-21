@@ -1,0 +1,58 @@
+{
+    "startEvent": {
+        "name": ""
+    },
+    "process": [
+        {
+            "type": "task",
+            "name": "Employee submits a vacation request"
+        },
+        {
+            "type": "task",
+            "name": "Requirement is registered"
+        },
+        {
+            "type": "task",
+            "name": "Employee's supervisor receive the request"
+        },
+        {
+            "type": "task",
+            "name": "Supervisor approve or reject the request"
+        },
+        {
+            "type": "xor",
+            "condition": "",
+            "branches": [
+                {
+                    "label": "rejected",
+                    "branch": [
+                        {
+                            "type": "task",
+                            "name": "Application is returned to employee"
+                        },
+                        {
+                            "type": "task",
+                            "name": "Employee can check rejection reasons"
+                        }
+                    ]
+                },
+                {
+                    "label": "approved",
+                    "branch": [
+                        {
+                            "type": "task",
+                            "name": "Notification is generated to the HR Representative"
+                        },
+                        {
+                            "type": "task",
+                            "name": "HR Representative complete the respective management procedures"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "endEvent": {
+        "name": ""
+    }
+}

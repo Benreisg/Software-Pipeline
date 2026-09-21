@@ -1,0 +1,41 @@
+digraph G {
+  rankdir=LR;  
+  node [shape=box];
+
+  "Place stock on\nshelves" -> "ExclusiveGateway_6";
+  "ExclusiveGateway_3" -> "ExclusiveGateway_4";
+  "ExclusiveGateway_6" -> "ParallelGateway_2";
+  "ExclusiveGateway_3" -> "ExclusiveGateway_1";
+  "ExclusiveGateway_4" -> "Send a manual alert";
+  "Place stock in\nstorage" -> "ExclusiveGateway_6";
+  "Check current\ninventory level" -> "ExclusiveGateway_3";
+  "ExclusiveGateway_4" -> "Send an automated\nalert";
+  "Inspect stock for\nquality" -> "ExclusiveGateway_2";
+  "Receive stock" -> "ParallelGateway_1";
+  "Log stock in system" -> "ParallelGateway_2";
+  "Send a manual alert" -> "ExclusiveGateway_5";
+  "Update inventory\nsystem with expected\ndelivery dates" -> "Receive stock";
+  "ParallelGateway_2" -> "Modify inventory\nlevels";
+  "ExclusiveGateway_2" -> "Place stock on\nshelves";
+  "ExclusiveGateway_2" -> "Place stock in\nstorage";
+  "Place order with\nsuppliers" -> "Update inventory\nsystem with expected\ndelivery dates";
+  "start" -> "ExclusiveGateway_1";
+  "Modify inventory\nlevels" -> "end";
+  "ParallelGateway_1" -> "Log stock in system";
+  "ExclusiveGateway_5" -> "Place order with\nsuppliers";
+  "ParallelGateway_1" -> "Inspect stock for\nquality";
+  "ExclusiveGateway_1" -> "Check current\ninventory level";
+  "Send an automated\nalert" -> "ExclusiveGateway_5";
+  "ParallelGateway_1" -> "Place stock in\nstorage";
+
+  "start" [shape=circle];
+  "end" [shape=circle, penwidth=4];
+  "ExclusiveGateway_1" [label="X", shape=diamond];
+  "ExclusiveGateway_2" [label="X", shape=diamond];
+  "ExclusiveGateway_3" [label="X", shape=diamond];
+  "ExclusiveGateway_4" [label="X", shape=diamond];
+  "ExclusiveGateway_5" [label="X", shape=diamond];
+  "ExclusiveGateway_6" [label="X", shape=diamond];
+  "ParallelGateway_1" [label="+", shape=diamond];
+  "ParallelGateway_2" [label="+", shape=diamond];
+}

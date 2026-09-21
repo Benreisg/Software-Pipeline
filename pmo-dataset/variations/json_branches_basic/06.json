@@ -1,0 +1,96 @@
+{
+    "startEvent": {
+        "name": "start"
+    },
+    "process": [
+        {
+            "type": "xor",
+            "condition": "",
+            "branches": [
+                {
+                    "branch": [
+                        {
+                            "type": "task",
+                            "name": "Customer places order online"
+                        }
+                    ]
+                },
+                {
+                    "branch": [
+                        {
+                            "type": "task",
+                            "name": "Customer places order over the phone"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "task",
+            "name": "Generate and send order confirmation"
+        },
+        {
+            "type": "parallel",
+            "branches": [
+                {
+                    "branch": [
+                        {
+                            "type": "task",
+                            "name": "Generate shipping label"
+                        }
+                    ]
+                },
+                {
+                    "branch": [
+                        {
+                            "type": "task",
+                            "name": "Pick and pack items"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "task",
+            "name": "Hand over order to logistics provider"
+        },
+        {
+            "type": "task",
+            "name": "Send tracking information to customer"
+        },
+        {
+            "type": "loop",
+            "condition": "Loop condition",
+            "body": [
+                {
+                    "type": "task",
+                    "name": "Monitor shipment"
+                }
+            ]
+        },
+        {
+            "type": "task",
+            "name": "Successful delivery"
+        },
+        {
+            "type": "xor",
+            "condition": "",
+            "branches": [
+                {
+                    "branch": [
+                        {
+                            "type": "task",
+                            "name": "Process customer feedback or returns"
+                        }
+                    ]
+                },
+                {
+                    "branch": []
+                }
+            ]
+        }
+    ],
+    "endEvent": {
+        "name": "end"
+    }
+}

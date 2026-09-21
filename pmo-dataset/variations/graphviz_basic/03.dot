@@ -1,0 +1,40 @@
+digraph G {
+  rankdir=LR;  
+  node [shape=box];
+
+  "Place stock on shelves" -> "ExclusiveGateway_6";
+  "ExclusiveGateway_3" -> "ExclusiveGateway_4";
+  "ExclusiveGateway_6" -> "ParallelGateway_2";
+  "ExclusiveGateway_3" -> "ExclusiveGateway_1";
+  "ExclusiveGateway_4" -> "Send a manual alert";
+  "Place stock in storage" -> "ExclusiveGateway_6";
+  "Check current inventory level" -> "ExclusiveGateway_3";
+  "ExclusiveGateway_4" -> "Send an automated alert";
+  "Inspect stock for quality" -> "ExclusiveGateway_2";
+  "Receive stock" -> "ParallelGateway_1";
+  "Record stock in system" -> "ParallelGateway_2";
+  "Send a manual alert" -> "ExclusiveGateway_5";
+  "Update inventory system with expected delivery dates" -> "Receive stock";
+  "ParallelGateway_2" -> "Update inventory levels";
+  "ExclusiveGateway_2" -> "Place stock on shelves";
+  "ExclusiveGateway_2" -> "Place stock in storage";
+  "Place order with suppliers" -> "Update inventory system with expected delivery dates";
+  "start" -> "ExclusiveGateway_1";
+  "Update inventory levels" -> "end";
+  "ParallelGateway_1" -> "Record stock in system";
+  "ExclusiveGateway_5" -> "Place order with suppliers";
+  "ParallelGateway_1" -> "Inspect stock for quality";
+  "ExclusiveGateway_1" -> "Check current inventory level";
+  "Send an automated alert" -> "ExclusiveGateway_5";
+
+  "start" [shape=circle, label="start"];
+  "end" [shape=circle, label="end"];
+  "ExclusiveGateway_1" [shape=diamond, label="X"];
+  "ExclusiveGateway_2" [shape=diamond, label="X"];
+  "ExclusiveGateway_3" [shape=diamond, label="X"];
+  "ExclusiveGateway_4" [shape=diamond, label="X"];
+  "ExclusiveGateway_5" [shape=diamond, label="X"];
+  "ExclusiveGateway_6" [shape=diamond, label="X"];
+  "ParallelGateway_1" [shape=diamond, label="+"];
+  "ParallelGateway_2" [shape=diamond, label="+"];
+}

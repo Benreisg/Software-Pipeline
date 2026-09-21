@@ -1,0 +1,22 @@
+graph LR
+	StartEvent_1(("Start")) --> Task_1["Determine properties"]
+	Task_1 --> ParallelGateway_1{"+"}
+	ParallelGateway_1 --> Task_7["Order parts"]
+	ParallelGateway_1 --> Task_8["Order parts"]
+	Task_7 --> ParallelGateway_2{"+"}
+	Task_8 --> ParallelGateway_2
+	ParallelGateway_2 --> Task_2["Check delivery of ordered parts"]
+	Task_2 --> ExclusiveGateway_1{"Parts arrived ?"}
+	ExclusiveGateway_1 -->|"No"| Task_2
+	ExclusiveGateway_1 -->|"Yes"| Task_3["Perform Inspection"]
+	Task_3 --> Task_10["Assemble the parts"]
+	Task_10 --> Task_11["Send updates"]
+	Task_11 --> Task_4["Send first saw"]
+	Task_4 --> ExclusiveGateway_2{"Customer Approval ?"}
+	ExclusiveGateway_2 -->|"No"| Task_5["Cancel production of the remaining order"]
+	Task_5 --> EndEvent_1(("End"))
+	ExclusiveGateway_2 -->|"Yes"| Task_12["Produce the remaining order"]
+	Task_12 --> Task_6["Send the remaining order"]
+	Task_6 --> EndEvent_1
+	ParallelGateway_1 --> Task_9["Order parts"]
+	Task_9 --> ParallelGateway_2

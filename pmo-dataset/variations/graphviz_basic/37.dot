@@ -1,0 +1,49 @@
+digraph G {
+  rankdir=LR;  
+  node [shape=box];
+
+  "Contract project received" -> "ExclusiveGateway_1";
+  "ExclusiveGateway_1" -> "Query the next shop";
+  "Create a list of the parts" -> "ExclusiveGateway_2";
+  "Query the next shop" -> "Ask about quantity, price and deadline";
+  "Ask about quantity, price and deadline" -> "Terms acceptable?";
+  "Terms acceptable?" -> "ExclusiveGateway_2" [label="No"];
+  "Terms acceptable?" -> "Create a list of the parts" [label="Yes"];
+  "ExclusiveGateway_2" -> "More parts needed?";
+  "More parts needed?" -> "ExclusiveGateway_1" [label="Yes"];
+  "More parts needed?" -> "ParallelGateway" [label="No"];
+  "ParallelGateway" -> "Receive first batch of parts";
+  "ParallelGateway" -> "Receive second batch of parts";
+  "ParallelGateway" -> "Receive third batch of parts";
+  "Receive first batch of parts" -> "First parts arrived";
+  "Receive second batch of parts" -> "First parts arrived";
+  "Receive third batch of parts" -> "First parts arrived";
+  "First parts arrived" -> "Start/Continue building";
+  "Start/Continue building" -> "Any stock falls?";
+  "Any stock falls?" -> "How much is the stock fall?" [label="Yes"];
+  "Reorder the part as fast as possible" -> "ExclusiveGateway_4";
+  "Reorder the cheapest part" -> "ExclusiveGateway_4";
+  "Complain to the friends" -> "ExclusiveGateway_4";
+  "ExclusiveGateway_4" -> "ExclusiveGateway_3";
+  "Any stock falls?" -> "ExclusiveGateway_3" [label="No"];
+  "How much is the stock fall?" -> "Reorder the cheapest part" [label="Below 5"];
+  "How much is the stock fall?" -> "Reorder the part as fast as possible" [label="Below 3"];
+  "How much is the stock fall?" -> "Complain to the friends" [label="Zero"];
+  "ExclusiveGateway_3" -> "Contract fullfilled?";
+  "Contract fullfilled?" -> "Start/Continue building" [label="No"];
+  "Contract fullfilled?" -> "Project completed" [label="Yes"];
+
+  "Contract project received" [shape=circle, label="Contract project received"];
+  "Project completed" [shape=circle, label="Project completed"];
+  "ExclusiveGateway_1" [shape=diamond, label="X"];
+  "Terms acceptable?" [shape=diamond];
+  "ExclusiveGateway_2" [shape=diamond, label="X"];
+  "More parts needed?" [shape=diamond];
+  "Any stock falls?" [shape=diamond];
+  "ExclusiveGateway_3" [shape=diamond, label="X"];
+  "How much is the stock fall?" [shape=diamond];
+  "ExclusiveGateway_4" [shape=diamond, label="X"];
+  "Contract fullfilled?" [shape=diamond];
+  "ParallelGateway" [shape=diamond, label="+"];
+  "First parts arrived" [shape=diamond];
+}

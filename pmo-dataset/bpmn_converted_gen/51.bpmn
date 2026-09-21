@@ -1,0 +1,65 @@
+<?xml version="1.0" ?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://www.omg.org/spec/BPMN/20100524/MODEL">
+  <process id="Process_1" name="51" isExecutable="false">
+    <task id="GEN_Task_1" name="Employee submits a vacation request">
+      <incoming>SequenceFlow_1</incoming>
+      <outgoing>SequenceFlow_2</outgoing>
+    </task>
+    <task id="GEN_Task_2" name="Requirement is registered">
+      <incoming>SequenceFlow_2</incoming>
+      <outgoing>SequenceFlow_3</outgoing>
+    </task>
+    <task id="GEN_Task_3" name="Employee's supervisor receive the request">
+      <incoming>SequenceFlow_3</incoming>
+      <outgoing>SequenceFlow_4</outgoing>
+    </task>
+    <task id="GEN_Task_4" name="Supervisor approve or reject the request">
+      <incoming>SequenceFlow_4</incoming>
+      <outgoing>SequenceFlow_5</outgoing>
+    </task>
+    <task id="GEN_Task_5" name="Notification is generated to the HR Representative">
+      <incoming>SequenceFlow_10</incoming>
+      <outgoing>SequenceFlow_6</outgoing>
+    </task>
+    <task id="GEN_Task_6" name="HR Representative complete the respective management procedures">
+      <incoming>SequenceFlow_6</incoming>
+      <outgoing>SequenceFlow_7</outgoing>
+    </task>
+    <task id="GEN_Task_7" name="Application is returned to employee">
+      <incoming>SequenceFlow_9</incoming>
+      <outgoing>SequenceFlow_11</outgoing>
+    </task>
+    <task id="GEN_Task_8" name="Employee can check rejection reasons">
+      <incoming>SequenceFlow_11</incoming>
+      <outgoing>SequenceFlow_12</outgoing>
+    </task>
+    <exclusiveGateway id="GEN_ExclusiveGateway_1" name="X">
+      <incoming>SequenceFlow_5</incoming>
+      <outgoing>SequenceFlow_9</outgoing>
+      <outgoing>SequenceFlow_10</outgoing>
+    </exclusiveGateway>
+    <exclusiveGateway id="GEN_ExclusiveGateway_2" name="X">
+      <incoming>SequenceFlow_7</incoming>
+      <incoming>SequenceFlow_12</incoming>
+      <outgoing>SequenceFlow_8</outgoing>
+    </exclusiveGateway>
+    <startEvent id="GEN_StartEvent_1" name="">
+      <outgoing>SequenceFlow_1</outgoing>
+    </startEvent>
+    <endEvent id="GEN_EndEvent_1" name="">
+      <incoming>SequenceFlow_8</incoming>
+    </endEvent>
+    <sequenceFlow id="SequenceFlow_1" sourceRef="GEN_StartEvent_1" targetRef="GEN_Task_1"/>
+    <sequenceFlow id="SequenceFlow_2" sourceRef="GEN_Task_1" targetRef="GEN_Task_2"/>
+    <sequenceFlow id="SequenceFlow_3" sourceRef="GEN_Task_2" targetRef="GEN_Task_3"/>
+    <sequenceFlow id="SequenceFlow_4" sourceRef="GEN_Task_3" targetRef="GEN_Task_4"/>
+    <sequenceFlow id="SequenceFlow_5" sourceRef="GEN_Task_4" targetRef="GEN_ExclusiveGateway_1"/>
+    <sequenceFlow id="SequenceFlow_6" sourceRef="GEN_Task_5" targetRef="GEN_Task_6"/>
+    <sequenceFlow id="SequenceFlow_7" sourceRef="GEN_Task_6" targetRef="GEN_ExclusiveGateway_2"/>
+    <sequenceFlow id="SequenceFlow_8" sourceRef="GEN_ExclusiveGateway_2" targetRef="GEN_EndEvent_1"/>
+    <sequenceFlow id="SequenceFlow_9" sourceRef="GEN_ExclusiveGateway_1" targetRef="GEN_Task_7"/>
+    <sequenceFlow id="SequenceFlow_10" sourceRef="GEN_ExclusiveGateway_1" targetRef="GEN_Task_5"/>
+    <sequenceFlow id="SequenceFlow_11" sourceRef="GEN_Task_7" targetRef="GEN_Task_8"/>
+    <sequenceFlow id="SequenceFlow_12" sourceRef="GEN_Task_8" targetRef="GEN_ExclusiveGateway_2"/>
+  </process>
+</definitions>

@@ -1,0 +1,25 @@
+graph LR
+	Task_6["Place stock on shelves"] --> ExclusiveGateway_6{"X"}
+	ExclusiveGateway_3{"X"} --> ExclusiveGateway_4{"X"}
+	ExclusiveGateway_6 --> ParallelGateway_2{"+"}
+	ExclusiveGateway_3 --> ExclusiveGateway_1{"X"}
+	ExclusiveGateway_4 --> Task_8["Send a manual alert"]
+	Task_10["Place stock in storage"] --> ExclusiveGateway_6
+	Task_7["Check current inventory level"] --> ExclusiveGateway_3
+	ExclusiveGateway_4 --> Task_9["Send an automated alert"]
+	Task_3["Inspect stock for quality"] --> ExclusiveGateway_2{"X"}
+	Task_5["Receive stock"] --> ParallelGateway_1{"+"}
+	Task_11["Record stock in system"] --> ParallelGateway_2
+	Task_8 --> ExclusiveGateway_5{"X"}
+	Task_2["Update inventory system with expected delivery dates"] --> Task_5
+	ParallelGateway_2 --> Task_1["Update inventory levels"]
+	ExclusiveGateway_2 --> Task_6
+	ExclusiveGateway_2 --> Task_10
+	Task_4["Place order with suppliers"] --> Task_2
+	StartEvent_1(("start")) --> ExclusiveGateway_1
+	Task_1 --> EndEvent_1(("end"))
+	ParallelGateway_1 --> Task_11
+	ExclusiveGateway_5 --> Task_4
+	ParallelGateway_1 --> Task_3
+	ExclusiveGateway_1 --> Task_7
+	Task_9 --> ExclusiveGateway_5

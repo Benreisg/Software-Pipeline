@@ -1,0 +1,51 @@
+graph LR
+	StartEvent_1((" ")) --> ExclusiveGateway_1{"X"}
+	ExclusiveGateway_1 --> Task_11["Check requirements and point for skilled workers in shortage occupations"]
+	ExclusiveGateway_1 --> Task_6["Check requirements and point for particularly highly qualified people"]
+	ExclusiveGateway_1 --> Task_10["Check requirements and point for other key employees"]
+	ExclusiveGateway_1 --> Task_8["Check requirements and point for start-up founders"]
+	Task_11 --> ExclusiveGateway_2{"Fullfiles the requirements or point?"}
+	Task_6 --> ExclusiveGateway_2
+	Task_10 --> ExclusiveGateway_2
+	Task_8 --> ExclusiveGateway_2
+	Task_7["Check requirements for independent key employees"] --> ExclusiveGateway_2
+	ExclusiveGateway_2 -->|"No"| ExclusiveGateway_1
+	Task_1["Check if passport is up to date"] --> ExclusiveGateway_3{"X"}
+	ExclusiveGateway_3 -->|"Yes"| ExclusiveGateway_4{"X"}
+	Task_12["Request new passport"] --> ExclusiveGateway_4
+	Task_2["Prepare Documents for r-w-r card"] --> ParallelGateway_1{"+"}
+	ParallelGateway_1 --> Task_1
+	ParallelGateway_1 --> Task_13["Make passport photo"]
+	ParallelGateway_1 --> Task_14["Prepare birth certificate"]
+	Task_15["Search and find suited apartment"] --> Task_16["Negotiate rent with landlord"]
+	ExclusiveGateway_5{"X"} --> Task_15
+	ParallelGateway_1 --> ExclusiveGateway_5
+	Task_16 --> ExclusiveGateway_6{"Negotitation successful?"}
+	ExclusiveGateway_6 -->|"No"| ExclusiveGateway_5
+	ExclusiveGateway_6 -->|"Yes"| Task_17["Sign contract"]
+	ParallelGateway_1 --> Task_19["Gather documentation to prove financial indepence"]
+	ParallelGateway_1 --> Task_20["Application for a residence permit"]
+	Task_13 --> ParallelGateway_2{"+"}
+	ExclusiveGateway_4 --> ParallelGateway_2
+	Task_14 --> ParallelGateway_2
+	Task_19 --> ParallelGateway_2
+	Task_20 --> ParallelGateway_2
+	Task_17 --> ParallelGateway_2
+	ExclusiveGateway_7{"X"} --> Task_2
+	ExclusiveGateway_3 -->|"No"| Task_12
+	ParallelGateway_1 --> Task_18["Request Austrian health insurance coverage incl. documentation"]
+	Task_18 --> ParallelGateway_2
+	Task_3["Send documentation to relevant agency"] --> Task_4["Rules engine automaticly checks if documentations fullfilles requirements"]
+	Task_4 --> ExclusiveGateway_8{"Additional documentation needed?"}
+	Task_5["Bank Systems creates bank account and sends E-Mail confirmation"] --> ExclusiveGateway_9{"X"}
+	ExclusiveGateway_9 --> EndEvent_1((" "))
+	ParallelGateway_2 --> Task_3
+	ExclusiveGateway_8 -->|"No"| ExclusiveGateway_10{"Agency approves right to stay?"}
+	ExclusiveGateway_8 -->|"Yes"| ExclusiveGateway_7
+	Task_21["Request Bank Account on Bank website"] --> Task_5
+	ExclusiveGateway_10 -->|"Yes"| Task_21
+	ExclusiveGateway_10 -->|"No"| ExclusiveGateway_9
+	ExclusiveGateway_2 -->|"Yes"| ExclusiveGateway_7
+	ExclusiveGateway_1 --> Task_7
+	ExclusiveGateway_1 --> Task_9["Check requirements for Graduates of an Austrian higher education institution"]
+	Task_9 --> ExclusiveGateway_2

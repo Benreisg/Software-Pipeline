@@ -1,0 +1,260 @@
+{
+    "tasks": [
+        {
+            "id": "User_1",
+            "name": "Send invites to 10 people",
+            "type": "User"
+        },
+        {
+            "id": "User_2",
+            "name": "Ask which games do they want to play",
+            "type": "User"
+        },
+        {
+            "id": "User_3",
+            "name": "Appoint a date",
+            "type": "User"
+        },
+        {
+            "id": "User_4",
+            "name": "Ask friends how much beer they would like",
+            "type": "User"
+        },
+        {
+            "id": "User_5",
+            "name": "Order beer for that date",
+            "type": "User"
+        },
+        {
+            "id": "User_6",
+            "name": "Find where can you download the games",
+            "type": "User"
+        },
+        {
+            "id": "Service_1",
+            "name": "Reserve that day",
+            "type": "Service"
+        },
+        {
+            "id": "Service_2",
+            "name": "Download the missing games",
+            "type": "Service"
+        },
+        {
+            "id": "Service_3",
+            "name": "Send a notification that the LAN party will be held on that date",
+            "type": "Service"
+        }
+    ],
+    "events": [
+        {
+            "id": "StartNoneEvent_1",
+            "name": "Wish for a LAN gameparty",
+            "type": "StartNoneEvent"
+        },
+        {
+            "id": "EndNoneEvent_1",
+            "name": "LAN party done",
+            "type": "EndNoneEvent"
+        },
+        {
+            "id": "IntermediateTimerEvent_1",
+            "name": "Few hours, until the user has all the games that they want to play",
+            "type": "IntermediateTimerEvent"
+        },
+        {
+            "id": "IntermediateTimerEvent_2",
+            "name": "Few hours, until all people reply if they can play on that date",
+            "type": "IntermediateTimerEvent"
+        },
+        {
+            "id": "IntermediateTimerEvent_3",
+            "name": "Few hours, until all people reply with t he amount of beer",
+            "type": "IntermediateTimerEvent"
+        }
+    ],
+    "gateways": [
+        {
+            "id": "ExclusiveGateway_1",
+            "name": "How many people can play on that date?",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_2",
+            "name": "Do we have all the games?",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_3",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_4",
+            "name": "Do you have enough beer?",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_5",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_6",
+            "name": "Download successful?",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ParallelGateway_1",
+            "name": "",
+            "type": "ParallelGateway"
+        },
+        {
+            "id": "ParallelGateway_2",
+            "name": "",
+            "type": "ParallelGateway"
+        }
+    ],
+    "pools": [],
+    "sequenceFlows": [
+        {
+            "id": "SequenceFlow_1",
+            "sourceRef": "StartNoneEvent_1",
+            "targetRef": "User_1"
+        },
+        {
+            "id": "SequenceFlow_2",
+            "sourceRef": "User_1",
+            "targetRef": "User_2"
+        },
+        {
+            "id": "SequenceFlow_3",
+            "sourceRef": "User_2",
+            "targetRef": "IntermediateTimerEvent_1"
+        },
+        {
+            "id": "SequenceFlow_4",
+            "sourceRef": "IntermediateTimerEvent_1",
+            "targetRef": "ParallelGateway_1"
+        },
+        {
+            "id": "SequenceFlow_5",
+            "sourceRef": "ParallelGateway_1",
+            "targetRef": "User_3"
+        },
+        {
+            "id": "SequenceFlow_6",
+            "sourceRef": "ParallelGateway_1",
+            "targetRef": "ExclusiveGateway_2"
+        },
+        {
+            "id": "SequenceFlow_7",
+            "sourceRef": "User_3",
+            "targetRef": "IntermediateTimerEvent_2"
+        },
+        {
+            "id": "SequenceFlow_8",
+            "sourceRef": "IntermediateTimerEvent_2",
+            "targetRef": "ExclusiveGateway_1"
+        },
+        {
+            "id": "SequenceFlow_9",
+            "sourceRef": "ExclusiveGateway_1",
+            "targetRef": "User_3",
+            "condition": "Less then 8 people can play on that date"
+        },
+        {
+            "id": "SequenceFlow_10",
+            "sourceRef": "ExclusiveGateway_1",
+            "targetRef": "Service_1",
+            "condition": "8 or more people can play on that date"
+        },
+        {
+            "id": "SequenceFlow_11",
+            "sourceRef": "ParallelGateway_2",
+            "targetRef": "User_4"
+        },
+        {
+            "id": "SequenceFlow_12",
+            "sourceRef": "User_4",
+            "targetRef": "IntermediateTimerEvent_3"
+        },
+        {
+            "id": "SequenceFlow_13",
+            "sourceRef": "ExclusiveGateway_4",
+            "targetRef": "User_5",
+            "condition": "No"
+        },
+        {
+            "id": "SequenceFlow_14",
+            "sourceRef": "User_5",
+            "targetRef": "ExclusiveGateway_5"
+        },
+        {
+            "id": "SequenceFlow_15",
+            "sourceRef": "ExclusiveGateway_2",
+            "targetRef": "User_6",
+            "condition": "No"
+        },
+        {
+            "id": "SequenceFlow_16",
+            "sourceRef": "User_6",
+            "targetRef": "Service_2"
+        },
+        {
+            "id": "SequenceFlow_17",
+            "sourceRef": "Service_3",
+            "targetRef": "EndNoneEvent_1"
+        },
+        {
+            "id": "SequenceFlow_18",
+            "sourceRef": "Service_1",
+            "targetRef": "ParallelGateway_2"
+        },
+        {
+            "id": "SequenceFlow_19",
+            "sourceRef": "ExclusiveGateway_6",
+            "targetRef": "ExclusiveGateway_3",
+            "condition": "Yes"
+        },
+        {
+            "id": "SequenceFlow_20",
+            "sourceRef": "ExclusiveGateway_6",
+            "targetRef": "Service_2",
+            "condition": "No"
+        },
+        {
+            "id": "SequenceFlow_21",
+            "sourceRef": "ExclusiveGateway_5",
+            "targetRef": "Service_3"
+        },
+        {
+            "id": "SequenceFlow_22",
+            "sourceRef": "IntermediateTimerEvent_3",
+            "targetRef": "ExclusiveGateway_4"
+        },
+        {
+            "id": "SequenceFlow_23",
+            "sourceRef": "ExclusiveGateway_4",
+            "targetRef": "ExclusiveGateway_5",
+            "condition": "Yes"
+        },
+        {
+            "id": "SequenceFlow_24",
+            "sourceRef": "ExclusiveGateway_3",
+            "targetRef": "ParallelGateway_2"
+        },
+        {
+            "id": "SequenceFlow_25",
+            "sourceRef": "ExclusiveGateway_2",
+            "targetRef": "ExclusiveGateway_3",
+            "condition": "Yes"
+        },
+        {
+            "id": "SequenceFlow_26",
+            "sourceRef": "Service_2",
+            "targetRef": "ExclusiveGateway_6"
+        }
+    ],
+    "messageFlows": []
+}

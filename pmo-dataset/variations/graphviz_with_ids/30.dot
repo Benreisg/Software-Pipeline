@@ -1,0 +1,54 @@
+digraph G {
+  rankdir=LR;  
+  node [shape=box];
+
+  "User_1" [label="Send invites to 10\npeople"];
+  "User_2" [label="Ask which games do\nthey want to play"];
+  "User_3" [label="Appoint a date"];
+  "User_4" [label="Ask friends how much\nbeer they would like"];
+  "User_5" [label="Order beer for that\ndate"];
+  "User_6" [label="Find where can you\ndownload the games"];
+  "Service_1" [label="Reserve that day"];
+  "Service_2" [label="Download the missing\ngames"];
+  "Service_3" [label="Send a notification\nthat the LAN party\nwill be held on that\ndate"];
+  "StartNoneEvent_1" [shape=circle, label="Wish for a LAN\ngameparty"];
+  "EndNoneEvent_1" [shape=circle, penwidth=4, label="LAN party done"];
+  "IntermediateTimerEvent_1" [shape=doublecircle, label="Few hours, until the\nuser has all the\ngames that they want\nto play"];
+  "IntermediateTimerEvent_2" [shape=doublecircle, label="Few hours, until all\npeople reply if they\ncan play on that\ndate"];
+  "IntermediateTimerEvent_3" [shape=doublecircle, label="Few hours, until all\npeople reply with t\nhe amount of beer"];
+  "ExclusiveGateway_1" [shape=diamond, label="How many people can\nplay on that date?"];
+  "ExclusiveGateway_2" [shape=diamond, label="Do we have all the\ngames?"];
+  "ExclusiveGateway_3" [shape=diamond, label="X"];
+  "ExclusiveGateway_4" [shape=diamond, label="Do you have enough\nbeer?"];
+  "ExclusiveGateway_5" [shape=diamond, label="X"];
+  "ExclusiveGateway_6" [shape=diamond, label="Download successful?"];
+  "ParallelGateway_1" [shape=diamond, label="+"];
+  "ParallelGateway_2" [shape=diamond, label="+"];
+
+  "StartNoneEvent_1" -> "User_1";
+  "User_1" -> "User_2";
+  "User_2" -> "IntermediateTimerEvent_1";
+  "IntermediateTimerEvent_1" -> "ParallelGateway_1";
+  "ParallelGateway_1" -> "User_3";
+  "ParallelGateway_1" -> "ExclusiveGateway_2";
+  "User_3" -> "IntermediateTimerEvent_2";
+  "IntermediateTimerEvent_2" -> "ExclusiveGateway_1";
+  "ExclusiveGateway_1" -> "User_3" [label="Less then 8 people\ncan play on that\ndate"];
+  "ExclusiveGateway_1" -> "Service_1" [label="8 or more people can\nplay on that date"];
+  "ParallelGateway_2" -> "User_4";
+  "User_4" -> "IntermediateTimerEvent_3";
+  "ExclusiveGateway_4" -> "User_5" [label="No"];
+  "User_5" -> "ExclusiveGateway_5";
+  "ExclusiveGateway_2" -> "User_6" [label="No"];
+  "User_6" -> "Service_2";
+  "Service_3" -> "EndNoneEvent_1";
+  "Service_1" -> "ParallelGateway_2";
+  "ExclusiveGateway_6" -> "ExclusiveGateway_3" [label="Yes"];
+  "ExclusiveGateway_6" -> "Service_2" [label="No"];
+  "ExclusiveGateway_5" -> "Service_3";
+  "IntermediateTimerEvent_3" -> "ExclusiveGateway_4";
+  "ExclusiveGateway_4" -> "ExclusiveGateway_5" [label="Yes"];
+  "ExclusiveGateway_3" -> "ParallelGateway_2";
+  "ExclusiveGateway_2" -> "ExclusiveGateway_3" [label="Yes"];
+  "Service_2" -> "ExclusiveGateway_6";
+}

@@ -1,0 +1,12 @@
+graph LR
+	StartEvent_1((" ")) --> Task_1["Claim is registered"]
+	Task_1 --> Task_2["Claim is examined by a claims officer"]
+	Task_3["Claims officer writes a settlement recommendation"] --> Task_4["Recommendation is checked by a senior claims officer"]
+	Task_4 --> Task_5["Senior claims officer marks the claim"]
+	Task_5 --> ExclusiveGateway_1{"X"}
+	Task_2 --> ExclusiveGateway_2{"X"}
+	ExclusiveGateway_2 --> Task_3
+	Task_6["Claim is sent back"] --> ExclusiveGateway_2
+	ExclusiveGateway_1 -->|"OK"| Task_7["Claim handling process proceeds"]
+	ExclusiveGateway_1 -->|"Not OK"| Task_6
+	Task_7 --> EndEvent_1((" "))

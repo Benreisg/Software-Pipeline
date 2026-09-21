@@ -1,0 +1,26 @@
+graph LR
+	Task_2["Enter type of Machine"] --> Task_3["Enter serial number of machine"]
+	Task_3 --> Task_9["Connecting to device"]
+	StartEvent_1((" ")) --> Task_1["Turn on bluetooth"]
+	Task_1 --> Task_4["Run 'Inspect-App'"]
+	Task_4 --> Task_2
+	Task_9 --> ExclusiveGateway_1{"Connected?"}
+	ExclusiveGateway_1 -->|"yes"| Task_5["Check the fill capacity"]
+	Task_5 --> ExclusiveGateway_2{"Is the fill level in the bootle ok?"}
+	Task_10["Save Answers"] --> Task_7["Press 'Produce' button"]
+	Task_7 --> ExclusiveGateway_4{"Are the right bottles in the pack?"}
+	Task_8["Press button 'Abort process'"] --> ParallelGateway_1{"+"}
+	ParallelGateway_1 --> Task_11["Auto collect values"]
+	ParallelGateway_1 --> Task_12["Show data"]
+	Task_12 --> ParallelGateway_2{"+"}
+	Task_11 --> ParallelGateway_2
+	ParallelGateway_2 --> Task_13["Present results"]
+	Task_13 --> EndEvent_1((" "))
+	ExclusiveGateway_1 -->|"no"| Task_4
+	ExclusiveGateway_3{"Is the cap position straight?"} -->|"no"| Task_6["Leave short Feedback"]
+	ExclusiveGateway_4 -->|"no"| Task_8
+	ExclusiveGateway_2 -->|"no"| Task_6
+	Task_6 --> Task_8
+	ExclusiveGateway_2 -->|"yes"| ExclusiveGateway_3
+	ExclusiveGateway_3 -->|"yes"| Task_10
+	ExclusiveGateway_4 -->|"yes"| Task_13

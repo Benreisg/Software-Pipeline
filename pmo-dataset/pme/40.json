@@ -1,0 +1,238 @@
+{
+    "tasks": [
+        {
+            "id": "Service_1",
+            "name": "Stop the machine",
+            "type": "Service"
+        },
+        {
+            "id": "Service_2",
+            "name": "Send email to an engineer",
+            "type": "Service"
+        },
+        {
+            "id": "Service_3",
+            "name": "Get availability data",
+            "type": "Service"
+        },
+        {
+            "id": "Service_4",
+            "name": "Get quality data",
+            "type": "Service"
+        },
+        {
+            "id": "Service_5",
+            "name": "Get performance data",
+            "type": "Service"
+        },
+        {
+            "id": "Service_6",
+            "name": "Calculate OEE",
+            "type": "Service"
+        },
+        {
+            "id": "Manual_1",
+            "name": "Continue measuring",
+            "type": "Manual"
+        },
+        {
+            "id": "Manual_2",
+            "name": "Repair the issue",
+            "type": "Manual"
+        },
+        {
+            "id": "Manual_3",
+            "name": "Restart the machine",
+            "type": "Manual"
+        },
+        {
+            "id": "Manual_4",
+            "name": "Disconnect the machine",
+            "type": "Manual"
+        }
+    ],
+    "events": [
+        {
+            "id": "StartNoneEvent_1",
+            "name": "OEE data required",
+            "type": "StartNoneEvent"
+        },
+        {
+            "id": "EndNoneEvent_1",
+            "name": "Machine operating normally / Machine disconnected",
+            "type": "EndNoneEvent"
+        }
+    ],
+    "gateways": [
+        {
+            "id": "ExclusiveGateway_1",
+            "name": "OEE below 50%?",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_2",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_3",
+            "name": "Machine worth repairing?",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_4",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_5",
+            "name": "Remaining issues?",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_6",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ParallelGateway_1",
+            "name": "",
+            "type": "ParallelGateway"
+        },
+        {
+            "id": "ParallelGateway_2",
+            "name": "",
+            "type": "ParallelGateway"
+        }
+    ],
+    "pools": [],
+    "sequenceFlows": [
+        {
+            "id": "SequenceFlow_1",
+            "sourceRef": "ParallelGateway_1",
+            "targetRef": "Service_4"
+        },
+        {
+            "id": "SequenceFlow_2",
+            "sourceRef": "ParallelGateway_1",
+            "targetRef": "Service_3"
+        },
+        {
+            "id": "SequenceFlow_3",
+            "sourceRef": "ParallelGateway_1",
+            "targetRef": "Service_5"
+        },
+        {
+            "id": "SequenceFlow_4",
+            "sourceRef": "Service_4",
+            "targetRef": "ParallelGateway_2"
+        },
+        {
+            "id": "SequenceFlow_5",
+            "sourceRef": "Service_3",
+            "targetRef": "ParallelGateway_2"
+        },
+        {
+            "id": "SequenceFlow_6",
+            "sourceRef": "Service_5",
+            "targetRef": "ParallelGateway_2"
+        },
+        {
+            "id": "SequenceFlow_7",
+            "sourceRef": "ParallelGateway_2",
+            "targetRef": "Service_6"
+        },
+        {
+            "id": "SequenceFlow_8",
+            "sourceRef": "ExclusiveGateway_1",
+            "targetRef": "Service_1",
+            "condition": "Yes"
+        },
+        {
+            "id": "SequenceFlow_9",
+            "sourceRef": "Service_1",
+            "targetRef": "Service_2"
+        },
+        {
+            "id": "SequenceFlow_10",
+            "sourceRef": "StartNoneEvent_1",
+            "targetRef": "ParallelGateway_1"
+        },
+        {
+            "id": "SequenceFlow_11",
+            "sourceRef": "Service_2",
+            "targetRef": "ExclusiveGateway_3"
+        },
+        {
+            "id": "SequenceFlow_12",
+            "sourceRef": "Manual_2",
+            "targetRef": "ExclusiveGateway_5"
+        },
+        {
+            "id": "SequenceFlow_13",
+            "sourceRef": "Manual_3",
+            "targetRef": "Manual_1"
+        },
+        {
+            "id": "SequenceFlow_14",
+            "sourceRef": "ExclusiveGateway_2",
+            "targetRef": "EndNoneEvent_1"
+        },
+        {
+            "id": "SequenceFlow_15",
+            "sourceRef": "Service_6",
+            "targetRef": "ExclusiveGateway_1"
+        },
+        {
+            "id": "SequenceFlow_16",
+            "sourceRef": "ExclusiveGateway_3",
+            "targetRef": "Manual_4",
+            "condition": "No"
+        },
+        {
+            "id": "SequenceFlow_17",
+            "sourceRef": "ExclusiveGateway_4",
+            "targetRef": "ExclusiveGateway_2"
+        },
+        {
+            "id": "SequenceFlow_18",
+            "sourceRef": "Manual_4",
+            "targetRef": "ExclusiveGateway_4"
+        },
+        {
+            "id": "SequenceFlow_19",
+            "sourceRef": "Manual_1",
+            "targetRef": "ExclusiveGateway_4"
+        },
+        {
+            "id": "SequenceFlow_20",
+            "sourceRef": "ExclusiveGateway_3",
+            "targetRef": "ExclusiveGateway_6",
+            "condition": "Yes"
+        },
+        {
+            "id": "SequenceFlow_21",
+            "sourceRef": "ExclusiveGateway_5",
+            "targetRef": "Manual_3",
+            "condition": "No"
+        },
+        {
+            "id": "SequenceFlow_22",
+            "sourceRef": "ExclusiveGateway_6",
+            "targetRef": "Manual_2"
+        },
+        {
+            "id": "SequenceFlow_23",
+            "sourceRef": "ExclusiveGateway_5",
+            "targetRef": "ExclusiveGateway_6",
+            "condition": "Yes"
+        },
+        {
+            "id": "SequenceFlow_24",
+            "sourceRef": "ExclusiveGateway_1",
+            "targetRef": "ExclusiveGateway_2",
+            "condition": "No"
+        }
+    ],
+    "messageFlows": []
+}

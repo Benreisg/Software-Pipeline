@@ -1,0 +1,23 @@
+digraph G {
+  rankdir=LR;  
+  node [shape=box];
+
+  "StartNoneEvent" -> "Employee submits a\nvacation request";
+  "Employee submits a\nvacation request" -> "Specification is\nregistered";
+  "Specification is\nregistered" -> "Employee's\nsupervisor receive\nthe request";
+  "Employee's\nsupervisor receive\nthe request" -> "Supervisor approve\nor reject the\nrequest";
+  "Supervisor approve\nor reject the\nrequest" -> "ExclusiveGateway_1";
+  "Alert is generated\nto the HR\nRepresentative" -> "HR Representative\ncomplete the\nrespective\nmanagement\nprocedures";
+  "HR Representative\ncomplete the\nrespective\nmanagement\nprocedures" -> "ExclusiveGateway_2";
+  "ExclusiveGateway_2" -> "EndNoneEvent";
+  "ExclusiveGateway_1" -> "Application is\nreturned to employee" [label="rejected"];
+  "ExclusiveGateway_1" -> "Alert is generated\nto the HR\nRepresentative" [label="approved"];
+  "Application is\nreturned to employee" -> "Employee can check\nrejection reasons";
+  "Employee can check\nrejection reasons" -> "ExclusiveGateway_2";
+  "Employee submits a\nvacation request" -> "Employee's\nsupervisor receive\nthe request";
+
+  "StartNoneEvent" [label="", shape=circle];
+  "EndNoneEvent" [label="", shape=circle, penwidth=4];
+  "ExclusiveGateway_1" [label="X", shape=diamond];
+  "ExclusiveGateway_2" [label="X", shape=diamond];
+}

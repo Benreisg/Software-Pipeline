@@ -1,0 +1,278 @@
+{
+    "tasks": [
+        {
+            "id": "Task_1",
+            "name": "Develop basic design",
+            "type": "Task"
+        },
+        {
+            "id": "Task_2",
+            "name": "Order Lego brick sets",
+            "type": "Task"
+        },
+        {
+            "id": "Task_3",
+            "name": "Test subcomponent 1",
+            "type": "Task"
+        },
+        {
+            "id": "Task_4",
+            "name": "Test subcomponent 2",
+            "type": "Task"
+        },
+        {
+            "id": "Task_5",
+            "name": "Test subcomponent 3",
+            "type": "Task"
+        },
+        {
+            "id": "Task_6",
+            "name": "Test subcomponent 4",
+            "type": "Task"
+        },
+        {
+            "id": "Task_7",
+            "name": "Give the lego sets to the children",
+            "type": "Task"
+        },
+        {
+            "id": "Task_8",
+            "name": "Sort the parts into containers",
+            "type": "Task"
+        },
+        {
+            "id": "Task_9",
+            "name": "Build the next subcomponent",
+            "type": "Task"
+        },
+        {
+            "id": "Task_10",
+            "name": "Reorder parts",
+            "type": "Task"
+        },
+        {
+            "id": "Task_11",
+            "name": "Assemble subcomponents",
+            "type": "Task"
+        }
+    ],
+    "events": [
+        {
+            "id": "StartEvent_1",
+            "name": "New order received",
+            "type": "StartEvent"
+        },
+        {
+            "id": "EndEvent_1",
+            "name": "Machine assembled",
+            "type": "EndEvent"
+        }
+    ],
+    "gateways": [
+        {
+            "id": "ExclusiveGateway_1",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_2",
+            "name": "Parts remained?",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_3",
+            "name": "Container empty?",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_4",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_5",
+            "name": "All tests successfull?",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_6",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_7",
+            "name": "Brick sets already ordered?",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_8",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ParallelGateway_1",
+            "name": "",
+            "type": "ParallelGateway"
+        },
+        {
+            "id": "ParallelGateway_2",
+            "name": "",
+            "type": "ParallelGateway"
+        }
+    ],
+    "sequenceFlows": [
+        {
+            "id": "SequenceFlow_1",
+            "sourceRef": "StartEvent_1",
+            "targetRef": "ExclusiveGateway_6"
+        },
+        {
+            "id": "SequenceFlow_2",
+            "sourceRef": "Task_2",
+            "targetRef": "Task_7"
+        },
+        {
+            "id": "SequenceFlow_3",
+            "sourceRef": "Task_7",
+            "targetRef": "Task_8"
+        },
+        {
+            "id": "SequenceFlow_4",
+            "sourceRef": "ExclusiveGateway_2",
+            "targetRef": "ExclusiveGateway_1",
+            "condition": "Yes"
+        },
+        {
+            "id": "SequenceFlow_5",
+            "sourceRef": "ExclusiveGateway_1",
+            "targetRef": "ExclusiveGateway_3"
+        },
+        {
+            "id": "SequenceFlow_6",
+            "sourceRef": "ExclusiveGateway_4",
+            "targetRef": "Task_9"
+        },
+        {
+            "id": "SequenceFlow_7",
+            "sourceRef": "Task_9",
+            "targetRef": "ExclusiveGateway_2"
+        },
+        {
+            "id": "SequenceFlow_8",
+            "sourceRef": "ExclusiveGateway_3",
+            "targetRef": "Task_10",
+            "condition": "Yes"
+        },
+        {
+            "id": "SequenceFlow_9",
+            "sourceRef": "Task_10",
+            "targetRef": "ExclusiveGateway_4"
+        },
+        {
+            "id": "SequenceFlow_10",
+            "sourceRef": "ExclusiveGateway_3",
+            "targetRef": "ExclusiveGateway_4",
+            "condition": "No"
+        },
+        {
+            "id": "SequenceFlow_11",
+            "sourceRef": "ParallelGateway_1",
+            "targetRef": "Task_3"
+        },
+        {
+            "id": "SequenceFlow_12",
+            "sourceRef": "ParallelGateway_1",
+            "targetRef": "Task_6"
+        },
+        {
+            "id": "SequenceFlow_13",
+            "sourceRef": "Task_6",
+            "targetRef": "ParallelGateway_2"
+        },
+        {
+            "id": "SequenceFlow_14",
+            "sourceRef": "Task_5",
+            "targetRef": "ParallelGateway_2"
+        },
+        {
+            "id": "SequenceFlow_15",
+            "sourceRef": "Task_3",
+            "targetRef": "ParallelGateway_2"
+        },
+        {
+            "id": "SequenceFlow_16",
+            "sourceRef": "ParallelGateway_2",
+            "targetRef": "ExclusiveGateway_5"
+        },
+        {
+            "id": "SequenceFlow_17",
+            "sourceRef": "Task_11",
+            "targetRef": "EndEvent_1"
+        },
+        {
+            "id": "SequenceFlow_18",
+            "sourceRef": "Task_4",
+            "targetRef": "ParallelGateway_2"
+        },
+        {
+            "id": "SequenceFlow_19",
+            "sourceRef": "ExclusiveGateway_6",
+            "targetRef": "Task_1"
+        },
+        {
+            "id": "SequenceFlow_20",
+            "sourceRef": "ExclusiveGateway_5",
+            "targetRef": "ExclusiveGateway_6",
+            "condition": "No"
+        },
+        {
+            "id": "SequenceFlow_21",
+            "sourceRef": "ExclusiveGateway_5",
+            "targetRef": "Task_11",
+            "condition": "Yes"
+        },
+        {
+            "id": "SequenceFlow_22",
+            "sourceRef": "ExclusiveGateway_2",
+            "targetRef": "ParallelGateway_1",
+            "condition": "No"
+        },
+        {
+            "id": "SequenceFlow_23",
+            "sourceRef": "Task_1",
+            "targetRef": "ExclusiveGateway_7"
+        },
+        {
+            "id": "SequenceFlow_24",
+            "sourceRef": "ExclusiveGateway_7",
+            "targetRef": "Task_2",
+            "condition": "No"
+        },
+        {
+            "id": "SequenceFlow_25",
+            "sourceRef": "Task_8",
+            "targetRef": "ExclusiveGateway_8"
+        },
+        {
+            "id": "SequenceFlow_26",
+            "sourceRef": "ExclusiveGateway_8",
+            "targetRef": "ExclusiveGateway_1"
+        },
+        {
+            "id": "SequenceFlow_27",
+            "sourceRef": "ExclusiveGateway_7",
+            "targetRef": "ExclusiveGateway_8",
+            "condition": "Yes"
+        },
+        {
+            "id": "SequenceFlow_28",
+            "sourceRef": "ParallelGateway_1",
+            "targetRef": "Task_4"
+        },
+        {
+            "id": "SequenceFlow_29",
+            "sourceRef": "ParallelGateway_1",
+            "targetRef": "Task_5"
+        }
+    ]
+}

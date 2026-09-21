@@ -1,0 +1,32 @@
+graph LR
+	classDef endEvent stroke-width:4px
+	
+	User_1["Send sketches to an\nartist"] --> Receive_1["Receive result"]
+	Receive_1 --> ExclusiveGateway_1{"Satisfied with\nresult?"}
+	User_2["Tell artist to\nchange"] --> ExclusiveGateway_2{"X"}
+	ExclusiveGateway_2 --> User_1
+	StartNoneEvent_1(("Create a 3D model")) --> ExclusiveGateway_2
+	ExclusiveGateway_1 -->|"Yes"| User_3["Choose the color"]
+	User_3 --> ExclusiveGateway_3{"In stock?"}
+	ExclusiveGateway_3 -->|"Yes"| User_4["Check color level"]
+	User_4 --> ExclusiveGateway_4{"Under 100g?"}
+	ExclusiveGateway_4 -->|"Yes"| Manual_1["Put it on shopping\nlist"]
+	ExclusiveGateway_4 -->|"No"| ExclusiveGateway_5{"X"}
+	Manual_1 --> ExclusiveGateway_5
+	ExclusiveGateway_3 -->|"No"| User_5["Order color"]
+	ExclusiveGateway_5 --> ExclusiveGateway_6{"X"}
+	User_5 --> Receive_3["Receive order\nconfirmation"]
+	ExclusiveGateway_6 --> User_6["Turn on the printer"]
+	User_6 --> ParallelGateway_1{"+"}
+	ParallelGateway_1 --> User_7["Generate gcode file"]
+	Receive_2["Receive status"] --> ExclusiveGateway_7{"Heated?"}
+	ParallelGateway_1 --> ExclusiveGateway_8{"X"}
+	ExclusiveGateway_8 --> Receive_2
+	ExclusiveGateway_7 -->|"Yes"| ParallelGateway_2{"+"}
+	User_7 --> ParallelGateway_2
+	ParallelGateway_2 --> User_8["Print the model"]
+	User_8 --> EndNoneEvent_1(("Model printed")):::endEvent
+	ExclusiveGateway_7 -->|"No"| ExclusiveGateway_8
+	Receive_3 --> Manual_2["Color received"]
+	Manual_2 --> ExclusiveGateway_6
+	ExclusiveGateway_1 -->|"No"| User_2

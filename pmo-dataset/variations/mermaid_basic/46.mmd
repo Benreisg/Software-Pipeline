@@ -1,0 +1,24 @@
+graph LR
+	StartEvent_1(("Storage management")) --> Task_1["Read order"]
+	Task_1 --> ExclusiveGateway_5{"X"}
+	Task_2["Check if product is in stock"] --> ExclusiveGateway_1{"Is in stock?"}
+	ExclusiveGateway_1 -->|"Yes"| Task_6["Withdraw the Product from warehouse"]
+	ExclusiveGateway_1 -->|"No"| Task_3["Reorder from wholesaler"]
+	Task_3 --> Task_4["Waiting until arrives (handling system)"]
+	Task_4 --> ExclusiveGateway_2{"Arrived after more than ten days?"}
+	Task_5["Demand delivery delay penalty from the wholesaler"] --> ExclusiveGateway_4{"X"}
+	ExclusiveGateway_2 -->|"Yes"| Task_5
+	Task_6 --> Task_8["Check if the whole order is ready for shipment"]
+	Task_7["Register in stock management system"] --> Task_8
+	Task_8 --> ExclusiveGateway_3{"Order is ready for shipment?"}
+	Task_10["Shipping the order"] --> EndEvent_1(("Order was shipped"))
+	ExclusiveGateway_4 --> Task_7
+	ExclusiveGateway_5 --> Task_2
+	ExclusiveGateway_3 -->|"No"| ExclusiveGateway_5
+	ExclusiveGateway_2 -->|"No"| ExclusiveGateway_4
+	ParallelGateway_2{"+"} --> Task_10
+	ParallelGateway_1{"+"} --> Task_11["Courier is requested"]
+	ExclusiveGateway_3 -->|"Yes"| ParallelGateway_1
+	Task_9["Packing the products"] --> ParallelGateway_2
+	Task_11 --> ParallelGateway_2
+	ParallelGateway_1 --> Task_9

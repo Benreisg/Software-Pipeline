@@ -1,0 +1,220 @@
+{
+    "startEvent": {
+        "name": "start"
+    },
+    "process": [
+        {
+            "type": "task",
+            "name": "Place order"
+        },
+        {
+            "type": "task",
+            "name": "Record order details"
+        },
+        {
+            "type": "task",
+            "name": "Process payment"
+        },
+        {
+            "type": "xor",
+            "condition": "",
+            "branches": [
+                {
+                    "branch": [
+                        {
+                            "type": "task",
+                            "name": "Check stock availability"
+                        },
+                        {
+                            "type": "xor",
+                            "condition": "",
+                            "branches": [
+                                {
+                                    "branch": [
+                                        {
+                                            "type": "task",
+                                            "name": "Initiate back-order"
+                                        },
+                                        {
+                                            "type": "task",
+                                            "name": "Inform customer about delay"
+                                        },
+                                        {
+                                            "type": "task",
+                                            "name": "Receive back-order"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "branch": []
+                                }
+                            ]
+                        },
+                        {
+                            "type": "task",
+                            "name": "Pick items from warehouse"
+                        },
+                        {
+                            "type": "task",
+                            "name": "Perform quality control checks"
+                        },
+                        {
+                            "type": "parallel",
+                            "branches": [
+                                {
+                                    "branch": [
+                                        {
+                                            "type": "task",
+                                            "name": "Package items"
+                                        },
+                                        {
+                                            "type": "xor",
+                                            "condition": "",
+                                            "branches": [
+                                                {
+                                                    "branch": []
+                                                },
+                                                {
+                                                    "branch": [
+                                                        {
+                                                            "type": "task",
+                                                            "name": "Gift wrap items"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "branch": [
+                                        {
+                                            "type": "task",
+                                            "name": "Prepare shipping documents and labels"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "branch": [
+                                        {
+                                            "type": "xor",
+                                            "condition": "",
+                                            "branches": [
+                                                {
+                                                    "branch": []
+                                                },
+                                                {
+                                                    "branch": [
+                                                        {
+                                                            "type": "task",
+                                                            "name": "Prepare documentation for international orders"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "task",
+                            "name": "Dispatch order"
+                        },
+                        {
+                            "type": "parallel",
+                            "branches": [
+                                {
+                                    "branch": [
+                                        {
+                                            "type": "task",
+                                            "name": "Update inventory levels"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "branch": [
+                                        {
+                                            "type": "task",
+                                            "name": "Send shipping confirmation to customer"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "task",
+                            "name": "Confirm delivery"
+                        },
+                        {
+                            "type": "task",
+                            "name": "Send follow-up email"
+                        },
+                        {
+                            "type": "xor",
+                            "condition": "",
+                            "branches": [
+                                {
+                                    "branch": [
+                                        {
+                                            "type": "task",
+                                            "name": "Customer reports issue"
+                                        },
+                                        {
+                                            "type": "task",
+                                            "name": "Send return shipping label"
+                                        },
+                                        {
+                                            "type": "task",
+                                            "name": "Receive returned items"
+                                        },
+                                        {
+                                            "type": "task",
+                                            "name": "Inspect returned items"
+                                        },
+                                        {
+                                            "type": "xor",
+                                            "condition": "",
+                                            "branches": [
+                                                {
+                                                    "branch": [
+                                                        {
+                                                            "type": "task",
+                                                            "name": "Process refund"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "branch": [
+                                                        {
+                                                            "type": "task",
+                                                            "name": "Process replacement"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "branch": []
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "branch": [
+                        {
+                            "type": "task",
+                            "name": "Notify about failed payment"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "endEvent": {
+        "name": "end"
+    }
+}

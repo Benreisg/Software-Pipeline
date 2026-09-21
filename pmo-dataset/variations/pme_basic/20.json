@@ -1,0 +1,250 @@
+{
+    "tasks": [
+        {
+            "id": "Task_1",
+            "name": "Waiter readies cart",
+            "type": "Task"
+        },
+        {
+            "id": "Task_2",
+            "name": "Kitchen prepares food",
+            "type": "Task"
+        },
+        {
+            "id": "Task_3",
+            "name": "Sommelier fetches wine and prepare alcoholic beverages",
+            "type": "Task"
+        },
+        {
+            "id": "Task_4",
+            "name": "Manager takes down the order",
+            "type": "Task"
+        },
+        {
+            "id": "Task_5",
+            "name": "Waiter prepares nonalcoholic drinks",
+            "type": "Task"
+        },
+        {
+            "id": "Task_6",
+            "name": "Waiter waits/delays debiting",
+            "type": "Task"
+        },
+        {
+            "id": "Task_7",
+            "name": "Manager gives order to sommelier",
+            "type": "Task"
+        },
+        {
+            "id": "Task_8",
+            "name": "Waiter debits guest's account",
+            "type": "Task"
+        },
+        {
+            "id": "Task_9",
+            "name": "Manager submits order ticket to kitchen",
+            "type": "Task"
+        },
+        {
+            "id": "Task_10",
+            "name": "Waiter returns to room-service station",
+            "type": "Task"
+        },
+        {
+            "id": "Task_11",
+            "name": "Waiter delivers order to guest's room",
+            "type": "Task"
+        },
+        {
+            "id": "Task_12",
+            "name": "Manager assigns order to waiter",
+            "type": "Task"
+        },
+        {
+            "id": "Task_13",
+            "name": "Guest calls room service",
+            "type": "Task"
+        }
+    ],
+    "events": [
+        {
+            "id": "StartEvent_1",
+            "name": "start",
+            "type": "StartEvent"
+        },
+        {
+            "id": "EndEvent_1",
+            "name": "end",
+            "type": "EndEvent"
+        }
+    ],
+    "gateways": [
+        {
+            "id": "ExclusiveGateway_1",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_2",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_3",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_4",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ParallelGateway_1",
+            "name": "",
+            "type": "ParallelGateway"
+        },
+        {
+            "id": "ParallelGateway_2",
+            "name": "",
+            "type": "ParallelGateway"
+        },
+        {
+            "id": "ParallelGateway_3",
+            "name": "",
+            "type": "ParallelGateway"
+        }
+    ],
+    "sequenceFlows": [
+        {
+            "id": "SequenceFlow_1",
+            "sourceRef": "ParallelGateway_3",
+            "targetRef": "Task_9"
+        },
+        {
+            "id": "SequenceFlow_2",
+            "sourceRef": "ExclusiveGateway_2",
+            "targetRef": "ExclusiveGateway_1"
+        },
+        {
+            "id": "SequenceFlow_3",
+            "sourceRef": "Task_4",
+            "targetRef": "ParallelGateway_3"
+        },
+        {
+            "id": "SequenceFlow_4",
+            "sourceRef": "Task_13",
+            "targetRef": "Task_4"
+        },
+        {
+            "id": "SequenceFlow_5",
+            "sourceRef": "ExclusiveGateway_2",
+            "targetRef": "Task_6"
+        },
+        {
+            "id": "SequenceFlow_6",
+            "sourceRef": "ParallelGateway_3",
+            "targetRef": "Task_12"
+        },
+        {
+            "id": "SequenceFlow_7",
+            "sourceRef": "Task_12",
+            "targetRef": "ParallelGateway_2"
+        },
+        {
+            "id": "SequenceFlow_8",
+            "sourceRef": "ParallelGateway_3",
+            "targetRef": "ExclusiveGateway_3"
+        },
+        {
+            "id": "SequenceFlow_9",
+            "sourceRef": "ParallelGateway_2",
+            "targetRef": "Task_5"
+        },
+        {
+            "id": "SequenceFlow_10",
+            "sourceRef": "Task_8",
+            "targetRef": "EndEvent_1"
+        },
+        {
+            "id": "SequenceFlow_11",
+            "sourceRef": "Task_10",
+            "targetRef": "ExclusiveGateway_2"
+        },
+        {
+            "id": "SequenceFlow_12",
+            "sourceRef": "Task_5",
+            "targetRef": "ParallelGateway_1"
+        },
+        {
+            "id": "SequenceFlow_13",
+            "sourceRef": "ParallelGateway_2",
+            "targetRef": "Task_1"
+        },
+        {
+            "id": "SequenceFlow_14",
+            "sourceRef": "ExclusiveGateway_1",
+            "targetRef": "Task_8"
+        },
+        {
+            "id": "SequenceFlow_15",
+            "sourceRef": "ExclusiveGateway_4",
+            "targetRef": "ParallelGateway_1"
+        },
+        {
+            "id": "SequenceFlow_16",
+            "sourceRef": "Task_2",
+            "targetRef": "ParallelGateway_1"
+        },
+        {
+            "id": "SequenceFlow_17",
+            "sourceRef": "ExclusiveGateway_3",
+            "targetRef": "Task_7"
+        },
+        {
+            "id": "SequenceFlow_18",
+            "sourceRef": "StartEvent_1",
+            "targetRef": "Task_13"
+        },
+        {
+            "id": "SequenceFlow_19",
+            "sourceRef": "Task_11",
+            "targetRef": "Task_10"
+        },
+        {
+            "id": "SequenceFlow_20",
+            "sourceRef": "Task_9",
+            "targetRef": "Task_2"
+        },
+        {
+            "id": "SequenceFlow_21",
+            "sourceRef": "ParallelGateway_1",
+            "targetRef": "Task_11"
+        },
+        {
+            "id": "SequenceFlow_22",
+            "sourceRef": "Task_3",
+            "targetRef": "ExclusiveGateway_4"
+        },
+        {
+            "id": "SequenceFlow_23",
+            "sourceRef": "Task_7",
+            "targetRef": "Task_3"
+        },
+        {
+            "id": "SequenceFlow_24",
+            "sourceRef": "Task_6",
+            "targetRef": "ExclusiveGateway_1"
+        },
+        {
+            "id": "SequenceFlow_25",
+            "sourceRef": "Task_1",
+            "targetRef": "ParallelGateway_1"
+        },
+        {
+            "id": "SequenceFlow_26",
+            "sourceRef": "ExclusiveGateway_3",
+            "targetRef": "ExclusiveGateway_4"
+        }
+    ]
+}

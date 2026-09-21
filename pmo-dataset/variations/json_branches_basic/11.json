@@ -1,0 +1,137 @@
+{
+    "startEvent": {
+        "name": "start"
+    },
+    "process": [
+        {
+            "type": "task",
+            "name": "Customer signs up"
+        },
+        {
+            "type": "task",
+            "name": "Generate account"
+        },
+        {
+            "type": "parallel",
+            "branches": [
+                {
+                    "branch": [
+                        {
+                            "type": "task",
+                            "name": "Assign access"
+                        }
+                    ]
+                },
+                {
+                    "branch": [
+                        {
+                            "type": "task",
+                            "name": "Set automatic triggers for billing cycles"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "loop",
+            "condition": "Loop condition",
+            "body": [
+                {
+                    "type": "parallel",
+                    "branches": [
+                        {
+                            "branch": [
+                                {
+                                    "type": "task",
+                                    "name": "Send renewal notifications"
+                                }
+                            ]
+                        },
+                        {
+                            "branch": [
+                                {
+                                    "type": "task",
+                                    "name": "Send regular updates"
+                                }
+                            ]
+                        },
+                        {
+                            "branch": [
+                                {
+                                    "type": "task",
+                                    "name": "Send product enhancements"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "xor",
+            "condition": "",
+            "branches": [
+                {
+                    "branch": []
+                },
+                {
+                    "branch": [
+                        {
+                            "type": "task",
+                            "name": "Customer submits cancellation request"
+                        },
+                        {
+                            "type": "parallel",
+                            "branches": [
+                                {
+                                    "branch": [
+                                        {
+                                            "type": "task",
+                                            "name": "Deactivate subscription"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "branch": [
+                                        {
+                                            "type": "xor",
+                                            "condition": "",
+                                            "branches": [
+                                                {
+                                                    "branch": [
+                                                        {
+                                                            "type": "task",
+                                                            "name": "apply refund"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "branch": [
+                                                        {
+                                                            "type": "task",
+                                                            "name": "apply charges"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "branch": []
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "task",
+                                            "name": "Settle final account balance"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "endEvent": {
+        "name": "end"
+    }
+}

@@ -1,0 +1,56 @@
+graph LR
+	classDef endEvent stroke-width:3px
+	User_1["Query the next shop"]
+	User_2["Ask about quantity,\nprice and deadline"]
+	Service_1["Create a list of the\nparts"]
+	Service_2["Reorder the cheapest\npart"]
+	Service_3["Reorder the part as\nfast as possible"]
+	Manual_1["Receive first batch\nof parts"]
+	Manual_2["Receive second batch\nof parts"]
+	Manual_3["Receive third batch\nof parts"]
+	Manual_4["Start/Continue\nbuilding"]
+	Manual_5["Complain to the\nfriends"]
+	StartNoneEvent_1(("Contract project\nreceived"))
+	EndNoneEvent_1(("Project completed")):::endEvent
+	ExclusiveGateway_1{"X"}
+	ExclusiveGateway_2{"Terms acceptable?"}
+	ExclusiveGateway_3{"X"}
+	ExclusiveGateway_4{"More parts needed?"}
+	ExclusiveGateway_5{"Any stock falls?"}
+	ExclusiveGateway_6{"X"}
+	ExclusiveGateway_7{"How much is the\nstock fall?"}
+	ExclusiveGateway_8{"X"}
+	ExclusiveGateway_9{"Contract fullfilled?"}
+	ParallelGateway_1{"+"}
+	ComplexGateway_1{"First parts arrived"}
+
+	StartNoneEvent_1 --> ExclusiveGateway_1
+	ExclusiveGateway_1 --> User_1
+	Service_1 --> ExclusiveGateway_3
+	User_1 --> User_2
+	User_2 --> ExclusiveGateway_2
+	ExclusiveGateway_2 -->|"No"| ExclusiveGateway_3
+	ExclusiveGateway_2 -->|"Yes"| Service_1
+	ExclusiveGateway_3 --> ExclusiveGateway_4
+	ExclusiveGateway_4 -->|"Yes"| ExclusiveGateway_1
+	ExclusiveGateway_4 -->|"No"| ParallelGateway_1
+	ParallelGateway_1 --> Manual_1
+	ParallelGateway_1 --> Manual_2
+	ParallelGateway_1 --> Manual_3
+	Manual_1 --> ComplexGateway_1
+	Manual_2 --> ComplexGateway_1
+	Manual_3 --> ComplexGateway_1
+	ComplexGateway_1 --> Manual_4
+	Manual_4 --> ExclusiveGateway_5
+	ExclusiveGateway_5 -->|"Yes"| ExclusiveGateway_7
+	Service_3 --> ExclusiveGateway_8
+	Service_2 --> ExclusiveGateway_8
+	Manual_5 --> ExclusiveGateway_8
+	ExclusiveGateway_8 --> ExclusiveGateway_6
+	ExclusiveGateway_5 -->|"No"| ExclusiveGateway_6
+	ExclusiveGateway_7 -->|"Below 5"| Service_2
+	ExclusiveGateway_7 -->|"Below 3"| Service_3
+	ExclusiveGateway_7 -->|"Zero"| Manual_5
+	ExclusiveGateway_6 --> ExclusiveGateway_9
+	ExclusiveGateway_9 -->|"No"| Manual_4
+	ExclusiveGateway_9 -->|"Yes"| EndNoneEvent_1

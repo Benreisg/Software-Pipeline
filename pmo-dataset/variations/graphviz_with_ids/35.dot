@@ -1,0 +1,45 @@
+digraph G {
+  rankdir=LR;  
+  node [shape=box];
+
+  "User_1" [label="Determine properties"];
+  "User_2" [label="Check delivery of\nordered parts"];
+  "User_3" [label="Perform Inspection"];
+  "User_4" [label="Send first saw"];
+  "User_5" [label="Cancel production of\nthe remaining order"];
+  "User_6" [label="Send the remaining\norder"];
+  "Service_1" [label="Order parts"];
+  "Service_2" [label="Order parts"];
+  "Service_3" [label="Order parts"];
+  "Service_4" [label="Assemble the parts"];
+  "Service_5" [label="Send updates"];
+  "Service_6" [label="Produce the\nremaining order"];
+  "StartNoneEvent_1" [shape=circle, label="Start"];
+  "EndNoneEvent_1" [shape=circle, penwidth=4, label="End"];
+  "ExclusiveGateway_1" [shape=diamond, label="Parts arrived ?"];
+  "ExclusiveGateway_2" [shape=diamond, label="Customer Approval ?"];
+  "ParallelGateway_1" [shape=diamond, label="+"];
+  "ParallelGateway_2" [shape=diamond, label="+"];
+
+  "StartNoneEvent_1" -> "User_1";
+  "User_1" -> "ParallelGateway_1";
+  "ParallelGateway_1" -> "Service_1";
+  "ParallelGateway_1" -> "Service_2";
+  "Service_1" -> "ParallelGateway_2";
+  "Service_2" -> "ParallelGateway_2";
+  "ParallelGateway_2" -> "User_2";
+  "User_2" -> "ExclusiveGateway_1";
+  "ExclusiveGateway_1" -> "User_2" [label="No"];
+  "ExclusiveGateway_1" -> "User_3" [label="Yes"];
+  "User_3" -> "Service_4";
+  "Service_4" -> "Service_5";
+  "Service_5" -> "User_4";
+  "User_4" -> "ExclusiveGateway_2";
+  "ExclusiveGateway_2" -> "User_5" [label="No"];
+  "User_5" -> "EndNoneEvent_1";
+  "ExclusiveGateway_2" -> "Service_6" [label="Yes"];
+  "Service_6" -> "User_6";
+  "User_6" -> "EndNoneEvent_1";
+  "ParallelGateway_1" -> "Service_3";
+  "Service_3" -> "ParallelGateway_2";
+}

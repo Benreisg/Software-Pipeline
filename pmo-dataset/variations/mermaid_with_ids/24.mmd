@@ -1,0 +1,110 @@
+graph LR
+	classDef endEvent stroke-width:3px
+	Task_1["Enter restaurant"]
+	Task_2["Choose dish"]
+	Task_3["Place order"]
+	Task_4["Pay money"]
+	Task_5["Take buzzer"]
+	Task_6["Get meal"]
+	Task_7["Eat meal"]
+	Task_8["Enter order"]
+	Task_9["Collect money"]
+	Task_10["Set up buzzer"]
+	Task_11["Hand over buzzer"]
+	Task_12["Inform chef"]
+	Task_13["Set off buzzer"]
+	Task_14["Hand over meal"]
+	Task_15["Call guest"]
+	Task_16["Prepare meal"]
+	Task_17["Place meal in hatch"]
+	Task_18["Inform employee"]
+	StartNoneEvent_1(("Hunger noticed"))
+	EndNoneEvent_1(("Not hungry anymore")):::endEvent
+	IntermediateConditionalEvent_1((("wait for turn")))
+	IntermediateMessageEventCatching_1((("Meal ready")))
+	StartMessageEvent_1(("Order received"))
+	EndNoneEvent_2(("Order processed")):::endEvent
+	IntermediateMessageEventCatching_2((("Meal ready")))
+	IntermediateMessageEventCatching_3((("Guest appears")))
+	IntermediateTimerEvent_1((("5 minutes")))
+	StartMessageEvent_2(("Meal needed"))
+	EndNoneEvent_3(("Meal prepared")):::endEvent
+	EventBasedGateway_1{"E"}
+
+	StartNoneEvent_1 --> Task_1
+	Task_1 --> Task_2
+	Task_2 --> IntermediateConditionalEvent_1
+	IntermediateConditionalEvent_1 --> Task_3
+	Task_3 --> Task_4
+	Task_4 --> Task_5
+	Task_5 --> IntermediateMessageEventCatching_1
+	IntermediateMessageEventCatching_1 --> Task_6
+	Task_6 --> Task_7
+	Task_7 --> EndNoneEvent_1
+	StartMessageEvent_1 --> Task_8
+	Task_8 --> Task_9
+	Task_9 --> Task_10
+	Task_10 --> Task_11
+	Task_11 --> Task_12
+	Task_12 --> IntermediateMessageEventCatching_2
+	IntermediateMessageEventCatching_2 --> Task_13
+	Task_13 --> EventBasedGateway_1
+	EventBasedGateway_1 --> IntermediateMessageEventCatching_3
+	IntermediateMessageEventCatching_3 --> Task_14
+	Task_14 --> EndNoneEvent_2
+	EventBasedGateway_1 --> IntermediateTimerEvent_1
+	IntermediateTimerEvent_1 --> Task_15
+	Task_15 --> EventBasedGateway_1
+	StartMessageEvent_2 --> Task_16
+	Task_16 --> Task_17
+	Task_17 --> Task_18
+	Task_18 --> EndNoneEvent_3
+	Task_3 -.-> StartMessageEvent_1
+	Task_9 -.-> Task_4
+	Task_4 -.-> Task_9
+	Task_11 -.-> Task_5
+	Task_13 -.-> IntermediateMessageEventCatching_1
+	Task_6 -.-> IntermediateMessageEventCatching_3
+	Task_14 -.-> Task_6
+	Task_12 -.-> StartMessageEvent_2
+	Task_18 -.-> IntermediateMessageEventCatching_2
+	Task_15 -.-> Pool_1
+
+	subgraph Pool_1 ["Guest food\nconsumption"]
+	  Task_1
+	  Task_2
+	  Task_3
+	  Task_4
+	  Task_5
+	  Task_6
+	  Task_7
+	  StartNoneEvent_1
+	  EndNoneEvent_1
+	  IntermediateConditionalEvent_1
+	  IntermediateMessageEventCatching_1
+	end
+
+	subgraph Pool_2 ["Employee order\nprocessing"]
+	  Task_8
+	  Task_9
+	  Task_10
+	  Task_11
+	  Task_12
+	  Task_13
+	  Task_14
+	  Task_15
+	  StartMessageEvent_1
+	  EndNoneEvent_2
+	  IntermediateMessageEventCatching_2
+	  IntermediateMessageEventCatching_3
+	  IntermediateTimerEvent_1
+	  EventBasedGateway_1
+	end
+
+	subgraph Pool_3 ["Chef meal\npreparation"]
+	  Task_16
+	  Task_17
+	  Task_18
+	  StartMessageEvent_2
+	  EndNoneEvent_3
+	end

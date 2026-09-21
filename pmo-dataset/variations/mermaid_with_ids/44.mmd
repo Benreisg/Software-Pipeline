@@ -1,0 +1,63 @@
+graph LR
+	classDef endEvent stroke-width:3px
+	User_1["Select type of order"]
+	User_2["Select burger"]
+	User_3["Select type of\nbeverage"]
+	User_4["Select side"]
+	User_5["Select menu"]
+	User_6["Make payment"]
+	User_7["Enter customer's\nname"]
+	Service_1["Prepare beverage"]
+	Service_2["Prepare potato\nwedges"]
+	Service_3["Prepare French fries"]
+	Service_4["Prepare burger"]
+	Service_5["Check status"]
+	Service_6["Update status"]
+	Service_7["Deliver via conveyor\nbelt"]
+	Service_8["Notify customer"]
+	StartNoneEvent_1(("Food order decided"))
+	EndNoneEvent_1(("Food delivered")):::endEvent
+	IntermediateTimerEvent_1((("30 seconds")))
+	ExclusiveGateway_1{"Menu or just the\nburger ?"}
+	ExclusiveGateway_2{"Fries or wedges ?"}
+	ExclusiveGateway_3{"X"}
+	ExclusiveGateway_4{"X"}
+	ExclusiveGateway_5{"X"}
+	ExclusiveGateway_6{"Is burger ready ?"}
+	ParallelGateway_1{"+"}
+	ParallelGateway_2{"+"}
+	ParallelGateway_3{"+"}
+	ParallelGateway_4{"+"}
+
+	StartNoneEvent_1 --> User_1
+	User_1 --> ExclusiveGateway_1
+	User_3 --> ParallelGateway_1
+	ParallelGateway_1 --> Service_1
+	ParallelGateway_1 --> User_4
+	Service_1 --> ParallelGateway_2
+	User_4 --> ParallelGateway_2
+	Service_2 --> ExclusiveGateway_3
+	Service_3 --> ExclusiveGateway_3
+	ExclusiveGateway_2 -->|"Potato wedges"| Service_2
+	ExclusiveGateway_2 -->|"French fries"| Service_3
+	ParallelGateway_2 --> ExclusiveGateway_2
+	User_5 --> User_3
+	User_2 --> ExclusiveGateway_4
+	ExclusiveGateway_1 -->|"With menu"| User_5
+	ExclusiveGateway_3 --> ExclusiveGateway_4
+	ParallelGateway_3 --> ExclusiveGateway_5
+	IntermediateTimerEvent_1 --> Service_5
+	Service_5 --> ExclusiveGateway_6
+	Service_4 --> ParallelGateway_4
+	Service_7 --> EndNoneEvent_1
+	ExclusiveGateway_5 --> Service_6
+	Service_6 --> IntermediateTimerEvent_1
+	ParallelGateway_4 --> Service_8
+	Service_8 --> Service_7
+	ExclusiveGateway_1 -->|"Burger only"| User_2
+	ExclusiveGateway_6 -->|"No"| ExclusiveGateway_5
+	ExclusiveGateway_6 -->|"Yes"| ParallelGateway_4
+	ParallelGateway_3 --> Service_4
+	User_6 --> User_7
+	User_7 --> ParallelGateway_3
+	ExclusiveGateway_4 --> User_6

@@ -1,0 +1,336 @@
+{
+    "tasks": [
+        {
+            "id": "User_1",
+            "name": "Register for internship",
+            "type": "User"
+        },
+        {
+            "id": "User_2",
+            "name": "Enter topic",
+            "type": "User"
+        },
+        {
+            "id": "User_3",
+            "name": "Enter expected income",
+            "type": "User"
+        },
+        {
+            "id": "User_4",
+            "name": "Enter experience",
+            "type": "User"
+        },
+        {
+            "id": "User_5",
+            "name": "Enter hobbies",
+            "type": "User"
+        },
+        {
+            "id": "User_6",
+            "name": "Accept offer",
+            "type": "User"
+        },
+        {
+            "id": "User_7",
+            "name": "Deny offer",
+            "type": "User"
+        },
+        {
+            "id": "User_8",
+            "name": "Publish your application",
+            "type": "User"
+        },
+        {
+            "id": "User_9",
+            "name": "Begin internship",
+            "type": "User"
+        },
+        {
+            "id": "User_10",
+            "name": "Write at least 3 status updates every week",
+            "type": "User"
+        },
+        {
+            "id": "User_11",
+            "name": "End internship",
+            "type": "User"
+        },
+        {
+            "id": "Service_1",
+            "name": "Recieve offer",
+            "type": "Service"
+        },
+        {
+            "id": "Service_2",
+            "name": "Invalidate all other offers",
+            "type": "Service"
+        },
+        {
+            "id": "Service_3",
+            "name": "Recommend company to a list of friends via twitter api",
+            "type": "Service"
+        },
+        {
+            "id": "Service_4",
+            "name": "Recieve 3 status updates from the company",
+            "type": "Service"
+        }
+    ],
+    "events": [
+        {
+            "id": "StartNoneEvent_1",
+            "name": "Internship process is started",
+            "type": "StartNoneEvent"
+        },
+        {
+            "id": "EndNoneEvent_1",
+            "name": "Internship succesful",
+            "type": "EndNoneEvent"
+        }
+    ],
+    "gateways": [
+        {
+            "id": "ExclusiveGateway_1",
+            "name": "Accept offer?",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_2",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_3",
+            "name": "Recommend company?",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_4",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ParallelGateway_1",
+            "name": "",
+            "type": "ParallelGateway"
+        },
+        {
+            "id": "ParallelGateway_2",
+            "name": "",
+            "type": "ParallelGateway"
+        },
+        {
+            "id": "ParallelGateway_3",
+            "name": "",
+            "type": "ParallelGateway"
+        },
+        {
+            "id": "ParallelGateway_4",
+            "name": "",
+            "type": "ParallelGateway"
+        },
+        {
+            "id": "ParallelGateway_5",
+            "name": "",
+            "type": "ParallelGateway"
+        },
+        {
+            "id": "ParallelGateway_6",
+            "name": "",
+            "type": "ParallelGateway"
+        },
+        {
+            "id": "InclusiveGateway_1",
+            "name": "",
+            "type": "InclusiveGateway"
+        },
+        {
+            "id": "InclusiveGateway_2",
+            "name": "",
+            "type": "InclusiveGateway"
+        }
+    ],
+    "pools": [],
+    "sequenceFlows": [
+        {
+            "id": "SequenceFlow_1",
+            "sourceRef": "StartNoneEvent_1",
+            "targetRef": "User_1"
+        },
+        {
+            "id": "SequenceFlow_2",
+            "sourceRef": "InclusiveGateway_1",
+            "targetRef": "User_5"
+        },
+        {
+            "id": "SequenceFlow_3",
+            "sourceRef": "User_5",
+            "targetRef": "InclusiveGateway_2"
+        },
+        {
+            "id": "SequenceFlow_4",
+            "sourceRef": "Service_1",
+            "targetRef": "ExclusiveGateway_1"
+        },
+        {
+            "id": "SequenceFlow_5",
+            "sourceRef": "ExclusiveGateway_2",
+            "targetRef": "Service_1"
+        },
+        {
+            "id": "SequenceFlow_6",
+            "sourceRef": "User_7",
+            "targetRef": "ExclusiveGateway_2"
+        },
+        {
+            "id": "SequenceFlow_7",
+            "sourceRef": "User_8",
+            "targetRef": "ExclusiveGateway_2"
+        },
+        {
+            "id": "SequenceFlow_8",
+            "sourceRef": "ParallelGateway_2",
+            "targetRef": "User_6"
+        },
+        {
+            "id": "SequenceFlow_9",
+            "sourceRef": "ParallelGateway_2",
+            "targetRef": "Service_2"
+        },
+        {
+            "id": "SequenceFlow_10",
+            "sourceRef": "User_6",
+            "targetRef": "ParallelGateway_1"
+        },
+        {
+            "id": "SequenceFlow_11",
+            "sourceRef": "Service_2",
+            "targetRef": "ParallelGateway_1"
+        },
+        {
+            "id": "SequenceFlow_12",
+            "sourceRef": "User_9",
+            "targetRef": "ParallelGateway_3"
+        },
+        {
+            "id": "SequenceFlow_13",
+            "sourceRef": "InclusiveGateway_1",
+            "targetRef": "User_4"
+        },
+        {
+            "id": "SequenceFlow_14",
+            "sourceRef": "InclusiveGateway_1",
+            "targetRef": "User_3"
+        },
+        {
+            "id": "SequenceFlow_15",
+            "sourceRef": "User_4",
+            "targetRef": "InclusiveGateway_2"
+        },
+        {
+            "id": "SequenceFlow_16",
+            "sourceRef": "User_3",
+            "targetRef": "InclusiveGateway_2"
+        },
+        {
+            "id": "SequenceFlow_17",
+            "sourceRef": "ParallelGateway_3",
+            "targetRef": "User_10"
+        },
+        {
+            "id": "SequenceFlow_18",
+            "sourceRef": "ParallelGateway_3",
+            "targetRef": "Service_4"
+        },
+        {
+            "id": "SequenceFlow_19",
+            "sourceRef": "Service_4",
+            "targetRef": "ParallelGateway_4"
+        },
+        {
+            "id": "SequenceFlow_20",
+            "sourceRef": "User_10",
+            "targetRef": "ParallelGateway_4"
+        },
+        {
+            "id": "SequenceFlow_21",
+            "sourceRef": "ExclusiveGateway_3",
+            "targetRef": "Service_3",
+            "condition": "Yes"
+        },
+        {
+            "id": "SequenceFlow_22",
+            "sourceRef": "ParallelGateway_1",
+            "targetRef": "User_9"
+        },
+        {
+            "id": "SequenceFlow_23",
+            "sourceRef": "User_11",
+            "targetRef": "ExclusiveGateway_3"
+        },
+        {
+            "id": "SequenceFlow_24",
+            "sourceRef": "User_1",
+            "targetRef": "ParallelGateway_5"
+        },
+        {
+            "id": "SequenceFlow_25",
+            "sourceRef": "ParallelGateway_4",
+            "targetRef": "User_11"
+        },
+        {
+            "id": "SequenceFlow_26",
+            "sourceRef": "ParallelGateway_5",
+            "targetRef": "User_2"
+        },
+        {
+            "id": "SequenceFlow_27",
+            "sourceRef": "InclusiveGateway_2",
+            "targetRef": "ParallelGateway_6"
+        },
+        {
+            "id": "SequenceFlow_28",
+            "sourceRef": "User_2",
+            "targetRef": "ParallelGateway_6"
+        },
+        {
+            "id": "SequenceFlow_29",
+            "sourceRef": "ParallelGateway_5",
+            "targetRef": "InclusiveGateway_1"
+        },
+        {
+            "id": "SequenceFlow_30",
+            "sourceRef": "ParallelGateway_6",
+            "targetRef": "User_8"
+        },
+        {
+            "id": "SequenceFlow_31",
+            "sourceRef": "ExclusiveGateway_1",
+            "targetRef": "User_7",
+            "condition": "No"
+        },
+        {
+            "id": "SequenceFlow_32",
+            "sourceRef": "ExclusiveGateway_1",
+            "targetRef": "ParallelGateway_2",
+            "condition": "Yes"
+        },
+        {
+            "id": "SequenceFlow_33",
+            "sourceRef": "ExclusiveGateway_3",
+            "targetRef": "ExclusiveGateway_4",
+            "condition": "No"
+        },
+        {
+            "id": "SequenceFlow_34",
+            "sourceRef": "ExclusiveGateway_4",
+            "targetRef": "EndNoneEvent_1"
+        },
+        {
+            "id": "SequenceFlow_35",
+            "sourceRef": "Service_3",
+            "targetRef": "ExclusiveGateway_4"
+        }
+    ],
+    "messageFlows": []
+}

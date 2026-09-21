@@ -1,0 +1,52 @@
+digraph G {
+  rankdir=LR;  
+  node [shape=box];
+
+  "User_1" [label="Mechanic check a car\nand enter problems"];
+  "User_2" [label="Pay per App"];
+  "User_3" [label="Save repair infos"];
+  "User_4" [label="Make appointment for\nnext service"];
+  "User_5" [label="Make new appointment"];
+  "Service_1" [label="Check if car is\nstill registered?"];
+  "Service_2" [label="User fined"];
+  "Service_3" [label="Receive updates\nwhile waiting"];
+  "Service_4" [label="Send 'Pickerl'"];
+  "Service_5" [label="Check appointment\nfor service"];
+  "Send_1" [label="Send reminder\nnotification to user"];
+  "Receive_1" [label="Received a\nnotificiation"];
+  "Manual_1" [label="Bring Documents for\nRegistration"];
+  "StartNoneEvent_1" [shape=circle, label=""];
+  "EndNoneEvent_1" [shape=circle, penwidth=4, label=""];
+  "ExclusiveGateway_1" [shape=diamond, label="Registered?"];
+  "ExclusiveGateway_2" [shape=diamond, label="Gone to service?"];
+  "ExclusiveGateway_3" [shape=diamond, label="> 30 days?"];
+  "ExclusiveGateway_4" [shape=diamond, label="Repair done?"];
+  "ParallelGateway_1" [shape=diamond, label="+"];
+  "ParallelGateway_2" [shape=diamond, label="+"];
+
+  "StartNoneEvent_1" -> "Manual_1";
+  "Manual_1" -> "Service_1";
+  "Service_1" -> "ExclusiveGateway_1";
+  "ExclusiveGateway_1" -> "Manual_1" [label="no"];
+  "Send_1" -> "Receive_1";
+  "ExclusiveGateway_2" -> "User_1" [label="yes"];
+  "ExclusiveGateway_3" -> "Service_2" [label="yes"];
+  "User_1" -> "Service_3";
+  "Service_3" -> "ExclusiveGateway_4";
+  "ExclusiveGateway_4" -> "User_2" [label="yes"];
+  "User_2" -> "ParallelGateway_1";
+  "ParallelGateway_1" -> "User_3";
+  "ParallelGateway_1" -> "Service_4";
+  "User_3" -> "ParallelGateway_2";
+  "Service_4" -> "ParallelGateway_2";
+  "ParallelGateway_2" -> "User_4";
+  "ExclusiveGateway_2" -> "ExclusiveGateway_3" [label="no"];
+  "ExclusiveGateway_4" -> "Service_3" [label="no"];
+  "User_4" -> "EndNoneEvent_1";
+  "Receive_1" -> "ExclusiveGateway_2";
+  "Service_5" -> "Send_1";
+  "ExclusiveGateway_1" -> "Service_5" [label="yes"];
+  "Service_2" -> "User_5";
+  "User_5" -> "Service_5";
+  "ExclusiveGateway_3" -> "Send_1" [label="no"];
+}

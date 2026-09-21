@@ -1,0 +1,318 @@
+{
+    "tasks": [
+        {
+            "id": "User_1",
+            "name": "Select type of order",
+            "type": "User"
+        },
+        {
+            "id": "User_2",
+            "name": "Select burger",
+            "type": "User"
+        },
+        {
+            "id": "User_3",
+            "name": "Select type of beverage",
+            "type": "User"
+        },
+        {
+            "id": "User_4",
+            "name": "Select side",
+            "type": "User"
+        },
+        {
+            "id": "User_5",
+            "name": "Select menu",
+            "type": "User"
+        },
+        {
+            "id": "User_6",
+            "name": "Make payment",
+            "type": "User"
+        },
+        {
+            "id": "User_7",
+            "name": "Enter customer's name",
+            "type": "User"
+        },
+        {
+            "id": "Service_1",
+            "name": "Prepare beverage",
+            "type": "Service"
+        },
+        {
+            "id": "Service_2",
+            "name": "Prepare potato wedges",
+            "type": "Service"
+        },
+        {
+            "id": "Service_3",
+            "name": "Prepare French fries",
+            "type": "Service"
+        },
+        {
+            "id": "Service_4",
+            "name": "Prepare burger",
+            "type": "Service"
+        },
+        {
+            "id": "Service_5",
+            "name": "Check status",
+            "type": "Service"
+        },
+        {
+            "id": "Service_6",
+            "name": "Update status",
+            "type": "Service"
+        },
+        {
+            "id": "Service_7",
+            "name": "Deliver via conveyor belt",
+            "type": "Service"
+        },
+        {
+            "id": "Service_8",
+            "name": "Notify customer",
+            "type": "Service"
+        }
+    ],
+    "events": [
+        {
+            "id": "StartNoneEvent_1",
+            "name": "Food order decided",
+            "type": "StartNoneEvent"
+        },
+        {
+            "id": "EndNoneEvent_1",
+            "name": "Food delivered",
+            "type": "EndNoneEvent"
+        },
+        {
+            "id": "IntermediateTimerEvent_1",
+            "name": "30 seconds",
+            "type": "IntermediateTimerEvent"
+        }
+    ],
+    "gateways": [
+        {
+            "id": "ExclusiveGateway_1",
+            "name": "Menu or just the burger ?",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_2",
+            "name": "Fries or wedges ?",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_3",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_4",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_5",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_6",
+            "name": "Is burger ready ?",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ParallelGateway_1",
+            "name": "",
+            "type": "ParallelGateway"
+        },
+        {
+            "id": "ParallelGateway_2",
+            "name": "",
+            "type": "ParallelGateway"
+        },
+        {
+            "id": "ParallelGateway_3",
+            "name": "",
+            "type": "ParallelGateway"
+        },
+        {
+            "id": "ParallelGateway_4",
+            "name": "",
+            "type": "ParallelGateway"
+        }
+    ],
+    "pools": [],
+    "sequenceFlows": [
+        {
+            "id": "SequenceFlow_1",
+            "sourceRef": "StartNoneEvent_1",
+            "targetRef": "User_1"
+        },
+        {
+            "id": "SequenceFlow_2",
+            "sourceRef": "User_1",
+            "targetRef": "ExclusiveGateway_1"
+        },
+        {
+            "id": "SequenceFlow_3",
+            "sourceRef": "User_3",
+            "targetRef": "ParallelGateway_1"
+        },
+        {
+            "id": "SequenceFlow_4",
+            "sourceRef": "ParallelGateway_1",
+            "targetRef": "Service_1"
+        },
+        {
+            "id": "SequenceFlow_5",
+            "sourceRef": "ParallelGateway_1",
+            "targetRef": "User_4"
+        },
+        {
+            "id": "SequenceFlow_6",
+            "sourceRef": "Service_1",
+            "targetRef": "ParallelGateway_2"
+        },
+        {
+            "id": "SequenceFlow_7",
+            "sourceRef": "User_4",
+            "targetRef": "ParallelGateway_2"
+        },
+        {
+            "id": "SequenceFlow_8",
+            "sourceRef": "Service_2",
+            "targetRef": "ExclusiveGateway_3"
+        },
+        {
+            "id": "SequenceFlow_9",
+            "sourceRef": "Service_3",
+            "targetRef": "ExclusiveGateway_3"
+        },
+        {
+            "id": "SequenceFlow_10",
+            "sourceRef": "ExclusiveGateway_2",
+            "targetRef": "Service_2",
+            "condition": "Potato wedges"
+        },
+        {
+            "id": "SequenceFlow_11",
+            "sourceRef": "ExclusiveGateway_2",
+            "targetRef": "Service_3",
+            "condition": "French fries"
+        },
+        {
+            "id": "SequenceFlow_12",
+            "sourceRef": "ParallelGateway_2",
+            "targetRef": "ExclusiveGateway_2"
+        },
+        {
+            "id": "SequenceFlow_13",
+            "sourceRef": "User_5",
+            "targetRef": "User_3"
+        },
+        {
+            "id": "SequenceFlow_14",
+            "sourceRef": "User_2",
+            "targetRef": "ExclusiveGateway_4"
+        },
+        {
+            "id": "SequenceFlow_15",
+            "sourceRef": "ExclusiveGateway_1",
+            "targetRef": "User_5",
+            "condition": "With menu"
+        },
+        {
+            "id": "SequenceFlow_16",
+            "sourceRef": "ExclusiveGateway_3",
+            "targetRef": "ExclusiveGateway_4"
+        },
+        {
+            "id": "SequenceFlow_17",
+            "sourceRef": "ParallelGateway_3",
+            "targetRef": "ExclusiveGateway_5"
+        },
+        {
+            "id": "SequenceFlow_18",
+            "sourceRef": "IntermediateTimerEvent_1",
+            "targetRef": "Service_5"
+        },
+        {
+            "id": "SequenceFlow_19",
+            "sourceRef": "Service_5",
+            "targetRef": "ExclusiveGateway_6"
+        },
+        {
+            "id": "SequenceFlow_20",
+            "sourceRef": "Service_4",
+            "targetRef": "ParallelGateway_4"
+        },
+        {
+            "id": "SequenceFlow_21",
+            "sourceRef": "Service_7",
+            "targetRef": "EndNoneEvent_1"
+        },
+        {
+            "id": "SequenceFlow_22",
+            "sourceRef": "ExclusiveGateway_5",
+            "targetRef": "Service_6"
+        },
+        {
+            "id": "SequenceFlow_23",
+            "sourceRef": "Service_6",
+            "targetRef": "IntermediateTimerEvent_1"
+        },
+        {
+            "id": "SequenceFlow_24",
+            "sourceRef": "ParallelGateway_4",
+            "targetRef": "Service_8"
+        },
+        {
+            "id": "SequenceFlow_25",
+            "sourceRef": "Service_8",
+            "targetRef": "Service_7"
+        },
+        {
+            "id": "SequenceFlow_26",
+            "sourceRef": "ExclusiveGateway_1",
+            "targetRef": "User_2",
+            "condition": "Burger only"
+        },
+        {
+            "id": "SequenceFlow_27",
+            "sourceRef": "ExclusiveGateway_6",
+            "targetRef": "ExclusiveGateway_5",
+            "condition": "No"
+        },
+        {
+            "id": "SequenceFlow_28",
+            "sourceRef": "ExclusiveGateway_6",
+            "targetRef": "ParallelGateway_4",
+            "condition": "Yes"
+        },
+        {
+            "id": "SequenceFlow_29",
+            "sourceRef": "ParallelGateway_3",
+            "targetRef": "Service_4"
+        },
+        {
+            "id": "SequenceFlow_30",
+            "sourceRef": "User_6",
+            "targetRef": "User_7"
+        },
+        {
+            "id": "SequenceFlow_31",
+            "sourceRef": "User_7",
+            "targetRef": "ParallelGateway_3"
+        },
+        {
+            "id": "SequenceFlow_32",
+            "sourceRef": "ExclusiveGateway_4",
+            "targetRef": "User_6"
+        }
+    ],
+    "messageFlows": []
+}

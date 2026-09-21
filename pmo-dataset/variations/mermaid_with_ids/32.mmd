@@ -1,0 +1,109 @@
+graph LR
+	classDef endEvent stroke-width:3px
+	Task_1["Collect urgently\nneeded resources"]
+	Task_2["Collect the remained\nresources"]
+	Task_3["Check repo for\nalready available\nresources"]
+	Task_4["Build tools"]
+	Task_5["Start farming"]
+	Task_6["Continue farming"]
+	Task_7["Update list of\nresources"]
+	Task_8["Wait for random\nnatural event for\nsome time"]
+	User_1["Find out wanted\nresources"]
+	User_2["Read message"]
+	User_3["Brag to friends"]
+	User_4["Help with materials"]
+	Service_1["Reset bot"]
+	Service_2["Notify player"]
+	Service_3["Give bot a sleeping\nbreak"]
+	StartNoneEvent_1(("Farming bot creation\ndesire"))
+	EndNoneEvent_1((" ")):::endEvent
+	ExclusiveGateway_1{"New tools needed?"}
+	ExclusiveGateway_2{"X"}
+	ExclusiveGateway_3{"New milestone\nachieved?"}
+	ExclusiveGateway_4{"X"}
+	ExclusiveGateway_5{"Bot finished?"}
+	ExclusiveGateway_6{"X"}
+	ExclusiveGateway_7{"RNE happened?"}
+	ExclusiveGateway_8{"X"}
+	ParallelGateway_1{"+"}
+	ParallelGateway_2{"+"}
+	ParallelGateway_3{"+"}
+	ParallelGateway_4{"+"}
+	InclusiveGateway_1{"O"}
+	InclusiveGateway_2{"O"}
+
+	StartNoneEvent_1 --> User_1
+	ExclusiveGateway_3 -->|"Yes"| Service_2
+	User_4 --> InclusiveGateway_2
+	User_3 --> InclusiveGateway_2
+	ParallelGateway_1 --> Task_3
+	Task_3 --> ParallelGateway_2
+	ParallelGateway_2 --> ExclusiveGateway_1
+	Task_4 --> ExclusiveGateway_2
+	ParallelGateway_1 --> Task_1
+	Task_1 --> ParallelGateway_2
+	ExclusiveGateway_1 -->|"Yes"| Task_4
+	ExclusiveGateway_2 --> Task_2
+	ExclusiveGateway_1 -->|"No"| ExclusiveGateway_2
+	User_2 --> ExclusiveGateway_4
+	ExclusiveGateway_4 --> ExclusiveGateway_5
+	Service_1 --> Task_6
+	Task_5 --> ExclusiveGateway_6
+	User_1 --> ParallelGateway_1
+	Service_2 --> User_2
+	ExclusiveGateway_6 --> ExclusiveGateway_3
+	Task_6 --> ExclusiveGateway_6
+	Task_8 --> ExclusiveGateway_7
+	ExclusiveGateway_7 -->|"Yes"| Service_1
+	ParallelGateway_3 --> ExclusiveGateway_8
+	ExclusiveGateway_8 --> Task_8
+	Task_2 --> ParallelGateway_3
+	ExclusiveGateway_7 -->|"No"| Task_5
+	ParallelGateway_3 --> Task_7
+	ExclusiveGateway_3 -->|"No"| ExclusiveGateway_4
+	Service_3 --> ExclusiveGateway_8
+	ExclusiveGateway_5 -->|"Yes"| InclusiveGateway_1
+	InclusiveGateway_2 --> ParallelGateway_4
+	Task_7 --> ParallelGateway_4
+	ParallelGateway_4 --> EndNoneEvent_1
+	ExclusiveGateway_5 -->|"No"| Service_3
+	InclusiveGateway_1 -->|"brag"| User_3
+	InclusiveGateway_1 -->|"help"| User_4
+
+	subgraph Pool_1 ["Farming Bot Game"]
+	  subgraph Lane_1 ["Player"]
+	    StartNoneEvent_1
+	    User_1
+	    User_2
+	    Task_1
+	    Task_2
+	    ParallelGateway_1
+	    Task_3
+	    ParallelGateway_2
+	    ExclusiveGateway_1
+	    Task_4
+	    ExclusiveGateway_2
+	  end
+	  subgraph Lane_2 ["Farming Bot"]
+	    Task_5
+	    Task_6
+	    Service_1
+	    ExclusiveGateway_3
+	    Service_2
+	    ExclusiveGateway_4
+	    ExclusiveGateway_5
+	    InclusiveGateway_1
+	    User_3
+	    User_4
+	    InclusiveGateway_2
+	    Service_3
+	    ParallelGateway_3
+	    Task_7
+	    ExclusiveGateway_6
+	    Task_8
+	    ExclusiveGateway_7
+	    ExclusiveGateway_8
+	    ParallelGateway_4
+	    EndNoneEvent_1
+	  end
+	end

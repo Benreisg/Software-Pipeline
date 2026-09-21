@@ -1,0 +1,565 @@
+<definitions Definitions_1>
+    <collaboration Collaboration_1>
+        <participant Pool_1> (Guest food consumption)
+          - processRef: Process_Pool_1
+        </participant>
+        <participant Pool_2> (Employee order processing)
+          - processRef: Process_Pool_2
+        </participant>
+        <participant Pool_3> (Chef meal preparation)
+          - processRef: Process_Pool_3
+        </participant>
+    </collaboration>
+    <process Process_Pool_1> (Guest food consumption)
+        <task Task_1 (Enter restaurant)/>
+        <task Task_2 (Choose dish)/>
+        <task Task_3 (Place order)/>
+        <task Task_4 (Pay money)/>
+        <task Task_5 (Take buzzer)/>
+        <task Task_6 (Get meal)/>
+        <task Task_7 (Eat meal)/>
+        <task Task_8 (Enter order)/>
+        <task Task_9 (Collect money)/>
+        <task Task_10 (Set up buzzer)/>
+        <task Task_11 (Hand over buzzer)/>
+        <task Task_12 (Inform chef)/>
+        <task Task_13 (Set off buzzer)/>
+        <task Task_14 (Hand over meal)/>
+        <task Task_15 (Call guest)/>
+        <task Task_16 (Prepare meal)/>
+        <task Task_17 (Place meal in hatch)/>
+        <task Task_18 (Inform employee)/>
+        <startNoneEvent StartNoneEvent_1 (Hunger noticed)/>
+        <endNoneEvent EndNoneEvent_1 (Not hungry anymore)/>
+        <intermediateConditionalEvent IntermediateConditionalEvent_1 (wait for turn)/>
+        <intermediateMessageEventCatching IntermediateMessageEventCatching_1 (Meal ready)/>
+        <startMessageEvent StartMessageEvent_1 (Order received)/>
+        <endNoneEvent EndNoneEvent_2 (Order processed)/>
+        <intermediateMessageEventCatching IntermediateMessageEventCatching_2 (Meal ready)/>
+        <intermediateMessageEventCatching IntermediateMessageEventCatching_3 (Guest appears)/>
+        <intermediateTimerEvent IntermediateTimerEvent_1 (5 minutes)/>
+        <startMessageEvent StartMessageEvent_2 (Meal needed)/>
+        <endNoneEvent EndNoneEvent_3 (Meal prepared)/>
+        <eventbasedgatewayGateway EventBasedGateway_1/>
+        <sequenceFlow SequenceFlow_1>
+          - sourceRef: StartNoneEvent_1
+          - targetRef: Task_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_2>
+          - sourceRef: Task_1
+          - targetRef: Task_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_3>
+          - sourceRef: Task_2
+          - targetRef: IntermediateConditionalEvent_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_4>
+          - sourceRef: IntermediateConditionalEvent_1
+          - targetRef: Task_3
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_5>
+          - sourceRef: Task_3
+          - targetRef: Task_4
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_6>
+          - sourceRef: Task_4
+          - targetRef: Task_5
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_7>
+          - sourceRef: Task_5
+          - targetRef: IntermediateMessageEventCatching_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_8>
+          - sourceRef: IntermediateMessageEventCatching_1
+          - targetRef: Task_6
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_9>
+          - sourceRef: Task_6
+          - targetRef: Task_7
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_10>
+          - sourceRef: Task_7
+          - targetRef: EndNoneEvent_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_11>
+          - sourceRef: StartMessageEvent_1
+          - targetRef: Task_8
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_12>
+          - sourceRef: Task_8
+          - targetRef: Task_9
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_13>
+          - sourceRef: Task_9
+          - targetRef: Task_10
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_14>
+          - sourceRef: Task_10
+          - targetRef: Task_11
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_15>
+          - sourceRef: Task_11
+          - targetRef: Task_12
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_16>
+          - sourceRef: Task_12
+          - targetRef: IntermediateMessageEventCatching_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_17>
+          - sourceRef: IntermediateMessageEventCatching_2
+          - targetRef: Task_13
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_18>
+          - sourceRef: Task_13
+          - targetRef: EventBasedGateway_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_19>
+          - sourceRef: EventBasedGateway_1
+          - targetRef: IntermediateMessageEventCatching_3
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_20>
+          - sourceRef: IntermediateMessageEventCatching_3
+          - targetRef: Task_14
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_21>
+          - sourceRef: Task_14
+          - targetRef: EndNoneEvent_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_22>
+          - sourceRef: EventBasedGateway_1
+          - targetRef: IntermediateTimerEvent_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_23>
+          - sourceRef: IntermediateTimerEvent_1
+          - targetRef: Task_15
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_24>
+          - sourceRef: Task_15
+          - targetRef: EventBasedGateway_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_25>
+          - sourceRef: StartMessageEvent_2
+          - targetRef: Task_16
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_26>
+          - sourceRef: Task_16
+          - targetRef: Task_17
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_27>
+          - sourceRef: Task_17
+          - targetRef: Task_18
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_28>
+          - sourceRef: Task_18
+          - targetRef: EndNoneEvent_3
+        </sequenceFlow>
+        <messageFlow MessageFlow_1>
+          - sourceRef: Task_3
+          - targetRef: StartMessageEvent_1
+        </messageFlow>
+        <messageFlow MessageFlow_2>
+          - sourceRef: Task_9
+          - targetRef: Task_4
+        </messageFlow>
+        <messageFlow MessageFlow_3>
+          - sourceRef: Task_4
+          - targetRef: Task_9
+        </messageFlow>
+        <messageFlow MessageFlow_4>
+          - sourceRef: Task_11
+          - targetRef: Task_5
+        </messageFlow>
+        <messageFlow MessageFlow_5>
+          - sourceRef: Task_13
+          - targetRef: IntermediateMessageEventCatching_1
+        </messageFlow>
+        <messageFlow MessageFlow_6>
+          - sourceRef: Task_6
+          - targetRef: IntermediateMessageEventCatching_3
+        </messageFlow>
+        <messageFlow MessageFlow_7>
+          - sourceRef: Task_14
+          - targetRef: Task_6
+        </messageFlow>
+        <messageFlow MessageFlow_8>
+          - sourceRef: Task_12
+          - targetRef: StartMessageEvent_2
+        </messageFlow>
+        <messageFlow MessageFlow_9>
+          - sourceRef: Task_18
+          - targetRef: IntermediateMessageEventCatching_2
+        </messageFlow>
+        <messageFlow MessageFlow_10>
+          - sourceRef: Task_15
+          - targetRef: Pool_1
+        </messageFlow>
+    </process>
+    <process Process_Pool_2> (Employee order processing)
+        <task Task_1 (Enter restaurant)/>
+        <task Task_2 (Choose dish)/>
+        <task Task_3 (Place order)/>
+        <task Task_4 (Pay money)/>
+        <task Task_5 (Take buzzer)/>
+        <task Task_6 (Get meal)/>
+        <task Task_7 (Eat meal)/>
+        <task Task_8 (Enter order)/>
+        <task Task_9 (Collect money)/>
+        <task Task_10 (Set up buzzer)/>
+        <task Task_11 (Hand over buzzer)/>
+        <task Task_12 (Inform chef)/>
+        <task Task_13 (Set off buzzer)/>
+        <task Task_14 (Hand over meal)/>
+        <task Task_15 (Call guest)/>
+        <task Task_16 (Prepare meal)/>
+        <task Task_17 (Place meal in hatch)/>
+        <task Task_18 (Inform employee)/>
+        <startNoneEvent StartNoneEvent_1 (Hunger noticed)/>
+        <endNoneEvent EndNoneEvent_1 (Not hungry anymore)/>
+        <intermediateConditionalEvent IntermediateConditionalEvent_1 (wait for turn)/>
+        <intermediateMessageEventCatching IntermediateMessageEventCatching_1 (Meal ready)/>
+        <startMessageEvent StartMessageEvent_1 (Order received)/>
+        <endNoneEvent EndNoneEvent_2 (Order processed)/>
+        <intermediateMessageEventCatching IntermediateMessageEventCatching_2 (Meal ready)/>
+        <intermediateMessageEventCatching IntermediateMessageEventCatching_3 (Guest appears)/>
+        <intermediateTimerEvent IntermediateTimerEvent_1 (5 minutes)/>
+        <startMessageEvent StartMessageEvent_2 (Meal needed)/>
+        <endNoneEvent EndNoneEvent_3 (Meal prepared)/>
+        <eventbasedgatewayGateway EventBasedGateway_1/>
+        <sequenceFlow SequenceFlow_1>
+          - sourceRef: StartNoneEvent_1
+          - targetRef: Task_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_2>
+          - sourceRef: Task_1
+          - targetRef: Task_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_3>
+          - sourceRef: Task_2
+          - targetRef: IntermediateConditionalEvent_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_4>
+          - sourceRef: IntermediateConditionalEvent_1
+          - targetRef: Task_3
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_5>
+          - sourceRef: Task_3
+          - targetRef: Task_4
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_6>
+          - sourceRef: Task_4
+          - targetRef: Task_5
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_7>
+          - sourceRef: Task_5
+          - targetRef: IntermediateMessageEventCatching_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_8>
+          - sourceRef: IntermediateMessageEventCatching_1
+          - targetRef: Task_6
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_9>
+          - sourceRef: Task_6
+          - targetRef: Task_7
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_10>
+          - sourceRef: Task_7
+          - targetRef: EndNoneEvent_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_11>
+          - sourceRef: StartMessageEvent_1
+          - targetRef: Task_8
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_12>
+          - sourceRef: Task_8
+          - targetRef: Task_9
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_13>
+          - sourceRef: Task_9
+          - targetRef: Task_10
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_14>
+          - sourceRef: Task_10
+          - targetRef: Task_11
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_15>
+          - sourceRef: Task_11
+          - targetRef: Task_12
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_16>
+          - sourceRef: Task_12
+          - targetRef: IntermediateMessageEventCatching_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_17>
+          - sourceRef: IntermediateMessageEventCatching_2
+          - targetRef: Task_13
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_18>
+          - sourceRef: Task_13
+          - targetRef: EventBasedGateway_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_19>
+          - sourceRef: EventBasedGateway_1
+          - targetRef: IntermediateMessageEventCatching_3
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_20>
+          - sourceRef: IntermediateMessageEventCatching_3
+          - targetRef: Task_14
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_21>
+          - sourceRef: Task_14
+          - targetRef: EndNoneEvent_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_22>
+          - sourceRef: EventBasedGateway_1
+          - targetRef: IntermediateTimerEvent_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_23>
+          - sourceRef: IntermediateTimerEvent_1
+          - targetRef: Task_15
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_24>
+          - sourceRef: Task_15
+          - targetRef: EventBasedGateway_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_25>
+          - sourceRef: StartMessageEvent_2
+          - targetRef: Task_16
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_26>
+          - sourceRef: Task_16
+          - targetRef: Task_17
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_27>
+          - sourceRef: Task_17
+          - targetRef: Task_18
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_28>
+          - sourceRef: Task_18
+          - targetRef: EndNoneEvent_3
+        </sequenceFlow>
+        <messageFlow MessageFlow_1>
+          - sourceRef: Task_3
+          - targetRef: StartMessageEvent_1
+        </messageFlow>
+        <messageFlow MessageFlow_2>
+          - sourceRef: Task_9
+          - targetRef: Task_4
+        </messageFlow>
+        <messageFlow MessageFlow_3>
+          - sourceRef: Task_4
+          - targetRef: Task_9
+        </messageFlow>
+        <messageFlow MessageFlow_4>
+          - sourceRef: Task_11
+          - targetRef: Task_5
+        </messageFlow>
+        <messageFlow MessageFlow_5>
+          - sourceRef: Task_13
+          - targetRef: IntermediateMessageEventCatching_1
+        </messageFlow>
+        <messageFlow MessageFlow_6>
+          - sourceRef: Task_6
+          - targetRef: IntermediateMessageEventCatching_3
+        </messageFlow>
+        <messageFlow MessageFlow_7>
+          - sourceRef: Task_14
+          - targetRef: Task_6
+        </messageFlow>
+        <messageFlow MessageFlow_8>
+          - sourceRef: Task_12
+          - targetRef: StartMessageEvent_2
+        </messageFlow>
+        <messageFlow MessageFlow_9>
+          - sourceRef: Task_18
+          - targetRef: IntermediateMessageEventCatching_2
+        </messageFlow>
+        <messageFlow MessageFlow_10>
+          - sourceRef: Task_15
+          - targetRef: Pool_1
+        </messageFlow>
+    </process>
+    <process Process_Pool_3> (Chef meal preparation)
+        <task Task_1 (Enter restaurant)/>
+        <task Task_2 (Choose dish)/>
+        <task Task_3 (Place order)/>
+        <task Task_4 (Pay money)/>
+        <task Task_5 (Take buzzer)/>
+        <task Task_6 (Get meal)/>
+        <task Task_7 (Eat meal)/>
+        <task Task_8 (Enter order)/>
+        <task Task_9 (Collect money)/>
+        <task Task_10 (Set up buzzer)/>
+        <task Task_11 (Hand over buzzer)/>
+        <task Task_12 (Inform chef)/>
+        <task Task_13 (Set off buzzer)/>
+        <task Task_14 (Hand over meal)/>
+        <task Task_15 (Call guest)/>
+        <task Task_16 (Prepare meal)/>
+        <task Task_17 (Place meal in hatch)/>
+        <task Task_18 (Inform employee)/>
+        <startNoneEvent StartNoneEvent_1 (Hunger noticed)/>
+        <endNoneEvent EndNoneEvent_1 (Not hungry anymore)/>
+        <intermediateConditionalEvent IntermediateConditionalEvent_1 (wait for turn)/>
+        <intermediateMessageEventCatching IntermediateMessageEventCatching_1 (Meal ready)/>
+        <startMessageEvent StartMessageEvent_1 (Order received)/>
+        <endNoneEvent EndNoneEvent_2 (Order processed)/>
+        <intermediateMessageEventCatching IntermediateMessageEventCatching_2 (Meal ready)/>
+        <intermediateMessageEventCatching IntermediateMessageEventCatching_3 (Guest appears)/>
+        <intermediateTimerEvent IntermediateTimerEvent_1 (5 minutes)/>
+        <startMessageEvent StartMessageEvent_2 (Meal needed)/>
+        <endNoneEvent EndNoneEvent_3 (Meal prepared)/>
+        <eventbasedgatewayGateway EventBasedGateway_1/>
+        <sequenceFlow SequenceFlow_1>
+          - sourceRef: StartNoneEvent_1
+          - targetRef: Task_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_2>
+          - sourceRef: Task_1
+          - targetRef: Task_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_3>
+          - sourceRef: Task_2
+          - targetRef: IntermediateConditionalEvent_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_4>
+          - sourceRef: IntermediateConditionalEvent_1
+          - targetRef: Task_3
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_5>
+          - sourceRef: Task_3
+          - targetRef: Task_4
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_6>
+          - sourceRef: Task_4
+          - targetRef: Task_5
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_7>
+          - sourceRef: Task_5
+          - targetRef: IntermediateMessageEventCatching_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_8>
+          - sourceRef: IntermediateMessageEventCatching_1
+          - targetRef: Task_6
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_9>
+          - sourceRef: Task_6
+          - targetRef: Task_7
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_10>
+          - sourceRef: Task_7
+          - targetRef: EndNoneEvent_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_11>
+          - sourceRef: StartMessageEvent_1
+          - targetRef: Task_8
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_12>
+          - sourceRef: Task_8
+          - targetRef: Task_9
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_13>
+          - sourceRef: Task_9
+          - targetRef: Task_10
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_14>
+          - sourceRef: Task_10
+          - targetRef: Task_11
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_15>
+          - sourceRef: Task_11
+          - targetRef: Task_12
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_16>
+          - sourceRef: Task_12
+          - targetRef: IntermediateMessageEventCatching_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_17>
+          - sourceRef: IntermediateMessageEventCatching_2
+          - targetRef: Task_13
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_18>
+          - sourceRef: Task_13
+          - targetRef: EventBasedGateway_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_19>
+          - sourceRef: EventBasedGateway_1
+          - targetRef: IntermediateMessageEventCatching_3
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_20>
+          - sourceRef: IntermediateMessageEventCatching_3
+          - targetRef: Task_14
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_21>
+          - sourceRef: Task_14
+          - targetRef: EndNoneEvent_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_22>
+          - sourceRef: EventBasedGateway_1
+          - targetRef: IntermediateTimerEvent_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_23>
+          - sourceRef: IntermediateTimerEvent_1
+          - targetRef: Task_15
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_24>
+          - sourceRef: Task_15
+          - targetRef: EventBasedGateway_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_25>
+          - sourceRef: StartMessageEvent_2
+          - targetRef: Task_16
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_26>
+          - sourceRef: Task_16
+          - targetRef: Task_17
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_27>
+          - sourceRef: Task_17
+          - targetRef: Task_18
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_28>
+          - sourceRef: Task_18
+          - targetRef: EndNoneEvent_3
+        </sequenceFlow>
+        <messageFlow MessageFlow_1>
+          - sourceRef: Task_3
+          - targetRef: StartMessageEvent_1
+        </messageFlow>
+        <messageFlow MessageFlow_2>
+          - sourceRef: Task_9
+          - targetRef: Task_4
+        </messageFlow>
+        <messageFlow MessageFlow_3>
+          - sourceRef: Task_4
+          - targetRef: Task_9
+        </messageFlow>
+        <messageFlow MessageFlow_4>
+          - sourceRef: Task_11
+          - targetRef: Task_5
+        </messageFlow>
+        <messageFlow MessageFlow_5>
+          - sourceRef: Task_13
+          - targetRef: IntermediateMessageEventCatching_1
+        </messageFlow>
+        <messageFlow MessageFlow_6>
+          - sourceRef: Task_6
+          - targetRef: IntermediateMessageEventCatching_3
+        </messageFlow>
+        <messageFlow MessageFlow_7>
+          - sourceRef: Task_14
+          - targetRef: Task_6
+        </messageFlow>
+        <messageFlow MessageFlow_8>
+          - sourceRef: Task_12
+          - targetRef: StartMessageEvent_2
+        </messageFlow>
+        <messageFlow MessageFlow_9>
+          - sourceRef: Task_18
+          - targetRef: IntermediateMessageEventCatching_2
+        </messageFlow>
+        <messageFlow MessageFlow_10>
+          - sourceRef: Task_15
+          - targetRef: Pool_1
+        </messageFlow>
+    </process>
+</definitions>

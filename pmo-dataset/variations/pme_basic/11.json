@@ -1,0 +1,305 @@
+{
+    "tasks": [
+        {
+            "id": "Task_1",
+            "name": "Assign access",
+            "type": "Task"
+        },
+        {
+            "id": "Task_2",
+            "name": "Customer submits cancellation request",
+            "type": "Task"
+        },
+        {
+            "id": "Task_3",
+            "name": "apply charges",
+            "type": "Task"
+        },
+        {
+            "id": "Task_4",
+            "name": "Generate account",
+            "type": "Task"
+        },
+        {
+            "id": "Task_5",
+            "name": "Send regular updates",
+            "type": "Task"
+        },
+        {
+            "id": "Task_6",
+            "name": "Deactivate subscription",
+            "type": "Task"
+        },
+        {
+            "id": "Task_7",
+            "name": "Settle final account balance",
+            "type": "Task"
+        },
+        {
+            "id": "Task_8",
+            "name": "apply refund",
+            "type": "Task"
+        },
+        {
+            "id": "Task_9",
+            "name": "Send renewal notifications",
+            "type": "Task"
+        },
+        {
+            "id": "Task_10",
+            "name": "Customer signs up",
+            "type": "Task"
+        },
+        {
+            "id": "Task_11",
+            "name": "Set automatic triggers for billing cycles",
+            "type": "Task"
+        },
+        {
+            "id": "Task_12",
+            "name": "Send product enhancements",
+            "type": "Task"
+        }
+    ],
+    "events": [
+        {
+            "id": "StartEvent_1",
+            "name": "start",
+            "type": "StartEvent"
+        },
+        {
+            "id": "EndEvent_1",
+            "name": "end",
+            "type": "EndEvent"
+        }
+    ],
+    "gateways": [
+        {
+            "id": "ExclusiveGateway_1",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_2",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_3",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_4",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_5",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_6",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ParallelGateway_1",
+            "name": "",
+            "type": "ParallelGateway"
+        },
+        {
+            "id": "ParallelGateway_2",
+            "name": "",
+            "type": "ParallelGateway"
+        },
+        {
+            "id": "ParallelGateway_3",
+            "name": "",
+            "type": "ParallelGateway"
+        },
+        {
+            "id": "ParallelGateway_4",
+            "name": "",
+            "type": "ParallelGateway"
+        },
+        {
+            "id": "ParallelGateway_5",
+            "name": "",
+            "type": "ParallelGateway"
+        },
+        {
+            "id": "ParallelGateway_6",
+            "name": "",
+            "type": "ParallelGateway"
+        }
+    ],
+    "sequenceFlows": [
+        {
+            "id": "SequenceFlow_1",
+            "sourceRef": "ExclusiveGateway_6",
+            "targetRef": "Task_8"
+        },
+        {
+            "id": "SequenceFlow_2",
+            "sourceRef": "Task_11",
+            "targetRef": "ParallelGateway_5"
+        },
+        {
+            "id": "SequenceFlow_3",
+            "sourceRef": "Task_5",
+            "targetRef": "ParallelGateway_2"
+        },
+        {
+            "id": "SequenceFlow_4",
+            "sourceRef": "ParallelGateway_1",
+            "targetRef": "Task_1"
+        },
+        {
+            "id": "SequenceFlow_5",
+            "sourceRef": "ExclusiveGateway_6",
+            "targetRef": "Task_3"
+        },
+        {
+            "id": "SequenceFlow_6",
+            "sourceRef": "ExclusiveGateway_4",
+            "targetRef": "ParallelGateway_4"
+        },
+        {
+            "id": "SequenceFlow_7",
+            "sourceRef": "ParallelGateway_4",
+            "targetRef": "Task_9"
+        },
+        {
+            "id": "SequenceFlow_8",
+            "sourceRef": "Task_4",
+            "targetRef": "ParallelGateway_1"
+        },
+        {
+            "id": "SequenceFlow_9",
+            "sourceRef": "ExclusiveGateway_1",
+            "targetRef": "ExclusiveGateway_3"
+        },
+        {
+            "id": "SequenceFlow_10",
+            "sourceRef": "ParallelGateway_6",
+            "targetRef": "ExclusiveGateway_2"
+        },
+        {
+            "id": "SequenceFlow_11",
+            "sourceRef": "Task_3",
+            "targetRef": "ExclusiveGateway_5"
+        },
+        {
+            "id": "SequenceFlow_12",
+            "sourceRef": "Task_12",
+            "targetRef": "ParallelGateway_2"
+        },
+        {
+            "id": "SequenceFlow_13",
+            "sourceRef": "ParallelGateway_4",
+            "targetRef": "Task_5"
+        },
+        {
+            "id": "SequenceFlow_14",
+            "sourceRef": "ParallelGateway_5",
+            "targetRef": "ExclusiveGateway_4"
+        },
+        {
+            "id": "SequenceFlow_15",
+            "sourceRef": "Task_1",
+            "targetRef": "ParallelGateway_5"
+        },
+        {
+            "id": "SequenceFlow_16",
+            "sourceRef": "Task_7",
+            "targetRef": "ParallelGateway_6"
+        },
+        {
+            "id": "SequenceFlow_17",
+            "sourceRef": "ExclusiveGateway_3",
+            "targetRef": "ExclusiveGateway_2"
+        },
+        {
+            "id": "SequenceFlow_18",
+            "sourceRef": "StartEvent_1",
+            "targetRef": "Task_10"
+        },
+        {
+            "id": "SequenceFlow_19",
+            "sourceRef": "ExclusiveGateway_6",
+            "targetRef": "ExclusiveGateway_5"
+        },
+        {
+            "id": "SequenceFlow_20",
+            "sourceRef": "ExclusiveGateway_1",
+            "targetRef": "ExclusiveGateway_4"
+        },
+        {
+            "id": "SequenceFlow_21",
+            "sourceRef": "ParallelGateway_3",
+            "targetRef": "Task_6"
+        },
+        {
+            "id": "SequenceFlow_22",
+            "sourceRef": "ParallelGateway_1",
+            "targetRef": "Task_11"
+        },
+        {
+            "id": "SequenceFlow_23",
+            "sourceRef": "ExclusiveGateway_2",
+            "targetRef": "EndEvent_1"
+        },
+        {
+            "id": "SequenceFlow_24",
+            "sourceRef": "Task_9",
+            "targetRef": "ParallelGateway_2"
+        },
+        {
+            "id": "SequenceFlow_25",
+            "sourceRef": "ExclusiveGateway_3",
+            "targetRef": "Task_2"
+        },
+        {
+            "id": "SequenceFlow_26",
+            "sourceRef": "ParallelGateway_3",
+            "targetRef": "ExclusiveGateway_6"
+        },
+        {
+            "id": "SequenceFlow_27",
+            "sourceRef": "Task_2",
+            "targetRef": "ParallelGateway_3"
+        },
+        {
+            "id": "SequenceFlow_28",
+            "sourceRef": "Task_8",
+            "targetRef": "ExclusiveGateway_5"
+        },
+        {
+            "id": "SequenceFlow_29",
+            "sourceRef": "ExclusiveGateway_5",
+            "targetRef": "Task_7"
+        },
+        {
+            "id": "SequenceFlow_30",
+            "sourceRef": "ParallelGateway_2",
+            "targetRef": "ExclusiveGateway_1"
+        },
+        {
+            "id": "SequenceFlow_31",
+            "sourceRef": "Task_6",
+            "targetRef": "ParallelGateway_6"
+        },
+        {
+            "id": "SequenceFlow_32",
+            "sourceRef": "ParallelGateway_4",
+            "targetRef": "Task_12"
+        },
+        {
+            "id": "SequenceFlow_33",
+            "sourceRef": "Task_10",
+            "targetRef": "Task_4"
+        }
+    ]
+}

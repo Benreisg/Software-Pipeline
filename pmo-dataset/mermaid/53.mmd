@@ -1,0 +1,11 @@
+graph LR
+	classDef endEvent stroke-width:4px
+	
+	StartNoneEvent_1((" ")) --> Task_1["MSPN sends a\ndismissal to MSPO"]
+	Task_1 --> Task_2["MSPO reviews the\ndismissal"]
+	Task_2 --> ExclusiveGateway_1{"X"}
+	ExclusiveGateway_1 --> Task_3["MSPO rejects the\ndismissal of the\nMSPN"]
+	ExclusiveGateway_1 --> Task_4["MSPO confirms the\ndismissal of the\nMSPN"]
+	Task_3 --> ExclusiveGateway_2{"X"}
+	Task_4 --> ExclusiveGateway_2
+	ExclusiveGateway_2 --> EndNoneEvent_1((" ")):::endEvent

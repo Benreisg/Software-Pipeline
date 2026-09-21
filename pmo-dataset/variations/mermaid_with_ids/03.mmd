@@ -1,0 +1,48 @@
+graph LR
+	classDef endEvent stroke-width:3px
+	Task_1["Update inventory\nlevels"]
+	Task_2["Update inventory\nsystem with expected\ndelivery dates"]
+	Task_3["Inspect stock for\nquality"]
+	Task_4["Place order with\nsuppliers"]
+	Task_5["Receive stock"]
+	Task_6["Place stock on\nshelves"]
+	Task_7["Check current\ninventory level"]
+	Task_8["Send a manual alert"]
+	Task_9["Send an automated\nalert"]
+	Task_10["Place stock in\nstorage"]
+	Task_11["Record stock in\nsystem"]
+	StartNoneEvent_1(("start"))
+	EndNoneEvent_1(("end")):::endEvent
+	ExclusiveGateway_1{"X"}
+	ExclusiveGateway_2{"X"}
+	ExclusiveGateway_3{"X"}
+	ExclusiveGateway_4{"X"}
+	ExclusiveGateway_5{"X"}
+	ExclusiveGateway_6{"X"}
+	ParallelGateway_1{"+"}
+	ParallelGateway_2{"+"}
+
+	Task_6 --> ExclusiveGateway_6
+	ExclusiveGateway_3 --> ExclusiveGateway_4
+	ExclusiveGateway_6 --> ParallelGateway_2
+	ExclusiveGateway_3 --> ExclusiveGateway_1
+	ExclusiveGateway_4 --> Task_8
+	Task_10 --> ExclusiveGateway_6
+	Task_7 --> ExclusiveGateway_3
+	ExclusiveGateway_4 --> Task_9
+	Task_3 --> ExclusiveGateway_2
+	Task_5 --> ParallelGateway_1
+	Task_11 --> ParallelGateway_2
+	Task_8 --> ExclusiveGateway_5
+	Task_2 --> Task_5
+	ParallelGateway_2 --> Task_1
+	ExclusiveGateway_2 --> Task_6
+	ExclusiveGateway_2 --> Task_10
+	Task_4 --> Task_2
+	StartNoneEvent_1 --> ExclusiveGateway_1
+	Task_1 --> EndNoneEvent_1
+	ParallelGateway_1 --> Task_11
+	ExclusiveGateway_5 --> Task_4
+	ParallelGateway_1 --> Task_3
+	ExclusiveGateway_1 --> Task_7
+	Task_9 --> ExclusiveGateway_5

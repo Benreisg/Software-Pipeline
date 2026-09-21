@@ -1,0 +1,48 @@
+digraph G {
+  rankdir=LR;  
+  node [shape=box];
+
+  "Send sketches to an\nartist" -> "Receive result";
+  "Receive result" -> "Satisfied with\nresult?";
+  "Tell artist to\nchange" -> "ExclusiveGateway_1";
+  "ExclusiveGateway_1" -> "Send sketches to an\nartist";
+  "Create a 3D model" -> "ExclusiveGateway_1";
+  "Satisfied with\nresult?" -> "Choose the color" [label="Yes"];
+  "Choose the color" -> "In stock?";
+  "In stock?" -> "Check color level" [label="Yes"];
+  "Check color level" -> "Below 100g?";
+  "Below 100g?" -> "Put it on shopping\nlist" [label="Yes"];
+  "Below 100g?" -> "ExclusiveGateway_2" [label="No"];
+  "Put it on shopping\nlist" -> "ExclusiveGateway_2";
+  "In stock?" -> "Order color" [label="No"];
+  "ExclusiveGateway_2" -> "ExclusiveGateway_3";
+  "Order color" -> "Receive order\nconfirmation";
+  "ExclusiveGateway_3" -> "Turn on the printer";
+  "Turn on the printer" -> "ParallelGateway_1";
+  "ParallelGateway_1" -> "Generate gcode file";
+  "Receive status" -> "Heated according to\nthe record?";
+  "ParallelGateway_1" -> "ExclusiveGateway_4";
+  "ExclusiveGateway_4" -> "Receive status";
+  "Heated according to\nthe record?" -> "ParallelGateway_2" [label="Yes"];
+  "Generate gcode file" -> "ParallelGateway_2";
+  "ParallelGateway_2" -> "Print the model";
+  "Print the model" -> "Model printed";
+  "Heated according to\nthe record?" -> "ExclusiveGateway_4" [label="No"];
+  "Receive order\nconfirmation" -> "Color received";
+  "Color received" -> "ExclusiveGateway_3";
+  "Satisfied with\nresult?" -> "Tell artist to\nchange" [label="No"];
+  "ParallelGateway_1" -> "Print the model";
+
+  "Create a 3D model" [shape=circle];
+  "Model printed" [shape=circle, penwidth=4];
+  "Satisfied with\nresult?" [shape=diamond];
+  "ExclusiveGateway_1" [label="X", shape=diamond];
+  "In stock?" [shape=diamond];
+  "Below 100g?" [shape=diamond];
+  "ExclusiveGateway_2" [label="X", shape=diamond];
+  "ExclusiveGateway_3" [label="X", shape=diamond];
+  "Heated according to\nthe record?" [shape=diamond];
+  "ExclusiveGateway_4" [label="X", shape=diamond];
+  "ParallelGateway_1" [label="+", shape=diamond];
+  "ParallelGateway_2" [label="+", shape=diamond];
+}

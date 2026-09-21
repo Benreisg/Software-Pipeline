@@ -1,0 +1,54 @@
+digraph G {
+  rankdir=LR;  
+  node [shape=box];
+
+  "Task_1" [label="Transition into new\nrole"];
+  "Task_2" [label="Create personal\ndevelopment plan"];
+  "Task_3" [label="Consider employee\nfor promotion or new\nrole"];
+  "Task_4" [label="Conducts formal\nperformance review"];
+  "Task_5" [label="Identify development\nneeds or career\naspirations"];
+  "Task_6" [label="Work on skill\nenhancement"];
+  "Task_7" [label="Adjust compensation"];
+  "Task_8" [label="Receive feedback and\nevaluation from\nsupervisors"];
+  "Task_9" [label="Approve promotion"];
+  "Task_10" [label="Set new\nresponsibilities"];
+  "StartNoneEvent_1" [shape=circle, label="start"];
+  "EndNoneEvent_1" [shape=circle, penwidth=4, label="end"];
+  "ExclusiveGateway_1" [shape=diamond, label="X"];
+  "ExclusiveGateway_2" [shape=diamond, label="X"];
+  "ExclusiveGateway_3" [shape=diamond, label="X"];
+  "ExclusiveGateway_4" [shape=diamond, label="X"];
+  "ExclusiveGateway_5" [shape=diamond, label="X"];
+  "ExclusiveGateway_6" [shape=diamond, label="X"];
+  "ParallelGateway_1" [shape=diamond, label="+"];
+  "ParallelGateway_2" [shape=diamond, label="+"];
+  "ParallelGateway_3" [shape=diamond, label="+"];
+  "ParallelGateway_4" [shape=diamond, label="+"];
+
+  "Task_7" -> "ParallelGateway_3";
+  "ExclusiveGateway_2" -> "ExclusiveGateway_5";
+  "ParallelGateway_4" -> "ExclusiveGateway_4";
+  "ParallelGateway_2" -> "Task_10";
+  "Task_10" -> "ParallelGateway_3";
+  "ExclusiveGateway_4" -> "Task_6";
+  "StartNoneEvent_1" -> "Task_5";
+  "ExclusiveGateway_6" -> "ParallelGateway_1";
+  "ExclusiveGateway_5" -> "Task_8";
+  "Task_1" -> "ExclusiveGateway_3";
+  "ParallelGateway_3" -> "Task_1";
+  "Task_4" -> "ExclusiveGateway_1";
+  "ParallelGateway_2" -> "Task_7";
+  "ExclusiveGateway_3" -> "EndNoneEvent_1";
+  "Task_6" -> "ExclusiveGateway_6";
+  "ExclusiveGateway_1" -> "Task_9";
+  "Task_9" -> "ParallelGateway_2";
+  "ParallelGateway_4" -> "ExclusiveGateway_5";
+  "ExclusiveGateway_6" -> "ExclusiveGateway_4";
+  "ExclusiveGateway_1" -> "ExclusiveGateway_3";
+  "Task_3" -> "Task_4";
+  "Task_8" -> "ExclusiveGateway_2";
+  "Task_2" -> "ParallelGateway_4";
+  "ExclusiveGateway_2" -> "ParallelGateway_1";
+  "Task_5" -> "Task_2";
+  "ParallelGateway_1" -> "Task_3";
+}

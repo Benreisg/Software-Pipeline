@@ -1,0 +1,29 @@
+graph LR
+	classDef endEvent stroke-width:4px
+	
+	StartNoneEvent_1(("Wish for a LAN\ngameparty")) --> User_1["Send invites to 10\npeople"]
+	User_1 --> User_2["Ask which games do\nthey want to play"]
+	User_2 --> IntermediateTimerEvent_1(("Few hours, until the\nuser has all the\ngames that they want\nto play"))
+	IntermediateTimerEvent_1 --> ParallelGateway_1{"+"}
+	ParallelGateway_1 --> User_3["Appoint a date"]
+	ParallelGateway_1 --> ExclusiveGateway_2{"Do we have all the\ngames?"}
+	User_3 --> IntermediateTimerEvent_2(("Few hours, until all\npeople reply if they\ncan play on that\ndate"))
+	IntermediateTimerEvent_2 --> ExclusiveGateway_1{"How many people can\nplay on that date?"}
+	ExclusiveGateway_1 -->|"Less then 8 people\ncan play on that\ndate"| User_3
+	ExclusiveGateway_1 -->|"8 or more people can\nplay on that date"| Service_1["Reserve that day"]
+	ParallelGateway_2{"+"} --> User_4["Ask friends how much\nbeer they would like"]
+	User_4 --> IntermediateTimerEvent_3(("Few hours, until all\npeople reply with t\nhe amount of beer"))
+	ExclusiveGateway_4{"Do you have enough\nbeer?"} -->|"No"| User_5["Order beer for that\ndate"]
+	User_5 --> ExclusiveGateway_5{"X"}
+	ExclusiveGateway_2 -->|"No"| User_6["Find where can you\ndownload the games"]
+	User_6 --> Service_2["Download the missing\ngames"]
+	Service_3["Send a notification\nthat the LAN party\nwill be held on that\ndate"] --> EndNoneEvent_1(("LAN party done")):::endEvent
+	Service_1 --> ParallelGateway_2
+	ExclusiveGateway_6{"Download successful?"} -->|"Yes"| ExclusiveGateway_3{"X"}
+	ExclusiveGateway_6 -->|"No"| Service_2
+	ExclusiveGateway_5 --> Service_3
+	IntermediateTimerEvent_3 --> ExclusiveGateway_4
+	ExclusiveGateway_4 -->|"Yes"| ExclusiveGateway_5
+	ExclusiveGateway_3 --> ParallelGateway_2
+	ExclusiveGateway_2 -->|"Yes"| ExclusiveGateway_3
+	Service_2 --> ExclusiveGateway_6

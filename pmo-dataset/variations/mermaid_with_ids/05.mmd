@@ -1,0 +1,39 @@
+graph LR
+	classDef endEvent stroke-width:3px
+	Task_1["Sign contract"]
+	Task_2["Conduct site visit"]
+	Task_3["Execute contract"]
+	Task_4["Identify need for\nnew supplier or\nvendor"]
+	Task_5["Evaluate proposal"]
+	Task_6["Receive supplier\nproposals"]
+	Task_7["Begin contract\nnegotiations"]
+	Task_8["Select supplier"]
+	Task_9["Conduct interview"]
+	Task_10["Issue request for\nproposals (RFP)"]
+	Task_11["Onboard supplier"]
+	StartNoneEvent_1(("start"))
+	EndNoneEvent_1(("end")):::endEvent
+	ExclusiveGateway_1{"X"}
+	ExclusiveGateway_2{"X"}
+	ExclusiveGateway_3{"X"}
+	ExclusiveGateway_4{"X"}
+
+	Task_2 --> ExclusiveGateway_1
+	ExclusiveGateway_4 --> ExclusiveGateway_1
+	ExclusiveGateway_4 --> Task_9
+	ExclusiveGateway_2 --> Task_8
+	Task_3 --> EndNoneEvent_1
+	Task_6 --> ExclusiveGateway_3
+	StartNoneEvent_1 --> Task_4
+	ExclusiveGateway_3 --> Task_5
+	Task_9 --> ExclusiveGateway_1
+	Task_7 --> Task_1
+	ExclusiveGateway_4 --> Task_2
+	ExclusiveGateway_1 --> ExclusiveGateway_2
+	Task_1 --> Task_11
+	Task_10 --> Task_6
+	Task_5 --> ExclusiveGateway_4
+	Task_11 --> Task_3
+	ExclusiveGateway_2 --> ExclusiveGateway_3
+	Task_8 --> Task_7
+	Task_4 --> Task_10

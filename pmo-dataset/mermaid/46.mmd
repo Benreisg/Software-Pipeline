@@ -1,0 +1,26 @@
+graph LR
+	classDef endEvent stroke-width:4px
+	
+	StartNoneEvent_1(("Storage management")) --> Service_1["Read order"]
+	Service_1 --> ExclusiveGateway_5{"X"}
+	Service_2["Check if product is\nin stock"] --> ExclusiveGateway_1{"Is in stock?"}
+	ExclusiveGateway_1 -->|"Yes"| Manual_1["Withdraw the Product\nfrom warehouse"]
+	ExclusiveGateway_1 -->|"No"| Service_3["Reorder from\nwholesaler"]
+	Service_3 --> Service_4["Waiting until\narrives (handling\nsystem)"]
+	Service_4 --> ExclusiveGateway_2{"Arrived after more\nthan ten days?"}
+	Service_5["Demand delivery\ndelay penalty from\nthe wholesaler"] --> ExclusiveGateway_4{"X"}
+	ExclusiveGateway_2 -->|"Yes"| Service_5
+	Manual_1 --> Manual_3["Check if the whole\norder is ready for\nshipment"]
+	Manual_2["Register in stock\nmanagement system"] --> Manual_3
+	Manual_3 --> ExclusiveGateway_3{"Order is ready for\nshipment?"}
+	Manual_5["Shipping the order"] --> EndNoneEvent_1(("Order was shipped")):::endEvent
+	ExclusiveGateway_4 --> Manual_2
+	ExclusiveGateway_5 --> Service_2
+	ExclusiveGateway_3 -->|"No"| ExclusiveGateway_5
+	ExclusiveGateway_2 -->|"No"| ExclusiveGateway_4
+	ParallelGateway_2{"+"} --> Manual_5
+	ParallelGateway_1{"+"} --> Manual_6["Courier is requested"]
+	ExclusiveGateway_3 -->|"Yes"| ParallelGateway_1
+	Manual_4["Packing the products"] --> ParallelGateway_2
+	Manual_6 --> ParallelGateway_2
+	ParallelGateway_1 --> Manual_4

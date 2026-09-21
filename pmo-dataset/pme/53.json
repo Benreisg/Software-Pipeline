@@ -1,0 +1,92 @@
+{
+    "tasks": [
+        {
+            "id": "Task_1",
+            "name": "MSPN sends a dismissal to MSPO",
+            "type": "Task"
+        },
+        {
+            "id": "Task_2",
+            "name": "MSPO reviews the dismissal",
+            "type": "Task"
+        },
+        {
+            "id": "Task_3",
+            "name": "MSPO rejects the dismissal of the MSPN",
+            "type": "Task"
+        },
+        {
+            "id": "Task_4",
+            "name": "MSPO confirms the dismissal of the MSPN",
+            "type": "Task"
+        }
+    ],
+    "events": [
+        {
+            "id": "StartNoneEvent_1",
+            "name": "",
+            "type": "StartNoneEvent"
+        },
+        {
+            "id": "EndNoneEvent_1",
+            "name": "",
+            "type": "EndNoneEvent"
+        }
+    ],
+    "gateways": [
+        {
+            "id": "ExclusiveGateway_1",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_2",
+            "name": "",
+            "type": "ExclusiveGateway"
+        }
+    ],
+    "pools": [],
+    "sequenceFlows": [
+        {
+            "id": "SequenceFlow_1",
+            "sourceRef": "StartNoneEvent_1",
+            "targetRef": "Task_1"
+        },
+        {
+            "id": "SequenceFlow_2",
+            "sourceRef": "Task_1",
+            "targetRef": "Task_2"
+        },
+        {
+            "id": "SequenceFlow_3",
+            "sourceRef": "Task_2",
+            "targetRef": "ExclusiveGateway_1"
+        },
+        {
+            "id": "SequenceFlow_4",
+            "sourceRef": "ExclusiveGateway_1",
+            "targetRef": "Task_3"
+        },
+        {
+            "id": "SequenceFlow_5",
+            "sourceRef": "ExclusiveGateway_1",
+            "targetRef": "Task_4"
+        },
+        {
+            "id": "SequenceFlow_6",
+            "sourceRef": "Task_3",
+            "targetRef": "ExclusiveGateway_2"
+        },
+        {
+            "id": "SequenceFlow_7",
+            "sourceRef": "Task_4",
+            "targetRef": "ExclusiveGateway_2"
+        },
+        {
+            "id": "SequenceFlow_8",
+            "sourceRef": "ExclusiveGateway_2",
+            "targetRef": "EndNoneEvent_1"
+        }
+    ],
+    "messageFlows": []
+}

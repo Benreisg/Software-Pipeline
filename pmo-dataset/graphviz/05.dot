@@ -1,0 +1,31 @@
+digraph G {
+  rankdir=LR;  
+  node [shape=box];
+
+  "Conduct site visit" -> "ExclusiveGateway_1";
+  "ExclusiveGateway_4" -> "ExclusiveGateway_1";
+  "ExclusiveGateway_4" -> "Conduct interview";
+  "ExclusiveGateway_2" -> "Select supplier";
+  "Execute contract" -> "end";
+  "Receive supplier\nproposals" -> "ExclusiveGateway_3";
+  "start" -> "Identify need for\nnew supplier or\nvendor";
+  "ExclusiveGateway_3" -> "Evaluate proposal";
+  "Conduct interview" -> "ExclusiveGateway_1";
+  "Begin contract\nnegotiations" -> "Sign contract";
+  "ExclusiveGateway_4" -> "Conduct site visit";
+  "ExclusiveGateway_1" -> "ExclusiveGateway_2";
+  "Sign contract" -> "Onboard supplier";
+  "Issue request for\nproposals (RFP)" -> "Receive supplier\nproposals";
+  "Evaluate proposal" -> "ExclusiveGateway_4";
+  "Onboard supplier" -> "Execute contract";
+  "ExclusiveGateway_2" -> "ExclusiveGateway_3";
+  "Select supplier" -> "Begin contract\nnegotiations";
+  "Identify need for\nnew supplier or\nvendor" -> "Issue request for\nproposals (RFP)";
+
+  "start" [shape=circle];
+  "end" [shape=circle, penwidth=4];
+  "ExclusiveGateway_1" [label="X", shape=diamond];
+  "ExclusiveGateway_2" [label="X", shape=diamond];
+  "ExclusiveGateway_3" [label="X", shape=diamond];
+  "ExclusiveGateway_4" [label="X", shape=diamond];
+}

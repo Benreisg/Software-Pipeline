@@ -1,0 +1,45 @@
+graph LR
+	StartEvent_1(("Issue occurs")) --> Task_6["Inform employer"]
+	ExclusiveGateway_2{"Death or serious injury?"} -->|"No"| ExclusiveGateway_5{"X"}
+	ExclusiveGateway_2 -->|"Yes"| Task_10["Inform relatives"]
+	Task_2["Notify labor inspectorate"] --> ExclusiveGateway_4{"X"}
+	ExclusiveGateway_3{"Safety authorities informed?"} -->|"No"| Task_2
+	ExclusiveGateway_3 -->|"Yes"| ExclusiveGateway_4
+	ParallelGateway_1{"+"} --> ExclusiveGateway_6{"Person insured?"}
+	Task_3["Notify insurance"] --> ExclusiveGateway_7{"X"}
+	ParallelGateway_1 --> ExclusiveGateway_3
+	ExclusiveGateway_4 --> ParallelGateway_2{"+"}
+	ExclusiveGateway_7 --> ParallelGateway_2
+	ExclusiveGateway_6 -->|"Yes"| Task_3
+	Task_6 --> ExclusiveGateway_1{"Type of event?"}
+	ExclusiveGateway_8{"X"} --> EndEvent_1(("Issue resolved"))
+	ExclusiveGateway_5 --> ExclusiveGateway_8
+	ParallelGateway_2 --> ExclusiveGateway_9{"Is the person dead? (Death as a result of an accident)"}
+	ExclusiveGateway_10{"X"} --> ExclusiveGateway_5
+	ExclusiveGateway_9 -->|"Yes"| ExclusiveGateway_10
+	Task_7["Stay informed about the person's condition"] --> ExclusiveGateway_11{"Did the person die and was insured?"}
+	ExclusiveGateway_12{"X"} --> ExclusiveGateway_10
+	Task_4["Notify insurance about the death"] --> ExclusiveGateway_12
+	ExclusiveGateway_11 -->|"Yes"| Task_4
+	Task_5["Schedule safety training"] --> ExclusiveGateway_14{"X"}
+	ExclusiveGateway_13{"Employee training reqired?"} -->|"No"| ExclusiveGateway_14
+	ExclusiveGateway_13 -->|"Yes"| Task_5
+	ExclusiveGateway_1 -->|"Event that almost led to an accident"| ExclusiveGateway_2
+	ExclusiveGateway_14 --> ExclusiveGateway_8
+	Task_1["Run diagnostics/find problems"] --> ExclusiveGateway_15{"X"}
+	ExclusiveGateway_15 --> Task_8["Fix the problem"]
+	Task_8 --> ExclusiveGateway_16{"More issues?"}
+	ExclusiveGateway_16 -->|"No"| ExclusiveGateway_8
+	ExclusiveGateway_16 -->|"Yes"| ExclusiveGateway_15
+	ExclusiveGateway_17{"X"} --> Task_11["Fix the threat"]
+	Task_11 --> ExclusiveGateway_18{"More issues?"}
+	ExclusiveGateway_18 -->|"Yes"| ExclusiveGateway_17
+	Task_9["Identify potential issues"] --> ExclusiveGateway_17
+	ExclusiveGateway_9 -->|"No"| Task_7
+	ExclusiveGateway_1 -->|"Defect in protective system"| ExclusiveGateway_13
+	ExclusiveGateway_6 -->|"No"| ExclusiveGateway_7
+	ExclusiveGateway_1 -->|"Accident at work"| Task_1
+	ExclusiveGateway_1 -->|"Serious/imminent threat to safety"| Task_9
+	Task_10 --> ParallelGateway_1
+	ExclusiveGateway_18 --> ExclusiveGateway_8
+	ExclusiveGateway_11 -->|"No"| ExclusiveGateway_12

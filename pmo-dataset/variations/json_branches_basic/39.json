@@ -1,0 +1,199 @@
+{
+    "startEvent": {
+        "name": "Hardware issue detected"
+    },
+    "process": [
+        {
+            "type": "xor",
+            "condition": "Have an account?",
+            "branches": [
+                {
+                    "label": "No",
+                    "branch": [
+                        {
+                            "type": "task",
+                            "name": "Create account"
+                        }
+                    ]
+                },
+                {
+                    "label": "Yes",
+                    "branch": []
+                }
+            ]
+        },
+        {
+            "type": "loop",
+            "condition": "No",
+            "body": [
+                {
+                    "type": "task",
+                    "name": "Log into account"
+                }
+            ]
+        },
+        {
+            "type": "task",
+            "name": "Select device model"
+        },
+        {
+            "type": "task",
+            "name": "Select type of hardware Issue"
+        },
+        {
+            "type": "parallel",
+            "branches": [
+                {
+                    "branch": [
+                        {
+                            "type": "task",
+                            "name": "List required materials"
+                        }
+                    ]
+                },
+                {
+                    "branch": [
+                        {
+                            "type": "task",
+                            "name": "List required tools"
+                        }
+                    ]
+                },
+                {
+                    "branch": [
+                        {
+                            "type": "task",
+                            "name": "Offer ordering choices"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "xor",
+            "condition": "Have all required items?",
+            "branches": [
+                {
+                    "label": "No",
+                    "branch": [
+                        {
+                            "type": "xor",
+                            "condition": "Have intention to get second-hand items?",
+                            "branches": [
+                                {
+                                    "label": "No",
+                                    "branch": []
+                                },
+                                {
+                                    "label": "Yes",
+                                    "branch": [
+                                        {
+                                            "type": "task",
+                                            "name": "Contact friends"
+                                        },
+                                        {
+                                            "type": "task",
+                                            "name": "Get second-hand tools and materials from friends"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "xor",
+                            "condition": "Have intention to purchase new items?",
+                            "branches": [
+                                {
+                                    "label": "Yes",
+                                    "branch": [
+                                        {
+                                            "type": "task",
+                                            "name": "purchase online"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "label": "No",
+                                    "branch": []
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "label": "Yes",
+                    "branch": []
+                }
+            ]
+        },
+        {
+            "type": "task",
+            "name": "Display repair instructions"
+        },
+        {
+            "type": "task",
+            "name": "Repair device"
+        },
+        {
+            "type": "xor",
+            "condition": "Is issue fixed?",
+            "branches": [
+                {
+                    "label": "No",
+                    "branch": [
+                        {
+                            "type": "task",
+                            "name": "Send device to an expert"
+                        }
+                    ]
+                },
+                {
+                    "label": "Yes",
+                    "branch": [
+                        {
+                            "type": "xor",
+                            "condition": "Have intention to write a review?",
+                            "branches": [
+                                {
+                                    "label": "Yes",
+                                    "branch": [
+                                        {
+                                            "type": "task",
+                                            "name": "Write review"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "label": "No",
+                                    "branch": []
+                                }
+                            ]
+                        },
+                        {
+                            "type": "xor",
+                            "condition": "Have intention to upload a video of repair steps?",
+                            "branches": [
+                                {
+                                    "label": "No",
+                                    "branch": []
+                                },
+                                {
+                                    "label": "Yes",
+                                    "branch": [
+                                        {
+                                            "type": "task",
+                                            "name": "Upload video of reparation steps"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "endEvent": {
+        "name": "Hardware issue fixed"
+    }
+}

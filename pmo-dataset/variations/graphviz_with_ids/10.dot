@@ -1,0 +1,57 @@
+digraph G {
+  rankdir=LR;  
+  node [shape=box];
+
+  "Task_1" [label="Install the solution"];
+  "Task_2" [label="Assess compatibility"];
+  "Task_3" [label="Evaluate cost and\nresource needs"];
+  "Task_4" [label="Procure necessary\ntools or licenses"];
+  "Task_5" [label="Submit IT solution\nrequest"];
+  "Task_6" [label="Test solution"];
+  "Task_7" [label="Roll out solution to\nrequesting\ndepartment"];
+  "Task_8" [label="Provide training"];
+  "Task_9" [label="Provide support for\ntroubleshooting"];
+  "StartNoneEvent_1" [shape=circle, label="start"];
+  "EndNoneEvent_1" [shape=circle, penwidth=4, label="end"];
+  "ExclusiveGateway_1" [shape=diamond, label="X"];
+  "ExclusiveGateway_2" [shape=diamond, label="X"];
+  "ExclusiveGateway_3" [shape=diamond, label="X"];
+  "ExclusiveGateway_4" [shape=diamond, label="X"];
+  "ExclusiveGateway_5" [shape=diamond, label="X"];
+  "ExclusiveGateway_6" [shape=diamond, label="X"];
+  "ExclusiveGateway_7" [shape=diamond, label="X"];
+  "ExclusiveGateway_8" [shape=diamond, label="X"];
+  "ParallelGateway_1" [shape=diamond, label="+"];
+  "ParallelGateway_2" [shape=diamond, label="+"];
+  "ParallelGateway_3" [shape=diamond, label="+"];
+  "ParallelGateway_4" [shape=diamond, label="+"];
+
+  "Task_9" -> "ExclusiveGateway_3";
+  "ParallelGateway_2" -> "ExclusiveGateway_6";
+  "Task_4" -> "Task_1";
+  "ParallelGateway_4" -> "ExclusiveGateway_5";
+  "ExclusiveGateway_4" -> "ParallelGateway_4";
+  "ParallelGateway_1" -> "Task_2";
+  "ParallelGateway_2" -> "ExclusiveGateway_7";
+  "Task_6" -> "Task_7";
+  "ExclusiveGateway_2" -> "Task_9";
+  "ExclusiveGateway_1" -> "ExclusiveGateway_5";
+  "Task_2" -> "ParallelGateway_3";
+  "Task_3" -> "ParallelGateway_3";
+  "ExclusiveGateway_1" -> "Task_4";
+  "ExclusiveGateway_3" -> "ExclusiveGateway_8";
+  "ExclusiveGateway_3" -> "ExclusiveGateway_2";
+  "ExclusiveGateway_7" -> "Task_8";
+  "Task_5" -> "ParallelGateway_1";
+  "ParallelGateway_3" -> "ExclusiveGateway_1";
+  "ExclusiveGateway_5" -> "EndNoneEvent_1";
+  "StartNoneEvent_1" -> "Task_5";
+  "Task_1" -> "Task_6";
+  "Task_7" -> "ParallelGateway_2";
+  "Task_8" -> "ExclusiveGateway_4";
+  "ExclusiveGateway_7" -> "ExclusiveGateway_4";
+  "ExclusiveGateway_6" -> "ExclusiveGateway_2";
+  "ExclusiveGateway_8" -> "ParallelGateway_4";
+  "ParallelGateway_1" -> "Task_3";
+  "ExclusiveGateway_6" -> "ExclusiveGateway_8";
+}

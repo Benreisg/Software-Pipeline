@@ -1,0 +1,12 @@
+graph LR
+	classDef endEvent stroke-width:3px
+	Task_1["INQ transmits the\ntransaction data\nrequest"]
+	Task_2["IP checks the\nrequest of the INQ"]
+	Task_3["IP answers the\nquestion of the INQ"]
+	StartNoneEvent_1((" "))
+	EndNoneEvent_1((" ")):::endEvent
+
+	StartNoneEvent_1 --> Task_1
+	Task_1 --> Task_2
+	Task_2 --> Task_3
+	Task_3 --> EndNoneEvent_1

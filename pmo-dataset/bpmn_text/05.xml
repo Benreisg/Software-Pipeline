@@ -1,0 +1,24 @@
+<process>
+    <activity role="" action="Identify need for new supplier or vendor" objects="" id="activity1"/>
+    <activity role="" action="Issue request for proposals (RFP)" objects="" id="activity2"/>
+    <activity role="" action="Receive supplier proposals" objects="" id="activity3"/>
+    <loopGateway id="loopgateway1">
+        <branch condition="Loop condition" id="branch1">
+            <activity role="" action="Evaluate proposal" objects="" id="activity4"/>
+            <exclusiveGateway id="exclusivegateway1">
+                <branch condition="" id="branch2"/>
+                <branch condition="" id="branch3">
+                    <activity role="" action="Conduct interview" objects="" id="activity5"/>
+                </branch>
+                <branch condition="" id="branch4">
+                    <activity role="" action="Conduct site visit" objects="" id="activity6"/>
+                </branch>
+            </exclusiveGateway>
+        </branch>
+    </loopGateway>
+    <activity role="" action="Select supplier" objects="" id="activity7"/>
+    <activity role="" action="Begin contract negotiations" objects="" id="activity8"/>
+    <activity role="" action="Sign contract" objects="" id="activity9"/>
+    <activity role="" action="Onboard supplier" objects="" id="activity10"/>
+    <activity role="" action="Execute contract" objects="" id="activity11"/>
+</process>

@@ -1,0 +1,97 @@
+<definitions Definitions_1>
+    <process Process_1>
+        <task Task_1 (Sign contract)/>
+        <task Task_2 (Conduct site visit)/>
+        <task Task_3 (Execute contract)/>
+        <task Task_4 (Identify need for new supplier or vendor)/>
+        <task Task_5 (Evaluate proposal)/>
+        <task Task_6 (Receive supplier proposals)/>
+        <task Task_7 (Begin contract negotiations)/>
+        <task Task_8 (Select supplier)/>
+        <task Task_9 (Conduct interview)/>
+        <task Task_10 (Issue request for proposals (RFP))/>
+        <task Task_11 (Onboard supplier)/>
+        <startEvent StartEvent_1 (start)/>
+        <endEvent EndEvent_1 (end)/>
+        <exclusivegatewayGateway ExclusiveGateway_1/>
+        <exclusivegatewayGateway ExclusiveGateway_2/>
+        <exclusivegatewayGateway ExclusiveGateway_3/>
+        <exclusivegatewayGateway ExclusiveGateway_4/>
+        <sequenceFlow SequenceFlow_1>
+          - sourceRef: Task_2
+          - targetRef: ExclusiveGateway_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_2>
+          - sourceRef: ExclusiveGateway_4
+          - targetRef: ExclusiveGateway_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_3>
+          - sourceRef: ExclusiveGateway_4
+          - targetRef: Task_9
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_4>
+          - sourceRef: ExclusiveGateway_2
+          - targetRef: Task_8
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_5>
+          - sourceRef: Task_3
+          - targetRef: EndEvent_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_6>
+          - sourceRef: Task_6
+          - targetRef: ExclusiveGateway_3
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_7>
+          - sourceRef: StartEvent_1
+          - targetRef: Task_4
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_8>
+          - sourceRef: ExclusiveGateway_3
+          - targetRef: Task_5
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_9>
+          - sourceRef: Task_9
+          - targetRef: ExclusiveGateway_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_10>
+          - sourceRef: Task_7
+          - targetRef: Task_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_11>
+          - sourceRef: ExclusiveGateway_4
+          - targetRef: Task_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_12>
+          - sourceRef: ExclusiveGateway_1
+          - targetRef: ExclusiveGateway_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_13>
+          - sourceRef: Task_1
+          - targetRef: Task_11
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_14>
+          - sourceRef: Task_10
+          - targetRef: Task_6
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_15>
+          - sourceRef: Task_5
+          - targetRef: ExclusiveGateway_4
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_16>
+          - sourceRef: Task_11
+          - targetRef: Task_3
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_17>
+          - sourceRef: ExclusiveGateway_2
+          - targetRef: ExclusiveGateway_3
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_18>
+          - sourceRef: Task_8
+          - targetRef: Task_7
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_19>
+          - sourceRef: Task_4
+          - targetRef: Task_10
+        </sequenceFlow>
+    </process>
+</definitions>

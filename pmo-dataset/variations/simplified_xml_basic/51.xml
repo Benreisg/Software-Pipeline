@@ -1,0 +1,64 @@
+<definitions Definitions_1>
+    <process Process_1>
+        <task Task_1 (Employee submits a vacation request)/>
+        <task Task_2 (Requirement is registered)/>
+        <task Task_3 (Employee's supervisor receive the request)/>
+        <task Task_4 (Supervisor approve or reject the request)/>
+        <task Task_5 (Application is returned to employee)/>
+        <task Task_6 (Notification is generated to the HR Representative)/>
+        <task Task_7 (HR Representative complete the respective management procedures)/>
+        <task Task_8 (Employee can check rejection reasons)/>
+        <startEvent StartEvent_1/>
+        <endEvent EndEvent_1/>
+        <exclusivegatewayGateway ExclusiveGateway_1/>
+        <exclusivegatewayGateway ExclusiveGateway_2/>
+        <sequenceFlow SequenceFlow_1>
+          - sourceRef: StartEvent_1
+          - targetRef: Task_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_2>
+          - sourceRef: Task_1
+          - targetRef: Task_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_3>
+          - sourceRef: Task_2
+          - targetRef: Task_3
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_4>
+          - sourceRef: Task_3
+          - targetRef: Task_4
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_5>
+          - sourceRef: Task_4
+          - targetRef: ExclusiveGateway_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_6>
+          - sourceRef: Task_6
+          - targetRef: Task_7
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_7>
+          - sourceRef: Task_7
+          - targetRef: ExclusiveGateway_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_8>
+          - sourceRef: ExclusiveGateway_2
+          - targetRef: EndEvent_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_9> (rejected)
+          - sourceRef: ExclusiveGateway_1
+          - targetRef: Task_5
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_10> (approved)
+          - sourceRef: ExclusiveGateway_1
+          - targetRef: Task_6
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_11>
+          - sourceRef: Task_5
+          - targetRef: Task_8
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_12>
+          - sourceRef: Task_8
+          - targetRef: ExclusiveGateway_2
+        </sequenceFlow>
+    </process>
+</definitions>

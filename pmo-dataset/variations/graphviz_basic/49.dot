@@ -1,0 +1,34 @@
+digraph G {
+  rankdir=LR;  
+  node [shape=box];
+
+  "StartEvent" -> "Customer brings a defective computer";
+  "Customer brings a defective computer" -> "CRS checks the defect";
+  "CRS checks the defect" -> "CRS hands out a repair cost calculation";
+  "CRS hands out a repair cost calculation" -> "ExclusiveGateway_1";
+  "ParallelGateway_1" -> "Check the hardware";
+  "ParallelGateway_1" -> "Check the software";
+  "Repair is finished" -> "ExclusiveGateway_4";
+  "Check the hardware" -> "Repair the hardware";
+  "Proper system functionality is tested" -> "ExclusiveGateway_2";
+  "Check the software" -> "Configure the software";
+  "ParallelGateway_2" -> "Proper system functionality is tested";
+  "ExclusiveGateway_3" -> "ParallelGateway_1";
+  "Repair the hardware" -> "ParallelGateway_2";
+  "Configure the software" -> "ParallelGateway_2";
+  "ExclusiveGateway_4" -> "EndEvent";
+  "Client takes her computer home unrepaired" -> "ExclusiveGateway_4";
+  "ExclusiveGateway_1" -> "Client takes her computer home unrepaired" [label="costs are not acceptable"];
+  "ExclusiveGateway_1" -> "ExclusiveGateway_3" [label="costs are acceptable"];
+  "ExclusiveGateway_2" -> "ExclusiveGateway_3" [label="error is detected"];
+  "ExclusiveGateway_2" -> "Repair is finished" [label="no error"];
+
+  "StartEvent" [shape=circle, label=""];
+  "EndEvent" [shape=circle, label=""];
+  "ExclusiveGateway_1" [shape=diamond, label="X"];
+  "ExclusiveGateway_2" [shape=diamond, label="X"];
+  "ExclusiveGateway_3" [shape=diamond, label="X"];
+  "ExclusiveGateway_4" [shape=diamond, label="X"];
+  "ParallelGateway_1" [shape=diamond, label="+"];
+  "ParallelGateway_2" [shape=diamond, label="+"];
+}

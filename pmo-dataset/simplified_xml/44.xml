@@ -1,0 +1,160 @@
+<definitions Definitions_1>
+    <process Process_1>
+        <task User_1 (Select type of order)/>
+        <task User_2 (Select burger)/>
+        <task User_3 (Select type of beverage)/>
+        <task User_4 (Select side)/>
+        <task User_5 (Select menu)/>
+        <task User_6 (Make payment)/>
+        <task User_7 (Enter customer's name)/>
+        <task Service_1 (Prepare beverage)/>
+        <task Service_2 (Prepare potato wedges)/>
+        <task Service_3 (Prepare French fries)/>
+        <task Service_4 (Prepare burger)/>
+        <task Service_5 (Check status)/>
+        <task Service_6 (Update status)/>
+        <task Service_7 (Deliver via conveyor belt)/>
+        <task Service_8 (Notify customer)/>
+        <startNoneEvent StartNoneEvent_1 (Food order decided)/>
+        <endNoneEvent EndNoneEvent_1 (Food delivered)/>
+        <intermediateTimerEvent IntermediateTimerEvent_1 (30 seconds)/>
+        <exclusivegatewayGateway ExclusiveGateway_1 (Menu or just the burger ?)/>
+        <exclusivegatewayGateway ExclusiveGateway_2 (Fries or wedges ?)/>
+        <exclusivegatewayGateway ExclusiveGateway_3/>
+        <exclusivegatewayGateway ExclusiveGateway_4/>
+        <exclusivegatewayGateway ExclusiveGateway_5/>
+        <exclusivegatewayGateway ExclusiveGateway_6 (Is burger ready ?)/>
+        <parallelgatewayGateway ParallelGateway_1/>
+        <parallelgatewayGateway ParallelGateway_2/>
+        <parallelgatewayGateway ParallelGateway_3/>
+        <parallelgatewayGateway ParallelGateway_4/>
+        <sequenceFlow SequenceFlow_1>
+          - sourceRef: StartNoneEvent_1
+          - targetRef: User_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_2>
+          - sourceRef: User_1
+          - targetRef: ExclusiveGateway_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_3>
+          - sourceRef: User_3
+          - targetRef: ParallelGateway_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_4>
+          - sourceRef: ParallelGateway_1
+          - targetRef: Service_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_5>
+          - sourceRef: ParallelGateway_1
+          - targetRef: User_4
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_6>
+          - sourceRef: Service_1
+          - targetRef: ParallelGateway_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_7>
+          - sourceRef: User_4
+          - targetRef: ParallelGateway_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_8>
+          - sourceRef: Service_2
+          - targetRef: ExclusiveGateway_3
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_9>
+          - sourceRef: Service_3
+          - targetRef: ExclusiveGateway_3
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_10> (Potato wedges)
+          - sourceRef: ExclusiveGateway_2
+          - targetRef: Service_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_11> (French fries)
+          - sourceRef: ExclusiveGateway_2
+          - targetRef: Service_3
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_12>
+          - sourceRef: ParallelGateway_2
+          - targetRef: ExclusiveGateway_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_13>
+          - sourceRef: User_5
+          - targetRef: User_3
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_14>
+          - sourceRef: User_2
+          - targetRef: ExclusiveGateway_4
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_15> (With menu)
+          - sourceRef: ExclusiveGateway_1
+          - targetRef: User_5
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_16>
+          - sourceRef: ExclusiveGateway_3
+          - targetRef: ExclusiveGateway_4
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_17>
+          - sourceRef: ParallelGateway_3
+          - targetRef: ExclusiveGateway_5
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_18>
+          - sourceRef: IntermediateTimerEvent_1
+          - targetRef: Service_5
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_19>
+          - sourceRef: Service_5
+          - targetRef: ExclusiveGateway_6
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_20>
+          - sourceRef: Service_4
+          - targetRef: ParallelGateway_4
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_21>
+          - sourceRef: Service_7
+          - targetRef: EndNoneEvent_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_22>
+          - sourceRef: ExclusiveGateway_5
+          - targetRef: Service_6
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_23>
+          - sourceRef: Service_6
+          - targetRef: IntermediateTimerEvent_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_24>
+          - sourceRef: ParallelGateway_4
+          - targetRef: Service_8
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_25>
+          - sourceRef: Service_8
+          - targetRef: Service_7
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_26> (Burger only)
+          - sourceRef: ExclusiveGateway_1
+          - targetRef: User_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_27> (No)
+          - sourceRef: ExclusiveGateway_6
+          - targetRef: ExclusiveGateway_5
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_28> (Yes)
+          - sourceRef: ExclusiveGateway_6
+          - targetRef: ParallelGateway_4
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_29>
+          - sourceRef: ParallelGateway_3
+          - targetRef: Service_4
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_30>
+          - sourceRef: User_6
+          - targetRef: User_7
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_31>
+          - sourceRef: User_7
+          - targetRef: ParallelGateway_3
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_32>
+          - sourceRef: ExclusiveGateway_4
+          - targetRef: User_6
+        </sequenceFlow>
+    </process>
+</definitions>

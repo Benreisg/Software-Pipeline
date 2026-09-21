@@ -1,0 +1,101 @@
+{
+    "startEvent": {
+        "name": "start"
+    },
+    "process": [
+        {
+            "type": "loop",
+            "condition": "Loop condition",
+            "body": [
+                {
+                    "type": "task",
+                    "name": "Check current inventory level"
+                }
+            ]
+        },
+        {
+            "type": "xor",
+            "condition": "",
+            "branches": [
+                {
+                    "branch": [
+                        {
+                            "type": "task",
+                            "name": "Send a manual alert"
+                        }
+                    ]
+                },
+                {
+                    "branch": [
+                        {
+                            "type": "task",
+                            "name": "Send an automated alert"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "task",
+            "name": "Place order with suppliers"
+        },
+        {
+            "type": "task",
+            "name": "Update inventory system with expected delivery dates"
+        },
+        {
+            "type": "task",
+            "name": "Receive stock"
+        },
+        {
+            "type": "parallel",
+            "branches": [
+                {
+                    "branch": [
+                        {
+                            "type": "task",
+                            "name": "Record stock in system"
+                        }
+                    ]
+                },
+                {
+                    "branch": [
+                        {
+                            "type": "task",
+                            "name": "Inspect stock for quality"
+                        },
+                        {
+                            "type": "xor",
+                            "condition": "",
+                            "branches": [
+                                {
+                                    "branch": [
+                                        {
+                                            "type": "task",
+                                            "name": "Place stock on shelves"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "branch": [
+                                        {
+                                            "type": "task",
+                                            "name": "Place stock in storage"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "task",
+            "name": "Update inventory levels"
+        }
+    ],
+    "endEvent": {
+        "name": "end"
+    }
+}

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" 
+                  xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" 
+                  xmlns:di="http://www.omg.org/spec/DD/20100524/DI" 
+                  xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" 
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                  id="Definitions_1" 
+                  targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:process id="Schufascoring-Prozess_1" isExecutable="false">
+    <bpmn:startEvent id="StartEvent_1" name="Scoringanfrage starten">
+      <bpmn:outgoing>SequenceFlow_1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_1" sourceRef="StartEvent_1" targetRef="Task_ScoringanfrageSenden"/>
+    <bpmn:task id="Task_ScoringanfrageSenden" name="Scoringanfrage an Schufa senden">
+      <bpmn:incoming>SequenceFlow_1</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_2</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="SequenceFlow_2" sourceRef="Task_ScoringanfrageSenden" targetRef="Gateway_Verzögerung"/>
+    <bpmn:exclusiveGateway id="Gateway_Verzögerung" name="Verzögerung?">
+      <bpmn:incoming>SequenceFlow_2</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_3</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_4</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="SequenceFlow_3" sourceRef="Gateway_Verzögerung" targetRef="Task_ScoringergebnisWeiterleiten"/>
+    <bpmn:task id="Task_ScoringergebnisWeiterleiten" name="Scoringergebnis an Kreditvergabe-Frontend weiterleiten">
+      <bpmn:incoming>SequenceFlow_3</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_5</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="SequenceFlow_5" sourceRef="Task_ScoringergebnisWeiterleiten" targetRef="EndEvent_1"/>
+    <bpmn:endEvent id="EndEvent_1" name="Prozess beendet">
+      <bpmn:incoming>SequenceFlow_5</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_4" sourceRef="Gateway_Verzögerung" targetRef="Task_Level2Scoring"/>
+    <bpmn:task id="Task_Level2Scoring" name="Level 2 Scoring durchführen">
+      <bpmn:incoming>SequenceFlow_4</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_6</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="SequenceFlow_6" sourceRef="Task_Level2Scoring" targetRef="Task_ScoringergebnisWeiterleiten"/>
+  </bpmn:process>
+</bpmn:definitions>

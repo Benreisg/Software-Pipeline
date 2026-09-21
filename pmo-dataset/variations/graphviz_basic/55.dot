@@ -1,0 +1,57 @@
+digraph G {
+  rankdir=LR;  
+  node [shape=box];
+
+  "StartEvent" -> "Prepare implements";
+  "Prepare implements" -> "Hand washing";
+  "Hand washing" -> "Get in sterile clothes";
+  "Get in sterile clothes" -> "Clean puncture area";
+  "Clean puncture area" -> "Drap puncture zone";
+  "Drap puncture zone" -> "Ultrasound configuration";
+  "Ultrasound configuration" -> "Gel in probe";
+  "Gel in probe" -> "Cover probe";
+  "Cover probe" -> "Put sterile gel";
+  "Put sterile gel" -> "Position probe";
+  "Position probe" -> "Position patient";
+  "Position patient" -> "Vein identification method";
+  "Vein identification method" -> "Doppler identification";
+  "Vein identification method" -> "Anatomic identification";
+  "Vein identification method" -> "Compression identification";
+  "Doppler identification" -> "ExclusiveGateway_1";
+  "Anatomic identification" -> "ExclusiveGateway_1";
+  "Compression identification" -> "ExclusiveGateway_1";
+  "Anesthetize patient" -> "ExclusiveGateway_2";
+  "ExclusiveGateway_2" -> "Puncture patient";
+  "Puncture patient" -> "Check blood return";
+  "ExclusiveGateway_1" -> "Anesthetize patient";
+  "Drop probe" -> "Remove syringe";
+  "Remove syringe" -> "Guidewire install";
+  "Guidewire install" -> "Remove trocar";
+  "Remove trocar" -> "ExclusiveGateway_3";
+  "ExclusiveGateway_3" -> "Check wire in long axis";
+  "ExclusiveGateway_3" -> "Check wire in short axis";
+  "Check wire in long axis" -> "ExclusiveGateway_4";
+  "Check wire in short axis" -> "ExclusiveGateway_4";
+  "ExclusiveGateway_4" -> "Check wire position";
+  "Check blood return" -> "Blood return correct ?";
+  "Check wire position" -> "Wire in good position ?";
+  "Blood return correct ?" -> "ExclusiveGateway_2" [label="No"];
+  "Wire in good position ?" -> "ExclusiveGateway_2" [label="No"];
+  "Blood return correct ?" -> "Drop probe" [label="Yes"];
+  "Wire in good position ?" -> "Widen pathway" [label="Yes"];
+  "Widen pathway" -> "Advance catheter";
+  "Advance catheter" -> "Remove guidewire";
+  "Remove guidewire" -> "Check flow and reflow";
+  "Check flow and reflow" -> "Check catheter position";
+  "Check catheter position" -> "EndEvent";
+
+  "StartEvent" [shape=circle, label=""];
+  "EndEvent" [shape=circle, label=""];
+  "Vein identification method" [shape=diamond];
+  "ExclusiveGateway_1" [shape=diamond, label="X"];
+  "ExclusiveGateway_2" [shape=diamond, label="X"];
+  "ExclusiveGateway_3" [shape=diamond, label="X"];
+  "ExclusiveGateway_4" [shape=diamond, label="X"];
+  "Blood return correct ?" [shape=diamond];
+  "Wire in good position ?" [shape=diamond];
+}

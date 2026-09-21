@@ -1,0 +1,50 @@
+graph LR
+	classDef endEvent stroke-width:4px
+	
+	StartMessageEvent_1(("scoring request\nreceived")) --> Task_1["request credit score"]
+	Task_1 --> ExclusiveGateway_1{"score received?"}
+	ExclusiveGateway_1 -->|"no"| Task_3["report delay"]
+	Task_3 --> IntermediateMessageEventCatching_1(("credit score\nreceived"))
+	IntermediateMessageEventCatching_1 --> ExclusiveGateway_2{"X"}
+	ExclusiveGateway_1 -->|"yes"| ExclusiveGateway_2
+	ExclusiveGateway_2 --> Task_2["send credit score"]
+	Task_2 --> EndNoneEvent_1(("scoring request\nhandled")):::endEvent
+	StartMessageEvent_2(("scoring request\nreceived")) --> Task_4["compute credit score\n(level 1)"]
+	Task_4 --> Task_5["send result"]
+	Task_5 --> ExclusiveGateway_3{"score available?"}
+	ExclusiveGateway_3 -->|"no"| Task_6["compute credit score\n(level 2)"]
+	Task_6 --> Task_7["send credit score"]
+	Task_7 --> ExclusiveGateway_4{"X"}
+	ExclusiveGateway_4 --> EndNoneEvent_2(("scoring request\nhandled")):::endEvent
+	ExclusiveGateway_3 -->|"yes"| ExclusiveGateway_4
+	Pool_1 -.-> StartMessageEvent_1
+	Task_3 -.-> Pool_1
+	Task_2 -.-> Pool_1
+	Task_1 -.-> StartMessageEvent_2
+	Task_5 -.-> Task_1
+	Task_7 -.-> IntermediateMessageEventCatching_1
+
+	subgraph Pool_1 ["credit scoring\nfrontend (bank)"]
+	end
+
+	subgraph Pool_2 ["credit scoring\n(bank)"]
+	  Task_1
+	  Task_2
+	  Task_3
+	  StartMessageEvent_1
+	  EndNoneEvent_1
+	  IntermediateMessageEventCatching_1
+	  ExclusiveGateway_1
+	  ExclusiveGateway_2
+	end
+
+	subgraph Pool_3 ["scoring service"]
+	  Task_4
+	  Task_5
+	  Task_6
+	  Task_7
+	  StartMessageEvent_2
+	  EndNoneEvent_2
+	  ExclusiveGateway_3
+	  ExclusiveGateway_4
+	end

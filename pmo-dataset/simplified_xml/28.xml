@@ -1,0 +1,173 @@
+<definitions Definitions_1>
+    <process Process_1>
+        <task User_1 (Register for internship)/>
+        <task User_2 (Enter topic)/>
+        <task User_3 (Enter expected income)/>
+        <task User_4 (Enter experience)/>
+        <task User_5 (Enter hobbies)/>
+        <task User_6 (Accept offer)/>
+        <task User_7 (Deny offer)/>
+        <task User_8 (Publish your application)/>
+        <task User_9 (Begin internship)/>
+        <task User_10 (Write at least 3 status updates every week)/>
+        <task User_11 (End internship)/>
+        <task Service_1 (Recieve offer)/>
+        <task Service_2 (Invalidate all other offers)/>
+        <task Service_3 (Recommend company to a list of friends via twitter api)/>
+        <task Service_4 (Recieve 3 status updates from the company)/>
+        <startNoneEvent StartNoneEvent_1 (Internship process is started)/>
+        <endNoneEvent EndNoneEvent_1 (Internship succesful)/>
+        <exclusivegatewayGateway ExclusiveGateway_1 (Accept offer?)/>
+        <exclusivegatewayGateway ExclusiveGateway_2/>
+        <exclusivegatewayGateway ExclusiveGateway_3 (Recommend company?)/>
+        <exclusivegatewayGateway ExclusiveGateway_4/>
+        <parallelgatewayGateway ParallelGateway_1/>
+        <parallelgatewayGateway ParallelGateway_2/>
+        <parallelgatewayGateway ParallelGateway_3/>
+        <parallelgatewayGateway ParallelGateway_4/>
+        <parallelgatewayGateway ParallelGateway_5/>
+        <parallelgatewayGateway ParallelGateway_6/>
+        <inclusivegatewayGateway InclusiveGateway_1/>
+        <inclusivegatewayGateway InclusiveGateway_2/>
+        <sequenceFlow SequenceFlow_1>
+          - sourceRef: StartNoneEvent_1
+          - targetRef: User_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_2>
+          - sourceRef: InclusiveGateway_1
+          - targetRef: User_5
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_3>
+          - sourceRef: User_5
+          - targetRef: InclusiveGateway_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_4>
+          - sourceRef: Service_1
+          - targetRef: ExclusiveGateway_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_5>
+          - sourceRef: ExclusiveGateway_2
+          - targetRef: Service_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_6>
+          - sourceRef: User_7
+          - targetRef: ExclusiveGateway_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_7>
+          - sourceRef: User_8
+          - targetRef: ExclusiveGateway_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_8>
+          - sourceRef: ParallelGateway_2
+          - targetRef: User_6
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_9>
+          - sourceRef: ParallelGateway_2
+          - targetRef: Service_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_10>
+          - sourceRef: User_6
+          - targetRef: ParallelGateway_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_11>
+          - sourceRef: Service_2
+          - targetRef: ParallelGateway_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_12>
+          - sourceRef: User_9
+          - targetRef: ParallelGateway_3
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_13>
+          - sourceRef: InclusiveGateway_1
+          - targetRef: User_4
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_14>
+          - sourceRef: InclusiveGateway_1
+          - targetRef: User_3
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_15>
+          - sourceRef: User_4
+          - targetRef: InclusiveGateway_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_16>
+          - sourceRef: User_3
+          - targetRef: InclusiveGateway_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_17>
+          - sourceRef: ParallelGateway_3
+          - targetRef: User_10
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_18>
+          - sourceRef: ParallelGateway_3
+          - targetRef: Service_4
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_19>
+          - sourceRef: Service_4
+          - targetRef: ParallelGateway_4
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_20>
+          - sourceRef: User_10
+          - targetRef: ParallelGateway_4
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_21> (Yes)
+          - sourceRef: ExclusiveGateway_3
+          - targetRef: Service_3
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_22>
+          - sourceRef: ParallelGateway_1
+          - targetRef: User_9
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_23>
+          - sourceRef: User_11
+          - targetRef: ExclusiveGateway_3
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_24>
+          - sourceRef: User_1
+          - targetRef: ParallelGateway_5
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_25>
+          - sourceRef: ParallelGateway_4
+          - targetRef: User_11
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_26>
+          - sourceRef: ParallelGateway_5
+          - targetRef: User_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_27>
+          - sourceRef: InclusiveGateway_2
+          - targetRef: ParallelGateway_6
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_28>
+          - sourceRef: User_2
+          - targetRef: ParallelGateway_6
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_29>
+          - sourceRef: ParallelGateway_5
+          - targetRef: InclusiveGateway_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_30>
+          - sourceRef: ParallelGateway_6
+          - targetRef: User_8
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_31> (No)
+          - sourceRef: ExclusiveGateway_1
+          - targetRef: User_7
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_32> (Yes)
+          - sourceRef: ExclusiveGateway_1
+          - targetRef: ParallelGateway_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_33> (No)
+          - sourceRef: ExclusiveGateway_3
+          - targetRef: ExclusiveGateway_4
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_34>
+          - sourceRef: ExclusiveGateway_4
+          - targetRef: EndNoneEvent_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_35>
+          - sourceRef: Service_3
+          - targetRef: ExclusiveGateway_4
+        </sequenceFlow>
+    </process>
+</definitions>

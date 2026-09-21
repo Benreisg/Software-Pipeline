@@ -1,0 +1,9 @@
+graph LR
+	StartEvent_1((" ")) --> Task_1["MPON sents the dismissal to the MPOO"]
+	Task_1 --> Task_2["MPOO reviews the dismissal"]
+	Task_2 --> ExclusiveGateway_1{"X"}
+	ExclusiveGateway_1 --> Task_3["MPOO opposes the dismissal"]
+	ExclusiveGateway_1 --> Task_4["MPOO confirmes the dismissal"]
+	Task_3 --> ExclusiveGateway_2{"X"}
+	Task_4 --> ExclusiveGateway_2
+	ExclusiveGateway_2 --> EndEvent_1((" "))

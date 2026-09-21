@@ -1,0 +1,12 @@
+<process>
+    <activity role="" action="MSPN sends a dismissal to MSPO" objects="" id="activity1"/>
+    <activity role="" action="MSPO reviews the dismissal" objects="" id="activity2"/>
+    <exclusiveGateway id="exclusivegateway1">
+        <branch condition="" id="branch1">
+            <activity role="" action="MSPO rejects the dismissal of the MSPN" objects="" id="activity3"/>
+        </branch>
+        <branch condition="" id="branch2">
+            <activity role="" action="MSPO confirms the dismissal of the MSPN" objects="" id="activity4"/>
+        </branch>
+    </exclusiveGateway>
+</process>

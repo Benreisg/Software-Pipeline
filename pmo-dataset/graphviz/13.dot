@@ -1,0 +1,28 @@
+digraph G {
+  rankdir=LR;  
+  node [shape=box];
+
+  "start" -> "File complaint";
+  "ExclusiveGateway_3" -> "Resolve complaint";
+  "Resolve complaint" -> "ExclusiveGateway_4";
+  "ExclusiveGateway_4" -> "Provide feedback";
+  "ExclusiveGateway_1" -> "end";
+  "ExclusiveGateway_4" -> "ExclusiveGateway_1";
+  "ExclusiveGateway_2" -> "Approve and notify\ncustomer";
+  "Reject and notify\ncustomer" -> "ExclusiveGateway_3";
+  "Log complaint" -> "Assign complaint to\nrelevant department";
+  "Review complaint\ndetails" -> "ExclusiveGateway_2";
+  "Provide feedback" -> "ExclusiveGateway_1";
+  "File complaint" -> "Log complaint";
+  "ExclusiveGateway_2" -> "Reject and notify\ncustomer";
+  "Process\nreimbursement" -> "ExclusiveGateway_3";
+  "Approve and notify\ncustomer" -> "Process\nreimbursement";
+  "Assign complaint to\nrelevant department" -> "Review complaint\ndetails";
+
+  "start" [shape=circle];
+  "end" [shape=circle, penwidth=4];
+  "ExclusiveGateway_1" [label="X", shape=diamond];
+  "ExclusiveGateway_2" [label="X", shape=diamond];
+  "ExclusiveGateway_3" [label="X", shape=diamond];
+  "ExclusiveGateway_4" [label="X", shape=diamond];
+}

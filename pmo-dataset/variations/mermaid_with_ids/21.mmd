@@ -1,0 +1,59 @@
+graph LR
+	classDef endEvent stroke-width:3px
+	Task_1["Insure parcel"]
+	Task_2["Write package label"]
+	Task_3["Clarify shipment\nmethod"]
+	Task_4["Get 3 offers from\nlogistic companies"]
+	Task_5["Select logistic\ncompany and place\norder"]
+	Task_6["Package goods"]
+	Task_7["Prepare for picking\nup goods"]
+	StartNoneEvent_1(("Ship goods"))
+	EndNoneEvent_1(("Shipment prepared")):::endEvent
+	ExclusiveGateway_1{"Special sandling?"}
+	ExclusiveGateway_2{"X"}
+	ExclusiveGateway_3{"X"}
+	ParallelGateway_1{"+"}
+	InclusiveGateway_1{"O"}
+	InclusiveGateway_2{"O"}
+
+	ExclusiveGateway_1 -->|"no"| InclusiveGateway_1
+	InclusiveGateway_1 -->|"If insurance\nnecessary"| Task_1
+	InclusiveGateway_1 -->|"always"| Task_2
+	Task_2 --> InclusiveGateway_2
+	Task_1 --> InclusiveGateway_2
+	StartNoneEvent_1 --> ParallelGateway_1
+	ParallelGateway_1 --> Task_3
+	Task_3 --> ExclusiveGateway_1
+	ExclusiveGateway_1 -->|"yes"| Task_4
+	Task_4 --> Task_5
+	Task_5 --> ExclusiveGateway_2
+	InclusiveGateway_2 --> ExclusiveGateway_2
+	ExclusiveGateway_2 --> ExclusiveGateway_3
+	Task_6 --> ExclusiveGateway_3
+	ExclusiveGateway_3 --> Task_7
+	Task_7 --> EndNoneEvent_1
+	ParallelGateway_1 --> Task_6
+
+	subgraph Pool_1 ["Dispatch of goods\nComputer Hardware\nShop"]
+	  subgraph Lane_1 ["Logistics"]
+	    Task_1
+	  end
+	  subgraph Lane_2 ["Secretary"]
+	    Task_2
+	    Task_3
+	    Task_4
+	    Task_5
+	    InclusiveGateway_1
+	    InclusiveGateway_2
+	    StartNoneEvent_1
+	    ParallelGateway_1
+	    ExclusiveGateway_1
+	    ExclusiveGateway_2
+	  end
+	  subgraph Lane_3 ["Warehouse"]
+	    Task_6
+	    Task_7
+	    ExclusiveGateway_3
+	    EndNoneEvent_1
+	  end
+	end

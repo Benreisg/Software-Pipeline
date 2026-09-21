@@ -1,0 +1,414 @@
+{
+    "tasks": [
+        {
+            "id": "Task_1",
+            "name": "Prepare implements",
+            "type": "Task"
+        },
+        {
+            "id": "Task_2",
+            "name": "Hand washing",
+            "type": "Task"
+        },
+        {
+            "id": "Task_3",
+            "name": "Get in sterile clothes",
+            "type": "Task"
+        },
+        {
+            "id": "Task_4",
+            "name": "Clean puncture area",
+            "type": "Task"
+        },
+        {
+            "id": "Task_5",
+            "name": "Drap puncture zone",
+            "type": "Task"
+        },
+        {
+            "id": "Task_6",
+            "name": "Ultrasound configuration",
+            "type": "Task"
+        },
+        {
+            "id": "Task_7",
+            "name": "Gel in probe",
+            "type": "Task"
+        },
+        {
+            "id": "Task_8",
+            "name": "Cover probe",
+            "type": "Task"
+        },
+        {
+            "id": "Task_9",
+            "name": "Put sterile gel",
+            "type": "Task"
+        },
+        {
+            "id": "Task_10",
+            "name": "Position probe",
+            "type": "Task"
+        },
+        {
+            "id": "Task_11",
+            "name": "Position patient",
+            "type": "Task"
+        },
+        {
+            "id": "Task_12",
+            "name": "Doppler identification",
+            "type": "Task"
+        },
+        {
+            "id": "Task_13",
+            "name": "Anatomic identification",
+            "type": "Task"
+        },
+        {
+            "id": "Task_14",
+            "name": "Compression identification",
+            "type": "Task"
+        },
+        {
+            "id": "Task_15",
+            "name": "Anesthetize patient",
+            "type": "Task"
+        },
+        {
+            "id": "Task_16",
+            "name": "Puncture patient",
+            "type": "Task"
+        },
+        {
+            "id": "Task_17",
+            "name": "Check blood return",
+            "type": "Task"
+        },
+        {
+            "id": "Task_18",
+            "name": "Drop probe",
+            "type": "Task"
+        },
+        {
+            "id": "Task_19",
+            "name": "Remove syringe",
+            "type": "Task"
+        },
+        {
+            "id": "Task_20",
+            "name": "Guidewire install",
+            "type": "Task"
+        },
+        {
+            "id": "Task_21",
+            "name": "Remove trocar",
+            "type": "Task"
+        },
+        {
+            "id": "Task_22",
+            "name": "Check wire in long axis",
+            "type": "Task"
+        },
+        {
+            "id": "Task_23",
+            "name": "Check wire in short axis",
+            "type": "Task"
+        },
+        {
+            "id": "Task_24",
+            "name": "Check wire position",
+            "type": "Task"
+        },
+        {
+            "id": "Task_25",
+            "name": "Widen pathway",
+            "type": "Task"
+        },
+        {
+            "id": "Task_26",
+            "name": "Advance catheter",
+            "type": "Task"
+        },
+        {
+            "id": "Task_27",
+            "name": "Remove guidewire",
+            "type": "Task"
+        },
+        {
+            "id": "Task_28",
+            "name": "Check flow and reflow",
+            "type": "Task"
+        },
+        {
+            "id": "Task_29",
+            "name": "Check catheter position",
+            "type": "Task"
+        }
+    ],
+    "events": [
+        {
+            "id": "StartEvent_1",
+            "name": "",
+            "type": "StartEvent"
+        },
+        {
+            "id": "EndEvent_1",
+            "name": "",
+            "type": "EndEvent"
+        }
+    ],
+    "gateways": [
+        {
+            "id": "ExclusiveGateway_1",
+            "name": "Vein identification method",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_2",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_3",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_4",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_5",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_6",
+            "name": "Blood return correct ?",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_7",
+            "name": "Wire in good position ?",
+            "type": "ExclusiveGateway"
+        }
+    ],
+    "sequenceFlows": [
+        {
+            "id": "SequenceFlow_1",
+            "sourceRef": "StartEvent_1",
+            "targetRef": "Task_1"
+        },
+        {
+            "id": "SequenceFlow_2",
+            "sourceRef": "Task_1",
+            "targetRef": "Task_2"
+        },
+        {
+            "id": "SequenceFlow_3",
+            "sourceRef": "Task_2",
+            "targetRef": "Task_3"
+        },
+        {
+            "id": "SequenceFlow_4",
+            "sourceRef": "Task_3",
+            "targetRef": "Task_4"
+        },
+        {
+            "id": "SequenceFlow_5",
+            "sourceRef": "Task_4",
+            "targetRef": "Task_5"
+        },
+        {
+            "id": "SequenceFlow_6",
+            "sourceRef": "Task_5",
+            "targetRef": "Task_6"
+        },
+        {
+            "id": "SequenceFlow_7",
+            "sourceRef": "Task_6",
+            "targetRef": "Task_7"
+        },
+        {
+            "id": "SequenceFlow_8",
+            "sourceRef": "Task_7",
+            "targetRef": "Task_8"
+        },
+        {
+            "id": "SequenceFlow_9",
+            "sourceRef": "Task_8",
+            "targetRef": "Task_9"
+        },
+        {
+            "id": "SequenceFlow_10",
+            "sourceRef": "Task_9",
+            "targetRef": "Task_10"
+        },
+        {
+            "id": "SequenceFlow_11",
+            "sourceRef": "Task_10",
+            "targetRef": "Task_11"
+        },
+        {
+            "id": "SequenceFlow_12",
+            "sourceRef": "Task_11",
+            "targetRef": "ExclusiveGateway_1"
+        },
+        {
+            "id": "SequenceFlow_13",
+            "sourceRef": "ExclusiveGateway_1",
+            "targetRef": "Task_12"
+        },
+        {
+            "id": "SequenceFlow_14",
+            "sourceRef": "ExclusiveGateway_1",
+            "targetRef": "Task_13"
+        },
+        {
+            "id": "SequenceFlow_15",
+            "sourceRef": "ExclusiveGateway_1",
+            "targetRef": "Task_14"
+        },
+        {
+            "id": "SequenceFlow_16",
+            "sourceRef": "Task_12",
+            "targetRef": "ExclusiveGateway_2"
+        },
+        {
+            "id": "SequenceFlow_17",
+            "sourceRef": "Task_13",
+            "targetRef": "ExclusiveGateway_2"
+        },
+        {
+            "id": "SequenceFlow_18",
+            "sourceRef": "Task_14",
+            "targetRef": "ExclusiveGateway_2"
+        },
+        {
+            "id": "SequenceFlow_19",
+            "sourceRef": "Task_15",
+            "targetRef": "ExclusiveGateway_3"
+        },
+        {
+            "id": "SequenceFlow_20",
+            "sourceRef": "ExclusiveGateway_3",
+            "targetRef": "Task_16"
+        },
+        {
+            "id": "SequenceFlow_21",
+            "sourceRef": "Task_16",
+            "targetRef": "Task_17"
+        },
+        {
+            "id": "SequenceFlow_22",
+            "sourceRef": "ExclusiveGateway_2",
+            "targetRef": "Task_15"
+        },
+        {
+            "id": "SequenceFlow_23",
+            "sourceRef": "Task_18",
+            "targetRef": "Task_19"
+        },
+        {
+            "id": "SequenceFlow_24",
+            "sourceRef": "Task_19",
+            "targetRef": "Task_20"
+        },
+        {
+            "id": "SequenceFlow_25",
+            "sourceRef": "Task_20",
+            "targetRef": "Task_21"
+        },
+        {
+            "id": "SequenceFlow_26",
+            "sourceRef": "Task_21",
+            "targetRef": "ExclusiveGateway_4"
+        },
+        {
+            "id": "SequenceFlow_27",
+            "sourceRef": "ExclusiveGateway_4",
+            "targetRef": "Task_22"
+        },
+        {
+            "id": "SequenceFlow_28",
+            "sourceRef": "ExclusiveGateway_4",
+            "targetRef": "Task_23"
+        },
+        {
+            "id": "SequenceFlow_29",
+            "sourceRef": "Task_22",
+            "targetRef": "ExclusiveGateway_5"
+        },
+        {
+            "id": "SequenceFlow_30",
+            "sourceRef": "Task_23",
+            "targetRef": "ExclusiveGateway_5"
+        },
+        {
+            "id": "SequenceFlow_31",
+            "sourceRef": "ExclusiveGateway_5",
+            "targetRef": "Task_24"
+        },
+        {
+            "id": "SequenceFlow_32",
+            "sourceRef": "Task_17",
+            "targetRef": "ExclusiveGateway_6"
+        },
+        {
+            "id": "SequenceFlow_33",
+            "sourceRef": "Task_24",
+            "targetRef": "ExclusiveGateway_7"
+        },
+        {
+            "id": "SequenceFlow_34",
+            "sourceRef": "ExclusiveGateway_6",
+            "targetRef": "ExclusiveGateway_3",
+            "condition": "No"
+        },
+        {
+            "id": "SequenceFlow_35",
+            "sourceRef": "ExclusiveGateway_7",
+            "targetRef": "ExclusiveGateway_3",
+            "condition": "No"
+        },
+        {
+            "id": "SequenceFlow_36",
+            "sourceRef": "ExclusiveGateway_6",
+            "targetRef": "Task_18",
+            "condition": "Yes"
+        },
+        {
+            "id": "SequenceFlow_37",
+            "sourceRef": "ExclusiveGateway_7",
+            "targetRef": "Task_25",
+            "condition": "Yes"
+        },
+        {
+            "id": "SequenceFlow_38",
+            "sourceRef": "Task_25",
+            "targetRef": "Task_26"
+        },
+        {
+            "id": "SequenceFlow_39",
+            "sourceRef": "Task_26",
+            "targetRef": "Task_27"
+        },
+        {
+            "id": "SequenceFlow_40",
+            "sourceRef": "Task_27",
+            "targetRef": "Task_28"
+        },
+        {
+            "id": "SequenceFlow_41",
+            "sourceRef": "Task_28",
+            "targetRef": "Task_29"
+        },
+        {
+            "id": "SequenceFlow_42",
+            "sourceRef": "Task_29",
+            "targetRef": "EndEvent_1"
+        }
+    ]
+}

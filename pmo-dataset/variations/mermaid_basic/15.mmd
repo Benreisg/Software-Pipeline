@@ -1,0 +1,19 @@
+graph LR
+	Task_9["Gather evidence"] --> ParallelGateway_2{"+"}
+	ParallelGateway_1{"+"} --> Task_1["Conduct self-assessment"]
+	Task_3["Issue official documents"] --> ExclusiveGateway_2{"X"}
+	ParallelGateway_2 --> Task_4["Conduct external audit"]
+	ExclusiveGateway_2 --> EndEvent_1(("end"))
+	ExclusiveGateway_1{"X"} --> Task_5["Award certification"]
+	Task_7["Identify gaps or issues"] --> Task_2["Make necessary corrections or improvements"]
+	Task_4 --> Task_7
+	Task_6["Schedule compliance audit"] --> ParallelGateway_1
+	Task_8["Prepare documentation"] --> ParallelGateway_2
+	Task_1 --> ParallelGateway_2
+	Task_5 --> Task_3
+	StartEvent_1(("start")) --> Task_6
+	Task_2 --> Task_10["Conduct final audit"]
+	ParallelGateway_1 --> Task_9
+	ExclusiveGateway_1 --> ExclusiveGateway_2
+	ParallelGateway_1 --> Task_8
+	Task_10 --> ExclusiveGateway_1

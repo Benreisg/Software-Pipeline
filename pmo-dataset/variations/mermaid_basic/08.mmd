@@ -1,0 +1,21 @@
+graph LR
+	Task_4["Change policy"] --> ExclusiveGateway_1{"X"}
+	ExclusiveGateway_2{"X"} --> Task_11["Implement fix"]
+	ExclusiveGateway_1 --> Task_12["Conduct follow-up"]
+	StartEvent_1(("start")) --> Task_6["Report incident"]
+	ParallelGateway_1{"+"} --> Task_1["Propose corrective actions"]
+	Task_8["Gather necessary information"] --> ParallelGateway_1
+	Task_2["Log report into tracking system"] --> Task_5["Assign report to appropriate team"]
+	ParallelGateway_2{"+"} --> Task_8
+	Task_12 --> Task_3["Close incident report"]
+	Task_10["Notify all stakeholders"] --> EndEvent_1(("end"))
+	ExclusiveGateway_2 --> Task_4
+	Task_9["Identify cause of incident"] --> ParallelGateway_1
+	Task_3 --> Task_10
+	Task_11 --> ExclusiveGateway_1
+	Task_6 --> Task_2
+	Task_1 --> ExclusiveGateway_2
+	Task_7["Conduct training"] --> ExclusiveGateway_1
+	Task_5 --> ParallelGateway_2
+	ParallelGateway_2 --> Task_9
+	ExclusiveGateway_2 --> Task_7

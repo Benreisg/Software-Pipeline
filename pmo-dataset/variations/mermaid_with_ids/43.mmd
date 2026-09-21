@@ -1,0 +1,49 @@
+graph LR
+	classDef endEvent stroke-width:3px
+	User_1["Mechanic check a car\nand enter problems"]
+	User_2["Pay per App"]
+	User_3["Save repair infos"]
+	User_4["Make appointment for\nnext service"]
+	User_5["Make new appointment"]
+	Service_1["Check if car is\nstill registered?"]
+	Service_2["User fined"]
+	Service_3["Receive updates\nwhile waiting"]
+	Service_4["Send 'Pickerl'"]
+	Service_5["Check appointment\nfor service"]
+	Send_1["Send reminder\nnotification to user"]
+	Receive_1["Received a\nnotificiation"]
+	Manual_1["Bring Documents for\nRegistration"]
+	StartNoneEvent_1((" "))
+	EndNoneEvent_1((" ")):::endEvent
+	ExclusiveGateway_1{"Registered?"}
+	ExclusiveGateway_2{"Gone to service?"}
+	ExclusiveGateway_3{"> 30 days?"}
+	ExclusiveGateway_4{"Repair done?"}
+	ParallelGateway_1{"+"}
+	ParallelGateway_2{"+"}
+
+	StartNoneEvent_1 --> Manual_1
+	Manual_1 --> Service_1
+	Service_1 --> ExclusiveGateway_1
+	ExclusiveGateway_1 -->|"no"| Manual_1
+	Send_1 --> Receive_1
+	ExclusiveGateway_2 -->|"yes"| User_1
+	ExclusiveGateway_3 -->|"yes"| Service_2
+	User_1 --> Service_3
+	Service_3 --> ExclusiveGateway_4
+	ExclusiveGateway_4 -->|"yes"| User_2
+	User_2 --> ParallelGateway_1
+	ParallelGateway_1 --> User_3
+	ParallelGateway_1 --> Service_4
+	User_3 --> ParallelGateway_2
+	Service_4 --> ParallelGateway_2
+	ParallelGateway_2 --> User_4
+	ExclusiveGateway_2 -->|"no"| ExclusiveGateway_3
+	ExclusiveGateway_4 -->|"no"| Service_3
+	User_4 --> EndNoneEvent_1
+	Receive_1 --> ExclusiveGateway_2
+	Service_5 --> Send_1
+	ExclusiveGateway_1 -->|"yes"| Service_5
+	Service_2 --> User_5
+	User_5 --> Service_5
+	ExclusiveGateway_3 -->|"no"| Send_1

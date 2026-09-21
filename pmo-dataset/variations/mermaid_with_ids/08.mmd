@@ -1,0 +1,41 @@
+graph LR
+	classDef endEvent stroke-width:3px
+	Task_1["Propose corrective\nactions"]
+	Task_2["Log report into\ntracking system"]
+	Task_3["Close incident\nreport"]
+	Task_4["Change policy"]
+	Task_5["Assign report to\nappropriate team"]
+	Task_6["Report incident"]
+	Task_7["Conduct training"]
+	Task_8["Gather necessary\ninformation"]
+	Task_9["Identify cause of\nincident"]
+	Task_10["Notify all\nstakeholders"]
+	Task_11["Implement fix"]
+	Task_12["Conduct follow-up"]
+	StartNoneEvent_1(("start"))
+	EndNoneEvent_1(("end")):::endEvent
+	ExclusiveGateway_1{"X"}
+	ExclusiveGateway_2{"X"}
+	ParallelGateway_1{"+"}
+	ParallelGateway_2{"+"}
+
+	Task_4 --> ExclusiveGateway_1
+	ExclusiveGateway_2 --> Task_11
+	ExclusiveGateway_1 --> Task_12
+	StartNoneEvent_1 --> Task_6
+	ParallelGateway_1 --> Task_1
+	Task_8 --> ParallelGateway_1
+	Task_2 --> Task_5
+	ParallelGateway_2 --> Task_8
+	Task_12 --> Task_3
+	Task_10 --> EndNoneEvent_1
+	ExclusiveGateway_2 --> Task_4
+	Task_9 --> ParallelGateway_1
+	Task_3 --> Task_10
+	Task_11 --> ExclusiveGateway_1
+	Task_6 --> Task_2
+	Task_1 --> ExclusiveGateway_2
+	Task_7 --> ExclusiveGateway_1
+	Task_5 --> ParallelGateway_2
+	ParallelGateway_2 --> Task_9
+	ExclusiveGateway_2 --> Task_7

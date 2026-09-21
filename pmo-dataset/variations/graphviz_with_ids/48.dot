@@ -1,0 +1,52 @@
+digraph G {
+  rankdir=LR;  
+  node [shape=box];
+
+  "User_1" [label="select a starting\nblock"];
+  "User_2" [label="get your starting\nnumber"];
+  "Service_1" [label="measure the time"];
+  "Service_2" [label="receive your final\nrunning time"];
+  "Service_3" [label="calculate time\nbetween starting\ntime and the end of\nworkday"];
+  "Service_4" [label="measure the time"];
+  "Manual_1" [label="run for 5km"];
+  "Manual_2" [label="train"];
+  "Manual_3" [label="go to home"];
+  "Manual_4" [label="run"];
+  "Manual_5" [label="drink"];
+  "StartNoneEvent_1" [shape=circle, label=""];
+  "EndNoneEvent_1" [shape=circle, penwidth=4, label=""];
+  "ExclusiveGateway_1" [shape=diamond, label="time less than 25\nminutes?"];
+  "ExclusiveGateway_2" [shape=diamond, label="X"];
+  "ExclusiveGateway_3" [shape=diamond, label="time more than 1\nhour?"];
+  "ExclusiveGateway_4" [shape=diamond, label="X"];
+  "ParallelGateway_1" [shape=diamond, label="+"];
+  "ParallelGateway_2" [shape=diamond, label="+"];
+  "ParallelGateway_3" [shape=diamond, label="+"];
+  "ParallelGateway_4" [shape=diamond, label="+"];
+
+  "StartNoneEvent_1" -> "User_1";
+  "ParallelGateway_1" -> "Manual_1";
+  "ParallelGateway_1" -> "Service_1";
+  "Manual_1" -> "ParallelGateway_2";
+  "Service_1" -> "ParallelGateway_2";
+  "ParallelGateway_2" -> "ExclusiveGateway_1";
+  "Manual_2" -> "ExclusiveGateway_2";
+  "ExclusiveGateway_1" -> "Manual_2" [label="No"];
+  "User_2" -> "Service_3";
+  "ExclusiveGateway_4" -> "ParallelGateway_3";
+  "ParallelGateway_3" -> "Manual_4";
+  "ParallelGateway_4" -> "Service_2";
+  "Service_2" -> "EndNoneEvent_1";
+  "ExclusiveGateway_3" -> "ExclusiveGateway_4" [label="No"];
+  "Service_3" -> "ExclusiveGateway_3";
+  "Manual_4" -> "ParallelGateway_4";
+  "Manual_5" -> "ParallelGateway_4";
+  "ExclusiveGateway_1" -> "User_2" [label="Yes"];
+  "User_1" -> "ExclusiveGateway_2";
+  "ExclusiveGateway_2" -> "ParallelGateway_1";
+  "ParallelGateway_3" -> "Manual_5";
+  "ParallelGateway_3" -> "Service_4";
+  "Service_4" -> "ParallelGateway_4";
+  "Manual_3" -> "ExclusiveGateway_4";
+  "ExclusiveGateway_3" -> "Manual_3" [label="Yes"];
+}

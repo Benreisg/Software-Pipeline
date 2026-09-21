@@ -1,0 +1,40 @@
+digraph G {
+  rankdir=LR;  
+  node [shape=box];
+
+  "User_1" [label="Send a report to the\nfridge service\ncenter"];
+  "User_2" [label="Rate Service\nFacility"];
+  "User_3" [label="Describe the\nsymptoms"];
+  "Service_1" [label="Schedule an\nappointment for\nfridge repair"];
+  "Service_2" [label="Select local service\nfacility"];
+  "Manual_1" [label="Confirm that fridge\nis okay"];
+  "Manual_2" [label="Repair the fridge"];
+  "Manual_3" [label="Collect fridge type\ndata"];
+  "StartNoneEvent_1" [shape=circle, label="Fridge makes strange\nnoises"];
+  "EndNoneEvent_1" [shape=circle, penwidth=4, label="Repair process over"];
+  "IntermediateTimerEvent_1" [shape=doublecircle, label="Wait until service\nfacility arrives"];
+  "ExclusiveGateway_1" [shape=diamond, label="Submit a rating?"];
+  "ExclusiveGateway_2" [shape=diamond, label="Additional parts\nneeded?"];
+  "ExclusiveGateway_3" [shape=diamond, label="X"];
+  "ParallelGateway_1" [shape=diamond, label="+"];
+  "ParallelGateway_2" [shape=diamond, label="+"];
+
+  "User_2" -> "EndNoneEvent_1";
+  "Manual_1" -> "ExclusiveGateway_1";
+  "User_1" -> "Service_2";
+  "Service_1" -> "IntermediateTimerEvent_1";
+  "IntermediateTimerEvent_1" -> "Manual_2";
+  "Manual_2" -> "ExclusiveGateway_2";
+  "Service_2" -> "ExclusiveGateway_3";
+  "ExclusiveGateway_3" -> "Service_1";
+  "ParallelGateway_1" -> "User_3";
+  "ParallelGateway_1" -> "Manual_3";
+  "ExclusiveGateway_2" -> "Manual_1" [label="No. Fridge is\nrepaired"];
+  "ExclusiveGateway_1" -> "User_2" [label="Yes"];
+  "Manual_3" -> "ParallelGateway_2";
+  "ParallelGateway_2" -> "User_1";
+  "User_3" -> "ParallelGateway_2";
+  "StartNoneEvent_1" -> "ParallelGateway_1";
+  "ExclusiveGateway_1" -> "EndNoneEvent_1" [label="No"];
+  "ExclusiveGateway_2" -> "ExclusiveGateway_3" [label="Yes. Fridge is not\nrepaired"];
+}

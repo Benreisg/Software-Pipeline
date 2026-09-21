@@ -1,0 +1,40 @@
+graph LR
+	StartEvent_1(("Get airplane request")) --> Task_1["Check desired airplane type"]
+	Task_1 --> ExclusiveGateway_1{"Individual customizing?"}
+	ParallelGateway_1{"+"} --> Task_6["Display bar type"]
+	ParallelGateway_1 --> Task_2["Select number of seats"]
+	ParallelGateway_1 --> Task_3["Select seat color"]
+	ParallelGateway_1 --> Task_4["Introduce amount of water in the toilets"]
+	Task_6 --> ExclusiveGateway_2{"Bar type"}
+	Task_2 --> ParallelGateway_2{"+"}
+	Task_3 --> ParallelGateway_2
+	Task_4 --> ParallelGateway_2
+	Task_7["Send customizing options"] --> Task_14["Receive customizing requirements"]
+	Task_14 --> ParallelGateway_1
+	Task_8["Send requirements to the russian team"] --> ExclusiveGateway_3{"X"}
+	Task_9["Send requirements to the irish team"] --> ExclusiveGateway_3
+	ExclusiveGateway_3 --> Task_16["Receive bar components"]
+	Task_16 --> ParallelGateway_2
+	ParallelGateway_2 --> Task_17["Assemble interior"]
+	Task_19["Sent plane to customer"] --> Task_15["Receive customer confirmation"]
+	Task_15 --> EndEvent_1((" "))
+	ExclusiveGateway_4{"Test succesful"} -->|"No"| Task_20["Ajdust errors"]
+	ParallelGateway_3{"+"} --> Task_18["Flight test"]
+	Task_18 --> ExclusiveGateway_4
+	ParallelGateway_3 --> Task_5["Update flight protocol"]
+	Task_5 --> Task_13["Send protocol to customer"]
+	Task_13 --> ParallelGateway_4{"+"}
+	ExclusiveGateway_4 -->|"Yes"| ParallelGateway_4
+	ParallelGateway_4 --> Task_19
+	Task_10["Send requirements to french team"] --> ExclusiveGateway_3
+	Task_11["Send requirements to the american team"] --> ExclusiveGateway_3
+	Task_12["Send requirements to the italian team"] --> ExclusiveGateway_3
+	Task_17 --> ParallelGateway_3
+	Task_20 --> Task_18
+	ExclusiveGateway_1 -->|"Yes"| Task_7
+	ExclusiveGateway_1 -->|"No"| Task_17
+	ExclusiveGateway_2 -->|"Vodka bar"| Task_8
+	ExclusiveGateway_2 -->|"Whiskey bar"| Task_9
+	ExclusiveGateway_2 -->|"Wine bar"| Task_10
+	ExclusiveGateway_2 -->|"Cocktail bar"| Task_11
+	ExclusiveGateway_2 -->|"Aperol bar"| Task_12

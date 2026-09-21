@@ -1,0 +1,190 @@
+<definitions Definitions_1>
+    <process Process_1>
+        <task User_1 (Check desired airplane type)/>
+        <task User_2 (Select number of seats)/>
+        <task User_3 (Select seat color)/>
+        <task User_4 (Introduce amount of water in the toilets)/>
+        <task User_5 (Update flight protocol)/>
+        <task Service_1 (Display bar type)/>
+        <task Send_1 (Send customizing options)/>
+        <task Send_2 (Send requirements to the russian team)/>
+        <task Send_3 (Send requirements to the irish team)/>
+        <task Send_4 (Send requirements to french team)/>
+        <task Send_5 (Send requirements to the american team)/>
+        <task Send_6 (Send requirements to the italian team)/>
+        <task Send_7 (Send protocol to customer)/>
+        <task Receive_1 (Receive customizing requirements)/>
+        <task Receive_2 (Receive customer confirmation)/>
+        <task Manual_1 (Receive bar components)/>
+        <task Manual_2 (Assemble interior)/>
+        <task Manual_3 (Flight test)/>
+        <task Manual_4 (Sent plane to customer)/>
+        <task Manual_5 (Ajdust errors)/>
+        <startMessageEvent StartMessageEvent_1 (Get airplane request)/>
+        <endNoneEvent EndNoneEvent_1/>
+        <exclusivegatewayGateway ExclusiveGateway_1 (Individual customizing?)/>
+        <exclusivegatewayGateway ExclusiveGateway_2 (Bar type)/>
+        <exclusivegatewayGateway ExclusiveGateway_3/>
+        <exclusivegatewayGateway ExclusiveGateway_4 (Test succesful)/>
+        <parallelgatewayGateway ParallelGateway_1/>
+        <parallelgatewayGateway ParallelGateway_2/>
+        <parallelgatewayGateway ParallelGateway_3/>
+        <parallelgatewayGateway ParallelGateway_4/>
+        <sequenceFlow SequenceFlow_1>
+          - sourceRef: StartMessageEvent_1
+          - targetRef: User_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_2>
+          - sourceRef: User_1
+          - targetRef: ExclusiveGateway_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_3>
+          - sourceRef: ParallelGateway_1
+          - targetRef: Service_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_4>
+          - sourceRef: ParallelGateway_1
+          - targetRef: User_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_5>
+          - sourceRef: ParallelGateway_1
+          - targetRef: User_3
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_6>
+          - sourceRef: ParallelGateway_1
+          - targetRef: User_4
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_7>
+          - sourceRef: Service_1
+          - targetRef: ExclusiveGateway_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_8>
+          - sourceRef: User_2
+          - targetRef: ParallelGateway_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_9>
+          - sourceRef: User_3
+          - targetRef: ParallelGateway_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_10>
+          - sourceRef: User_4
+          - targetRef: ParallelGateway_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_11>
+          - sourceRef: Send_1
+          - targetRef: Receive_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_12>
+          - sourceRef: Receive_1
+          - targetRef: ParallelGateway_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_13>
+          - sourceRef: Send_2
+          - targetRef: ExclusiveGateway_3
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_14>
+          - sourceRef: Send_3
+          - targetRef: ExclusiveGateway_3
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_15>
+          - sourceRef: ExclusiveGateway_3
+          - targetRef: Manual_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_16>
+          - sourceRef: Manual_1
+          - targetRef: ParallelGateway_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_17>
+          - sourceRef: ParallelGateway_2
+          - targetRef: Manual_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_18>
+          - sourceRef: Manual_4
+          - targetRef: Receive_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_19>
+          - sourceRef: Receive_2
+          - targetRef: EndNoneEvent_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_20> (No)
+          - sourceRef: ExclusiveGateway_4
+          - targetRef: Manual_5
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_21>
+          - sourceRef: ParallelGateway_3
+          - targetRef: Manual_3
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_22>
+          - sourceRef: Manual_3
+          - targetRef: ExclusiveGateway_4
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_23>
+          - sourceRef: ParallelGateway_3
+          - targetRef: User_5
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_24>
+          - sourceRef: User_5
+          - targetRef: Send_7
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_25>
+          - sourceRef: Send_7
+          - targetRef: ParallelGateway_4
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_26> (Yes)
+          - sourceRef: ExclusiveGateway_4
+          - targetRef: ParallelGateway_4
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_27>
+          - sourceRef: ParallelGateway_4
+          - targetRef: Manual_4
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_28>
+          - sourceRef: Send_4
+          - targetRef: ExclusiveGateway_3
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_29>
+          - sourceRef: Send_5
+          - targetRef: ExclusiveGateway_3
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_30>
+          - sourceRef: Send_6
+          - targetRef: ExclusiveGateway_3
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_31>
+          - sourceRef: Manual_2
+          - targetRef: ParallelGateway_3
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_32>
+          - sourceRef: Manual_5
+          - targetRef: Manual_3
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_33> (Yes)
+          - sourceRef: ExclusiveGateway_1
+          - targetRef: Send_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_34> (No)
+          - sourceRef: ExclusiveGateway_1
+          - targetRef: Manual_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_35> (Vodka bar)
+          - sourceRef: ExclusiveGateway_2
+          - targetRef: Send_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_36> (Whiskey bar)
+          - sourceRef: ExclusiveGateway_2
+          - targetRef: Send_3
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_37> (Wine bar)
+          - sourceRef: ExclusiveGateway_2
+          - targetRef: Send_4
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_38> (Cocktail bar)
+          - sourceRef: ExclusiveGateway_2
+          - targetRef: Send_5
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_39> (Aperol bar)
+          - sourceRef: ExclusiveGateway_2
+          - targetRef: Send_6
+        </sequenceFlow>
+    </process>
+</definitions>

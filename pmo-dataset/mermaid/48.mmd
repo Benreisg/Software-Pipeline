@@ -1,0 +1,28 @@
+graph LR
+	classDef endEvent stroke-width:4px
+	
+	StartNoneEvent_1((" ")) --> User_1["select a starting\nblock"]
+	ParallelGateway_1{"+"} --> Manual_1["run for 5km"]
+	ParallelGateway_1 --> Service_1["measure the time"]
+	Manual_1 --> ParallelGateway_2{"+"}
+	Service_1 --> ParallelGateway_2
+	ParallelGateway_2 --> ExclusiveGateway_1{"time less than 25\nminutes?"}
+	Manual_2["train"] --> ExclusiveGateway_2{"X"}
+	ExclusiveGateway_1 -->|"No"| Manual_2
+	User_2["get your starting\nnumber"] --> Service_3["calculate time\nbetween starting\ntime and the end of\nworkday"]
+	ExclusiveGateway_4{"X"} --> ParallelGateway_3{"+"}
+	ParallelGateway_3 --> Manual_4["run"]
+	ParallelGateway_4{"+"} --> Service_2["receive your final\nrunning time"]
+	Service_2 --> EndNoneEvent_1((" ")):::endEvent
+	ExclusiveGateway_3{"time more than 1\nhour?"} -->|"No"| ExclusiveGateway_4
+	Service_3 --> ExclusiveGateway_3
+	Manual_4 --> ParallelGateway_4
+	Manual_5["drink"] --> ParallelGateway_4
+	ExclusiveGateway_1 -->|"Yes"| User_2
+	User_1 --> ExclusiveGateway_2
+	ExclusiveGateway_2 --> ParallelGateway_1
+	ParallelGateway_3 --> Manual_5
+	ParallelGateway_3 --> Service_4["measure the time"]
+	Service_4 --> ParallelGateway_4
+	Manual_3["go to home"] --> ExclusiveGateway_4
+	ExclusiveGateway_3 -->|"Yes"| Manual_3

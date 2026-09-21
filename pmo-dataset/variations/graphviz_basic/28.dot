@@ -1,0 +1,55 @@
+digraph G {
+  rankdir=LR;  
+  node [shape=box];
+
+  "Internship process is started" -> "Register for internship";
+  "ExclusiveGateway_3" -> "Enter hobbies";
+  "Enter hobbies" -> "ExclusiveGateway_4";
+  "Recieve offer" -> "Accept offer?";
+  "ExclusiveGateway_1" -> "Recieve offer";
+  "Deny offer" -> "ExclusiveGateway_1";
+  "Publish your application" -> "ExclusiveGateway_1";
+  "ParallelGateway_2" -> "Accept offer";
+  "ParallelGateway_2" -> "Invalidate all other offers";
+  "Accept offer" -> "ParallelGateway_1";
+  "Invalidate all other offers" -> "ParallelGateway_1";
+  "Begin internship" -> "ParallelGateway_3";
+  "ExclusiveGateway_3" -> "Enter experience";
+  "ExclusiveGateway_3" -> "Enter expected income";
+  "Enter experience" -> "ExclusiveGateway_4";
+  "Enter expected income" -> "ExclusiveGateway_4";
+  "ParallelGateway_3" -> "Write at least 3 status updates every week";
+  "ParallelGateway_3" -> "Recieve 3 status updates from the company";
+  "Recieve 3 status updates from the company" -> "ParallelGateway_4";
+  "Write at least 3 status updates every week" -> "ParallelGateway_4";
+  "Recommend company?" -> "Recommend company to a list of friends via twitter api" [label="Yes"];
+  "ParallelGateway_1" -> "Begin internship";
+  "End internship" -> "Recommend company?";
+  "Register for internship" -> "ParallelGateway_5";
+  "ParallelGateway_4" -> "End internship";
+  "ParallelGateway_5" -> "Enter topic";
+  "ExclusiveGateway_4" -> "ParallelGateway_6";
+  "Enter topic" -> "ParallelGateway_6";
+  "ParallelGateway_5" -> "ExclusiveGateway_3";
+  "ParallelGateway_6" -> "Publish your application";
+  "Accept offer?" -> "Deny offer" [label="No"];
+  "Accept offer?" -> "ParallelGateway_2" [label="Yes"];
+  "Recommend company?" -> "ExclusiveGateway_2" [label="No"];
+  "ExclusiveGateway_2" -> "Internship succesful";
+  "Recommend company to a list of friends via twitter api" -> "ExclusiveGateway_2";
+
+  "Internship process is started" [shape=circle, label="Internship process is started"];
+  "Internship succesful" [shape=circle, label="Internship succesful"];
+  "Accept offer?" [shape=diamond];
+  "ExclusiveGateway_1" [shape=diamond, label="X"];
+  "Recommend company?" [shape=diamond];
+  "ExclusiveGateway_2" [shape=diamond, label="X"];
+  "ParallelGateway_1" [shape=diamond, label="+"];
+  "ParallelGateway_2" [shape=diamond, label="+"];
+  "ParallelGateway_3" [shape=diamond, label="+"];
+  "ParallelGateway_4" [shape=diamond, label="+"];
+  "ParallelGateway_5" [shape=diamond, label="+"];
+  "ParallelGateway_6" [shape=diamond, label="+"];
+  "ExclusiveGateway_3" [shape=diamond, label="X"];
+  "ExclusiveGateway_4" [shape=diamond, label="X"];
+}

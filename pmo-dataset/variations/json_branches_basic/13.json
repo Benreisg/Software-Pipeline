@@ -1,0 +1,73 @@
+{
+    "startEvent": {
+        "name": "start"
+    },
+    "process": [
+        {
+            "type": "task",
+            "name": "File complaint"
+        },
+        {
+            "type": "task",
+            "name": "Log complaint"
+        },
+        {
+            "type": "task",
+            "name": "Assign complaint to relevant department"
+        },
+        {
+            "type": "task",
+            "name": "Review complaint details"
+        },
+        {
+            "type": "xor",
+            "condition": "",
+            "branches": [
+                {
+                    "branch": [
+                        {
+                            "type": "task",
+                            "name": "Approve and notify customer"
+                        },
+                        {
+                            "type": "task",
+                            "name": "Process reimbursement"
+                        }
+                    ]
+                },
+                {
+                    "branch": [
+                        {
+                            "type": "task",
+                            "name": "Reject and notify customer"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "task",
+            "name": "Resolve complaint"
+        },
+        {
+            "type": "xor",
+            "condition": "",
+            "branches": [
+                {
+                    "branch": [
+                        {
+                            "type": "task",
+                            "name": "Provide feedback"
+                        }
+                    ]
+                },
+                {
+                    "branch": []
+                }
+            ]
+        }
+    ],
+    "endEvent": {
+        "name": "end"
+    }
+}

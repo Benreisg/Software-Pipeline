@@ -1,0 +1,154 @@
+<definitions Definitions_1>
+    <process Process_1>
+        <task Task_1 (Complete orientation)/>
+        <task Task_2 (Conduct initial phone interviews)/>
+        <task Task_3 (Conduct a virtual interview)/>
+        <task Task_4 (Begin onboarding process)/>
+        <task Task_5 (Identify need for new hire)/>
+        <task Task_6 (Choose candidate)/>
+        <task Task_7 (Collect resumes)/>
+        <task Task_8 (Extend offer)/>
+        <task Task_9 (Complete training)/>
+        <task Task_10 (Complete paperwork)/>
+        <task Task_11 (Invite candidates for interviews)/>
+        <task Task_12 (Post job description)/>
+        <task Task_13 (Create job description)/>
+        <task Task_14 (Screen resumes)/>
+        <task Task_15 (Negotiate salary)/>
+        <task Task_16 (Conduct an in-person interview)/>
+        <startNoneEvent StartNoneEvent_1 (start)/>
+        <endNoneEvent EndNoneEvent_1 (end)/>
+        <exclusivegatewayGateway ExclusiveGateway_1/>
+        <exclusivegatewayGateway ExclusiveGateway_2/>
+        <exclusivegatewayGateway ExclusiveGateway_3/>
+        <exclusivegatewayGateway ExclusiveGateway_4/>
+        <exclusivegatewayGateway ExclusiveGateway_5/>
+        <exclusivegatewayGateway ExclusiveGateway_6/>
+        <parallelgatewayGateway ParallelGateway_1/>
+        <parallelgatewayGateway ParallelGateway_2/>
+        <sequenceFlow SequenceFlow_1>
+          - sourceRef: Task_12
+          - targetRef: Task_7
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_2>
+          - sourceRef: Task_6
+          - targetRef: Task_8
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_3>
+          - sourceRef: Task_15
+          - targetRef: ExclusiveGateway_3
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_4>
+          - sourceRef: Task_14
+          - targetRef: Task_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_5>
+          - sourceRef: Task_2
+          - targetRef: Task_11
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_6>
+          - sourceRef: ExclusiveGateway_2
+          - targetRef: Task_6
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_7>
+          - sourceRef: ExclusiveGateway_6
+          - targetRef: ExclusiveGateway_5
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_8>
+          - sourceRef: ParallelGateway_1
+          - targetRef: Task_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_9>
+          - sourceRef: Task_1
+          - targetRef: ParallelGateway_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_10>
+          - sourceRef: ParallelGateway_1
+          - targetRef: Task_10
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_11>
+          - sourceRef: ExclusiveGateway_1
+          - targetRef: Task_3
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_12>
+          - sourceRef: Task_8
+          - targetRef: ExclusiveGateway_6
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_13>
+          - sourceRef: ParallelGateway_2
+          - targetRef: EndNoneEvent_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_14>
+          - sourceRef: ExclusiveGateway_1
+          - targetRef: Task_16
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_15>
+          - sourceRef: ExclusiveGateway_3
+          - targetRef: ExclusiveGateway_4
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_16>
+          - sourceRef: Task_16
+          - targetRef: ExclusiveGateway_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_17>
+          - sourceRef: Task_3
+          - targetRef: ExclusiveGateway_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_18>
+          - sourceRef: ParallelGateway_1
+          - targetRef: Task_9
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_19>
+          - sourceRef: Task_7
+          - targetRef: Task_14
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_20>
+          - sourceRef: ExclusiveGateway_2
+          - targetRef: ExclusiveGateway_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_21>
+          - sourceRef: Task_9
+          - targetRef: ParallelGateway_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_22>
+          - sourceRef: Task_13
+          - targetRef: Task_12
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_23>
+          - sourceRef: Task_11
+          - targetRef: ExclusiveGateway_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_24>
+          - sourceRef: Task_10
+          - targetRef: ParallelGateway_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_25>
+          - sourceRef: ExclusiveGateway_4
+          - targetRef: Task_15
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_26>
+          - sourceRef: ExclusiveGateway_5
+          - targetRef: Task_4
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_27>
+          - sourceRef: ExclusiveGateway_3
+          - targetRef: ExclusiveGateway_5
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_28>
+          - sourceRef: ExclusiveGateway_6
+          - targetRef: ExclusiveGateway_4
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_29>
+          - sourceRef: Task_5
+          - targetRef: Task_13
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_30>
+          - sourceRef: StartNoneEvent_1
+          - targetRef: Task_5
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_31>
+          - sourceRef: Task_4
+          - targetRef: ParallelGateway_1
+        </sequenceFlow>
+    </process>
+</definitions>

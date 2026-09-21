@@ -1,0 +1,12 @@
+digraph G {
+  rankdir=LR;  
+  node [shape=box];
+
+  "StartNoneEvent" -> "INQ transmits the\ntransaction data\nrequest";
+  "INQ transmits the\ntransaction data\nrequest" -> "IP checks the\nrequest of the INQ";
+  "IP checks the\nrequest of the INQ" -> "IP answers the\nquestion of the INQ";
+  "IP answers the\nquestion of the INQ" -> "EndNoneEvent";
+
+  "StartNoneEvent" [label="", shape=circle];
+  "EndNoneEvent" [label="", shape=circle, penwidth=4];
+}

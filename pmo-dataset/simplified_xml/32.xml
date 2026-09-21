@@ -1,0 +1,225 @@
+<definitions Definitions_1>
+    <collaboration Collaboration_1>
+        <participant Pool_1> (Farming Bot Game)
+          - processRef: Process_Pool_1
+        </participant>
+    </collaboration>
+    <process Process_Pool_1> (Farming Bot Game)
+        <laneSet LaneSet_1>
+            <lane Lane_1> (Player)
+                <flowNodeRef (StartNoneEvent_1)/>
+                <flowNodeRef (User_1)/>
+                <flowNodeRef (User_2)/>
+                <flowNodeRef (Task_1)/>
+                <flowNodeRef (Task_2)/>
+                <flowNodeRef (ParallelGateway_1)/>
+                <flowNodeRef (Task_3)/>
+                <flowNodeRef (ParallelGateway_2)/>
+                <flowNodeRef (ExclusiveGateway_1)/>
+                <flowNodeRef (Task_4)/>
+                <flowNodeRef (ExclusiveGateway_2)/>
+            </lane>
+            <lane Lane_2> (Farming Bot)
+                <flowNodeRef (Task_5)/>
+                <flowNodeRef (Task_6)/>
+                <flowNodeRef (Service_1)/>
+                <flowNodeRef (ExclusiveGateway_3)/>
+                <flowNodeRef (Service_2)/>
+                <flowNodeRef (ExclusiveGateway_4)/>
+                <flowNodeRef (ExclusiveGateway_5)/>
+                <flowNodeRef (InclusiveGateway_1)/>
+                <flowNodeRef (User_3)/>
+                <flowNodeRef (User_4)/>
+                <flowNodeRef (InclusiveGateway_2)/>
+                <flowNodeRef (Service_3)/>
+                <flowNodeRef (ParallelGateway_3)/>
+                <flowNodeRef (Task_7)/>
+                <flowNodeRef (ExclusiveGateway_6)/>
+                <flowNodeRef (Task_8)/>
+                <flowNodeRef (ExclusiveGateway_7)/>
+                <flowNodeRef (ExclusiveGateway_8)/>
+                <flowNodeRef (ParallelGateway_4)/>
+                <flowNodeRef (EndNoneEvent_1)/>
+            </lane>
+        </laneSet>
+        <task Task_1 (Collect urgently needed resources)/>
+        <task Task_2 (Collect the remained resources)/>
+        <task Task_3 (Check repo for already available resources)/>
+        <task Task_4 (Build tools)/>
+        <task Task_5 (Start farming)/>
+        <task Task_6 (Continue farming)/>
+        <task Task_7 (Update list of resources)/>
+        <task Task_8 (Wait for random natural event for some time)/>
+        <task User_1 (Find out wanted resources)/>
+        <task User_2 (Read message)/>
+        <task User_3 (Brag to friends)/>
+        <task User_4 (Help with materials)/>
+        <task Service_1 (Reset bot)/>
+        <task Service_2 (Notify player)/>
+        <task Service_3 (Give bot a sleeping break)/>
+        <startNoneEvent StartNoneEvent_1 (Farming bot creation desire)/>
+        <endNoneEvent EndNoneEvent_1/>
+        <exclusivegatewayGateway ExclusiveGateway_1 (New tools needed?)/>
+        <exclusivegatewayGateway ExclusiveGateway_2/>
+        <exclusivegatewayGateway ExclusiveGateway_3 (New milestone achieved?)/>
+        <exclusivegatewayGateway ExclusiveGateway_4/>
+        <exclusivegatewayGateway ExclusiveGateway_5 (Bot finished?)/>
+        <exclusivegatewayGateway ExclusiveGateway_6/>
+        <exclusivegatewayGateway ExclusiveGateway_7 (RNE happened?)/>
+        <exclusivegatewayGateway ExclusiveGateway_8/>
+        <parallelgatewayGateway ParallelGateway_1/>
+        <parallelgatewayGateway ParallelGateway_2/>
+        <parallelgatewayGateway ParallelGateway_3/>
+        <parallelgatewayGateway ParallelGateway_4/>
+        <inclusivegatewayGateway InclusiveGateway_1/>
+        <inclusivegatewayGateway InclusiveGateway_2/>
+        <sequenceFlow SequenceFlow_1>
+          - sourceRef: StartNoneEvent_1
+          - targetRef: User_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_2> (Yes)
+          - sourceRef: ExclusiveGateway_3
+          - targetRef: Service_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_3>
+          - sourceRef: User_4
+          - targetRef: InclusiveGateway_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_4>
+          - sourceRef: User_3
+          - targetRef: InclusiveGateway_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_5>
+          - sourceRef: ParallelGateway_1
+          - targetRef: Task_3
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_6>
+          - sourceRef: Task_3
+          - targetRef: ParallelGateway_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_7>
+          - sourceRef: ParallelGateway_2
+          - targetRef: ExclusiveGateway_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_8>
+          - sourceRef: Task_4
+          - targetRef: ExclusiveGateway_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_9>
+          - sourceRef: ParallelGateway_1
+          - targetRef: Task_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_10>
+          - sourceRef: Task_1
+          - targetRef: ParallelGateway_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_11> (Yes)
+          - sourceRef: ExclusiveGateway_1
+          - targetRef: Task_4
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_12>
+          - sourceRef: ExclusiveGateway_2
+          - targetRef: Task_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_13> (No)
+          - sourceRef: ExclusiveGateway_1
+          - targetRef: ExclusiveGateway_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_14>
+          - sourceRef: User_2
+          - targetRef: ExclusiveGateway_4
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_15>
+          - sourceRef: ExclusiveGateway_4
+          - targetRef: ExclusiveGateway_5
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_16>
+          - sourceRef: Service_1
+          - targetRef: Task_6
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_17>
+          - sourceRef: Task_5
+          - targetRef: ExclusiveGateway_6
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_18>
+          - sourceRef: User_1
+          - targetRef: ParallelGateway_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_19>
+          - sourceRef: Service_2
+          - targetRef: User_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_20>
+          - sourceRef: ExclusiveGateway_6
+          - targetRef: ExclusiveGateway_3
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_21>
+          - sourceRef: Task_6
+          - targetRef: ExclusiveGateway_6
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_22>
+          - sourceRef: Task_8
+          - targetRef: ExclusiveGateway_7
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_23> (Yes)
+          - sourceRef: ExclusiveGateway_7
+          - targetRef: Service_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_24>
+          - sourceRef: ParallelGateway_3
+          - targetRef: ExclusiveGateway_8
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_25>
+          - sourceRef: ExclusiveGateway_8
+          - targetRef: Task_8
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_26>
+          - sourceRef: Task_2
+          - targetRef: ParallelGateway_3
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_27> (No)
+          - sourceRef: ExclusiveGateway_7
+          - targetRef: Task_5
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_28>
+          - sourceRef: ParallelGateway_3
+          - targetRef: Task_7
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_29> (No)
+          - sourceRef: ExclusiveGateway_3
+          - targetRef: ExclusiveGateway_4
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_30>
+          - sourceRef: Service_3
+          - targetRef: ExclusiveGateway_8
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_31> (Yes)
+          - sourceRef: ExclusiveGateway_5
+          - targetRef: InclusiveGateway_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_32>
+          - sourceRef: InclusiveGateway_2
+          - targetRef: ParallelGateway_4
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_33>
+          - sourceRef: Task_7
+          - targetRef: ParallelGateway_4
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_34>
+          - sourceRef: ParallelGateway_4
+          - targetRef: EndNoneEvent_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_35> (No)
+          - sourceRef: ExclusiveGateway_5
+          - targetRef: Service_3
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_36> (brag)
+          - sourceRef: InclusiveGateway_1
+          - targetRef: User_3
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_37> (help)
+          - sourceRef: InclusiveGateway_1
+          - targetRef: User_4
+        </sequenceFlow>
+    </process>
+</definitions>

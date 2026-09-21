@@ -1,0 +1,24 @@
+digraph G {
+  rankdir=LR;  
+  node [shape=box];
+
+  "Conduct strategic\nalignment meeting" -> "ExclusiveGateway_2";
+  "ExclusiveGateway_2" -> "Review budget\nfeasibility";
+  "Documented and\napprove adjustment" -> "ExclusiveGateway_2";
+  "Outline objectives" -> "Draft plan";
+  "Implement plan" -> "end";
+  "Provide feedback" -> "ExclusiveGateway_1";
+  "Distribute budget" -> "Implement plan";
+  "Adjust Plan" -> "Documented and\napprove adjustment";
+  "ExclusiveGateway_1" -> "Approve final budget";
+  "Review budget\nfeasibility" -> "Provide feedback";
+  "ExclusiveGateway_1" -> "Adjust Plan";
+  "Approve final budget" -> "Distribute budget";
+  "Draft plan" -> "Conduct strategic\nalignment meeting";
+  "start" -> "Outline objectives";
+
+  "start" [shape=circle];
+  "end" [shape=circle, penwidth=4];
+  "ExclusiveGateway_1" [label="X", shape=diamond];
+  "ExclusiveGateway_2" [label="X", shape=diamond];
+}

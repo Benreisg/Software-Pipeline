@@ -1,0 +1,250 @@
+{
+    "tasks": [
+        {
+            "id": "User_1",
+            "name": "Mechanic check a car and enter problems",
+            "type": "User"
+        },
+        {
+            "id": "User_2",
+            "name": "Pay per App",
+            "type": "User"
+        },
+        {
+            "id": "User_3",
+            "name": "Save repair infos",
+            "type": "User"
+        },
+        {
+            "id": "User_4",
+            "name": "Make appointment for next service",
+            "type": "User"
+        },
+        {
+            "id": "User_5",
+            "name": "Make new appointment",
+            "type": "User"
+        },
+        {
+            "id": "Service_1",
+            "name": "Check if car is still registered?",
+            "type": "Service"
+        },
+        {
+            "id": "Service_2",
+            "name": "User fined",
+            "type": "Service"
+        },
+        {
+            "id": "Service_3",
+            "name": "Receive updates while waiting",
+            "type": "Service"
+        },
+        {
+            "id": "Service_4",
+            "name": "Send 'Pickerl'",
+            "type": "Service"
+        },
+        {
+            "id": "Service_5",
+            "name": "Check appointment for service",
+            "type": "Service"
+        },
+        {
+            "id": "Send_1",
+            "name": "Send reminder notification to user",
+            "type": "Send"
+        },
+        {
+            "id": "Receive_1",
+            "name": "Received a notificiation",
+            "type": "Receive"
+        },
+        {
+            "id": "Manual_1",
+            "name": "Bring Documents for Registration",
+            "type": "Manual"
+        }
+    ],
+    "events": [
+        {
+            "id": "StartNoneEvent_1",
+            "name": "",
+            "type": "StartNoneEvent"
+        },
+        {
+            "id": "EndNoneEvent_1",
+            "name": "",
+            "type": "EndNoneEvent"
+        }
+    ],
+    "gateways": [
+        {
+            "id": "ExclusiveGateway_1",
+            "name": "Registered?",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_2",
+            "name": "Gone to service?",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_3",
+            "name": "> 30 days?",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_4",
+            "name": "Repair done?",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ParallelGateway_1",
+            "name": "",
+            "type": "ParallelGateway"
+        },
+        {
+            "id": "ParallelGateway_2",
+            "name": "",
+            "type": "ParallelGateway"
+        }
+    ],
+    "pools": [],
+    "sequenceFlows": [
+        {
+            "id": "SequenceFlow_1",
+            "sourceRef": "StartNoneEvent_1",
+            "targetRef": "Manual_1"
+        },
+        {
+            "id": "SequenceFlow_2",
+            "sourceRef": "Manual_1",
+            "targetRef": "Service_1"
+        },
+        {
+            "id": "SequenceFlow_3",
+            "sourceRef": "Service_1",
+            "targetRef": "ExclusiveGateway_1"
+        },
+        {
+            "id": "SequenceFlow_4",
+            "sourceRef": "ExclusiveGateway_1",
+            "targetRef": "Manual_1",
+            "condition": "no"
+        },
+        {
+            "id": "SequenceFlow_5",
+            "sourceRef": "Send_1",
+            "targetRef": "Receive_1"
+        },
+        {
+            "id": "SequenceFlow_6",
+            "sourceRef": "ExclusiveGateway_2",
+            "targetRef": "User_1",
+            "condition": "yes"
+        },
+        {
+            "id": "SequenceFlow_7",
+            "sourceRef": "ExclusiveGateway_3",
+            "targetRef": "Service_2",
+            "condition": "yes"
+        },
+        {
+            "id": "SequenceFlow_8",
+            "sourceRef": "User_1",
+            "targetRef": "Service_3"
+        },
+        {
+            "id": "SequenceFlow_9",
+            "sourceRef": "Service_3",
+            "targetRef": "ExclusiveGateway_4"
+        },
+        {
+            "id": "SequenceFlow_10",
+            "sourceRef": "ExclusiveGateway_4",
+            "targetRef": "User_2",
+            "condition": "yes"
+        },
+        {
+            "id": "SequenceFlow_11",
+            "sourceRef": "User_2",
+            "targetRef": "ParallelGateway_1"
+        },
+        {
+            "id": "SequenceFlow_12",
+            "sourceRef": "ParallelGateway_1",
+            "targetRef": "User_3"
+        },
+        {
+            "id": "SequenceFlow_13",
+            "sourceRef": "ParallelGateway_1",
+            "targetRef": "Service_4"
+        },
+        {
+            "id": "SequenceFlow_14",
+            "sourceRef": "User_3",
+            "targetRef": "ParallelGateway_2"
+        },
+        {
+            "id": "SequenceFlow_15",
+            "sourceRef": "Service_4",
+            "targetRef": "ParallelGateway_2"
+        },
+        {
+            "id": "SequenceFlow_16",
+            "sourceRef": "ParallelGateway_2",
+            "targetRef": "User_4"
+        },
+        {
+            "id": "SequenceFlow_17",
+            "sourceRef": "ExclusiveGateway_2",
+            "targetRef": "ExclusiveGateway_3",
+            "condition": "no"
+        },
+        {
+            "id": "SequenceFlow_18",
+            "sourceRef": "ExclusiveGateway_4",
+            "targetRef": "Service_3",
+            "condition": "no"
+        },
+        {
+            "id": "SequenceFlow_19",
+            "sourceRef": "User_4",
+            "targetRef": "EndNoneEvent_1"
+        },
+        {
+            "id": "SequenceFlow_20",
+            "sourceRef": "Receive_1",
+            "targetRef": "ExclusiveGateway_2"
+        },
+        {
+            "id": "SequenceFlow_21",
+            "sourceRef": "Service_5",
+            "targetRef": "Send_1"
+        },
+        {
+            "id": "SequenceFlow_22",
+            "sourceRef": "ExclusiveGateway_1",
+            "targetRef": "Service_5",
+            "condition": "yes"
+        },
+        {
+            "id": "SequenceFlow_23",
+            "sourceRef": "Service_2",
+            "targetRef": "User_5"
+        },
+        {
+            "id": "SequenceFlow_24",
+            "sourceRef": "User_5",
+            "targetRef": "Service_5"
+        },
+        {
+            "id": "SequenceFlow_25",
+            "sourceRef": "ExclusiveGateway_3",
+            "targetRef": "Send_1",
+            "condition": "no"
+        }
+    ],
+    "messageFlows": []
+}

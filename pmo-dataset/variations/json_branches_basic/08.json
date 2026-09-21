@@ -1,0 +1,89 @@
+{
+    "startEvent": {
+        "name": "start"
+    },
+    "process": [
+        {
+            "type": "task",
+            "name": "Report incident"
+        },
+        {
+            "type": "task",
+            "name": "Log report into tracking system"
+        },
+        {
+            "type": "task",
+            "name": "Assign report to appropriate team"
+        },
+        {
+            "type": "parallel",
+            "branches": [
+                {
+                    "branch": [
+                        {
+                            "type": "task",
+                            "name": "Gather necessary information"
+                        }
+                    ]
+                },
+                {
+                    "branch": [
+                        {
+                            "type": "task",
+                            "name": "Identify cause of incident"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "task",
+            "name": "Propose corrective actions"
+        },
+        {
+            "type": "xor",
+            "condition": "",
+            "branches": [
+                {
+                    "branch": [
+                        {
+                            "type": "task",
+                            "name": "Implement fix"
+                        }
+                    ]
+                },
+                {
+                    "branch": [
+                        {
+                            "type": "task",
+                            "name": "Change policy"
+                        }
+                    ]
+                },
+                {
+                    "branch": [
+                        {
+                            "type": "task",
+                            "name": "Conduct training"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "task",
+            "name": "Conduct follow-up"
+        },
+        {
+            "type": "task",
+            "name": "Close incident report"
+        },
+        {
+            "type": "task",
+            "name": "Notify all stakeholders"
+        }
+    ],
+    "endEvent": {
+        "name": "end"
+    }
+}

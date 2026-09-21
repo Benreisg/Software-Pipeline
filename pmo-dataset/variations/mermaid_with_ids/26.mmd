@@ -1,0 +1,51 @@
+graph LR
+	classDef endEvent stroke-width:3px
+	Service_1["receive confirmation\nfrom employer"]
+	Service_2["fetch information\nabout leave models"]
+	Service_3["fetch information\nabout financial\nsupport"]
+	Service_4["check if all\nnecessary documents\ngathered"]
+	Manual_1["select appropriate\nmodel"]
+	Manual_2["notify employer"]
+	Manual_3["notify social\nsecurity"]
+	Manual_4["prepare necessary\ndocuments for leave"]
+	Manual_5["do\nmaternity/paternity\nleave"]
+	Manual_6["decide if extend\nleave or return to\nwork"]
+	Manual_7["apply for financial\nsupport"]
+	Manual_8["decide if apply for\nfinancial support"]
+	StartNoneEvent_1((" "))
+	EndNoneEvent_1(("return to job")):::endEvent
+	ExclusiveGateway_1{"X"}
+	ExclusiveGateway_2{"X"}
+	ExclusiveGateway_3{"X"}
+	ExclusiveGateway_4{"X"}
+	ParallelGateway_1{"+"}
+	ParallelGateway_2{"+"}
+	ParallelGateway_3{"+"}
+	ParallelGateway_4{"+"}
+
+	Manual_3 --> ParallelGateway_2
+	Manual_2 --> ParallelGateway_2
+	ParallelGateway_2 --> Service_1
+	Manual_5 --> Manual_6
+	Manual_6 --> ExclusiveGateway_1
+	ExclusiveGateway_1 --> EndNoneEvent_1
+	StartNoneEvent_1 --> ParallelGateway_3
+	ParallelGateway_3 --> Service_3
+	ParallelGateway_3 --> Service_2
+	Service_3 --> ParallelGateway_4
+	Service_2 --> ParallelGateway_4
+	ParallelGateway_4 --> Manual_1
+	ExclusiveGateway_2 --> Manual_7
+	Manual_7 --> ExclusiveGateway_3
+	Manual_8 --> ExclusiveGateway_2
+	ExclusiveGateway_2 --> ExclusiveGateway_3
+	Service_1 --> Service_4
+	Service_4 --> ExclusiveGateway_4
+	ExclusiveGateway_4 --> Manual_5
+	ParallelGateway_1 --> Manual_2
+	ParallelGateway_1 --> Manual_3
+	ExclusiveGateway_4 --> Manual_4
+	ExclusiveGateway_3 --> Manual_4
+	Manual_4 --> ParallelGateway_1
+	Manual_1 --> Manual_8
+	ExclusiveGateway_1 --> Manual_4

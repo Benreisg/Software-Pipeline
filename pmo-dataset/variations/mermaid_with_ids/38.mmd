@@ -1,0 +1,90 @@
+graph LR
+	classDef endEvent stroke-width:3px
+	User_1["Send requirements"]
+	User_2["Collect requirements"]
+	User_3["Refine requirements"]
+	User_4["Create order list"]
+	User_5["Place order"]
+	Service_1["Report for builing\npermit"]
+	Service_2["Calculate effort"]
+	Service_3["Check feasibility"]
+	Manual_1["Call friends"]
+	Manual_2["Build house"]
+	Manual_3["Hire building\ncompany"]
+	StartNoneEvent_1(("wish to build a\nhouse"))
+	EndNoneEvent_1(("finished house")):::endEvent
+	IntermediateMessageEventCatching_1((("draft received")))
+	IntermediateMessageEventCatching_2((("Get order")))
+	ExclusiveGateway_1{"Draft sufficient?"}
+	ExclusiveGateway_2{"X"}
+	ExclusiveGateway_3{"Subject to approval?"}
+	ExclusiveGateway_4{"X"}
+	ExclusiveGateway_5{"Affordable?"}
+	ExclusiveGateway_6{"X"}
+	ParallelGateway_1{"+"}
+	ParallelGateway_2{"+"}
+
+	StartNoneEvent_1 --> User_2
+	User_1 --> IntermediateMessageEventCatching_1
+	User_4 --> User_5
+	IntermediateMessageEventCatching_1 --> Service_3
+	User_3 --> ExclusiveGateway_2
+	ExclusiveGateway_2 --> User_1
+	User_2 --> ExclusiveGateway_2
+	ExclusiveGateway_3 -->|"Yes"| Service_1
+	ExclusiveGateway_1 -->|"Yes"| ExclusiveGateway_3
+	ExclusiveGateway_1 -->|"No"| User_3
+	Service_1 --> ExclusiveGateway_4
+	ExclusiveGateway_3 -->|"No"| ExclusiveGateway_4
+	ExclusiveGateway_4 --> User_4
+	User_5 --> Service_2
+	Service_2 --> ParallelGateway_1
+	Service_3 --> ExclusiveGateway_1
+	ParallelGateway_1 --> IntermediateMessageEventCatching_2
+	ParallelGateway_1 --> ExclusiveGateway_5
+	ExclusiveGateway_5 -->|"No"| Manual_1
+	ExclusiveGateway_5 -->|"Yes"| Manual_3
+	Manual_1 --> ExclusiveGateway_6
+	IntermediateMessageEventCatching_2 --> ParallelGateway_2
+	ExclusiveGateway_6 --> ParallelGateway_2
+	ParallelGateway_2 --> Manual_2
+	Manual_2 --> EndNoneEvent_1
+	Manual_3 --> ExclusiveGateway_6
+	User_1 -.-> Pool_2
+	Pool_2 -.-> IntermediateMessageEventCatching_1
+	Pool_3 -.-> IntermediateMessageEventCatching_2
+	User_5 -.-> Pool_3
+
+	subgraph Pool_1 ["Customer"]
+	  subgraph Lane_1 [""]
+	    User_1
+	    User_2
+	    StartNoneEvent_1
+	    User_3
+	    User_4
+	    IntermediateMessageEventCatching_1
+	    User_5
+	    ExclusiveGateway_1
+	    ExclusiveGateway_2
+	    Service_1
+	    ExclusiveGateway_3
+	    ExclusiveGateway_4
+	    Service_2
+	    Service_3
+	    ParallelGateway_1
+	    ExclusiveGateway_5
+	    Manual_1
+	    IntermediateMessageEventCatching_2
+	    ParallelGateway_2
+	    Manual_2
+	    EndNoneEvent_1
+	    ExclusiveGateway_6
+	    Manual_3
+	  end
+	end
+
+	subgraph Pool_2 ["Architect"]
+	end
+
+	subgraph Pool_3 ["Online stores"]
+	end

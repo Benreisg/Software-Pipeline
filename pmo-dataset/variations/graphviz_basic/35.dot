@@ -1,0 +1,33 @@
+digraph G {
+  rankdir=LR;  
+  node [shape=box];
+
+  "Start" -> "Determine properties";
+  "Determine properties" -> "ParallelGateway_1";
+  "ParallelGateway_1" -> "Order parts_1";
+  "ParallelGateway_1" -> "Order parts_2";
+  "Order parts_1" -> "ParallelGateway_2";
+  "Order parts_2" -> "ParallelGateway_2";
+  "ParallelGateway_2" -> "Check delivery of ordered parts";
+  "Check delivery of ordered parts" -> "Parts arrived ?";
+  "Parts arrived ?" -> "Check delivery of ordered parts" [label="No"];
+  "Parts arrived ?" -> "Perform Inspection" [label="Yes"];
+  "Perform Inspection" -> "Assemble the parts";
+  "Assemble the parts" -> "Send updates";
+  "Send updates" -> "Send first saw";
+  "Send first saw" -> "Customer Approval ?";
+  "Customer Approval ?" -> "Cancel production of the remaining order" [label="No"];
+  "Cancel production of the remaining order" -> "End";
+  "Customer Approval ?" -> "Produce the remaining order" [label="Yes"];
+  "Produce the remaining order" -> "Send the remaining order";
+  "Send the remaining order" -> "End";
+  "ParallelGateway_1" -> "Order parts_3";
+  "Order parts_3" -> "ParallelGateway_2";
+
+  "Start" [shape=circle, label="Start"];
+  "End" [shape=circle, label="End"];
+  "Parts arrived ?" [shape=diamond];
+  "Customer Approval ?" [shape=diamond];
+  "ParallelGateway_1" [shape=diamond, label="+"];
+  "ParallelGateway_2" [shape=diamond, label="+"];
+}

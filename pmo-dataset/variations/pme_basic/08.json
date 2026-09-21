@@ -1,0 +1,200 @@
+{
+    "tasks": [
+        {
+            "id": "Task_1",
+            "name": "Propose corrective actions",
+            "type": "Task"
+        },
+        {
+            "id": "Task_2",
+            "name": "Log report into tracking system",
+            "type": "Task"
+        },
+        {
+            "id": "Task_3",
+            "name": "Close incident report",
+            "type": "Task"
+        },
+        {
+            "id": "Task_4",
+            "name": "Change policy",
+            "type": "Task"
+        },
+        {
+            "id": "Task_5",
+            "name": "Assign report to appropriate team",
+            "type": "Task"
+        },
+        {
+            "id": "Task_6",
+            "name": "Report incident",
+            "type": "Task"
+        },
+        {
+            "id": "Task_7",
+            "name": "Conduct training",
+            "type": "Task"
+        },
+        {
+            "id": "Task_8",
+            "name": "Gather necessary information",
+            "type": "Task"
+        },
+        {
+            "id": "Task_9",
+            "name": "Identify cause of incident",
+            "type": "Task"
+        },
+        {
+            "id": "Task_10",
+            "name": "Notify all stakeholders",
+            "type": "Task"
+        },
+        {
+            "id": "Task_11",
+            "name": "Implement fix",
+            "type": "Task"
+        },
+        {
+            "id": "Task_12",
+            "name": "Conduct follow-up",
+            "type": "Task"
+        }
+    ],
+    "events": [
+        {
+            "id": "StartEvent_1",
+            "name": "start",
+            "type": "StartEvent"
+        },
+        {
+            "id": "EndEvent_1",
+            "name": "end",
+            "type": "EndEvent"
+        }
+    ],
+    "gateways": [
+        {
+            "id": "ExclusiveGateway_1",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_2",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ParallelGateway_1",
+            "name": "",
+            "type": "ParallelGateway"
+        },
+        {
+            "id": "ParallelGateway_2",
+            "name": "",
+            "type": "ParallelGateway"
+        }
+    ],
+    "sequenceFlows": [
+        {
+            "id": "SequenceFlow_1",
+            "sourceRef": "Task_4",
+            "targetRef": "ExclusiveGateway_1"
+        },
+        {
+            "id": "SequenceFlow_2",
+            "sourceRef": "ExclusiveGateway_2",
+            "targetRef": "Task_11"
+        },
+        {
+            "id": "SequenceFlow_3",
+            "sourceRef": "ExclusiveGateway_1",
+            "targetRef": "Task_12"
+        },
+        {
+            "id": "SequenceFlow_4",
+            "sourceRef": "StartEvent_1",
+            "targetRef": "Task_6"
+        },
+        {
+            "id": "SequenceFlow_5",
+            "sourceRef": "ParallelGateway_1",
+            "targetRef": "Task_1"
+        },
+        {
+            "id": "SequenceFlow_6",
+            "sourceRef": "Task_8",
+            "targetRef": "ParallelGateway_1"
+        },
+        {
+            "id": "SequenceFlow_7",
+            "sourceRef": "Task_2",
+            "targetRef": "Task_5"
+        },
+        {
+            "id": "SequenceFlow_8",
+            "sourceRef": "ParallelGateway_2",
+            "targetRef": "Task_8"
+        },
+        {
+            "id": "SequenceFlow_9",
+            "sourceRef": "Task_12",
+            "targetRef": "Task_3"
+        },
+        {
+            "id": "SequenceFlow_10",
+            "sourceRef": "Task_10",
+            "targetRef": "EndEvent_1"
+        },
+        {
+            "id": "SequenceFlow_11",
+            "sourceRef": "ExclusiveGateway_2",
+            "targetRef": "Task_4"
+        },
+        {
+            "id": "SequenceFlow_12",
+            "sourceRef": "Task_9",
+            "targetRef": "ParallelGateway_1"
+        },
+        {
+            "id": "SequenceFlow_13",
+            "sourceRef": "Task_3",
+            "targetRef": "Task_10"
+        },
+        {
+            "id": "SequenceFlow_14",
+            "sourceRef": "Task_11",
+            "targetRef": "ExclusiveGateway_1"
+        },
+        {
+            "id": "SequenceFlow_15",
+            "sourceRef": "Task_6",
+            "targetRef": "Task_2"
+        },
+        {
+            "id": "SequenceFlow_16",
+            "sourceRef": "Task_1",
+            "targetRef": "ExclusiveGateway_2"
+        },
+        {
+            "id": "SequenceFlow_17",
+            "sourceRef": "Task_7",
+            "targetRef": "ExclusiveGateway_1"
+        },
+        {
+            "id": "SequenceFlow_18",
+            "sourceRef": "Task_5",
+            "targetRef": "ParallelGateway_2"
+        },
+        {
+            "id": "SequenceFlow_19",
+            "sourceRef": "ParallelGateway_2",
+            "targetRef": "Task_9"
+        },
+        {
+            "id": "SequenceFlow_20",
+            "sourceRef": "ExclusiveGateway_2",
+            "targetRef": "Task_7"
+        }
+    ]
+}

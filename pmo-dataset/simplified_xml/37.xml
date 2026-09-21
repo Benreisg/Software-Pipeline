@@ -1,0 +1,147 @@
+<definitions Definitions_1>
+    <process Process_1>
+        <task User_1 (Query the next shop)/>
+        <task User_2 (Ask about quantity, price and deadline)/>
+        <task Service_1 (Create a list of the parts)/>
+        <task Service_2 (Reorder the cheapest part)/>
+        <task Service_3 (Reorder the part as fast as possible)/>
+        <task Manual_1 (Receive first batch of parts)/>
+        <task Manual_2 (Receive second batch of parts)/>
+        <task Manual_3 (Receive third batch of parts)/>
+        <task Manual_4 (Start/Continue building)/>
+        <task Manual_5 (Complain to the friends)/>
+        <startNoneEvent StartNoneEvent_1 (Contract project received)/>
+        <endNoneEvent EndNoneEvent_1 (Project completed)/>
+        <exclusivegatewayGateway ExclusiveGateway_1/>
+        <exclusivegatewayGateway ExclusiveGateway_2 (Terms acceptable?)/>
+        <exclusivegatewayGateway ExclusiveGateway_3/>
+        <exclusivegatewayGateway ExclusiveGateway_4 (More parts needed?)/>
+        <exclusivegatewayGateway ExclusiveGateway_5 (Any stock falls?)/>
+        <exclusivegatewayGateway ExclusiveGateway_6/>
+        <exclusivegatewayGateway ExclusiveGateway_7 (How much is the stock fall?)/>
+        <exclusivegatewayGateway ExclusiveGateway_8/>
+        <exclusivegatewayGateway ExclusiveGateway_9 (Contract fullfilled?)/>
+        <parallelgatewayGateway ParallelGateway_1/>
+        <complexgatewayGateway ComplexGateway_1 (First parts arrived)/>
+        <sequenceFlow SequenceFlow_1>
+          - sourceRef: StartNoneEvent_1
+          - targetRef: ExclusiveGateway_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_2>
+          - sourceRef: ExclusiveGateway_1
+          - targetRef: User_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_3>
+          - sourceRef: Service_1
+          - targetRef: ExclusiveGateway_3
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_4>
+          - sourceRef: User_1
+          - targetRef: User_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_5>
+          - sourceRef: User_2
+          - targetRef: ExclusiveGateway_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_6> (No)
+          - sourceRef: ExclusiveGateway_2
+          - targetRef: ExclusiveGateway_3
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_7> (Yes)
+          - sourceRef: ExclusiveGateway_2
+          - targetRef: Service_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_8>
+          - sourceRef: ExclusiveGateway_3
+          - targetRef: ExclusiveGateway_4
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_9> (Yes)
+          - sourceRef: ExclusiveGateway_4
+          - targetRef: ExclusiveGateway_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_10> (No)
+          - sourceRef: ExclusiveGateway_4
+          - targetRef: ParallelGateway_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_11>
+          - sourceRef: ParallelGateway_1
+          - targetRef: Manual_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_12>
+          - sourceRef: ParallelGateway_1
+          - targetRef: Manual_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_13>
+          - sourceRef: ParallelGateway_1
+          - targetRef: Manual_3
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_14>
+          - sourceRef: Manual_1
+          - targetRef: ComplexGateway_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_15>
+          - sourceRef: Manual_2
+          - targetRef: ComplexGateway_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_16>
+          - sourceRef: Manual_3
+          - targetRef: ComplexGateway_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_17>
+          - sourceRef: ComplexGateway_1
+          - targetRef: Manual_4
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_18>
+          - sourceRef: Manual_4
+          - targetRef: ExclusiveGateway_5
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_19> (Yes)
+          - sourceRef: ExclusiveGateway_5
+          - targetRef: ExclusiveGateway_7
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_20>
+          - sourceRef: Service_3
+          - targetRef: ExclusiveGateway_8
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_21>
+          - sourceRef: Service_2
+          - targetRef: ExclusiveGateway_8
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_22>
+          - sourceRef: Manual_5
+          - targetRef: ExclusiveGateway_8
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_23>
+          - sourceRef: ExclusiveGateway_8
+          - targetRef: ExclusiveGateway_6
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_24> (No)
+          - sourceRef: ExclusiveGateway_5
+          - targetRef: ExclusiveGateway_6
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_25> (Below 5)
+          - sourceRef: ExclusiveGateway_7
+          - targetRef: Service_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_26> (Below 3)
+          - sourceRef: ExclusiveGateway_7
+          - targetRef: Service_3
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_27> (Zero)
+          - sourceRef: ExclusiveGateway_7
+          - targetRef: Manual_5
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_28>
+          - sourceRef: ExclusiveGateway_6
+          - targetRef: ExclusiveGateway_9
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_29> (No)
+          - sourceRef: ExclusiveGateway_9
+          - targetRef: Manual_4
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_30> (Yes)
+          - sourceRef: ExclusiveGateway_9
+          - targetRef: EndNoneEvent_1
+        </sequenceFlow>
+    </process>
+</definitions>

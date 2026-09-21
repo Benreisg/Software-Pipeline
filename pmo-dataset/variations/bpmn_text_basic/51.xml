@@ -1,0 +1,16 @@
+<process>
+    <activity role="" action="Employee submits a vacation request" objects="" id="activity1"/>
+    <activity role="" action="Requirement is registered" objects="" id="activity2"/>
+    <activity role="" action="Employee's supervisor receive the request" objects="" id="activity3"/>
+    <activity role="" action="Supervisor approve or reject the request" objects="" id="activity4"/>
+    <exclusiveGateway id="exclusivegateway1">
+        <branch condition="rejected" id="branch1">
+            <activity role="" action="Application is returned to employee" objects="" id="activity5"/>
+            <activity role="" action="Employee can check rejection reasons" objects="" id="activity6"/>
+        </branch>
+        <branch condition="approved" id="branch2">
+            <activity role="" action="Notification is generated to the HR Representative" objects="" id="activity7"/>
+            <activity role="" action="HR Representative complete the respective management procedures" objects="" id="activity8"/>
+        </branch>
+    </exclusiveGateway>
+</process>

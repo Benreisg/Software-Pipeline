@@ -1,0 +1,22 @@
+#Juypter
+.ipynb_checkpoints/
+*.ipynb
+
+#data file
+data/
+.idea/
+.venv/
+.csv
+
+#other files
+jupyter_notebooks/
+
+# Default ignored files
+/shelf/
+/workspace.xml
+# Editor-based HTTP Client requests
+/httpRequests/
+# Datasource local storage ignored files
+/dataSources/
+/dataSources.local.xml
+

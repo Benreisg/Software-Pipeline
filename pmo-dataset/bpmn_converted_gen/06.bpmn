@@ -1,0 +1,114 @@
+<?xml version="1.0" ?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://www.omg.org/spec/BPMN/20100524/MODEL">
+  <process id="Process_1" name="06" isExecutable="false">
+    <task id="GEN_Task_1" name="Generate shipping label">
+      <incoming>SequenceFlow_1</incoming>
+      <outgoing>SequenceFlow_13</outgoing>
+    </task>
+    <task id="GEN_Task_2" name="Customer places order online">
+      <incoming>SequenceFlow_2</incoming>
+      <outgoing>SequenceFlow_3</outgoing>
+    </task>
+    <task id="GEN_Task_3" name="Successful delivery">
+      <incoming>SequenceFlow_17</incoming>
+      <outgoing>SequenceFlow_5</outgoing>
+    </task>
+    <task id="GEN_Task_4" name="Send tracking information to customer">
+      <incoming>SequenceFlow_23</incoming>
+      <outgoing>SequenceFlow_6</outgoing>
+    </task>
+    <task id="GEN_Task_5" name="Generate and send order confirmation">
+      <incoming>SequenceFlow_7</incoming>
+      <outgoing>SequenceFlow_9</outgoing>
+    </task>
+    <task id="GEN_Task_6" name="Customer places order over the phone">
+      <incoming>SequenceFlow_15</incoming>
+      <outgoing>SequenceFlow_8</outgoing>
+    </task>
+    <task id="GEN_Task_7" name="Process customer feedback or returns">
+      <incoming>SequenceFlow_16</incoming>
+      <outgoing>SequenceFlow_10</outgoing>
+    </task>
+    <task id="GEN_Task_8" name="Pick and pack items">
+      <incoming>SequenceFlow_11</incoming>
+      <outgoing>SequenceFlow_14</outgoing>
+    </task>
+    <task id="GEN_Task_9" name="Monitor shipment">
+      <incoming>SequenceFlow_22</incoming>
+      <outgoing>SequenceFlow_12</outgoing>
+    </task>
+    <task id="GEN_Task_10" name="Hand over order to logistics provider">
+      <incoming>SequenceFlow_21</incoming>
+      <outgoing>SequenceFlow_23</outgoing>
+    </task>
+    <parallelGateway id="GEN_ParallelGateway_1" name="+">
+      <incoming>SequenceFlow_9</incoming>
+      <outgoing>SequenceFlow_1</outgoing>
+      <outgoing>SequenceFlow_11</outgoing>
+    </parallelGateway>
+    <exclusiveGateway id="GEN_ExclusiveGateway_1" name="X">
+      <incoming>SequenceFlow_4</incoming>
+      <outgoing>SequenceFlow_2</outgoing>
+      <outgoing>SequenceFlow_15</outgoing>
+    </exclusiveGateway>
+    <exclusiveGateway id="GEN_ExclusiveGateway_2" name="X">
+      <incoming>SequenceFlow_3</incoming>
+      <incoming>SequenceFlow_8</incoming>
+      <outgoing>SequenceFlow_7</outgoing>
+    </exclusiveGateway>
+    <exclusiveGateway id="GEN_ExclusiveGateway_3" name="X">
+      <incoming>SequenceFlow_5</incoming>
+      <outgoing>SequenceFlow_16</outgoing>
+      <outgoing>SequenceFlow_20</outgoing>
+    </exclusiveGateway>
+    <exclusiveGateway id="GEN_ExclusiveGateway_4" name="X">
+      <incoming>SequenceFlow_6</incoming>
+      <incoming>SequenceFlow_18</incoming>
+      <outgoing>SequenceFlow_22</outgoing>
+    </exclusiveGateway>
+    <exclusiveGateway id="GEN_ExclusiveGateway_5" name="X">
+      <incoming>SequenceFlow_10</incoming>
+      <incoming>SequenceFlow_20</incoming>
+      <outgoing>SequenceFlow_19</outgoing>
+    </exclusiveGateway>
+    <exclusiveGateway id="GEN_ExclusiveGateway_6" name="X">
+      <incoming>SequenceFlow_12</incoming>
+      <outgoing>SequenceFlow_17</outgoing>
+      <outgoing>SequenceFlow_18</outgoing>
+    </exclusiveGateway>
+    <parallelGateway id="GEN_ParallelGateway_2" name="+">
+      <incoming>SequenceFlow_13</incoming>
+      <incoming>SequenceFlow_14</incoming>
+      <outgoing>SequenceFlow_21</outgoing>
+    </parallelGateway>
+    <startEvent id="GEN_StartEvent_1" name="start">
+      <outgoing>SequenceFlow_4</outgoing>
+    </startEvent>
+    <endEvent id="GEN_EndEvent_1" name="end">
+      <incoming>SequenceFlow_19</incoming>
+    </endEvent>
+    <sequenceFlow id="SequenceFlow_1" sourceRef="GEN_ParallelGateway_1" targetRef="GEN_Task_1"/>
+    <sequenceFlow id="SequenceFlow_2" sourceRef="GEN_ExclusiveGateway_1" targetRef="GEN_Task_2"/>
+    <sequenceFlow id="SequenceFlow_3" sourceRef="GEN_Task_2" targetRef="GEN_ExclusiveGateway_2"/>
+    <sequenceFlow id="SequenceFlow_4" sourceRef="GEN_StartEvent_1" targetRef="GEN_ExclusiveGateway_1"/>
+    <sequenceFlow id="SequenceFlow_5" sourceRef="GEN_Task_3" targetRef="GEN_ExclusiveGateway_3"/>
+    <sequenceFlow id="SequenceFlow_6" sourceRef="GEN_Task_4" targetRef="GEN_ExclusiveGateway_4"/>
+    <sequenceFlow id="SequenceFlow_7" sourceRef="GEN_ExclusiveGateway_2" targetRef="GEN_Task_5"/>
+    <sequenceFlow id="SequenceFlow_8" sourceRef="GEN_Task_6" targetRef="GEN_ExclusiveGateway_2"/>
+    <sequenceFlow id="SequenceFlow_9" sourceRef="GEN_Task_5" targetRef="GEN_ParallelGateway_1"/>
+    <sequenceFlow id="SequenceFlow_10" sourceRef="GEN_Task_7" targetRef="GEN_ExclusiveGateway_5"/>
+    <sequenceFlow id="SequenceFlow_11" sourceRef="GEN_ParallelGateway_1" targetRef="GEN_Task_8"/>
+    <sequenceFlow id="SequenceFlow_12" sourceRef="GEN_Task_9" targetRef="GEN_ExclusiveGateway_6"/>
+    <sequenceFlow id="SequenceFlow_13" sourceRef="GEN_Task_1" targetRef="GEN_ParallelGateway_2"/>
+    <sequenceFlow id="SequenceFlow_14" sourceRef="GEN_Task_8" targetRef="GEN_ParallelGateway_2"/>
+    <sequenceFlow id="SequenceFlow_15" sourceRef="GEN_ExclusiveGateway_1" targetRef="GEN_Task_6"/>
+    <sequenceFlow id="SequenceFlow_16" sourceRef="GEN_ExclusiveGateway_3" targetRef="GEN_Task_7"/>
+    <sequenceFlow id="SequenceFlow_17" sourceRef="GEN_ExclusiveGateway_6" targetRef="GEN_Task_3"/>
+    <sequenceFlow id="SequenceFlow_18" sourceRef="GEN_ExclusiveGateway_6" targetRef="GEN_ExclusiveGateway_4"/>
+    <sequenceFlow id="SequenceFlow_19" sourceRef="GEN_ExclusiveGateway_5" targetRef="GEN_EndEvent_1"/>
+    <sequenceFlow id="SequenceFlow_20" sourceRef="GEN_ExclusiveGateway_3" targetRef="GEN_ExclusiveGateway_5"/>
+    <sequenceFlow id="SequenceFlow_21" sourceRef="GEN_ParallelGateway_2" targetRef="GEN_Task_10"/>
+    <sequenceFlow id="SequenceFlow_22" sourceRef="GEN_ExclusiveGateway_4" targetRef="GEN_Task_9"/>
+    <sequenceFlow id="SequenceFlow_23" sourceRef="GEN_Task_10" targetRef="GEN_Task_4"/>
+  </process>
+</definitions>

@@ -1,0 +1,32 @@
+digraph G {
+  rankdir=LR;  
+  node [shape=box];
+
+  "Change policy" -> "ExclusiveGateway_1";
+  "ExclusiveGateway_2" -> "Implement fix";
+  "ExclusiveGateway_1" -> "Conduct follow-up";
+  "start" -> "Report incident";
+  "ParallelGateway_1" -> "Propose corrective actions";
+  "Gather necessary information" -> "ParallelGateway_1";
+  "Log report into tracking system" -> "Assign report to appropriate team";
+  "ParallelGateway_2" -> "Gather necessary information";
+  "Conduct follow-up" -> "Close incident report";
+  "Notify all stakeholders" -> "end";
+  "ExclusiveGateway_2" -> "Change policy";
+  "Identify cause of incident" -> "ParallelGateway_1";
+  "Close incident report" -> "Notify all stakeholders";
+  "Implement fix" -> "ExclusiveGateway_1";
+  "Report incident" -> "Log report into tracking system";
+  "Propose corrective actions" -> "ExclusiveGateway_2";
+  "Conduct training" -> "ExclusiveGateway_1";
+  "Assign report to appropriate team" -> "ParallelGateway_2";
+  "ParallelGateway_2" -> "Identify cause of incident";
+  "ExclusiveGateway_2" -> "Conduct training";
+
+  "start" [shape=circle, label="start"];
+  "end" [shape=circle, label="end"];
+  "ExclusiveGateway_1" [shape=diamond, label="X"];
+  "ExclusiveGateway_2" [shape=diamond, label="X"];
+  "ParallelGateway_1" [shape=diamond, label="+"];
+  "ParallelGateway_2" [shape=diamond, label="+"];
+}

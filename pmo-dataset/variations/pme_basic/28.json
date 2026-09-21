@@ -1,0 +1,334 @@
+{
+    "tasks": [
+        {
+            "id": "Task_1",
+            "name": "Register for internship",
+            "type": "Task"
+        },
+        {
+            "id": "Task_2",
+            "name": "Enter topic",
+            "type": "Task"
+        },
+        {
+            "id": "Task_3",
+            "name": "Enter expected income",
+            "type": "Task"
+        },
+        {
+            "id": "Task_4",
+            "name": "Enter experience",
+            "type": "Task"
+        },
+        {
+            "id": "Task_5",
+            "name": "Enter hobbies",
+            "type": "Task"
+        },
+        {
+            "id": "Task_6",
+            "name": "Accept offer",
+            "type": "Task"
+        },
+        {
+            "id": "Task_7",
+            "name": "Deny offer",
+            "type": "Task"
+        },
+        {
+            "id": "Task_8",
+            "name": "Publish your application",
+            "type": "Task"
+        },
+        {
+            "id": "Task_9",
+            "name": "Begin internship",
+            "type": "Task"
+        },
+        {
+            "id": "Task_10",
+            "name": "Write at least 3 status updates every week",
+            "type": "Task"
+        },
+        {
+            "id": "Task_11",
+            "name": "End internship",
+            "type": "Task"
+        },
+        {
+            "id": "Task_12",
+            "name": "Recieve offer",
+            "type": "Task"
+        },
+        {
+            "id": "Task_13",
+            "name": "Invalidate all other offers",
+            "type": "Task"
+        },
+        {
+            "id": "Task_14",
+            "name": "Recommend company to a list of friends via twitter api",
+            "type": "Task"
+        },
+        {
+            "id": "Task_15",
+            "name": "Recieve 3 status updates from the company",
+            "type": "Task"
+        }
+    ],
+    "events": [
+        {
+            "id": "StartEvent_1",
+            "name": "Internship process is started",
+            "type": "StartEvent"
+        },
+        {
+            "id": "EndEvent_1",
+            "name": "Internship succesful",
+            "type": "EndEvent"
+        }
+    ],
+    "gateways": [
+        {
+            "id": "ExclusiveGateway_1",
+            "name": "Accept offer?",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_2",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_3",
+            "name": "Recommend company?",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_4",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ParallelGateway_1",
+            "name": "",
+            "type": "ParallelGateway"
+        },
+        {
+            "id": "ParallelGateway_2",
+            "name": "",
+            "type": "ParallelGateway"
+        },
+        {
+            "id": "ParallelGateway_3",
+            "name": "",
+            "type": "ParallelGateway"
+        },
+        {
+            "id": "ParallelGateway_4",
+            "name": "",
+            "type": "ParallelGateway"
+        },
+        {
+            "id": "ParallelGateway_5",
+            "name": "",
+            "type": "ParallelGateway"
+        },
+        {
+            "id": "ParallelGateway_6",
+            "name": "",
+            "type": "ParallelGateway"
+        },
+        {
+            "id": "ExclusiveGateway_5",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_6",
+            "name": "",
+            "type": "ExclusiveGateway"
+        }
+    ],
+    "sequenceFlows": [
+        {
+            "id": "SequenceFlow_1",
+            "sourceRef": "StartEvent_1",
+            "targetRef": "Task_1"
+        },
+        {
+            "id": "SequenceFlow_2",
+            "sourceRef": "ExclusiveGateway_5",
+            "targetRef": "Task_5"
+        },
+        {
+            "id": "SequenceFlow_3",
+            "sourceRef": "Task_5",
+            "targetRef": "ExclusiveGateway_6"
+        },
+        {
+            "id": "SequenceFlow_4",
+            "sourceRef": "Task_12",
+            "targetRef": "ExclusiveGateway_1"
+        },
+        {
+            "id": "SequenceFlow_5",
+            "sourceRef": "ExclusiveGateway_2",
+            "targetRef": "Task_12"
+        },
+        {
+            "id": "SequenceFlow_6",
+            "sourceRef": "Task_7",
+            "targetRef": "ExclusiveGateway_2"
+        },
+        {
+            "id": "SequenceFlow_7",
+            "sourceRef": "Task_8",
+            "targetRef": "ExclusiveGateway_2"
+        },
+        {
+            "id": "SequenceFlow_8",
+            "sourceRef": "ParallelGateway_2",
+            "targetRef": "Task_6"
+        },
+        {
+            "id": "SequenceFlow_9",
+            "sourceRef": "ParallelGateway_2",
+            "targetRef": "Task_13"
+        },
+        {
+            "id": "SequenceFlow_10",
+            "sourceRef": "Task_6",
+            "targetRef": "ParallelGateway_1"
+        },
+        {
+            "id": "SequenceFlow_11",
+            "sourceRef": "Task_13",
+            "targetRef": "ParallelGateway_1"
+        },
+        {
+            "id": "SequenceFlow_12",
+            "sourceRef": "Task_9",
+            "targetRef": "ParallelGateway_3"
+        },
+        {
+            "id": "SequenceFlow_13",
+            "sourceRef": "ExclusiveGateway_5",
+            "targetRef": "Task_4"
+        },
+        {
+            "id": "SequenceFlow_14",
+            "sourceRef": "ExclusiveGateway_5",
+            "targetRef": "Task_3"
+        },
+        {
+            "id": "SequenceFlow_15",
+            "sourceRef": "Task_4",
+            "targetRef": "ExclusiveGateway_6"
+        },
+        {
+            "id": "SequenceFlow_16",
+            "sourceRef": "Task_3",
+            "targetRef": "ExclusiveGateway_6"
+        },
+        {
+            "id": "SequenceFlow_17",
+            "sourceRef": "ParallelGateway_3",
+            "targetRef": "Task_10"
+        },
+        {
+            "id": "SequenceFlow_18",
+            "sourceRef": "ParallelGateway_3",
+            "targetRef": "Task_15"
+        },
+        {
+            "id": "SequenceFlow_19",
+            "sourceRef": "Task_15",
+            "targetRef": "ParallelGateway_4"
+        },
+        {
+            "id": "SequenceFlow_20",
+            "sourceRef": "Task_10",
+            "targetRef": "ParallelGateway_4"
+        },
+        {
+            "id": "SequenceFlow_21",
+            "sourceRef": "ExclusiveGateway_3",
+            "targetRef": "Task_14",
+            "condition": "Yes"
+        },
+        {
+            "id": "SequenceFlow_22",
+            "sourceRef": "ParallelGateway_1",
+            "targetRef": "Task_9"
+        },
+        {
+            "id": "SequenceFlow_23",
+            "sourceRef": "Task_11",
+            "targetRef": "ExclusiveGateway_3"
+        },
+        {
+            "id": "SequenceFlow_24",
+            "sourceRef": "Task_1",
+            "targetRef": "ParallelGateway_5"
+        },
+        {
+            "id": "SequenceFlow_25",
+            "sourceRef": "ParallelGateway_4",
+            "targetRef": "Task_11"
+        },
+        {
+            "id": "SequenceFlow_26",
+            "sourceRef": "ParallelGateway_5",
+            "targetRef": "Task_2"
+        },
+        {
+            "id": "SequenceFlow_27",
+            "sourceRef": "ExclusiveGateway_6",
+            "targetRef": "ParallelGateway_6"
+        },
+        {
+            "id": "SequenceFlow_28",
+            "sourceRef": "Task_2",
+            "targetRef": "ParallelGateway_6"
+        },
+        {
+            "id": "SequenceFlow_29",
+            "sourceRef": "ParallelGateway_5",
+            "targetRef": "ExclusiveGateway_5"
+        },
+        {
+            "id": "SequenceFlow_30",
+            "sourceRef": "ParallelGateway_6",
+            "targetRef": "Task_8"
+        },
+        {
+            "id": "SequenceFlow_31",
+            "sourceRef": "ExclusiveGateway_1",
+            "targetRef": "Task_7",
+            "condition": "No"
+        },
+        {
+            "id": "SequenceFlow_32",
+            "sourceRef": "ExclusiveGateway_1",
+            "targetRef": "ParallelGateway_2",
+            "condition": "Yes"
+        },
+        {
+            "id": "SequenceFlow_33",
+            "sourceRef": "ExclusiveGateway_3",
+            "targetRef": "ExclusiveGateway_4",
+            "condition": "No"
+        },
+        {
+            "id": "SequenceFlow_34",
+            "sourceRef": "ExclusiveGateway_4",
+            "targetRef": "EndEvent_1"
+        },
+        {
+            "id": "SequenceFlow_35",
+            "sourceRef": "Task_14",
+            "targetRef": "ExclusiveGateway_4"
+        }
+    ]
+}

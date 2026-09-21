@@ -1,0 +1,413 @@
+{
+    "tasks": [
+        {
+            "id": "Task_1",
+            "name": "Collect urgently needed resources",
+            "type": "Task"
+        },
+        {
+            "id": "Task_2",
+            "name": "Collect the remained resources",
+            "type": "Task"
+        },
+        {
+            "id": "Task_3",
+            "name": "Check repo for already available resources",
+            "type": "Task"
+        },
+        {
+            "id": "Task_4",
+            "name": "Build tools",
+            "type": "Task"
+        },
+        {
+            "id": "Task_5",
+            "name": "Start farming",
+            "type": "Task"
+        },
+        {
+            "id": "Task_6",
+            "name": "Continue farming",
+            "type": "Task"
+        },
+        {
+            "id": "Task_7",
+            "name": "Update list of resources",
+            "type": "Task"
+        },
+        {
+            "id": "Task_8",
+            "name": "Wait for random natural event for some time",
+            "type": "Task"
+        },
+        {
+            "id": "User_1",
+            "name": "Find out wanted resources",
+            "type": "User"
+        },
+        {
+            "id": "User_2",
+            "name": "Read message",
+            "type": "User"
+        },
+        {
+            "id": "User_3",
+            "name": "Brag to friends",
+            "type": "User"
+        },
+        {
+            "id": "User_4",
+            "name": "Help with materials",
+            "type": "User"
+        },
+        {
+            "id": "Service_1",
+            "name": "Reset bot",
+            "type": "Service"
+        },
+        {
+            "id": "Service_2",
+            "name": "Notify player",
+            "type": "Service"
+        },
+        {
+            "id": "Service_3",
+            "name": "Give bot a sleeping break",
+            "type": "Service"
+        }
+    ],
+    "events": [
+        {
+            "id": "StartNoneEvent_1",
+            "name": "Farming bot creation desire",
+            "type": "StartNoneEvent"
+        },
+        {
+            "id": "EndNoneEvent_1",
+            "name": "",
+            "type": "EndNoneEvent"
+        }
+    ],
+    "gateways": [
+        {
+            "id": "ExclusiveGateway_1",
+            "name": "New tools needed?",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_2",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_3",
+            "name": "New milestone achieved?",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_4",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_5",
+            "name": "Bot finished?",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_6",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_7",
+            "name": "RNE happened?",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_8",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ParallelGateway_1",
+            "name": "",
+            "type": "ParallelGateway"
+        },
+        {
+            "id": "ParallelGateway_2",
+            "name": "",
+            "type": "ParallelGateway"
+        },
+        {
+            "id": "ParallelGateway_3",
+            "name": "",
+            "type": "ParallelGateway"
+        },
+        {
+            "id": "ParallelGateway_4",
+            "name": "",
+            "type": "ParallelGateway"
+        },
+        {
+            "id": "InclusiveGateway_1",
+            "name": "",
+            "type": "InclusiveGateway"
+        },
+        {
+            "id": "InclusiveGateway_2",
+            "name": "",
+            "type": "InclusiveGateway"
+        }
+    ],
+    "pools": [
+        {
+            "id": "Pool_1",
+            "name": "Farming Bot Game",
+            "lanes": [
+                {
+                    "id": "Lane_1",
+                    "name": "Player",
+                    "elemRefs": [
+                        "StartNoneEvent_1",
+                        "User_1",
+                        "User_2",
+                        "Task_1",
+                        "Task_2",
+                        "ParallelGateway_1",
+                        "Task_3",
+                        "ParallelGateway_2",
+                        "ExclusiveGateway_1",
+                        "Task_4",
+                        "ExclusiveGateway_2"
+                    ]
+                },
+                {
+                    "id": "Lane_2",
+                    "name": "Farming Bot",
+                    "elemRefs": [
+                        "Task_5",
+                        "Task_6",
+                        "Service_1",
+                        "ExclusiveGateway_3",
+                        "Service_2",
+                        "ExclusiveGateway_4",
+                        "ExclusiveGateway_5",
+                        "InclusiveGateway_1",
+                        "User_3",
+                        "User_4",
+                        "InclusiveGateway_2",
+                        "Service_3",
+                        "ParallelGateway_3",
+                        "Task_7",
+                        "ExclusiveGateway_6",
+                        "Task_8",
+                        "ExclusiveGateway_7",
+                        "ExclusiveGateway_8",
+                        "ParallelGateway_4",
+                        "EndNoneEvent_1"
+                    ]
+                }
+            ],
+            "elemRefs": []
+        }
+    ],
+    "sequenceFlows": [
+        {
+            "id": "SequenceFlow_1",
+            "sourceRef": "StartNoneEvent_1",
+            "targetRef": "User_1"
+        },
+        {
+            "id": "SequenceFlow_2",
+            "sourceRef": "ExclusiveGateway_3",
+            "targetRef": "Service_2",
+            "condition": "Yes"
+        },
+        {
+            "id": "SequenceFlow_3",
+            "sourceRef": "User_4",
+            "targetRef": "InclusiveGateway_2"
+        },
+        {
+            "id": "SequenceFlow_4",
+            "sourceRef": "User_3",
+            "targetRef": "InclusiveGateway_2"
+        },
+        {
+            "id": "SequenceFlow_5",
+            "sourceRef": "ParallelGateway_1",
+            "targetRef": "Task_3"
+        },
+        {
+            "id": "SequenceFlow_6",
+            "sourceRef": "Task_3",
+            "targetRef": "ParallelGateway_2"
+        },
+        {
+            "id": "SequenceFlow_7",
+            "sourceRef": "ParallelGateway_2",
+            "targetRef": "ExclusiveGateway_1"
+        },
+        {
+            "id": "SequenceFlow_8",
+            "sourceRef": "Task_4",
+            "targetRef": "ExclusiveGateway_2"
+        },
+        {
+            "id": "SequenceFlow_9",
+            "sourceRef": "ParallelGateway_1",
+            "targetRef": "Task_1"
+        },
+        {
+            "id": "SequenceFlow_10",
+            "sourceRef": "Task_1",
+            "targetRef": "ParallelGateway_2"
+        },
+        {
+            "id": "SequenceFlow_11",
+            "sourceRef": "ExclusiveGateway_1",
+            "targetRef": "Task_4",
+            "condition": "Yes"
+        },
+        {
+            "id": "SequenceFlow_12",
+            "sourceRef": "ExclusiveGateway_2",
+            "targetRef": "Task_2"
+        },
+        {
+            "id": "SequenceFlow_13",
+            "sourceRef": "ExclusiveGateway_1",
+            "targetRef": "ExclusiveGateway_2",
+            "condition": "No"
+        },
+        {
+            "id": "SequenceFlow_14",
+            "sourceRef": "User_2",
+            "targetRef": "ExclusiveGateway_4"
+        },
+        {
+            "id": "SequenceFlow_15",
+            "sourceRef": "ExclusiveGateway_4",
+            "targetRef": "ExclusiveGateway_5"
+        },
+        {
+            "id": "SequenceFlow_16",
+            "sourceRef": "Service_1",
+            "targetRef": "Task_6"
+        },
+        {
+            "id": "SequenceFlow_17",
+            "sourceRef": "Task_5",
+            "targetRef": "ExclusiveGateway_6"
+        },
+        {
+            "id": "SequenceFlow_18",
+            "sourceRef": "User_1",
+            "targetRef": "ParallelGateway_1"
+        },
+        {
+            "id": "SequenceFlow_19",
+            "sourceRef": "Service_2",
+            "targetRef": "User_2"
+        },
+        {
+            "id": "SequenceFlow_20",
+            "sourceRef": "ExclusiveGateway_6",
+            "targetRef": "ExclusiveGateway_3"
+        },
+        {
+            "id": "SequenceFlow_21",
+            "sourceRef": "Task_6",
+            "targetRef": "ExclusiveGateway_6"
+        },
+        {
+            "id": "SequenceFlow_22",
+            "sourceRef": "Task_8",
+            "targetRef": "ExclusiveGateway_7"
+        },
+        {
+            "id": "SequenceFlow_23",
+            "sourceRef": "ExclusiveGateway_7",
+            "targetRef": "Service_1",
+            "condition": "Yes"
+        },
+        {
+            "id": "SequenceFlow_24",
+            "sourceRef": "ParallelGateway_3",
+            "targetRef": "ExclusiveGateway_8"
+        },
+        {
+            "id": "SequenceFlow_25",
+            "sourceRef": "ExclusiveGateway_8",
+            "targetRef": "Task_8"
+        },
+        {
+            "id": "SequenceFlow_26",
+            "sourceRef": "Task_2",
+            "targetRef": "ParallelGateway_3"
+        },
+        {
+            "id": "SequenceFlow_27",
+            "sourceRef": "ExclusiveGateway_7",
+            "targetRef": "Task_5",
+            "condition": "No"
+        },
+        {
+            "id": "SequenceFlow_28",
+            "sourceRef": "ParallelGateway_3",
+            "targetRef": "Task_7"
+        },
+        {
+            "id": "SequenceFlow_29",
+            "sourceRef": "ExclusiveGateway_3",
+            "targetRef": "ExclusiveGateway_4",
+            "condition": "No"
+        },
+        {
+            "id": "SequenceFlow_30",
+            "sourceRef": "Service_3",
+            "targetRef": "ExclusiveGateway_8"
+        },
+        {
+            "id": "SequenceFlow_31",
+            "sourceRef": "ExclusiveGateway_5",
+            "targetRef": "InclusiveGateway_1",
+            "condition": "Yes"
+        },
+        {
+            "id": "SequenceFlow_32",
+            "sourceRef": "InclusiveGateway_2",
+            "targetRef": "ParallelGateway_4"
+        },
+        {
+            "id": "SequenceFlow_33",
+            "sourceRef": "Task_7",
+            "targetRef": "ParallelGateway_4"
+        },
+        {
+            "id": "SequenceFlow_34",
+            "sourceRef": "ParallelGateway_4",
+            "targetRef": "EndNoneEvent_1"
+        },
+        {
+            "id": "SequenceFlow_35",
+            "sourceRef": "ExclusiveGateway_5",
+            "targetRef": "Service_3",
+            "condition": "No"
+        },
+        {
+            "id": "SequenceFlow_36",
+            "sourceRef": "InclusiveGateway_1",
+            "targetRef": "User_3",
+            "condition": "brag"
+        },
+        {
+            "id": "SequenceFlow_37",
+            "sourceRef": "InclusiveGateway_1",
+            "targetRef": "User_4",
+            "condition": "help"
+        }
+    ],
+    "messageFlows": []
+}

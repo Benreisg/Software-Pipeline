@@ -1,0 +1,22 @@
+Ein Gast betritt das Restaurant, wenn er Hunger verspürt. Er wählt sich aus dem
+wechselnden Angebot ein Gericht aus und wartet, bis er an der Reihe ist. Daraufhin gibt
+er beim Angestellten seine Bestellung auf. Der Angestellte gibt anschließend die
+Bestellung in das Kassensystem ein und kassiert das Geld vom Gast. Wenn der Gast
+bezahlt hat, stellt der Angestellte einen Pieper ein und übergibt ihn an den Gast mit den
+Worten "wenn sich der Pieper meldet, ist ihr Essen fertig". Danach informiert der
+Angestellte den Koch über die bestellte Mahlzeit. Der Koch bereitet die Mahlzeit zu und
+stellt sie danach in die Durchreiche zum Angestellten. Nachdem er die Mahlzeit in die
+Durchreiche gestellt hat, informiert der Koch den Angestellten darüber. Sobald der
+Angestellte weiß, dass das Essen fertig ist löst er den Pieper des Gastes aus. So erfährt
+der Gast, dass sein Essen abholbereit ist. Er kann sein Essen abholen und anschließend
+die Mahlzeit verzehren. Sobald der Gast an der Ausgabe erscheint, übergibt ihm der
+Angestellte das Essen. Sollte ein Gast einmal nicht auf den Pieper reagieren, ruft der
+Angestellte den Gast nach 5 Minuten aus – notfalls auch mehrere Male hintereinander.
+Hintergrund:
+In einem Selbstbedienungsrestaurant geht es chaotisch zu. Die Kunden geben ihre
+Bestellungen an der Kasse auf und erhalten ihre Mahlzeiten auf Zuruf von der Küche. Da
+sich das Restaurant großer Beliebtheit erfreut, müssen die Prozesse an die steigenden
+Besucherzahlen angepasst werden. Die Gäste des Restaurants sollen für Ihre
+Bestellungen nur noch Kontakt mit einem Mitarbeiter haben. Der Koch soll sich
+ausschließlich die Zubereitung der Mahlzeiten konzentrieren. Es werden Pieper
+eingeführt, die den Gästen signalisieren, wenn Ihre Bestellungen fertig zubereitet sind.

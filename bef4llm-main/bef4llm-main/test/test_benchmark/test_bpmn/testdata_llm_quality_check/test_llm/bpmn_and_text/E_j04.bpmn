@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:collaboration id="Collaboration_0">
+    <bpmn:participant id="Participant_0" name="Student" processRef="Process_1"/>
+    <bpmn:participant id="Participant_1" name="Company" processRef="Process_2"/>
+  </bpmn:collaboration>
+  <bpmn:process id="Process_1" isExecutable="false">
+    <bpmn:startEvent id="StartEvent_1" name="Apply for Internship">
+      <bpmn:outgoing>SequenceFlow_0</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_0" sourceRef="StartEvent_1" targetRef="Task_0"/>
+    <bpmn:task id="Task_0" name="Enter topic, salary, experience and hobbies">
+      <bpmn:incoming>SequenceFlow_0</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="SequenceFlow_1" sourceRef="Task_0" targetRef="ParallelGateway_0"/>
+    <bpmn:parallelGateway id="ParallelGateway_0">
+      <bpmn:incoming>SequenceFlow_1</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_2</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_3</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:sequenceFlow id="SequenceFlow_2" sourceRef="ParallelGateway_0" targetRef="Task_1"/>
+    <bpmn:task id="Task_1" name="Receive and review offers">
+      <bpmn:incoming>SequenceFlow_2</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_4</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="SequenceFlow_4" sourceRef="Task_1" targetRef="ExclusiveGateway_0"/>
+    <bpmn:exclusiveGateway id="ExclusiveGateway_0">
+      <bpmn:incoming>SequenceFlow_4</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_5</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_6</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="SequenceFlow_5" sourceRef="ExclusiveGateway_0" targetRef="Task_2"/>
+    <bpmn:task id="Task_2" name="Accept offer">
+      <bpmn:incoming>SequenceFlow_5</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_7</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="SequenceFlow_7" sourceRef="Task_2" targetRef="Task_3"/>
+    <bpmn:task id="Task_3" name="Write status updates (every week)">
+      <bpmn:incoming>SequenceFlow_7</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_8</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="SequenceFlow_8" sourceRef="Task_3" targetRef="ParallelGateway_1"/>
+    <bpmn:parallelGateway id="ParallelGateway_1">
+      <bpmn:incoming>SequenceFlow_8</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_9</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_10</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:sequenceFlow id="SequenceFlow_9" sourceRef="ParallelGateway_1" targetRef="Task_4"/>
+    <bpmn:task id="Task_4" name="Recommend company to friends (via Twitter)">
+      <bpmn:incoming>SequenceFlow_9</bpmn:incoming>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="SequenceFlow_10" sourceRef="ParallelGateway_1" targetRef="Task_5"/>
+    <bpmn:task id="Task_5" name="Send separate tweets in parallel">
+      <bpmn:incoming>SequenceFlow_10</bpmn:incoming>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="SequenceFlow_6" sourceRef="ExclusiveGateway_0" targetRef="Task_1"/>
+    <bpmn:sequenceFlow id="SequenceFlow_3" sourceRef="ParallelGateway_0" targetRef="Task_6"/>
+    <bpmn:task id="Task_6" name="Company writes status updates">
+      <bpmn:incoming>SequenceFlow_3</bpmn:incoming>
+    </bpmn:task>
+  </bpmn:process>
+  <bpmn:process id="Process_2" isExecutable="false">
+    <bpmn:startEvent id="StartEvent_2" name="Receive application">
+      <bpmn:outgoing>SequenceFlow_11</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_11" sourceRef="StartEvent_2" targetRef="Task_7"/>
+    <bpmn:task id="Task_7" name="Send offers to student">
+      <bpmn:incoming>SequenceFlow_11</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_12</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="SequenceFlow_12" sourceRef="Task_7" targetRef="EndEvent_0"/>
+    <bpmn:endEvent id="EndEvent_0" name="Internship finished">
+      <bpmn:incoming>SequenceFlow_12</bpmn:incoming>
+    </bpmn:endEvent>
+  </bpmn:process>
+</bpmn:definitions>

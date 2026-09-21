@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" 
+                  xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" 
+                  xmlns:di="http://www.omg.org/spec/DD/20100524/DI" 
+                  xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" 
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                  id="Definitions_1" 
+                  targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:process id="Process_1" isExecutable="false">
+    <bpmn:laneSet>
+      <bpmn:lane id="Lane_Parent" name="Parent">
+        <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_FetchInformation</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_SelectModel</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_CollectInformation</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_DecideExtension</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_SocialSecurity" name="Social Security">
+        <bpmn:flowNodeRef>Task_NotifySocialSecurity</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_Company" name="Company">
+        <bpmn:flowNodeRef>Task_NotifyCompany</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_GatherInformation</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="StartEvent_1" name="Initiate Maternity Leave Process">
+      <bpmn:outgoing>SequenceFlow_1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_1" sourceRef="StartEvent_1" targetRef="Task_FetchInformation"/>
+    <bpmn:task id="Task_FetchInformation" name="Fetch Information about Potential Models">
+      <bpmn:incoming>SequenceFlow_1</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_2</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="SequenceFlow_2" sourceRef="Task_FetchInformation" targetRef="Task_SelectModel"/>
+    <bpmn:task id="Task_SelectModel" name="Let Parent Select Model">
+      <bpmn:incoming>SequenceFlow_2</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_3</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="SequenceFlow_3" sourceRef="Task_SelectModel" targetRef="Task_CollectInformation"/>
+    <bpmn:task id="Task_CollectInformation" name="Collect Relevant Information">
+      <bpmn:incoming>SequenceFlow_3</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_4</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_5</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="SequenceFlow_4" sourceRef="Task_CollectInformation" targetRef="Task_NotifySocialSecurity"/>
+    <bpmn:sequenceFlow id="SequenceFlow_5" sourceRef="Task_CollectInformation" targetRef="Task_NotifyCompany"/>
+    <bpmn:task id="Task_NotifySocialSecurity" name="Notify Social Security">
+      <bpmn:incoming>SequenceFlow_4</bpmn:incoming>
+    </bpmn:task>
+    <bpmn:task id="Task_NotifyCompany" name="Notify Company">
+      <bpmn:incoming>SequenceFlow_5</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_6</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="SequenceFlow_6" sourceRef="Task_NotifyCompany" targetRef="Task_GatherInformation"/>
+    <bpmn:task id="Task_GatherInformation" name="Gather Information from Companies">
+      <bpmn:incoming>SequenceFlow_6</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_7</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="SequenceFlow_7" sourceRef="Task_GatherInformation" targetRef="Task_DecideExtension"/>
+    <bpmn:task id="Task_DecideExtension" name="Let Parent Decide about Extension">
+      <bpmn:incoming>SequenceFlow_7</bpmn:incoming>
+    </bpmn:task>
+  </bpmn:process>
+</bpmn:definitions>

@@ -1,0 +1,59 @@
+<definitions Definitions_1>
+    <process Process_1>
+        <task Task_1 (Claim is registered)/>
+        <task Task_2 (Claim is examined by a claims officer)/>
+        <task Task_3 (Claims officer writes a settlement recommendation)/>
+        <task Task_4 (Recommendation is checked by a senior claims officer)/>
+        <task Task_5 (Senior claims officer marks the claim)/>
+        <task Task_6 (Claim is sent back)/>
+        <task Task_7 (Claim handling process proceeds)/>
+        <startEvent StartEvent_1/>
+        <endEvent EndEvent_1/>
+        <exclusivegatewayGateway ExclusiveGateway_1/>
+        <exclusivegatewayGateway ExclusiveGateway_2/>
+        <sequenceFlow SequenceFlow_1>
+          - sourceRef: StartEvent_1
+          - targetRef: Task_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_2>
+          - sourceRef: Task_1
+          - targetRef: Task_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_3>
+          - sourceRef: Task_3
+          - targetRef: Task_4
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_4>
+          - sourceRef: Task_4
+          - targetRef: Task_5
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_5>
+          - sourceRef: Task_5
+          - targetRef: ExclusiveGateway_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_6>
+          - sourceRef: Task_2
+          - targetRef: ExclusiveGateway_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_7>
+          - sourceRef: ExclusiveGateway_2
+          - targetRef: Task_3
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_8>
+          - sourceRef: Task_6
+          - targetRef: ExclusiveGateway_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_9> (OK)
+          - sourceRef: ExclusiveGateway_1
+          - targetRef: Task_7
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_10> (Not OK)
+          - sourceRef: ExclusiveGateway_1
+          - targetRef: Task_6
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_11>
+          - sourceRef: Task_7
+          - targetRef: EndEvent_1
+        </sequenceFlow>
+    </process>
+</definitions>

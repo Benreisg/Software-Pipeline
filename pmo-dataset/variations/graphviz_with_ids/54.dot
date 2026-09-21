@@ -1,0 +1,15 @@
+digraph G {
+  rankdir=LR;  
+  node [shape=box];
+
+  "Task_1" [label="INQ transmits the\ntransaction data\nrequest"];
+  "Task_2" [label="IP checks the\nrequest of the INQ"];
+  "Task_3" [label="IP answers the\nquestion of the INQ"];
+  "StartNoneEvent_1" [shape=circle, label=""];
+  "EndNoneEvent_1" [shape=circle, penwidth=4, label=""];
+
+  "StartNoneEvent_1" -> "Task_1";
+  "Task_1" -> "Task_2";
+  "Task_2" -> "Task_3";
+  "Task_3" -> "EndNoneEvent_1";
+}

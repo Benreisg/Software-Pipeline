@@ -1,0 +1,32 @@
+graph LR
+	Task_12["Post job description"] --> Task_7["Collect resumes"]
+	Task_6["Choose candidate"] --> Task_8["Extend offer"]
+	Task_15["Negotiate salary"] --> ExclusiveGateway_3{"X"}
+	Task_14["Screen resumes"] --> Task_2["Conduct initial phone interviews"]
+	Task_2 --> Task_11["Invite candidates for interviews"]
+	ExclusiveGateway_2{"X"} --> Task_6
+	ExclusiveGateway_6{"X"} --> ExclusiveGateway_5{"X"}
+	ParallelGateway_1{"+"} --> Task_1["Complete orientation"]
+	Task_1 --> ParallelGateway_2{"+"}
+	ParallelGateway_1 --> Task_10["Complete paperwork"]
+	ExclusiveGateway_1{"X"} --> Task_3["Conduct a virtual interview"]
+	Task_8 --> ExclusiveGateway_6
+	ParallelGateway_2 --> EndEvent_1(("end"))
+	ExclusiveGateway_1 --> Task_16["Conduct an in-person interview"]
+	ExclusiveGateway_3 --> ExclusiveGateway_4{"X"}
+	Task_16 --> ExclusiveGateway_2
+	Task_3 --> ExclusiveGateway_2
+	ParallelGateway_1 --> Task_9["Complete training"]
+	Task_7 --> Task_14
+	ExclusiveGateway_2 --> ExclusiveGateway_1
+	Task_9 --> ParallelGateway_2
+	Task_13["Create job description"] --> Task_12
+	Task_11 --> ExclusiveGateway_1
+	Task_10 --> ParallelGateway_2
+	ExclusiveGateway_4 --> Task_15
+	ExclusiveGateway_5 --> Task_4["Begin onboarding process"]
+	ExclusiveGateway_3 --> ExclusiveGateway_5
+	ExclusiveGateway_6 --> ExclusiveGateway_4
+	Task_5["Identify need for new hire"] --> Task_13
+	StartEvent_1(("start")) --> Task_5
+	Task_4 --> ParallelGateway_1

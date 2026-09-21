@@ -1,0 +1,44 @@
+digraph G {
+  rankdir=LR;  
+  node [shape=box];
+
+  "Wish for a LAN\ngameparty" -> "Send invites to 10\npeople";
+  "Send invites to 10\npeople" -> "Ask which games do\nthey want to play";
+  "Ask which games do\nthey want to play" -> "Few hours, until the\nuser has all the\ngames that they want\nto play";
+  "Few hours, until the\nuser has all the\ngames that they want\nto play" -> "ParallelGateway_1";
+  "ParallelGateway_1" -> "Appoint a date";
+  "ParallelGateway_1" -> "Do we have all the\ntitles?";
+  "Appoint a date" -> "Few hours, until all\npeople reply if they\ncan play on that\ndate";
+  "Few hours, until all\npeople reply if they\ncan play on that\ndate" -> "How many people can\nplay on that date?";
+  "How many people can\nplay on that date?" -> "Appoint a date" [label="Less then 8 people\ncan play on that\ndate"];
+  "How many people can\nplay on that date?" -> "Reserve that day" [label="8 or more people can\nplay on that date"];
+  "ParallelGateway_2" -> "Ask friends how much\nbeer they would like";
+  "Ask friends how much\nbeer they would like" -> "Few hours, until all\npeople reply with t\nhe amount of beer";
+  "Do you have enough\nbeer?" -> "Order beer for that\ndate" [label="No"];
+  "Order beer for that\ndate" -> "ExclusiveGateway_2";
+  "Do we have all the\ntitles?" -> "Find where can you\ndownload the games" [label="No"];
+  "Send a notification\nthat the LAN party\nwill be held on that\ndate" -> "LAN party done";
+  "Reserve that day" -> "ParallelGateway_2";
+  "Download effective?" -> "ExclusiveGateway_1" [label="Yes"];
+  "Download effective?" -> "Download the missing\ngames" [label="No"];
+  "ExclusiveGateway_2" -> "Send a notification\nthat the LAN party\nwill be held on that\ndate";
+  "Few hours, until all\npeople reply with t\nhe amount of beer" -> "Do you have enough\nbeer?";
+  "Do you have enough\nbeer?" -> "ExclusiveGateway_2" [label="Yes"];
+  "ExclusiveGateway_1" -> "ParallelGateway_2";
+  "Do we have all the\ntitles?" -> "ExclusiveGateway_1" [label="Yes"];
+  "Download the missing\ngames" -> "Download effective?";
+
+  "Wish for a LAN\ngameparty" [shape=circle];
+  "LAN party done" [shape=circle, penwidth=4];
+  "Few hours, until the\nuser has all the\ngames that they want\nto play" [shape=doublecircle];
+  "Few hours, until all\npeople reply if they\ncan play on that\ndate" [shape=doublecircle];
+  "Few hours, until all\npeople reply with t\nhe amount of beer" [shape=doublecircle];
+  "How many people can\nplay on that date?" [shape=diamond];
+  "Do we have all the\ntitles?" [shape=diamond];
+  "ExclusiveGateway_1" [label="X", shape=diamond];
+  "Do you have enough\nbeer?" [shape=diamond];
+  "ExclusiveGateway_2" [label="X", shape=diamond];
+  "Download effective?" [shape=diamond];
+  "ParallelGateway_1" [label="+", shape=diamond];
+  "ParallelGateway_2" [label="+", shape=diamond];
+}
