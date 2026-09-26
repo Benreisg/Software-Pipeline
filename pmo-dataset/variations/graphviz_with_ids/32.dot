@@ -1,0 +1,117 @@
+digraph G {
+  rankdir=LR;  
+  node [shape=box];
+
+  "Task_1" [label="Collect urgently\nneeded resources"];
+  "Task_2" [label="Collect the remained\nresources"];
+  "Task_3" [label="Check repo for\nalready available\nresources"];
+  "Task_4" [label="Build tools"];
+  "Task_5" [label="Start farming"];
+  "Task_6" [label="Continue farming"];
+  "Task_7" [label="Update list of\nresources"];
+  "Task_8" [label="Wait for random\nnatural event for\nsome time"];
+  "User_1" [label="Find out wanted\nresources"];
+  "User_2" [label="Read message"];
+  "User_3" [label="Brag to friends"];
+  "User_4" [label="Help with materials"];
+  "Service_1" [label="Reset bot"];
+  "Service_2" [label="Notify player"];
+  "Service_3" [label="Give bot a sleeping\nbreak"];
+  "StartNoneEvent_1" [shape=circle, label="Farming bot creation\ndesire"];
+  "EndNoneEvent_1" [shape=circle, penwidth=4, label=""];
+  "ExclusiveGateway_1" [shape=diamond, label="New tools needed?"];
+  "ExclusiveGateway_2" [shape=diamond, label="X"];
+  "ExclusiveGateway_3" [shape=diamond, label="New milestone\nachieved?"];
+  "ExclusiveGateway_4" [shape=diamond, label="X"];
+  "ExclusiveGateway_5" [shape=diamond, label="Bot finished?"];
+  "ExclusiveGateway_6" [shape=diamond, label="X"];
+  "ExclusiveGateway_7" [shape=diamond, label="RNE happened?"];
+  "ExclusiveGateway_8" [shape=diamond, label="X"];
+  "ParallelGateway_1" [shape=diamond, label="+"];
+  "ParallelGateway_2" [shape=diamond, label="+"];
+  "ParallelGateway_3" [shape=diamond, label="+"];
+  "ParallelGateway_4" [shape=diamond, label="+"];
+  "InclusiveGateway_1" [shape=diamond, label="O"];
+  "InclusiveGateway_2" [shape=diamond, label="O"];
+
+  "StartNoneEvent_1" -> "User_1";
+  "ExclusiveGateway_3" -> "Service_2" [label="Yes"];
+  "User_4" -> "InclusiveGateway_2";
+  "User_3" -> "InclusiveGateway_2";
+  "ParallelGateway_1" -> "Task_3";
+  "Task_3" -> "ParallelGateway_2";
+  "ParallelGateway_2" -> "ExclusiveGateway_1";
+  "Task_4" -> "ExclusiveGateway_2";
+  "ParallelGateway_1" -> "Task_1";
+  "Task_1" -> "ParallelGateway_2";
+  "ExclusiveGateway_1" -> "Task_4" [label="Yes"];
+  "ExclusiveGateway_2" -> "Task_2";
+  "ExclusiveGateway_1" -> "ExclusiveGateway_2" [label="No"];
+  "User_2" -> "ExclusiveGateway_4";
+  "ExclusiveGateway_4" -> "ExclusiveGateway_5";
+  "Service_1" -> "Task_6";
+  "Task_5" -> "ExclusiveGateway_6";
+  "User_1" -> "ParallelGateway_1";
+  "Service_2" -> "User_2";
+  "ExclusiveGateway_6" -> "ExclusiveGateway_3";
+  "Task_6" -> "ExclusiveGateway_6";
+  "Task_8" -> "ExclusiveGateway_7";
+  "ExclusiveGateway_7" -> "Service_1" [label="Yes"];
+  "ParallelGateway_3" -> "ExclusiveGateway_8";
+  "ExclusiveGateway_8" -> "Task_8";
+  "Task_2" -> "ParallelGateway_3";
+  "ExclusiveGateway_7" -> "Task_5" [label="No"];
+  "ParallelGateway_3" -> "Task_7";
+  "ExclusiveGateway_3" -> "ExclusiveGateway_4" [label="No"];
+  "Service_3" -> "ExclusiveGateway_8";
+  "ExclusiveGateway_5" -> "InclusiveGateway_1" [label="Yes"];
+  "InclusiveGateway_2" -> "ParallelGateway_4";
+  "Task_7" -> "ParallelGateway_4";
+  "ParallelGateway_4" -> "EndNoneEvent_1";
+  "ExclusiveGateway_5" -> "Service_3" [label="No"];
+  "InclusiveGateway_1" -> "User_3" [label="brag"];
+  "InclusiveGateway_1" -> "User_4" [label="help"];
+
+  subgraph "cluster_Pool_1" {
+    label="Farming Bot Game";
+
+    subgraph "cluster_Lane_1" {
+      label="Player";
+      "StartNoneEvent_1";
+      "User_1";
+      "User_2";
+      "Task_1";
+      "Task_2";
+      "ParallelGateway_1";
+      "Task_3";
+      "ParallelGateway_2";
+      "ExclusiveGateway_1";
+      "Task_4";
+      "ExclusiveGateway_2";
+    }
+
+    subgraph "cluster_Lane_2" {
+      label="Farming Bot";
+      "Task_5";
+      "Task_6";
+      "Service_1";
+      "ExclusiveGateway_3";
+      "Service_2";
+      "ExclusiveGateway_4";
+      "ExclusiveGateway_5";
+      "InclusiveGateway_1";
+      "User_3";
+      "User_4";
+      "InclusiveGateway_2";
+      "Service_3";
+      "ParallelGateway_3";
+      "Task_7";
+      "ExclusiveGateway_6";
+      "Task_8";
+      "ExclusiveGateway_7";
+      "ExclusiveGateway_8";
+      "ParallelGateway_4";
+      "EndNoneEvent_1";
+    }
+  }
+}

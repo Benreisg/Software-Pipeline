@@ -1,0 +1,348 @@
+<?xml version="1.0" ?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://www.omg.org/spec/BPMN/20100524/MODEL">
+  <process id="GEN_Process_1">
+    <serviceTask id="GEN_ServiceTask_1" name="Read order">
+      <incoming>GEN_SequenceFlow_1</incoming>
+      <outgoing>GEN_SequenceFlow_2</outgoing>
+    </serviceTask>
+    <serviceTask id="GEN_ServiceTask_2" name="Check if product is in stock">
+      <incoming>GEN_SequenceFlow_15</incoming>
+      <outgoing>GEN_SequenceFlow_3</outgoing>
+    </serviceTask>
+    <serviceTask id="GEN_ServiceTask_3" name="Reorder from wholesaler">
+      <incoming>GEN_SequenceFlow_5</incoming>
+      <outgoing>GEN_SequenceFlow_6</outgoing>
+    </serviceTask>
+    <serviceTask id="GEN_ServiceTask_4" name="Waiting until arrives (handling system)">
+      <incoming>GEN_SequenceFlow_6</incoming>
+      <outgoing>GEN_SequenceFlow_7</outgoing>
+    </serviceTask>
+    <serviceTask id="GEN_ServiceTask_5" name="Demand delivery delay penalty from the wholesaler">
+      <incoming>GEN_SequenceFlow_9</incoming>
+      <outgoing>GEN_SequenceFlow_8</outgoing>
+    </serviceTask>
+    <manualTask id="GEN_ManualTask_1" name="Withdraw the Product from warehouse">
+      <incoming>GEN_SequenceFlow_4</incoming>
+      <outgoing>GEN_SequenceFlow_10</outgoing>
+    </manualTask>
+    <manualTask id="GEN_ManualTask_2" name="Register in stock management system">
+      <incoming>GEN_SequenceFlow_14</incoming>
+      <outgoing>GEN_SequenceFlow_11</outgoing>
+    </manualTask>
+    <manualTask id="GEN_ManualTask_3" name="Check if the whole order is ready for shipment">
+      <incoming>GEN_SequenceFlow_10</incoming>
+      <incoming>GEN_SequenceFlow_11</incoming>
+      <outgoing>GEN_SequenceFlow_12</outgoing>
+    </manualTask>
+    <manualTask id="GEN_ManualTask_4" name="Packing the products">
+      <incoming>GEN_SequenceFlow_23</incoming>
+      <outgoing>GEN_SequenceFlow_21</outgoing>
+    </manualTask>
+    <manualTask id="GEN_ManualTask_5" name="Shipping the order">
+      <incoming>GEN_SequenceFlow_18</incoming>
+      <outgoing>GEN_SequenceFlow_13</outgoing>
+    </manualTask>
+    <manualTask id="GEN_ManualTask_6" name="Courier is requested">
+      <incoming>GEN_SequenceFlow_19</incoming>
+      <outgoing>GEN_SequenceFlow_22</outgoing>
+    </manualTask>
+    <exclusiveGateway id="GEN_ExclusiveGateway_1" name="Is in stock?">
+      <incoming>GEN_SequenceFlow_3</incoming>
+      <outgoing>GEN_SequenceFlow_4</outgoing>
+      <outgoing>GEN_SequenceFlow_5</outgoing>
+    </exclusiveGateway>
+    <exclusiveGateway id="GEN_ExclusiveGateway_2" name="Arrived after more than ten days?">
+      <incoming>GEN_SequenceFlow_7</incoming>
+      <outgoing>GEN_SequenceFlow_9</outgoing>
+      <outgoing>GEN_SequenceFlow_17</outgoing>
+    </exclusiveGateway>
+    <exclusiveGateway id="GEN_ExclusiveGateway_3" name="Order is ready for shipment?">
+      <incoming>GEN_SequenceFlow_12</incoming>
+      <outgoing>GEN_SequenceFlow_16</outgoing>
+      <outgoing>GEN_SequenceFlow_20</outgoing>
+    </exclusiveGateway>
+    <exclusiveGateway id="GEN_ExclusiveGateway_4">
+      <incoming>GEN_SequenceFlow_8</incoming>
+      <incoming>GEN_SequenceFlow_17</incoming>
+      <outgoing>GEN_SequenceFlow_14</outgoing>
+    </exclusiveGateway>
+    <exclusiveGateway id="GEN_ExclusiveGateway_5">
+      <incoming>GEN_SequenceFlow_2</incoming>
+      <incoming>GEN_SequenceFlow_16</incoming>
+      <outgoing>GEN_SequenceFlow_15</outgoing>
+    </exclusiveGateway>
+    <parallelGateway id="GEN_ParallelGateway_1">
+      <incoming>GEN_SequenceFlow_20</incoming>
+      <outgoing>GEN_SequenceFlow_19</outgoing>
+      <outgoing>GEN_SequenceFlow_23</outgoing>
+    </parallelGateway>
+    <parallelGateway id="GEN_ParallelGateway_2">
+      <incoming>GEN_SequenceFlow_21</incoming>
+      <incoming>GEN_SequenceFlow_22</incoming>
+      <outgoing>GEN_SequenceFlow_18</outgoing>
+    </parallelGateway>
+    <startEvent id="GEN_StartEvent_1" name="Storage management">
+      <outgoing>GEN_SequenceFlow_1</outgoing>
+    </startEvent>
+    <endEvent id="GEN_EndEvent_1" name="Order was shipped">
+      <incoming>GEN_SequenceFlow_13</incoming>
+    </endEvent>
+    <sequenceFlow id="GEN_SequenceFlow_1" sourceRef="GEN_StartEvent_1" targetRef="GEN_ServiceTask_1"/>
+    <sequenceFlow id="GEN_SequenceFlow_2" sourceRef="GEN_ServiceTask_1" targetRef="GEN_ExclusiveGateway_5"/>
+    <sequenceFlow id="GEN_SequenceFlow_3" sourceRef="GEN_ServiceTask_2" targetRef="GEN_ExclusiveGateway_1"/>
+    <sequenceFlow id="GEN_SequenceFlow_4" name="Yes" sourceRef="GEN_ExclusiveGateway_1" targetRef="GEN_ManualTask_1"/>
+    <sequenceFlow id="GEN_SequenceFlow_5" name="No" sourceRef="GEN_ExclusiveGateway_1" targetRef="GEN_ServiceTask_3"/>
+    <sequenceFlow id="GEN_SequenceFlow_6" sourceRef="GEN_ServiceTask_3" targetRef="GEN_ServiceTask_4"/>
+    <sequenceFlow id="GEN_SequenceFlow_7" sourceRef="GEN_ServiceTask_4" targetRef="GEN_ExclusiveGateway_2"/>
+    <sequenceFlow id="GEN_SequenceFlow_8" sourceRef="GEN_ServiceTask_5" targetRef="GEN_ExclusiveGateway_4"/>
+    <sequenceFlow id="GEN_SequenceFlow_9" name="Yes" sourceRef="GEN_ExclusiveGateway_2" targetRef="GEN_ServiceTask_5"/>
+    <sequenceFlow id="GEN_SequenceFlow_10" sourceRef="GEN_ManualTask_1" targetRef="GEN_ManualTask_3"/>
+    <sequenceFlow id="GEN_SequenceFlow_11" sourceRef="GEN_ManualTask_2" targetRef="GEN_ManualTask_3"/>
+    <sequenceFlow id="GEN_SequenceFlow_12" sourceRef="GEN_ManualTask_3" targetRef="GEN_ExclusiveGateway_3"/>
+    <sequenceFlow id="GEN_SequenceFlow_13" sourceRef="GEN_ManualTask_5" targetRef="GEN_EndEvent_1"/>
+    <sequenceFlow id="GEN_SequenceFlow_14" sourceRef="GEN_ExclusiveGateway_4" targetRef="GEN_ManualTask_2"/>
+    <sequenceFlow id="GEN_SequenceFlow_15" sourceRef="GEN_ExclusiveGateway_5" targetRef="GEN_ServiceTask_2"/>
+    <sequenceFlow id="GEN_SequenceFlow_16" name="No" sourceRef="GEN_ExclusiveGateway_3" targetRef="GEN_ExclusiveGateway_5"/>
+    <sequenceFlow id="GEN_SequenceFlow_17" name="No" sourceRef="GEN_ExclusiveGateway_2" targetRef="GEN_ExclusiveGateway_4"/>
+    <sequenceFlow id="GEN_SequenceFlow_18" sourceRef="GEN_ParallelGateway_2" targetRef="GEN_ManualTask_5"/>
+    <sequenceFlow id="GEN_SequenceFlow_19" sourceRef="GEN_ParallelGateway_1" targetRef="GEN_ManualTask_6"/>
+    <sequenceFlow id="GEN_SequenceFlow_20" name="Yes" sourceRef="GEN_ExclusiveGateway_3" targetRef="GEN_ParallelGateway_1"/>
+    <sequenceFlow id="GEN_SequenceFlow_21" sourceRef="GEN_ManualTask_4" targetRef="GEN_ParallelGateway_2"/>
+    <sequenceFlow id="GEN_SequenceFlow_22" sourceRef="GEN_ManualTask_6" targetRef="GEN_ParallelGateway_2"/>
+    <sequenceFlow id="GEN_SequenceFlow_23" sourceRef="GEN_ParallelGateway_1" targetRef="GEN_ManualTask_4"/>
+  </process>
+  <bpmndi:BPMNDiagram id="GEN_BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="GEN_BPMNPlane_1" bpmnElement="GEN_Process_1">
+      <bpmndi:BPMNShape bpmnElement="GEN_StartEvent_1" id="GEN_StartEvent_1_di">
+        <omgdc:Bounds x="15" y="284" width="30" height="30"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="-24" y="316" width="107" height="11"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="GEN_ServiceTask_1" id="GEN_ServiceTask_1_di">
+        <omgdc:Bounds x="165" y="259" width="100" height="80"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="185" y="291" width="60" height="12"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="GEN_ServiceTask_2" id="GEN_ServiceTask_2_di">
+        <omgdc:Bounds x="410" y="259" width="100" height="80"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="426" y="279" width="68" height="36"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="GEN_ExclusiveGateway_1" id="GEN_ExclusiveGateway_1_di">
+        <omgdc:Bounds x="593" y="279" width="40" height="40"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="585" y="263" width="55" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="GEN_ExclusiveGateway_5" id="GEN_ExclusiveGateway_5_di">
+        <omgdc:Bounds x="310" y="279" width="40" height="40"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="TextAnnotation_15avfcd" id="GEN_TextAnnotation_15avfcd_di">
+        <omgdc:Bounds x="10" y="20" width="994" height="170"/>
+        <bpmndi:BPMNLabel/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="GEN_ManualTask_1" id="GEN_ManualTask_1_di">
+        <omgdc:Bounds x="700" y="259" width="100" height="80"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="713" y="279" width="73" height="36"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="GEN_ServiceTask_3" id="GEN_ServiceTask_3_di">
+        <omgdc:Bounds x="700" y="361" width="100" height="80"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="714" y="387" width="73" height="24"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="GEN_ServiceTask_5" id="GEN_ServiceTask_5_di">
+        <omgdc:Bounds x="1100" y="361" width="100" height="80"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1105" y="375" width="89" height="48"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="GEN_ManualTask_2" id="GEN_ManualTask_2_di">
+        <omgdc:Bounds x="1350" y="361" width="100" height="80"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1354" y="381" width="91" height="36"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="GEN_ExclusiveGateway_4" id="GEN_ExclusiveGateway_4_di">
+        <omgdc:Bounds x="1250" y="380" width="40" height="40"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="GEN_ServiceTask_4" id="GEN_ServiceTask_4_di">
+        <omgdc:Bounds x="860" y="361" width="100" height="80"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="865" y="381" width="90" height="36"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="GEN_ExclusiveGateway_2" id="GEN_ExclusiveGateway_2_di">
+        <omgdc:Bounds x="1000" y="381" width="40" height="40"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="976" y="344" width="87" height="27"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="GEN_ManualTask_3" id="GEN_ManualTask_3_di">
+        <omgdc:Bounds x="1470" y="259" width="100" height="80"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1482" y="273" width="76" height="48"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="GEN_ExclusiveGateway_3" id="GEN_ExclusiveGateway_3_di">
+        <omgdc:Bounds x="1600" y="279" width="40" height="40"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1577" y="246" width="87" height="27"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="GEN_ParallelGateway_1" id="GEN_ParallelGateway_1_di">
+        <omgdc:Bounds x="1680" y="279" width="40" height="40"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="GEN_ManualTask_6" id="GEN_ManualTask_6_di">
+        <omgdc:Bounds x="1770" y="259" width="100" height="80"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1793" y="285" width="55" height="24"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="GEN_ManualTask_4" id="GEN_ManualTask_4_di">
+        <omgdc:Bounds x="1771" y="361" width="100" height="80"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1790" y="387" width="62" height="24"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="GEN_ParallelGateway_2" id="GEN_ParallelGateway_2_di">
+        <omgdc:Bounds x="1910" y="279" width="40" height="40"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="GEN_ManualTask_5" id="GEN_ManualTask_5_di">
+        <omgdc:Bounds x="2020" y="259" width="100" height="80"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="2036" y="285" width="69" height="24"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="GEN_EndEvent_1" id="GEN_EndEvent_1_di">
+        <omgdc:Bounds x="2166" y="285" width="28" height="28"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="2154" y="315" width="52" height="27"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="GEN_SequenceFlow_17" id="GEN_SequenceFlow_17_di">
+        <omgdi:waypoint x="1020" y="421"/>
+        <omgdi:waypoint x="1020" y="500"/>
+        <omgdi:waypoint x="1270" y="500"/>
+        <omgdi:waypoint x="1270" y="420"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1032" y="428" width="15" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="GEN_SequenceFlow_16" id="GEN_SequenceFlow_16_di">
+        <omgdi:waypoint x="1621" y="318"/>
+        <omgdi:waypoint x="1621" y="570"/>
+        <omgdi:waypoint x="330" y="570"/>
+        <omgdi:waypoint x="330" y="319"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1625" y="325" width="15" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="GEN_SequenceFlow_15" id="GEN_SequenceFlow_15_di">
+        <omgdi:waypoint x="350" y="299"/>
+        <omgdi:waypoint x="410" y="299"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="GEN_SequenceFlow_10" id="GEN_SequenceFlow_10_di">
+        <omgdi:waypoint x="800" y="299"/>
+        <omgdi:waypoint x="1470" y="299"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="GEN_SequenceFlow_9" id="GEN_SequenceFlow_9_di">
+        <omgdi:waypoint x="1040" y="401"/>
+        <omgdi:waypoint x="1100" y="401"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1068" y="388" width="18" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="GEN_SequenceFlow_7" id="GEN_SequenceFlow_7_di">
+        <omgdi:waypoint x="960" y="401"/>
+        <omgdi:waypoint x="1000" y="401"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="GEN_SequenceFlow_6" id="GEN_SequenceFlow_6_di">
+        <omgdi:waypoint x="800" y="401"/>
+        <omgdi:waypoint x="860" y="401"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="GEN_SequenceFlow_5" id="GEN_SequenceFlow_5_di">
+        <omgdi:waypoint x="613" y="319"/>
+        <omgdi:waypoint x="613" y="401"/>
+        <omgdi:waypoint x="700" y="401"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="591" y="323" width="15" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="GEN_SequenceFlow_4" id="GEN_SequenceFlow_4_di">
+        <omgdi:waypoint x="633" y="299"/>
+        <omgdi:waypoint x="700" y="299"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="635" y="279" width="18" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="GEN_SequenceFlow_3" id="GEN_SequenceFlow_3_di">
+        <omgdi:waypoint x="510" y="299"/>
+        <omgdi:waypoint x="593" y="299"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="GEN_SequenceFlow_2" id="GEN_SequenceFlow_2_di">
+        <omgdi:waypoint x="265" y="299"/>
+        <omgdi:waypoint x="310" y="299"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="GEN_SequenceFlow_1" id="GEN_SequenceFlow_1_di">
+        <omgdi:waypoint x="45" y="299"/>
+        <omgdi:waypoint x="165" y="299"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="GEN_SequenceFlow_8" id="GEN_SequenceFlow_8_di">
+        <omgdi:waypoint x="1200" y="401"/>
+        <omgdi:waypoint x="1251" y="401"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="GEN_SequenceFlow_14" id="GEN_SequenceFlow_14_di">
+        <omgdi:waypoint x="1289" y="401"/>
+        <omgdi:waypoint x="1350" y="401"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="GEN_SequenceFlow_11" id="GEN_SequenceFlow_11_di">
+        <omgdi:waypoint x="1450" y="401"/>
+        <omgdi:waypoint x="1520" y="401"/>
+        <omgdi:waypoint x="1520" y="339"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="GEN_SequenceFlow_12" id="GEN_SequenceFlow_12_di">
+        <omgdi:waypoint x="1570" y="299"/>
+        <omgdi:waypoint x="1600" y="299"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="GEN_SequenceFlow_20" id="GEN_SequenceFlow_20_di">
+        <omgdi:waypoint x="1640" y="299"/>
+        <omgdi:waypoint x="1680" y="299"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1640" y="279" width="18" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="GEN_SequenceFlow_19" id="GEN_SequenceFlow_19_di">
+        <omgdi:waypoint x="1720" y="299"/>
+        <omgdi:waypoint x="1770" y="299"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="GEN_SequenceFlow_23" id="GEN_SequenceFlow_23_di">
+        <omgdi:waypoint x="1700" y="319"/>
+        <omgdi:waypoint x="1700" y="401"/>
+        <omgdi:waypoint x="1771" y="401"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="GEN_SequenceFlow_22" id="GEN_SequenceFlow_22_di">
+        <omgdi:waypoint x="1870" y="299"/>
+        <omgdi:waypoint x="1910" y="299"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="GEN_SequenceFlow_21" id="GEN_SequenceFlow_21_di">
+        <omgdi:waypoint x="1871" y="401"/>
+        <omgdi:waypoint x="1930" y="401"/>
+        <omgdi:waypoint x="1930" y="319"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="GEN_SequenceFlow_18" id="GEN_SequenceFlow_18_di">
+        <omgdi:waypoint x="1950" y="299"/>
+        <omgdi:waypoint x="2020" y="299"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="GEN_SequenceFlow_13" id="GEN_SequenceFlow_13_di">
+        <omgdi:waypoint x="2120" y="299"/>
+        <omgdi:waypoint x="2166" y="299"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

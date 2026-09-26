@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:collaboration id="Collaboration_0">
+    <bpmn:participant id="Participant_0" name="Banking System" processRef="Process_1"/>
+    <bpmn:participant id="Participant_1" name="Agency" processRef="Process_2"/>
+    <bpmn:messageFlow id="MessageFlow_0" name="Scoring Request" sourceRef="Participant_0" targetRef="Participant_1"/>
+    <bpmn:messageFlow id="MessageFlow_1" name="Scoring Result" sourceRef="Participant_1" targetRef="Participant_0"/>
+    <bpmn:messageFlow id="MessageFlow_2" name="Delay Notification" sourceRef="Participant_1" targetRef="Participant_0"/>
+  </bpmn:collaboration>
+  <bpmn:process id="Process_1" isExecutable="false">
+    <bpmn:startEvent id="StartEvent_1" name="Receive Credit Scoring Request">
+      <bpmn:outgoing>SequenceFlow_0</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_0" sourceRef="StartEvent_1" targetRef="Task_0"/>
+    <bpmn:task id="Task_0" name="Send Scoring Request to Agency">
+      <bpmn:incoming>SequenceFlow_0</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="SequenceFlow_1" sourceRef="Task_0" targetRef="Gateway_0"/>
+    <bpmn:exclusiveGateway id="Gateway_0" name="Immediate Result?">
+      <bpmn:incoming>SequenceFlow_1</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_2</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_3</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="SequenceFlow_2" name="Yes" sourceRef="Gateway_0" targetRef="Task_1"/>
+    <bpmn:task id="Task_1" name="Display Scoring Result to Clerk">
+      <bpmn:incoming>SequenceFlow_2</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_4</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="SequenceFlow_4" sourceRef="Task_1" targetRef="EndEvent_0"/>
+    <bpmn:endEvent id="EndEvent_0" name="Scoring Result Displayed">
+      <bpmn:incoming>SequenceFlow_4</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_3" name="No" sourceRef="Gateway_0" targetRef="Task_2"/>
+    <bpmn:task id="Task_2" name="Wait for Scoring Result">
+      <bpmn:incoming>SequenceFlow_3</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_5</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="SequenceFlow_5" sourceRef="Task_2" targetRef="Gateway_1"/>
+    <bpmn:exclusiveGateway id="Gateway_1" name="Delay Notification Received?">
+      <bpmn:incoming>SequenceFlow_5</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_6</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_7</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="SequenceFlow_6" name="Yes" sourceRef="Gateway_1" targetRef="Task_3"/>
+    <bpmn:task id="Task_3" name="Display Delay Message to Clerk">
+      <bpmn:incoming>SequenceFlow_6</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_8</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="SequenceFlow_8" sourceRef="Task_3" targetRef="Task_2"/>
+    <bpmn:sequenceFlow id="SequenceFlow_7" name="No" sourceRef="Gateway_1" targetRef="Task_1"/>
+  </bpmn:process>
+  <bpmn:process id="Process_2" isExecutable="false">
+    <bpmn:startEvent id="StartEvent_2" name="Receive Scoring Request from Banking System">
+      <bpmn:outgoing>SequenceFlow_9</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_9" sourceRef="StartEvent_2" targetRef="Task_4"/>
+    <bpmn:task id="Task_4" name="Perform Level 1 Scoring">
+      <bpmn:incoming>SequenceFlow_9</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_10</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="SequenceFlow_10" sourceRef="Task_4" targetRef="Gateway_2"/>
+    <bpmn:exclusiveGateway id="Gateway_2" name="Immediate Result?">
+      <bpmn:incoming>SequenceFlow_10</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_11</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_12</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="SequenceFlow_11" name="Yes" sourceRef="Gateway_2" targetRef="Task_5"/>
+    <bpmn:task id="Task_5" name="Send Scoring Result to Banking System">
+      <bpmn:incoming>SequenceFlow_11</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_13</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="SequenceFlow_13" sourceRef="Task_5" targetRef="EndEvent_1"/>
+    <bpmn:endEvent id="EndEvent_1" name="Scoring Result Sent">
+      <bpmn:incoming>SequenceFlow_13</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_12" name="No" sourceRef="Gateway_2" targetRef="Task_6"/>
+    <bpmn:task id="Task_6" name="Send Delay Notification to Banking System">
+      <bpmn:incoming>SequenceFlow_12</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_14</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="SequenceFlow_14" sourceRef="Task_6" targetRef="Task_7"/>
+    <bpmn:task id="Task_7" name="Perform Level 2 Scoring">
+      <bpmn:incoming>SequenceFlow_14</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_15</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="SequenceFlow_15" sourceRef="Task_7" targetRef="Task_5"/>
+  </bpmn:process>
+</bpmn:definitions>

@@ -1,0 +1,40 @@
+digraph G {
+  rankdir=LR;  
+  node [shape=box];
+
+  "ParallelGateway_1" -> "Get quality data";
+  "ParallelGateway_1" -> "Get availability data";
+  "ParallelGateway_1" -> "Get performance data";
+  "Get quality data" -> "ParallelGateway_2";
+  "Get availability data" -> "ParallelGateway_2";
+  "Get performance data" -> "ParallelGateway_2";
+  "ParallelGateway_2" -> "Calculate OEE";
+  "OEE below 50%?" -> "Stop the machine" [label="Yes"];
+  "Stop the machine" -> "Send email to an engineer";
+  "OEE data required" -> "ParallelGateway_1";
+  "Send email to an engineer" -> "Machine worth repairing?";
+  "Repair the issue" -> "Remaining issues?";
+  "Restart the machine" -> "Continue measuring";
+  "ExclusiveGateway_1" -> "Machine operating normally / Machine disconnected";
+  "Calculate OEE" -> "OEE below 50%?";
+  "Machine worth repairing?" -> "Disconnect the machine" [label="No"];
+  "ExclusiveGateway_2" -> "ExclusiveGateway_1";
+  "Disconnect the machine" -> "ExclusiveGateway_2";
+  "Continue measuring" -> "ExclusiveGateway_2";
+  "Machine worth repairing?" -> "ExclusiveGateway_3" [label="Yes"];
+  "Remaining issues?" -> "Restart the machine" [label="No"];
+  "ExclusiveGateway_3" -> "Repair the issue";
+  "Remaining issues?" -> "ExclusiveGateway_3" [label="Yes"];
+  "OEE below 50%?" -> "ExclusiveGateway_1" [label="No"];
+
+  "OEE data required" [shape=circle, label="OEE data required"];
+  "Machine operating normally / Machine disconnected" [shape=circle, label="Machine operating normally / Machine disconnected"];
+  "OEE below 50%?" [shape=diamond];
+  "ExclusiveGateway_1" [shape=diamond, label="X"];
+  "Machine worth repairing?" [shape=diamond];
+  "ExclusiveGateway_2" [shape=diamond, label="X"];
+  "Remaining issues?" [shape=diamond];
+  "ExclusiveGateway_3" [shape=diamond, label="X"];
+  "ParallelGateway_1" [shape=diamond, label="+"];
+  "ParallelGateway_2" [shape=diamond, label="+"];
+}

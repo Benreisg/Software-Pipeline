@@ -1,0 +1,44 @@
+digraph G {
+  rankdir=LR;  
+  node [shape=box];
+
+  "Task_1" [label="Customer brings a\ndefective computer"];
+  "Task_2" [label="CRS checks the\ndefect"];
+  "Task_3" [label="CRS hands out a\nrepair cost\ncalculation"];
+  "Task_4" [label="Client takes her\ncomputer home\nunrepaired"];
+  "Task_5" [label="Check the hardware"];
+  "Task_6" [label="Check the software"];
+  "Task_7" [label="Proper system\nfunctionality is\ntested"];
+  "Task_8" [label="Repair is finished"];
+  "Task_9" [label="Repair the hardware"];
+  "Task_10" [label="Configure the\nsoftware"];
+  "StartNoneEvent_1" [shape=circle, label=""];
+  "EndNoneEvent_1" [shape=circle, penwidth=4, label=""];
+  "ExclusiveGateway_1" [shape=diamond, label="X"];
+  "ExclusiveGateway_2" [shape=diamond, label="X"];
+  "ExclusiveGateway_3" [shape=diamond, label="X"];
+  "ExclusiveGateway_4" [shape=diamond, label="X"];
+  "ParallelGateway_1" [shape=diamond, label="+"];
+  "ParallelGateway_2" [shape=diamond, label="+"];
+
+  "StartNoneEvent_1" -> "Task_1";
+  "Task_1" -> "Task_2";
+  "Task_2" -> "Task_3";
+  "Task_3" -> "ExclusiveGateway_1";
+  "ParallelGateway_1" -> "Task_5";
+  "ParallelGateway_1" -> "Task_6";
+  "Task_8" -> "ExclusiveGateway_4";
+  "Task_5" -> "Task_9";
+  "Task_7" -> "ExclusiveGateway_2";
+  "Task_6" -> "Task_10";
+  "ParallelGateway_2" -> "Task_7";
+  "ExclusiveGateway_3" -> "ParallelGateway_1";
+  "Task_9" -> "ParallelGateway_2";
+  "Task_10" -> "ParallelGateway_2";
+  "ExclusiveGateway_4" -> "EndNoneEvent_1";
+  "Task_4" -> "ExclusiveGateway_4";
+  "ExclusiveGateway_1" -> "Task_4" [label="costs are not\nacceptable"];
+  "ExclusiveGateway_1" -> "ExclusiveGateway_3" [label="costs are acceptable"];
+  "ExclusiveGateway_2" -> "ExclusiveGateway_3" [label="error is detected"];
+  "ExclusiveGateway_2" -> "Task_8" [label="no error"];
+}

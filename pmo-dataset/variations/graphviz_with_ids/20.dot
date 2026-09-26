@@ -1,0 +1,54 @@
+digraph G {
+  rankdir=LR;  
+  node [shape=box];
+
+  "Task_1" [label="Waiter readies cart"];
+  "Task_2" [label="Kitchen prepares\nfood"];
+  "Task_3" [label="Sommelier fetches\nwine and prepare\nalcoholic beverages"];
+  "Task_4" [label="Manager takes down\nthe order"];
+  "Task_5" [label="Waiter prepares\nnonalcoholic drinks"];
+  "Task_6" [label="Waiter waits/delays\ndebiting"];
+  "Task_7" [label="Manager gives order\nto sommelier"];
+  "Task_8" [label="Waiter debits\nguest's account"];
+  "Task_9" [label="Manager submits\norder ticket to\nkitchen"];
+  "Task_10" [label="Waiter returns to\nroom-service station"];
+  "Task_11" [label="Waiter delivers\norder to guest's\nroom"];
+  "Task_12" [label="Manager assigns\norder to waiter"];
+  "Task_13" [label="Guest calls room\nservice"];
+  "StartNoneEvent_1" [shape=circle, label="start"];
+  "EndNoneEvent_1" [shape=circle, penwidth=4, label="end"];
+  "ExclusiveGateway_1" [shape=diamond, label="X"];
+  "ExclusiveGateway_2" [shape=diamond, label="X"];
+  "ExclusiveGateway_3" [shape=diamond, label="X"];
+  "ExclusiveGateway_4" [shape=diamond, label="X"];
+  "ParallelGateway_1" [shape=diamond, label="+"];
+  "ParallelGateway_2" [shape=diamond, label="+"];
+  "ParallelGateway_3" [shape=diamond, label="+"];
+
+  "ParallelGateway_3" -> "Task_9";
+  "ExclusiveGateway_2" -> "ExclusiveGateway_1";
+  "Task_4" -> "ParallelGateway_3";
+  "Task_13" -> "Task_4";
+  "ExclusiveGateway_2" -> "Task_6";
+  "ParallelGateway_3" -> "Task_12";
+  "Task_12" -> "ParallelGateway_2";
+  "ParallelGateway_3" -> "ExclusiveGateway_3";
+  "ParallelGateway_2" -> "Task_5";
+  "Task_8" -> "EndNoneEvent_1";
+  "Task_10" -> "ExclusiveGateway_2";
+  "Task_5" -> "ParallelGateway_1";
+  "ParallelGateway_2" -> "Task_1";
+  "ExclusiveGateway_1" -> "Task_8";
+  "ExclusiveGateway_4" -> "ParallelGateway_1";
+  "Task_2" -> "ParallelGateway_1";
+  "ExclusiveGateway_3" -> "Task_7";
+  "StartNoneEvent_1" -> "Task_13";
+  "Task_11" -> "Task_10";
+  "Task_9" -> "Task_2";
+  "ParallelGateway_1" -> "Task_11";
+  "Task_3" -> "ExclusiveGateway_4";
+  "Task_7" -> "Task_3";
+  "Task_6" -> "ExclusiveGateway_1";
+  "Task_1" -> "ParallelGateway_1";
+  "ExclusiveGateway_3" -> "ExclusiveGateway_4";
+}

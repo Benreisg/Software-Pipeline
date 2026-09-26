@@ -1,0 +1,64 @@
+digraph G {
+  rankdir=LR;  
+  node [shape=box];
+
+  "probable recourse\ndetected" -> "check case";
+  "check case" -> "recourse possible?";
+  "recourse possible?" -> "send request for\npayment" [label="yes"];
+  "recourse possible?" -> "close case_1" [label="no"];
+  "close case_1" -> "case closed_1";
+  "send request for\npayment" -> "send reminder";
+  "send reminder" -> "EventBasedGateway";
+  "EventBasedGateway" -> "disagreement letter\nreceived";
+  "disagreement letter\nreceived" -> "check reasoning";
+  "check reasoning" -> "OK?";
+  "OK?" -> "close case_2" [label="yes"];
+  "close case_2" -> "case closed_2";
+  "EventBasedGateway" -> "Reminder is due";
+  "Reminder is due" -> "hand over to\ncollection agency";
+  "OK?" -> "hand over to\ncollection agency" [label="no"];
+  "hand over to\ncollection agency" -> "case open";
+  "EventBasedGateway" -> "Money received";
+  "Money received" -> "make booking";
+  "make booking" -> "close case_3";
+  "close case_3" -> "case closed_3";
+
+  subgraph "cluster_Pool_1" {
+    label="Recourse Clerk";
+    "check case";
+    "send request for\npayment";
+    "close case_1";
+    "send reminder";
+    "check reasoning";
+    "close case_2";
+    "hand over to\ncollection agency";
+    "make booking";
+    "close case_3";
+    "probable recourse\ndetected";
+    "case closed_1";
+    "case closed_2";
+    "case open";
+    "case closed_3";
+    "disagreement letter\nreceived";
+    "Reminder is due";
+    "Money received";
+    "recourse possible?";
+    "OK?";
+    "EventBasedGateway";
+  }
+
+  "close case_1" [label="close case"];
+  "close case_2" [label="close case"];
+  "close case_3" [label="close case"];
+  "probable recourse\ndetected" [shape=circle];
+  "case closed_1" [label="case closed", shape=circle, penwidth=4];
+  "case closed_2" [label="case closed", shape=circle, penwidth=4];
+  "case open" [shape=circle, penwidth=4];
+  "case closed_3" [label="case closed", shape=circle, penwidth=4];
+  "disagreement letter\nreceived" [shape=doublecircle];
+  "Reminder is due" [shape=doublecircle];
+  "Money received" [shape=doublecircle];
+  "recourse possible?" [shape=diamond];
+  "OK?" [shape=diamond];
+  "EventBasedGateway" [label="E", shape=diamond];
+}

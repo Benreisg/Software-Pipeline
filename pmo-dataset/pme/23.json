@@ -1,0 +1,244 @@
+{
+    "tasks": [
+        {
+            "id": "Task_1",
+            "name": "request credit score",
+            "type": "Task"
+        },
+        {
+            "id": "Task_2",
+            "name": "send credit score",
+            "type": "Task"
+        },
+        {
+            "id": "Task_3",
+            "name": "report delay",
+            "type": "Task"
+        },
+        {
+            "id": "Task_4",
+            "name": "compute credit score (level 1)",
+            "type": "Task"
+        },
+        {
+            "id": "Task_5",
+            "name": "send result",
+            "type": "Task"
+        },
+        {
+            "id": "Task_6",
+            "name": "compute credit score (level 2)",
+            "type": "Task"
+        },
+        {
+            "id": "Task_7",
+            "name": "send credit score",
+            "type": "Task"
+        }
+    ],
+    "events": [
+        {
+            "id": "StartMessageEvent_1",
+            "name": "scoring request received",
+            "type": "StartMessageEvent"
+        },
+        {
+            "id": "EndNoneEvent_1",
+            "name": "scoring request handled",
+            "type": "EndNoneEvent"
+        },
+        {
+            "id": "IntermediateMessageEventCatching_1",
+            "name": "credit score received",
+            "type": "IntermediateMessageEventCatching"
+        },
+        {
+            "id": "StartMessageEvent_2",
+            "name": "scoring request received",
+            "type": "StartMessageEvent"
+        },
+        {
+            "id": "EndNoneEvent_2",
+            "name": "scoring request handled",
+            "type": "EndNoneEvent"
+        }
+    ],
+    "gateways": [
+        {
+            "id": "ExclusiveGateway_1",
+            "name": "score received?",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_2",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_3",
+            "name": "score available?",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_4",
+            "name": "",
+            "type": "ExclusiveGateway"
+        }
+    ],
+    "pools": [
+        {
+            "id": "Pool_1",
+            "name": "credit scoring frontend (bank)",
+            "lanes": [],
+            "elemRefs": []
+        },
+        {
+            "id": "Pool_2",
+            "name": "credit scoring (bank)",
+            "lanes": [],
+            "elemRefs": [
+                "Task_1",
+                "Task_2",
+                "Task_3",
+                "StartMessageEvent_1",
+                "EndNoneEvent_1",
+                "IntermediateMessageEventCatching_1",
+                "ExclusiveGateway_1",
+                "ExclusiveGateway_2"
+            ]
+        },
+        {
+            "id": "Pool_3",
+            "name": "scoring service",
+            "lanes": [],
+            "elemRefs": [
+                "Task_4",
+                "Task_5",
+                "Task_6",
+                "Task_7",
+                "StartMessageEvent_2",
+                "EndNoneEvent_2",
+                "ExclusiveGateway_3",
+                "ExclusiveGateway_4"
+            ]
+        }
+    ],
+    "sequenceFlows": [
+        {
+            "id": "SequenceFlow_1",
+            "sourceRef": "StartMessageEvent_1",
+            "targetRef": "Task_1"
+        },
+        {
+            "id": "SequenceFlow_2",
+            "sourceRef": "Task_1",
+            "targetRef": "ExclusiveGateway_1"
+        },
+        {
+            "id": "SequenceFlow_3",
+            "sourceRef": "ExclusiveGateway_1",
+            "targetRef": "Task_3",
+            "condition": "no"
+        },
+        {
+            "id": "SequenceFlow_4",
+            "sourceRef": "Task_3",
+            "targetRef": "IntermediateMessageEventCatching_1"
+        },
+        {
+            "id": "SequenceFlow_5",
+            "sourceRef": "IntermediateMessageEventCatching_1",
+            "targetRef": "ExclusiveGateway_2"
+        },
+        {
+            "id": "SequenceFlow_6",
+            "sourceRef": "ExclusiveGateway_1",
+            "targetRef": "ExclusiveGateway_2",
+            "condition": "yes"
+        },
+        {
+            "id": "SequenceFlow_7",
+            "sourceRef": "ExclusiveGateway_2",
+            "targetRef": "Task_2"
+        },
+        {
+            "id": "SequenceFlow_8",
+            "sourceRef": "Task_2",
+            "targetRef": "EndNoneEvent_1"
+        },
+        {
+            "id": "SequenceFlow_9",
+            "sourceRef": "StartMessageEvent_2",
+            "targetRef": "Task_4"
+        },
+        {
+            "id": "SequenceFlow_10",
+            "sourceRef": "Task_4",
+            "targetRef": "Task_5"
+        },
+        {
+            "id": "SequenceFlow_11",
+            "sourceRef": "Task_5",
+            "targetRef": "ExclusiveGateway_3"
+        },
+        {
+            "id": "SequenceFlow_12",
+            "sourceRef": "ExclusiveGateway_3",
+            "targetRef": "Task_6",
+            "condition": "no"
+        },
+        {
+            "id": "SequenceFlow_13",
+            "sourceRef": "Task_6",
+            "targetRef": "Task_7"
+        },
+        {
+            "id": "SequenceFlow_14",
+            "sourceRef": "Task_7",
+            "targetRef": "ExclusiveGateway_4"
+        },
+        {
+            "id": "SequenceFlow_15",
+            "sourceRef": "ExclusiveGateway_4",
+            "targetRef": "EndNoneEvent_2"
+        },
+        {
+            "id": "SequenceFlow_16",
+            "sourceRef": "ExclusiveGateway_3",
+            "targetRef": "ExclusiveGateway_4",
+            "condition": "yes"
+        }
+    ],
+    "messageFlows": [
+        {
+            "id": "MessageFlow_1",
+            "sourceRef": "Pool_1",
+            "targetRef": "StartMessageEvent_1"
+        },
+        {
+            "id": "MessageFlow_2",
+            "sourceRef": "Task_3",
+            "targetRef": "Pool_1"
+        },
+        {
+            "id": "MessageFlow_3",
+            "sourceRef": "Task_2",
+            "targetRef": "Pool_1"
+        },
+        {
+            "id": "MessageFlow_4",
+            "sourceRef": "Task_1",
+            "targetRef": "StartMessageEvent_2"
+        },
+        {
+            "id": "MessageFlow_5",
+            "sourceRef": "Task_5",
+            "targetRef": "Task_1"
+        },
+        {
+            "id": "MessageFlow_6",
+            "sourceRef": "Task_7",
+            "targetRef": "IntermediateMessageEventCatching_1"
+        }
+    ]
+}

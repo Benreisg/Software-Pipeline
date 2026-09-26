@@ -1,0 +1,6 @@
+Sobald ein Kunde eine Schadensmeldung einreicht, wird diese zunächst auf ihre Gültigkeit überprüft. Sollte sich herausstellen, dass der Schaden nicht gültig ist, wird der Kunde entsprechend informiert und der Prozess abgeschlossen.
+Wird die Schadensmeldung hingegen als gültig eingestuft, folgen weitere Prüfungen und Bearbeitungsschritte durch das Versicherungsmanagement. Dazu gehört in erster Linie die Kontrolle der eingereichten Unterlagen auf Vollständigkeit.
+Nach der vorläufigen Annahme durch das Kundenzentrum wird die Schadensmeldung an die zuständige Fachabteilung weitergeleitet. Dort durchläuft sie einen vertieften Validierungsprozess. Im Rahmen dieser detaillierten Prüfung werden die Schadensursache untersucht und, falls erforderlich, eine rechtliche Einschätzung durch einen Versicherer eingeholt. Hierzu werden dem Versicherer alle relevanten Informationen zu dem Schadensfall übermittelt.
+Während der Bearbeitung kann es notwendig sein, zusätzliche Informationen vom Kunden oder Dritten einzuholen.
+Parallel dazu wird der Fall zu Beginn der Bearbeitung in der Schadensstatistik erfasst. Nach Abschluss der rechtlichen und fachlichen Prüfung wird die Schadensstatistik entsprechend aktualisiert.
+Abschließend wird der aktuelle Bearbeitungsstand dem Kunden mitgeteilt, sodass dieser über den weiteren Verlauf und die Entscheidung informiert ist.

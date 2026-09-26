@@ -1,0 +1,77 @@
+{
+    "startEvent": {
+        "name": "start"
+    },
+    "process": [
+        {
+            "type": "task",
+            "name": "Identify need for new supplier or vendor"
+        },
+        {
+            "type": "task",
+            "name": "Issue request for proposals (RFP)"
+        },
+        {
+            "type": "task",
+            "name": "Receive supplier proposals"
+        },
+        {
+            "type": "loop",
+            "condition": "Loop condition",
+            "body": [
+                {
+                    "type": "task",
+                    "name": "Evaluate proposal"
+                },
+                {
+                    "type": "xor",
+                    "condition": "",
+                    "branches": [
+                        {
+                            "branch": []
+                        },
+                        {
+                            "branch": [
+                                {
+                                    "type": "task",
+                                    "name": "Conduct interview"
+                                }
+                            ]
+                        },
+                        {
+                            "branch": [
+                                {
+                                    "type": "task",
+                                    "name": "Conduct site visit"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "task",
+            "name": "Select supplier"
+        },
+        {
+            "type": "task",
+            "name": "Begin contract negotiations"
+        },
+        {
+            "type": "task",
+            "name": "Sign contract"
+        },
+        {
+            "type": "task",
+            "name": "Onboard supplier"
+        },
+        {
+            "type": "task",
+            "name": "Execute contract"
+        }
+    ],
+    "endEvent": {
+        "name": "end"
+    }
+}

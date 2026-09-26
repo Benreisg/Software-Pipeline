@@ -1,0 +1,88 @@
+graph LR
+	classDef endEvent stroke-width:3px
+	User_1["Check if passport is\nup to date"]
+	User_2["Prepare Documents\nfor r-w-r card"]
+	Service_1["Send documentation\nto relevant agency"]
+	Service_2["Rules engine\nautomaticly checks\nif documentations\nfullfilles\nrequirements"]
+	Service_3["Bank Systems creates\nbank account and\nsends E-Mail\nconfirmation"]
+	Manual_1["Check requirements\nand point for\nparticularly highly\nqualified people"]
+	Manual_2["Check requirements\nfor independent key\nemployees"]
+	Manual_3["Check requirements\nand point for\nstart-up founders"]
+	Manual_4["Check requirements\nfor Graduates of an\nAustrian higher\neducation\ninstitution"]
+	Manual_5["Check requirements\nand point for other\nkey employees"]
+	Manual_6["Check requirements\nand point for\nskilled workers in\nshortage occupations"]
+	Manual_7["Request new passport"]
+	Manual_8["Make passport photo"]
+	Manual_9["Prepare birth\ncertificate"]
+	Manual_10["Search and find\nsuited apartment"]
+	Manual_11["Negotiate rent with\nlandlord"]
+	Manual_12["Sign contract"]
+	Manual_13["Request Austrian\nhealth insurance\ncoverage incl.\ndocumentation"]
+	Manual_14["Gather documentation\nto prove financial\nindepence"]
+	Manual_15["Application for a\nresidence permit"]
+	Manual_16["Request Bank Account\non Bank website"]
+	StartNoneEvent_1((" "))
+	EndNoneEvent_1((" ")):::endEvent
+	ExclusiveGateway_1{"X"}
+	ExclusiveGateway_2{"Fullfiles the\nrequirements or\npoint?"}
+	ExclusiveGateway_3{"X"}
+	ExclusiveGateway_4{"X"}
+	ExclusiveGateway_5{"X"}
+	ExclusiveGateway_6{"Negotitation\nsuccessful?"}
+	ExclusiveGateway_7{"X"}
+	ExclusiveGateway_8{"Additional\ndocumentation\nneeded?"}
+	ExclusiveGateway_9{"X"}
+	ExclusiveGateway_10{"Agency approves\nright to stay?"}
+	ParallelGateway_1{"+"}
+	ParallelGateway_2{"+"}
+
+	StartNoneEvent_1 --> ExclusiveGateway_1
+	ExclusiveGateway_1 --> Manual_6
+	ExclusiveGateway_1 --> Manual_1
+	ExclusiveGateway_1 --> Manual_5
+	ExclusiveGateway_1 --> Manual_3
+	Manual_6 --> ExclusiveGateway_2
+	Manual_1 --> ExclusiveGateway_2
+	Manual_5 --> ExclusiveGateway_2
+	Manual_3 --> ExclusiveGateway_2
+	Manual_2 --> ExclusiveGateway_2
+	ExclusiveGateway_2 -->|"No"| ExclusiveGateway_1
+	User_1 --> ExclusiveGateway_3
+	ExclusiveGateway_3 -->|"Yes"| ExclusiveGateway_4
+	Manual_7 --> ExclusiveGateway_4
+	User_2 --> ParallelGateway_1
+	ParallelGateway_1 --> User_1
+	ParallelGateway_1 --> Manual_8
+	ParallelGateway_1 --> Manual_9
+	Manual_10 --> Manual_11
+	ExclusiveGateway_5 --> Manual_10
+	ParallelGateway_1 --> ExclusiveGateway_5
+	Manual_11 --> ExclusiveGateway_6
+	ExclusiveGateway_6 -->|"No"| ExclusiveGateway_5
+	ExclusiveGateway_6 -->|"Yes"| Manual_12
+	ParallelGateway_1 --> Manual_14
+	ParallelGateway_1 --> Manual_15
+	Manual_8 --> ParallelGateway_2
+	ExclusiveGateway_4 --> ParallelGateway_2
+	Manual_9 --> ParallelGateway_2
+	Manual_14 --> ParallelGateway_2
+	Manual_15 --> ParallelGateway_2
+	Manual_12 --> ParallelGateway_2
+	ExclusiveGateway_7 --> User_2
+	ExclusiveGateway_3 -->|"No"| Manual_7
+	ParallelGateway_1 --> Manual_13
+	Manual_13 --> ParallelGateway_2
+	Service_1 --> Service_2
+	Service_2 --> ExclusiveGateway_8
+	Service_3 --> ExclusiveGateway_9
+	ExclusiveGateway_9 --> EndNoneEvent_1
+	ParallelGateway_2 --> Service_1
+	ExclusiveGateway_8 -->|"No"| ExclusiveGateway_10
+	ExclusiveGateway_8 -->|"Yes"| ExclusiveGateway_7
+	Manual_16 --> Service_3
+	ExclusiveGateway_10 -->|"Yes"| Manual_16
+	ExclusiveGateway_10 -->|"No"| ExclusiveGateway_9
+	ExclusiveGateway_2 -->|"Yes"| ExclusiveGateway_7
+	ExclusiveGateway_1 --> Manual_2
+	ExclusiveGateway_1 --> Manual_4
+	Manual_4 --> ExclusiveGateway_2

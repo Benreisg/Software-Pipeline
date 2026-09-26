@@ -1,0 +1,38 @@
+graph LR
+	classDef endEvent stroke-width:4px
+	
+	StartNoneEvent_1(("Internship process\nis started")) --> User_1["Register for\ninternship"]
+	InclusiveGateway_1{"O"} --> User_5["Enter hobbies"]
+	User_5 --> InclusiveGateway_2{"O"}
+	Service_1["Recieve offer"] --> ExclusiveGateway_1{"Accept offer?"}
+	ExclusiveGateway_2{"X"} --> Service_1
+	User_7["Deny offer"] --> ExclusiveGateway_2
+	User_8["Publish your\napplication"] --> ExclusiveGateway_2
+	ParallelGateway_2{"+"} --> User_6["Accept offer"]
+	ParallelGateway_2 --> Service_2["Invalidate all other\noffers"]
+	User_6 --> ParallelGateway_1{"+"}
+	Service_2 --> ParallelGateway_1
+	User_9["Begin internship"] --> ParallelGateway_3{"+"}
+	InclusiveGateway_1 --> User_4["Enter experience"]
+	InclusiveGateway_1 --> User_3["Enter expected\nincome"]
+	User_4 --> InclusiveGateway_2
+	User_3 --> InclusiveGateway_2
+	ParallelGateway_3 --> User_10["Write at least 3\nstatus updates every\nweek"]
+	ParallelGateway_3 --> Service_4["Recieve 3 status\nupdates from the\ncompany"]
+	Service_4 --> ParallelGateway_4{"+"}
+	User_10 --> ParallelGateway_4
+	ExclusiveGateway_3{"Recommend company?"} -->|"Yes"| Service_3["Recommend company to\na list of friends\nvia twitter api"]
+	ParallelGateway_1 --> User_9
+	User_11["End internship"] --> ExclusiveGateway_3
+	User_1 --> ParallelGateway_5{"+"}
+	ParallelGateway_4 --> User_11
+	ParallelGateway_5 --> User_2["Enter topic"]
+	InclusiveGateway_2 --> ParallelGateway_6{"+"}
+	User_2 --> ParallelGateway_6
+	ParallelGateway_5 --> InclusiveGateway_1
+	ParallelGateway_6 --> User_8
+	ExclusiveGateway_1 -->|"No"| User_7
+	ExclusiveGateway_1 -->|"Yes"| ParallelGateway_2
+	ExclusiveGateway_3 -->|"No"| ExclusiveGateway_4{"X"}
+	ExclusiveGateway_4 --> EndNoneEvent_1(("Internship succesful")):::endEvent
+	Service_3 --> ExclusiveGateway_4

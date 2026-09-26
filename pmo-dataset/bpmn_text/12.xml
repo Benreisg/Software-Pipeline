@@ -1,0 +1,37 @@
+<process>
+    <activity role="" action="Identify development needs or career aspirations" objects="" id="activity1"/>
+    <activity role="" action="Create personal development plan" objects="" id="activity2"/>
+    <parallelGateway id="parallelgateway1">
+        <branch condition="" id="branch1">
+            <loopGateway id="loopgateway1">
+                <branch condition="Loop condition" id="branch2">
+                    <activity role="" action="Work on skill enhancement" objects="" id="activity3"/>
+                </branch>
+            </loopGateway>
+        </branch>
+        <branch condition="" id="branch3">
+            <loopGateway id="loopgateway2">
+                <branch condition="Loop condition" id="branch4">
+                    <activity role="" action="Receive feedback and evaluation from supervisors" objects="" id="activity4"/>
+                </branch>
+            </loopGateway>
+        </branch>
+    </parallelGateway>
+    <activity role="" action="Consider employee for promotion or new role" objects="" id="activity5"/>
+    <activity role="" action="Conducts formal performance review" objects="" id="activity6"/>
+    <exclusiveGateway id="exclusivegateway1">
+        <branch condition="" id="branch5">
+            <activity role="" action="Approve promotion" objects="" id="activity7"/>
+            <parallelGateway id="parallelgateway2">
+                <branch condition="" id="branch6">
+                    <activity role="" action="Set new responsibilities" objects="" id="activity8"/>
+                </branch>
+                <branch condition="" id="branch7">
+                    <activity role="" action="Adjust compensation" objects="" id="activity9"/>
+                </branch>
+            </parallelGateway>
+            <activity role="" action="Transition into new role" objects="" id="activity10"/>
+        </branch>
+        <branch condition="" id="branch8"/>
+    </exclusiveGateway>
+</process>

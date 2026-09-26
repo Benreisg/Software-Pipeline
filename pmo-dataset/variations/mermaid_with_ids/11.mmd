@@ -1,0 +1,62 @@
+graph LR
+	classDef endEvent stroke-width:3px
+	Task_1["Assign access"]
+	Task_2["Customer submits\ncancellation request"]
+	Task_3["apply charges"]
+	Task_4["Generate account"]
+	Task_5["Send regular updates"]
+	Task_6["Deactivate\nsubscription"]
+	Task_7["Settle final account\nbalance"]
+	Task_8["apply refund"]
+	Task_9["Send renewal\nnotifications"]
+	Task_10["Customer signs up"]
+	Task_11["Set automatic\ntriggers for billing\ncycles"]
+	Task_12["Send product\nenhancements"]
+	StartNoneEvent_1(("start"))
+	EndNoneEvent_1(("end")):::endEvent
+	ExclusiveGateway_1{"X"}
+	ExclusiveGateway_2{"X"}
+	ExclusiveGateway_3{"X"}
+	ExclusiveGateway_4{"X"}
+	ExclusiveGateway_5{"X"}
+	ExclusiveGateway_6{"X"}
+	ParallelGateway_1{"+"}
+	ParallelGateway_2{"+"}
+	ParallelGateway_3{"+"}
+	ParallelGateway_4{"+"}
+	ParallelGateway_5{"+"}
+	ParallelGateway_6{"+"}
+
+	ExclusiveGateway_6 --> Task_8
+	Task_11 --> ParallelGateway_5
+	Task_5 --> ParallelGateway_2
+	ParallelGateway_1 --> Task_1
+	ExclusiveGateway_6 --> Task_3
+	ExclusiveGateway_4 --> ParallelGateway_4
+	ParallelGateway_4 --> Task_9
+	Task_4 --> ParallelGateway_1
+	ExclusiveGateway_1 --> ExclusiveGateway_3
+	ParallelGateway_6 --> ExclusiveGateway_2
+	Task_3 --> ExclusiveGateway_5
+	Task_12 --> ParallelGateway_2
+	ParallelGateway_4 --> Task_5
+	ParallelGateway_5 --> ExclusiveGateway_4
+	Task_1 --> ParallelGateway_5
+	Task_7 --> ParallelGateway_6
+	ExclusiveGateway_3 --> ExclusiveGateway_2
+	StartNoneEvent_1 --> Task_10
+	ExclusiveGateway_6 --> ExclusiveGateway_5
+	ExclusiveGateway_1 --> ExclusiveGateway_4
+	ParallelGateway_3 --> Task_6
+	ParallelGateway_1 --> Task_11
+	ExclusiveGateway_2 --> EndNoneEvent_1
+	Task_9 --> ParallelGateway_2
+	ExclusiveGateway_3 --> Task_2
+	ParallelGateway_3 --> ExclusiveGateway_6
+	Task_2 --> ParallelGateway_3
+	Task_8 --> ExclusiveGateway_5
+	ExclusiveGateway_5 --> Task_7
+	ParallelGateway_2 --> ExclusiveGateway_1
+	Task_6 --> ParallelGateway_6
+	ParallelGateway_4 --> Task_12
+	Task_10 --> Task_4

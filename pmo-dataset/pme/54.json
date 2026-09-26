@@ -1,0 +1,56 @@
+{
+    "tasks": [
+        {
+            "id": "Task_1",
+            "name": "INQ transmits the transaction data request",
+            "type": "Task"
+        },
+        {
+            "id": "Task_2",
+            "name": "IP checks the request of the INQ",
+            "type": "Task"
+        },
+        {
+            "id": "Task_3",
+            "name": "IP answers the question of the INQ",
+            "type": "Task"
+        }
+    ],
+    "events": [
+        {
+            "id": "StartNoneEvent_1",
+            "name": "",
+            "type": "StartNoneEvent"
+        },
+        {
+            "id": "EndNoneEvent_1",
+            "name": "",
+            "type": "EndNoneEvent"
+        }
+    ],
+    "gateways": [],
+    "pools": [],
+    "sequenceFlows": [
+        {
+            "id": "SequenceFlow_1",
+            "sourceRef": "StartNoneEvent_1",
+            "targetRef": "Task_1"
+        },
+        {
+            "id": "SequenceFlow_2",
+            "sourceRef": "Task_1",
+            "targetRef": "Task_2"
+        },
+        {
+            "id": "SequenceFlow_3",
+            "sourceRef": "Task_2",
+            "targetRef": "Task_3"
+        },
+        {
+            "id": "SequenceFlow_4",
+            "sourceRef": "Task_3",
+            "targetRef": "EndNoneEvent_1"
+        }
+    ],
+    "messageFlows": []
+}

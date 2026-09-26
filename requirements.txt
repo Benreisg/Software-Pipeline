@@ -1,0 +1,44 @@
+pydot>=2.0
+pandas>=2.0
+
+# Test suite (`python -m pytest tests -q`). Every test is offline — the vendor
+# SDKs are exercised with stubbed transports, so the suite never calls an API
+# and never spends anything.
+pytest>=8.0
+
+# Semantic quality (quality/semantic.py): the optimal bipartite label
+# matching of BEF4LLM Table A.17 uses the Hungarian method.
+numpy>=1.26
+scipy>=1.10
+
+# OPTIONAL — the synonym term of semantic label similarity (metric 2).
+# Without it the term is 0 and every row records sem_wordnet = 0.
+# After installing, fetch the corpus once:  python -m nltk.downloader wordnet
+nltk>=3.8
+
+# Semantic metric 4: the graph edit distance is networkx's
+# `optimize_edit_paths` (author's instruction, 2026-08-24; restored 2026-09-08
+# after the metric was dropped on 2026-08-29). Not `optimize_graph_edit_distance`,
+# which exposes no timeout — and this metric runs on a generation worker, where
+# one that does not return takes the whole run with it.
+networkx>=3.0
+
+# NOTE: scikit-learn / sentence-transformers were only required by the removed
+# quality-metric layer and stay out.
+
+# NOT a pip package: the validity dimension (quality/validity.py) shells out to
+# Graphviz's `nop -p` — install Graphviz itself (graphviz.org, `winget install
+# graphviz`, `apt install graphviz`, `brew install graphviz`) and have `nop` on
+# PATH, or point $GRAPHVIZ_NOP at the binary. Check with `dot -V`. Without it
+# the val_* columns come back empty (never zero) and scoring says so once.
+
+# vendor SDKs — only the ones for vendors you actually run are required.
+# Anthropic and OpenAI are the wired-up, price-verified vendors
+# (cfg.LIVE_VENDORS); the Mistral and Google integrations are best-effort
+# (see providers.py) — pin/upgrade and smoke-test each before a paid run.
+anthropic>=0.40
+# OpenAI ≥3.0: the provider uses the Responses API and reads
+# usage.input_tokens_details.cache_write_tokens, which older SDKs do not model.
+openai>=3.0
+mistralai>=1.0
+google-genai>=0.3

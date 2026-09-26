@@ -1,0 +1,113 @@
+graph LR
+	classDef endEvent stroke-width:3px
+	Task_1["Provide missing\ndocuments"]
+	Task_2["Meet with appeals\ncommittee"]
+	Task_3["Send rejection\nletter"]
+	Task_4["Set up IT accounts"]
+	Task_5["Confirm enrollment"]
+	Task_6["Add/drop courses"]
+	Task_7["Review grades online"]
+	Task_8["Graduate"]
+	Task_9["Meet with academic\nadvisor"]
+	Task_10["Post grades"]
+	Task_11["Resolve schedule\nconflicts"]
+	Task_12["Send acceptance\nletter"]
+	Task_13["Send orientation\nmaterials"]
+	Task_14["Withdraw"]
+	Task_15["Cancel application"]
+	Task_16["Evaluate application\nby admissions\ncommittee"]
+	Task_17["Assist with visa\nprocessing"]
+	Task_18["Review application\nand documents"]
+	Task_19["Submit appeal form"]
+	Task_20["Process fees or\nwaivers"]
+	Task_21["Notify applicant of\nmissing documents"]
+	Task_22["Await decision"]
+	Task_23["Submit application\nonline"]
+	Task_24["Select courses"]
+	Task_25["Obtain student ID\ncard"]
+	Task_26["Begin attending\nclasses"]
+	StartNoneEvent_1(("start"))
+	EndNoneEvent_1(("end")):::endEvent
+	ExclusiveGateway_1{"X"}
+	ExclusiveGateway_2{"X"}
+	ExclusiveGateway_3{"X"}
+	ExclusiveGateway_4{"X"}
+	ExclusiveGateway_5{"X"}
+	ExclusiveGateway_6{"X"}
+	ExclusiveGateway_7{"X"}
+	ExclusiveGateway_8{"X"}
+	ExclusiveGateway_9{"X"}
+	ExclusiveGateway_10{"X"}
+	ExclusiveGateway_11{"X"}
+	ExclusiveGateway_12{"X"}
+	ExclusiveGateway_13{"X"}
+	ExclusiveGateway_14{"X"}
+	ExclusiveGateway_15{"X"}
+	ExclusiveGateway_16{"X"}
+	ParallelGateway_1{"+"}
+	ParallelGateway_2{"+"}
+	ParallelGateway_3{"+"}
+	ParallelGateway_4{"+"}
+	ParallelGateway_5{"+"}
+	ParallelGateway_6{"+"}
+
+	ExclusiveGateway_6 --> EndNoneEvent_1
+	Task_6 --> ExclusiveGateway_15
+	ParallelGateway_5 --> ExclusiveGateway_3
+	Task_12 --> ExclusiveGateway_16
+	Task_17 --> ExclusiveGateway_13
+	Task_22 --> ExclusiveGateway_5
+	ParallelGateway_1 --> Task_13
+	ExclusiveGateway_13 --> ParallelGateway_6
+	ExclusiveGateway_7 --> ExclusiveGateway_15
+	Task_26 --> ExclusiveGateway_7
+	StartNoneEvent_1 --> Task_23
+	Task_3 --> ExclusiveGateway_6
+	ParallelGateway_3 --> ExclusiveGateway_9
+	ExclusiveGateway_8 --> Task_19
+	ExclusiveGateway_16 --> Task_15
+	Task_24 --> Task_11
+	ExclusiveGateway_3 --> Task_3
+	Task_2 --> Task_22
+	ParallelGateway_1 --> Task_4
+	ExclusiveGateway_10 --> Task_21
+	ParallelGateway_2 --> Task_16
+	ExclusiveGateway_14 --> ParallelGateway_2
+	ParallelGateway_2 --> Task_20
+	Task_9 --> Task_24
+	Task_19 --> Task_2
+	Task_18 --> ExclusiveGateway_10
+	ExclusiveGateway_7 --> Task_6
+	Task_21 --> Task_1
+	Task_25 --> ParallelGateway_3
+	Task_15 --> ExclusiveGateway_2
+	ExclusiveGateway_2 --> ExclusiveGateway_6
+	ExclusiveGateway_4 --> Task_17
+	Task_23 --> Task_18
+	ExclusiveGateway_1 --> Task_14
+	Task_10 --> Task_7
+	ExclusiveGateway_1 --> Task_8
+	Task_13 --> ParallelGateway_4
+	ParallelGateway_6 --> Task_9
+	ExclusiveGateway_5 --> ExclusiveGateway_11
+	Task_16 --> ParallelGateway_5
+	Task_7 --> ExclusiveGateway_8
+	ExclusiveGateway_11 --> ExclusiveGateway_1
+	ParallelGateway_4 --> ExclusiveGateway_4
+	Task_5 --> ParallelGateway_1
+	Task_4 --> ParallelGateway_4
+	ExclusiveGateway_4 --> ExclusiveGateway_13
+	ExclusiveGateway_10 --> ExclusiveGateway_14
+	Task_20 --> ParallelGateway_5
+	ExclusiveGateway_3 --> Task_12
+	ParallelGateway_6 --> Task_25
+	Task_8 --> ExclusiveGateway_12
+	ExclusiveGateway_15 --> Task_10
+	Task_14 --> ExclusiveGateway_12
+	ExclusiveGateway_9 --> Task_26
+	ExclusiveGateway_12 --> ExclusiveGateway_2
+	ExclusiveGateway_11 --> ExclusiveGateway_9
+	Task_1 --> ExclusiveGateway_14
+	Task_11 --> ParallelGateway_3
+	ExclusiveGateway_8 --> ExclusiveGateway_5
+	ExclusiveGateway_16 --> Task_5

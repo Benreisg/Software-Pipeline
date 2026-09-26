@@ -1,0 +1,482 @@
+{
+    "tasks": [
+        {
+            "id": "Task_1",
+            "name": "Process payment",
+            "type": "Task"
+        },
+        {
+            "id": "Task_2",
+            "name": "Confirm delivery",
+            "type": "Task"
+        },
+        {
+            "id": "Task_3",
+            "name": "Receive back-order",
+            "type": "Task"
+        },
+        {
+            "id": "Task_4",
+            "name": "Prepare documentation for international orders",
+            "type": "Task"
+        },
+        {
+            "id": "Task_5",
+            "name": "Initiate back-order",
+            "type": "Task"
+        },
+        {
+            "id": "Task_6",
+            "name": "Customer reports issue",
+            "type": "Task"
+        },
+        {
+            "id": "Task_7",
+            "name": "Perform quality control checks",
+            "type": "Task"
+        },
+        {
+            "id": "Task_8",
+            "name": "Dispatch order",
+            "type": "Task"
+        },
+        {
+            "id": "Task_9",
+            "name": "Check stock availability",
+            "type": "Task"
+        },
+        {
+            "id": "Task_10",
+            "name": "Prepare shipping documents and labels",
+            "type": "Task"
+        },
+        {
+            "id": "Task_11",
+            "name": "Process refund",
+            "type": "Task"
+        },
+        {
+            "id": "Task_12",
+            "name": "Inspect returned items",
+            "type": "Task"
+        },
+        {
+            "id": "Task_13",
+            "name": "Notify about failed payment",
+            "type": "Task"
+        },
+        {
+            "id": "Task_14",
+            "name": "Update inventory levels",
+            "type": "Task"
+        },
+        {
+            "id": "Task_15",
+            "name": "Gift wrap items",
+            "type": "Task"
+        },
+        {
+            "id": "Task_16",
+            "name": "Inform customer about delay",
+            "type": "Task"
+        },
+        {
+            "id": "Task_17",
+            "name": "Send return shipping label",
+            "type": "Task"
+        },
+        {
+            "id": "Task_18",
+            "name": "Process replacement",
+            "type": "Task"
+        },
+        {
+            "id": "Task_19",
+            "name": "Pick items from warehouse",
+            "type": "Task"
+        },
+        {
+            "id": "Task_20",
+            "name": "Send shipping confirmation to customer",
+            "type": "Task"
+        },
+        {
+            "id": "Task_21",
+            "name": "Package items",
+            "type": "Task"
+        },
+        {
+            "id": "Task_22",
+            "name": "Send follow-up email",
+            "type": "Task"
+        },
+        {
+            "id": "Task_23",
+            "name": "Record order details",
+            "type": "Task"
+        },
+        {
+            "id": "Task_24",
+            "name": "Receive returned items",
+            "type": "Task"
+        },
+        {
+            "id": "Task_25",
+            "name": "Place order",
+            "type": "Task"
+        }
+    ],
+    "events": [
+        {
+            "id": "StartNoneEvent_1",
+            "name": "start",
+            "type": "StartNoneEvent"
+        },
+        {
+            "id": "EndNoneEvent_1",
+            "name": "end",
+            "type": "EndNoneEvent"
+        }
+    ],
+    "gateways": [
+        {
+            "id": "ExclusiveGateway_1",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_2",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_3",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_4",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_5",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_6",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_7",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_8",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_9",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_10",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_11",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_12",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ParallelGateway_1",
+            "name": "",
+            "type": "ParallelGateway"
+        },
+        {
+            "id": "ParallelGateway_2",
+            "name": "",
+            "type": "ParallelGateway"
+        },
+        {
+            "id": "ParallelGateway_3",
+            "name": "",
+            "type": "ParallelGateway"
+        },
+        {
+            "id": "ParallelGateway_4",
+            "name": "",
+            "type": "ParallelGateway"
+        }
+    ],
+    "pools": [],
+    "sequenceFlows": [
+        {
+            "id": "SequenceFlow_1",
+            "sourceRef": "ExclusiveGateway_5",
+            "targetRef": "Task_11"
+        },
+        {
+            "id": "SequenceFlow_2",
+            "sourceRef": "Task_11",
+            "targetRef": "ExclusiveGateway_6"
+        },
+        {
+            "id": "SequenceFlow_3",
+            "sourceRef": "ExclusiveGateway_6",
+            "targetRef": "ExclusiveGateway_10"
+        },
+        {
+            "id": "SequenceFlow_4",
+            "sourceRef": "Task_9",
+            "targetRef": "ExclusiveGateway_9"
+        },
+        {
+            "id": "SequenceFlow_5",
+            "sourceRef": "ParallelGateway_2",
+            "targetRef": "Task_21"
+        },
+        {
+            "id": "SequenceFlow_6",
+            "sourceRef": "Task_3",
+            "targetRef": "ExclusiveGateway_3"
+        },
+        {
+            "id": "SequenceFlow_7",
+            "sourceRef": "ExclusiveGateway_11",
+            "targetRef": "Task_9"
+        },
+        {
+            "id": "SequenceFlow_8",
+            "sourceRef": "ExclusiveGateway_10",
+            "targetRef": "ExclusiveGateway_1"
+        },
+        {
+            "id": "SequenceFlow_9",
+            "sourceRef": "ExclusiveGateway_7",
+            "targetRef": "ParallelGateway_3"
+        },
+        {
+            "id": "SequenceFlow_10",
+            "sourceRef": "Task_17",
+            "targetRef": "Task_24"
+        },
+        {
+            "id": "SequenceFlow_11",
+            "sourceRef": "Task_2",
+            "targetRef": "Task_22"
+        },
+        {
+            "id": "SequenceFlow_12",
+            "sourceRef": "ExclusiveGateway_12",
+            "targetRef": "Task_6"
+        },
+        {
+            "id": "SequenceFlow_13",
+            "sourceRef": "ExclusiveGateway_12",
+            "targetRef": "ExclusiveGateway_10"
+        },
+        {
+            "id": "SequenceFlow_14",
+            "sourceRef": "ParallelGateway_1",
+            "targetRef": "Task_14"
+        },
+        {
+            "id": "SequenceFlow_15",
+            "sourceRef": "Task_6",
+            "targetRef": "Task_17"
+        },
+        {
+            "id": "SequenceFlow_16",
+            "sourceRef": "ExclusiveGateway_11",
+            "targetRef": "Task_13"
+        },
+        {
+            "id": "SequenceFlow_17",
+            "sourceRef": "ParallelGateway_4",
+            "targetRef": "Task_2"
+        },
+        {
+            "id": "SequenceFlow_18",
+            "sourceRef": "Task_12",
+            "targetRef": "ExclusiveGateway_5"
+        },
+        {
+            "id": "SequenceFlow_19",
+            "sourceRef": "Task_7",
+            "targetRef": "ParallelGateway_2"
+        },
+        {
+            "id": "SequenceFlow_20",
+            "sourceRef": "Task_14",
+            "targetRef": "ParallelGateway_4"
+        },
+        {
+            "id": "SequenceFlow_21",
+            "sourceRef": "StartNoneEvent_1",
+            "targetRef": "Task_25"
+        },
+        {
+            "id": "SequenceFlow_22",
+            "sourceRef": "Task_21",
+            "targetRef": "ExclusiveGateway_2"
+        },
+        {
+            "id": "SequenceFlow_23",
+            "sourceRef": "ExclusiveGateway_4",
+            "targetRef": "ExclusiveGateway_8"
+        },
+        {
+            "id": "SequenceFlow_24",
+            "sourceRef": "Task_20",
+            "targetRef": "ParallelGateway_4"
+        },
+        {
+            "id": "SequenceFlow_25",
+            "sourceRef": "Task_13",
+            "targetRef": "ExclusiveGateway_1"
+        },
+        {
+            "id": "SequenceFlow_26",
+            "sourceRef": "ExclusiveGateway_3",
+            "targetRef": "Task_19"
+        },
+        {
+            "id": "SequenceFlow_27",
+            "sourceRef": "Task_19",
+            "targetRef": "Task_7"
+        },
+        {
+            "id": "SequenceFlow_28",
+            "sourceRef": "Task_8",
+            "targetRef": "ParallelGateway_1"
+        },
+        {
+            "id": "SequenceFlow_29",
+            "sourceRef": "ExclusiveGateway_1",
+            "targetRef": "EndNoneEvent_1"
+        },
+        {
+            "id": "SequenceFlow_30",
+            "sourceRef": "ParallelGateway_1",
+            "targetRef": "Task_20"
+        },
+        {
+            "id": "SequenceFlow_31",
+            "sourceRef": "ParallelGateway_3",
+            "targetRef": "Task_8"
+        },
+        {
+            "id": "SequenceFlow_32",
+            "sourceRef": "ExclusiveGateway_2",
+            "targetRef": "ExclusiveGateway_7"
+        },
+        {
+            "id": "SequenceFlow_33",
+            "sourceRef": "ExclusiveGateway_2",
+            "targetRef": "Task_15"
+        },
+        {
+            "id": "SequenceFlow_34",
+            "sourceRef": "ExclusiveGateway_4",
+            "targetRef": "Task_4"
+        },
+        {
+            "id": "SequenceFlow_35",
+            "sourceRef": "Task_15",
+            "targetRef": "ExclusiveGateway_7"
+        },
+        {
+            "id": "SequenceFlow_36",
+            "sourceRef": "ExclusiveGateway_8",
+            "targetRef": "ParallelGateway_3"
+        },
+        {
+            "id": "SequenceFlow_37",
+            "sourceRef": "Task_1",
+            "targetRef": "ExclusiveGateway_11"
+        },
+        {
+            "id": "SequenceFlow_38",
+            "sourceRef": "Task_5",
+            "targetRef": "Task_16"
+        },
+        {
+            "id": "SequenceFlow_39",
+            "sourceRef": "ParallelGateway_2",
+            "targetRef": "Task_10"
+        },
+        {
+            "id": "SequenceFlow_40",
+            "sourceRef": "Task_23",
+            "targetRef": "Task_1"
+        },
+        {
+            "id": "SequenceFlow_41",
+            "sourceRef": "Task_24",
+            "targetRef": "Task_12"
+        },
+        {
+            "id": "SequenceFlow_42",
+            "sourceRef": "Task_18",
+            "targetRef": "ExclusiveGateway_6"
+        },
+        {
+            "id": "SequenceFlow_43",
+            "sourceRef": "ExclusiveGateway_9",
+            "targetRef": "Task_5"
+        },
+        {
+            "id": "SequenceFlow_44",
+            "sourceRef": "ExclusiveGateway_9",
+            "targetRef": "ExclusiveGateway_3"
+        },
+        {
+            "id": "SequenceFlow_45",
+            "sourceRef": "ParallelGateway_2",
+            "targetRef": "ExclusiveGateway_4"
+        },
+        {
+            "id": "SequenceFlow_46",
+            "sourceRef": "ExclusiveGateway_5",
+            "targetRef": "Task_18"
+        },
+        {
+            "id": "SequenceFlow_47",
+            "sourceRef": "Task_10",
+            "targetRef": "ParallelGateway_3"
+        },
+        {
+            "id": "SequenceFlow_48",
+            "sourceRef": "Task_16",
+            "targetRef": "Task_3"
+        },
+        {
+            "id": "SequenceFlow_49",
+            "sourceRef": "Task_4",
+            "targetRef": "ExclusiveGateway_8"
+        },
+        {
+            "id": "SequenceFlow_50",
+            "sourceRef": "Task_25",
+            "targetRef": "Task_23"
+        },
+        {
+            "id": "SequenceFlow_51",
+            "sourceRef": "Task_22",
+            "targetRef": "ExclusiveGateway_12"
+        }
+    ],
+    "messageFlows": []
+}

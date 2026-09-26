@@ -1,0 +1,48 @@
+digraph G {
+  rankdir=LR;  
+  node [shape=box];
+
+  "Provide support for\ntroubleshooting" -> "ExclusiveGateway_3";
+  "ParallelGateway_2" -> "ExclusiveGateway_6";
+  "Procure necessary\ntools or licenses" -> "Install the solution";
+  "ParallelGateway_4" -> "ExclusiveGateway_5";
+  "ExclusiveGateway_4" -> "ParallelGateway_4";
+  "ParallelGateway_1" -> "Assess compatibility";
+  "ParallelGateway_2" -> "ExclusiveGateway_7";
+  "Test solution" -> "Roll out solution to\nrequesting\ndepartment";
+  "ExclusiveGateway_2" -> "Provide support for\ntroubleshooting";
+  "ExclusiveGateway_1" -> "ExclusiveGateway_5";
+  "Assess compatibility" -> "ParallelGateway_3";
+  "Evaluate cost and\nresource needs" -> "ParallelGateway_3";
+  "ExclusiveGateway_1" -> "Procure necessary\ntools or licenses";
+  "ExclusiveGateway_3" -> "ExclusiveGateway_8";
+  "ExclusiveGateway_3" -> "ExclusiveGateway_2";
+  "ExclusiveGateway_7" -> "Provide training";
+  "Submit IT solution\nrequest" -> "ParallelGateway_1";
+  "ParallelGateway_3" -> "ExclusiveGateway_1";
+  "ExclusiveGateway_5" -> "end";
+  "start" -> "Submit IT solution\nrequest";
+  "Install the solution" -> "Test solution";
+  "Roll out solution to\nrequesting\ndepartment" -> "ParallelGateway_2";
+  "Provide training" -> "ExclusiveGateway_4";
+  "ExclusiveGateway_7" -> "ExclusiveGateway_4";
+  "ExclusiveGateway_6" -> "ExclusiveGateway_2";
+  "ExclusiveGateway_8" -> "ParallelGateway_4";
+  "ParallelGateway_1" -> "Evaluate cost and\nresource needs";
+  "ExclusiveGateway_6" -> "ExclusiveGateway_8";
+
+  "start" [shape=circle];
+  "end" [shape=circle, penwidth=4];
+  "ExclusiveGateway_1" [label="X", shape=diamond];
+  "ExclusiveGateway_2" [label="X", shape=diamond];
+  "ExclusiveGateway_3" [label="X", shape=diamond];
+  "ExclusiveGateway_4" [label="X", shape=diamond];
+  "ExclusiveGateway_5" [label="X", shape=diamond];
+  "ExclusiveGateway_6" [label="X", shape=diamond];
+  "ExclusiveGateway_7" [label="X", shape=diamond];
+  "ExclusiveGateway_8" [label="X", shape=diamond];
+  "ParallelGateway_1" [label="+", shape=diamond];
+  "ParallelGateway_2" [label="+", shape=diamond];
+  "ParallelGateway_3" [label="+", shape=diamond];
+  "ParallelGateway_4" [label="+", shape=diamond];
+}

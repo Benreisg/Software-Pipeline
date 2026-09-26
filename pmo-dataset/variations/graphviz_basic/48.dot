@@ -1,0 +1,41 @@
+digraph G {
+  rankdir=LR;  
+  node [shape=box];
+
+  "StartEvent" -> "select a starting block";
+  "ParallelGateway_1" -> "run for 5km";
+  "ParallelGateway_1" -> "measure the time_1";
+  "run for 5km" -> "ParallelGateway_2";
+  "measure the time_1" -> "ParallelGateway_2";
+  "ParallelGateway_2" -> "time less than 25 minutes?";
+  "train" -> "ExclusiveGateway_1";
+  "time less than 25 minutes?" -> "train" [label="No"];
+  "get your starting number" -> "calculate time between starting time and the end of workday";
+  "ExclusiveGateway_2" -> "ParallelGateway_3";
+  "ParallelGateway_3" -> "run";
+  "ParallelGateway_4" -> "receive your final running time";
+  "receive your final running time" -> "EndEvent";
+  "time more than 1 hour?" -> "ExclusiveGateway_2" [label="No"];
+  "calculate time between starting time and the end of workday" -> "time more than 1 hour?";
+  "run" -> "ParallelGateway_4";
+  "drink" -> "ParallelGateway_4";
+  "time less than 25 minutes?" -> "get your starting number" [label="Yes"];
+  "select a starting block" -> "ExclusiveGateway_1";
+  "ExclusiveGateway_1" -> "ParallelGateway_1";
+  "ParallelGateway_3" -> "drink";
+  "ParallelGateway_3" -> "measure the time_2";
+  "measure the time_2" -> "ParallelGateway_4";
+  "go to home" -> "ExclusiveGateway_2";
+  "time more than 1 hour?" -> "go to home" [label="Yes"];
+
+  "StartEvent" [shape=circle, label=""];
+  "EndEvent" [shape=circle, label=""];
+  "time less than 25 minutes?" [shape=diamond];
+  "ExclusiveGateway_1" [shape=diamond, label="X"];
+  "time more than 1 hour?" [shape=diamond];
+  "ExclusiveGateway_2" [shape=diamond, label="X"];
+  "ParallelGateway_1" [shape=diamond, label="+"];
+  "ParallelGateway_2" [shape=diamond, label="+"];
+  "ParallelGateway_3" [shape=diamond, label="+"];
+  "ParallelGateway_4" [shape=diamond, label="+"];
+}

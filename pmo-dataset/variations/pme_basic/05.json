@@ -1,0 +1,190 @@
+{
+    "tasks": [
+        {
+            "id": "Task_1",
+            "name": "Sign contract",
+            "type": "Task"
+        },
+        {
+            "id": "Task_2",
+            "name": "Conduct site visit",
+            "type": "Task"
+        },
+        {
+            "id": "Task_3",
+            "name": "Execute contract",
+            "type": "Task"
+        },
+        {
+            "id": "Task_4",
+            "name": "Identify need for new supplier or vendor",
+            "type": "Task"
+        },
+        {
+            "id": "Task_5",
+            "name": "Evaluate proposal",
+            "type": "Task"
+        },
+        {
+            "id": "Task_6",
+            "name": "Receive supplier proposals",
+            "type": "Task"
+        },
+        {
+            "id": "Task_7",
+            "name": "Begin contract negotiations",
+            "type": "Task"
+        },
+        {
+            "id": "Task_8",
+            "name": "Select supplier",
+            "type": "Task"
+        },
+        {
+            "id": "Task_9",
+            "name": "Conduct interview",
+            "type": "Task"
+        },
+        {
+            "id": "Task_10",
+            "name": "Issue request for proposals (RFP)",
+            "type": "Task"
+        },
+        {
+            "id": "Task_11",
+            "name": "Onboard supplier",
+            "type": "Task"
+        }
+    ],
+    "events": [
+        {
+            "id": "StartEvent_1",
+            "name": "start",
+            "type": "StartEvent"
+        },
+        {
+            "id": "EndEvent_1",
+            "name": "end",
+            "type": "EndEvent"
+        }
+    ],
+    "gateways": [
+        {
+            "id": "ExclusiveGateway_1",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_2",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_3",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_4",
+            "name": "",
+            "type": "ExclusiveGateway"
+        }
+    ],
+    "sequenceFlows": [
+        {
+            "id": "SequenceFlow_1",
+            "sourceRef": "Task_2",
+            "targetRef": "ExclusiveGateway_1"
+        },
+        {
+            "id": "SequenceFlow_2",
+            "sourceRef": "ExclusiveGateway_4",
+            "targetRef": "ExclusiveGateway_1"
+        },
+        {
+            "id": "SequenceFlow_3",
+            "sourceRef": "ExclusiveGateway_4",
+            "targetRef": "Task_9"
+        },
+        {
+            "id": "SequenceFlow_4",
+            "sourceRef": "ExclusiveGateway_2",
+            "targetRef": "Task_8"
+        },
+        {
+            "id": "SequenceFlow_5",
+            "sourceRef": "Task_3",
+            "targetRef": "EndEvent_1"
+        },
+        {
+            "id": "SequenceFlow_6",
+            "sourceRef": "Task_6",
+            "targetRef": "ExclusiveGateway_3"
+        },
+        {
+            "id": "SequenceFlow_7",
+            "sourceRef": "StartEvent_1",
+            "targetRef": "Task_4"
+        },
+        {
+            "id": "SequenceFlow_8",
+            "sourceRef": "ExclusiveGateway_3",
+            "targetRef": "Task_5"
+        },
+        {
+            "id": "SequenceFlow_9",
+            "sourceRef": "Task_9",
+            "targetRef": "ExclusiveGateway_1"
+        },
+        {
+            "id": "SequenceFlow_10",
+            "sourceRef": "Task_7",
+            "targetRef": "Task_1"
+        },
+        {
+            "id": "SequenceFlow_11",
+            "sourceRef": "ExclusiveGateway_4",
+            "targetRef": "Task_2"
+        },
+        {
+            "id": "SequenceFlow_12",
+            "sourceRef": "ExclusiveGateway_1",
+            "targetRef": "ExclusiveGateway_2"
+        },
+        {
+            "id": "SequenceFlow_13",
+            "sourceRef": "Task_1",
+            "targetRef": "Task_11"
+        },
+        {
+            "id": "SequenceFlow_14",
+            "sourceRef": "Task_10",
+            "targetRef": "Task_6"
+        },
+        {
+            "id": "SequenceFlow_15",
+            "sourceRef": "Task_5",
+            "targetRef": "ExclusiveGateway_4"
+        },
+        {
+            "id": "SequenceFlow_16",
+            "sourceRef": "Task_11",
+            "targetRef": "Task_3"
+        },
+        {
+            "id": "SequenceFlow_17",
+            "sourceRef": "ExclusiveGateway_2",
+            "targetRef": "ExclusiveGateway_3"
+        },
+        {
+            "id": "SequenceFlow_18",
+            "sourceRef": "Task_8",
+            "targetRef": "Task_7"
+        },
+        {
+            "id": "SequenceFlow_19",
+            "sourceRef": "Task_4",
+            "targetRef": "Task_10"
+        }
+    ]
+}

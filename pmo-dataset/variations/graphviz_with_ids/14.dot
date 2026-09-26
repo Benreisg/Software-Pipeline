@@ -1,0 +1,34 @@
+digraph G {
+  rankdir=LR;  
+  node [shape=box];
+
+  "Task_1" [label="Implement plan"];
+  "Task_2" [label="Approve final budget"];
+  "Task_3" [label="Provide feedback"];
+  "Task_4" [label="Distribute budget"];
+  "Task_5" [label="Outline objectives"];
+  "Task_6" [label="Draft plan"];
+  "Task_7" [label="Documented and\napprove adjustment"];
+  "Task_8" [label="Review budget\nfeasibility"];
+  "Task_9" [label="Adjust Plan"];
+  "Task_10" [label="Conduct strategic\nalignment meeting"];
+  "StartNoneEvent_1" [shape=circle, label="start"];
+  "EndNoneEvent_1" [shape=circle, penwidth=4, label="end"];
+  "ExclusiveGateway_1" [shape=diamond, label="X"];
+  "ExclusiveGateway_2" [shape=diamond, label="X"];
+
+  "Task_10" -> "ExclusiveGateway_2";
+  "ExclusiveGateway_2" -> "Task_8";
+  "Task_7" -> "ExclusiveGateway_2";
+  "Task_5" -> "Task_6";
+  "Task_1" -> "EndNoneEvent_1";
+  "Task_3" -> "ExclusiveGateway_1";
+  "Task_4" -> "Task_1";
+  "Task_9" -> "Task_7";
+  "ExclusiveGateway_1" -> "Task_2";
+  "Task_8" -> "Task_3";
+  "ExclusiveGateway_1" -> "Task_9";
+  "Task_2" -> "Task_4";
+  "Task_6" -> "Task_10";
+  "StartNoneEvent_1" -> "Task_5";
+}

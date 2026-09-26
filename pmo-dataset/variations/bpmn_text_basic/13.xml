@@ -1,0 +1,22 @@
+<process>
+    <activity role="" action="File complaint" objects="" id="activity1"/>
+    <activity role="" action="Log complaint" objects="" id="activity2"/>
+    <activity role="" action="Assign complaint to relevant department" objects="" id="activity3"/>
+    <activity role="" action="Review complaint details" objects="" id="activity4"/>
+    <exclusiveGateway id="exclusivegateway1">
+        <branch condition="" id="branch1">
+            <activity role="" action="Approve and notify customer" objects="" id="activity5"/>
+            <activity role="" action="Process reimbursement" objects="" id="activity6"/>
+        </branch>
+        <branch condition="" id="branch2">
+            <activity role="" action="Reject and notify customer" objects="" id="activity7"/>
+        </branch>
+    </exclusiveGateway>
+    <activity role="" action="Resolve complaint" objects="" id="activity8"/>
+    <exclusiveGateway id="exclusivegateway2">
+        <branch condition="" id="branch3">
+            <activity role="" action="Provide feedback" objects="" id="activity9"/>
+        </branch>
+        <branch condition="" id="branch4"/>
+    </exclusiveGateway>
+</process>

@@ -1,0 +1,58 @@
+digraph G {
+  rankdir=LR;  
+  node [shape=box];
+
+  "User_1" [label="Develop basic design"];
+  "User_2" [label="Order Lego brick\nsets"];
+  "Service_1" [label="Test subcomponent 1"];
+  "Service_2" [label="Test subcomponent 2"];
+  "Service_3" [label="Test subcomponent 3"];
+  "Service_4" [label="Test subcomponent 4"];
+  "Manual_1" [label="Give the lego sets\nto the children"];
+  "Manual_2" [label="Sort the parts into\ncontainers"];
+  "Manual_3" [label="Build the next\nsubcomponent"];
+  "Manual_4" [label="Reorder parts"];
+  "Manual_5" [label="Assemble\nsubcomponents"];
+  "StartNoneEvent_1" [shape=circle, label="New order received"];
+  "EndNoneEvent_1" [shape=circle, penwidth=4, label="Machine assembled"];
+  "ExclusiveGateway_1" [shape=diamond, label="X"];
+  "ExclusiveGateway_2" [shape=diamond, label="Parts remained?"];
+  "ExclusiveGateway_3" [shape=diamond, label="Container empty?"];
+  "ExclusiveGateway_4" [shape=diamond, label="X"];
+  "ExclusiveGateway_5" [shape=diamond, label="All tests\nsuccessfull?"];
+  "ExclusiveGateway_6" [shape=diamond, label="X"];
+  "ExclusiveGateway_7" [shape=diamond, label="Brick sets already\nordered?"];
+  "ExclusiveGateway_8" [shape=diamond, label="X"];
+  "ParallelGateway_1" [shape=diamond, label="+"];
+  "ParallelGateway_2" [shape=diamond, label="+"];
+
+  "StartNoneEvent_1" -> "ExclusiveGateway_6";
+  "User_2" -> "Manual_1";
+  "Manual_1" -> "Manual_2";
+  "ExclusiveGateway_2" -> "ExclusiveGateway_1" [label="Yes"];
+  "ExclusiveGateway_1" -> "ExclusiveGateway_3";
+  "ExclusiveGateway_4" -> "Manual_3";
+  "Manual_3" -> "ExclusiveGateway_2";
+  "ExclusiveGateway_3" -> "Manual_4" [label="Yes"];
+  "Manual_4" -> "ExclusiveGateway_4";
+  "ExclusiveGateway_3" -> "ExclusiveGateway_4" [label="No"];
+  "ParallelGateway_1" -> "Service_1";
+  "ParallelGateway_1" -> "Service_4";
+  "Service_4" -> "ParallelGateway_2";
+  "Service_3" -> "ParallelGateway_2";
+  "Service_1" -> "ParallelGateway_2";
+  "ParallelGateway_2" -> "ExclusiveGateway_5";
+  "Manual_5" -> "EndNoneEvent_1";
+  "Service_2" -> "ParallelGateway_2";
+  "ExclusiveGateway_6" -> "User_1";
+  "ExclusiveGateway_5" -> "ExclusiveGateway_6" [label="No"];
+  "ExclusiveGateway_5" -> "Manual_5" [label="Yes"];
+  "ExclusiveGateway_2" -> "ParallelGateway_1" [label="No"];
+  "User_1" -> "ExclusiveGateway_7";
+  "ExclusiveGateway_7" -> "User_2" [label="No"];
+  "Manual_2" -> "ExclusiveGateway_8";
+  "ExclusiveGateway_8" -> "ExclusiveGateway_1";
+  "ExclusiveGateway_7" -> "ExclusiveGateway_8" [label="Yes"];
+  "ParallelGateway_1" -> "Service_2";
+  "ParallelGateway_1" -> "Service_3";
+}

@@ -1,0 +1,32 @@
+graph LR
+	classDef endEvent stroke-width:4px
+	
+	StartNoneEvent_1(("Open E-Shop Homepage")) --> Manual_1["customer logs into\nE-Shop"]
+	Manual_1 --> Service_1["customer credentials\nbeing checked by\nsystem"]
+	Service_1 --> ExclusiveGateway_1{"succesful login?"}
+	Manual_2["customer selects a\nproduct"] --> Manual_3["customer adds\nproduct to shopping\ncart"]
+	Manual_3 --> Manual_4["customer saves\nproduct"]
+	Manual_4 --> Manual_5["customer checks if\nproduct was already\nselected"]
+	Manual_5 --> ExclusiveGateway_2{"has customer\nselected all desired\nproducts?"}
+	ParallelGateway_1{"+"} --> Service_2["Payment is prepared\nby system"]
+	ParallelGateway_1 --> Service_3["Shipment is prepared\nby system"]
+	ParallelGateway_2{"+"} --> Service_4["order is being\nfinished by system"]
+	Manual_6["customer enters\npayment data"] --> ParallelGateway_3{"+"}
+	Service_2 --> ParallelGateway_4{"+"}
+	Service_3 --> ParallelGateway_4
+	ParallelGateway_4 --> Manual_6
+	ParallelGateway_3 --> Manual_7["customer enters\nshipping address"]
+	Manual_7 --> ExclusiveGateway_3{"if shipping adress\n== billing adress?"}
+	Manual_8["customer enters an\nindependent billing\nadress"] --> ExclusiveGateway_4{"X"}
+	ExclusiveGateway_4 --> ParallelGateway_2
+	ExclusiveGateway_3 -->|"Yes"| ExclusiveGateway_4
+	ExclusiveGateway_3 -->|"No"| Manual_8
+	ExclusiveGateway_2 -->|"Yes"| ParallelGateway_1
+	Service_4 --> ExclusiveGateway_5{"X"}
+	ExclusiveGateway_5 --> EndNoneEvent_1(("Close E-Shop\nHomepage")):::endEvent
+	ExclusiveGateway_6{"X"} --> Manual_2
+	ExclusiveGateway_1 -->|"Yes"| ExclusiveGateway_6
+	ParallelGateway_3 --> Task_1["customer waits until\nbank confirms\npayment"]
+	Task_1 --> ParallelGateway_2
+	ExclusiveGateway_2 -->|"No"| ExclusiveGateway_6
+	ExclusiveGateway_1 -->|"No"| ExclusiveGateway_5

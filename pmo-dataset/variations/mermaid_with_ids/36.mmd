@@ -1,0 +1,72 @@
+graph LR
+	classDef endEvent stroke-width:3px
+	User_1["Check desired\nairplane type"]
+	User_2["Select number of\nseats"]
+	User_3["Select seat color"]
+	User_4["Introduce amount of\nwater in the toilets"]
+	User_5["Update flight\nprotocol"]
+	Service_1["Display bar type"]
+	Send_1["Send customizing\noptions"]
+	Send_2["Send requirements to\nthe russian team"]
+	Send_3["Send requirements to\nthe irish team"]
+	Send_4["Send requirements to\nfrench team"]
+	Send_5["Send requirements to\nthe american team"]
+	Send_6["Send requirements to\nthe italian team"]
+	Send_7["Send protocol to\ncustomer"]
+	Receive_1["Receive customizing\nrequirements"]
+	Receive_2["Receive customer\nconfirmation"]
+	Manual_1["Receive bar\ncomponents"]
+	Manual_2["Assemble interior"]
+	Manual_3["Flight test"]
+	Manual_4["Sent plane to\ncustomer"]
+	Manual_5["Ajdust errors"]
+	StartMessageEvent_1(("Get airplane request"))
+	EndNoneEvent_1((" ")):::endEvent
+	ExclusiveGateway_1{"Individual\ncustomizing?"}
+	ExclusiveGateway_2{"Bar type"}
+	ExclusiveGateway_3{"X"}
+	ExclusiveGateway_4{"Test succesful"}
+	ParallelGateway_1{"+"}
+	ParallelGateway_2{"+"}
+	ParallelGateway_3{"+"}
+	ParallelGateway_4{"+"}
+
+	StartMessageEvent_1 --> User_1
+	User_1 --> ExclusiveGateway_1
+	ParallelGateway_1 --> Service_1
+	ParallelGateway_1 --> User_2
+	ParallelGateway_1 --> User_3
+	ParallelGateway_1 --> User_4
+	Service_1 --> ExclusiveGateway_2
+	User_2 --> ParallelGateway_2
+	User_3 --> ParallelGateway_2
+	User_4 --> ParallelGateway_2
+	Send_1 --> Receive_1
+	Receive_1 --> ParallelGateway_1
+	Send_2 --> ExclusiveGateway_3
+	Send_3 --> ExclusiveGateway_3
+	ExclusiveGateway_3 --> Manual_1
+	Manual_1 --> ParallelGateway_2
+	ParallelGateway_2 --> Manual_2
+	Manual_4 --> Receive_2
+	Receive_2 --> EndNoneEvent_1
+	ExclusiveGateway_4 -->|"No"| Manual_5
+	ParallelGateway_3 --> Manual_3
+	Manual_3 --> ExclusiveGateway_4
+	ParallelGateway_3 --> User_5
+	User_5 --> Send_7
+	Send_7 --> ParallelGateway_4
+	ExclusiveGateway_4 -->|"Yes"| ParallelGateway_4
+	ParallelGateway_4 --> Manual_4
+	Send_4 --> ExclusiveGateway_3
+	Send_5 --> ExclusiveGateway_3
+	Send_6 --> ExclusiveGateway_3
+	Manual_2 --> ParallelGateway_3
+	Manual_5 --> Manual_3
+	ExclusiveGateway_1 -->|"Yes"| Send_1
+	ExclusiveGateway_1 -->|"No"| Manual_2
+	ExclusiveGateway_2 -->|"Vodka bar"| Send_2
+	ExclusiveGateway_2 -->|"Whiskey bar"| Send_3
+	ExclusiveGateway_2 -->|"Wine bar"| Send_4
+	ExclusiveGateway_2 -->|"Cocktail bar"| Send_5
+	ExclusiveGateway_2 -->|"Aperol bar"| Send_6

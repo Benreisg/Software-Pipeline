@@ -1,0 +1,35 @@
+graph LR
+	classDef endEvent stroke-width:4px
+	
+	User_1["select course"] --> ExclusiveGateway_1{"free spots?"}
+	Service_1["system shows\nparallel courses and\ndates"] --> User_2["select specific\ncourse"]
+	User_3["check if registered\nat eligible\nuniversity"] --> ExclusiveGateway_3{"eligible university?"}
+	ExclusiveGateway_3 -->|"no"| User_6["request activation"]
+	User_6 --> Service_2["system checks\neligibility"]
+	Service_2 --> ExclusiveGateway_4{"person eligible?"}
+	User_7["connect to twitter\naccount"] --> User_8["invite friends to\ncourse"]
+	ExclusiveGateway_1 -->|"yes"| Service_1
+	ExclusiveGateway_2{"already registered?"} -->|"no"| User_3
+	User_4["log into account"] --> ParallelGateway_1{"+"}
+	ParallelGateway_1 --> User_7
+	User_10["check if another\ncourse is\ninteresting"] --> ExclusiveGateway_5{"X"}
+	ParallelGateway_2{"+"} --> Service_3["system issues course\ntickets"]
+	User_8 --> ParallelGateway_2
+	User_9["provide payment info"] --> ParallelGateway_2
+	ExclusiveGateway_1 -->|"no"| User_10
+	User_2 --> ExclusiveGateway_2
+	StartNoneEvent_1(("wish to enroll in\ncourse")) --> ExclusiveGateway_6{"X"}
+	ExclusiveGateway_6 --> User_1
+	ExclusiveGateway_5 -->|"yes"| ExclusiveGateway_6
+	Service_3 --> ExclusiveGateway_7{"X"}
+	ExclusiveGateway_7 --> ExclusiveGateway_8{"X"}
+	ExclusiveGateway_8 --> EndNoneEvent_1(("end process")):::endEvent
+	ExclusiveGateway_5 -->|"no"| ExclusiveGateway_7
+	ExclusiveGateway_4 -->|"no"| ExclusiveGateway_8
+	ParallelGateway_1 --> User_9
+	ExclusiveGateway_9{"X"} --> User_5["register account"]
+	ExclusiveGateway_2 -->|"yes"| ExclusiveGateway_10{"X"}
+	ExclusiveGateway_10 --> User_4
+	User_5 --> ExclusiveGateway_10
+	ExclusiveGateway_4 -->|"yes"| ExclusiveGateway_9
+	ExclusiveGateway_3 -->|"yes"| ExclusiveGateway_9

@@ -1,0 +1,117 @@
+{
+    "startEvent": {
+        "name": "New order received"
+    },
+    "process": [
+        {
+            "type": "loop",
+            "condition": "No",
+            "body": [
+                {
+                    "type": "task",
+                    "name": "Develop basic design"
+                },
+                {
+                    "type": "xor",
+                    "condition": "Brick sets already ordered?",
+                    "branches": [
+                        {
+                            "label": "No",
+                            "branch": [
+                                {
+                                    "type": "task",
+                                    "name": "Order Lego brick sets"
+                                },
+                                {
+                                    "type": "task",
+                                    "name": "Give the lego sets to the children"
+                                },
+                                {
+                                    "type": "task",
+                                    "name": "Sort the parts into containers"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Yes",
+                            "branch": []
+                        }
+                    ]
+                },
+                {
+                    "type": "loop",
+                    "condition": "Yes",
+                    "body": [
+                        {
+                            "type": "xor",
+                            "condition": "Container empty?",
+                            "branches": [
+                                {
+                                    "label": "Yes",
+                                    "branch": [
+                                        {
+                                            "type": "task",
+                                            "name": "Reorder parts"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "label": "No",
+                                    "branch": []
+                                }
+                            ]
+                        },
+                        {
+                            "type": "task",
+                            "name": "Build the next subcomponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "parallel",
+                    "branches": [
+                        {
+                            "branch": [
+                                {
+                                    "type": "task",
+                                    "name": "Test subcomponent 1"
+                                }
+                            ]
+                        },
+                        {
+                            "branch": [
+                                {
+                                    "type": "task",
+                                    "name": "Test subcomponent 4"
+                                }
+                            ]
+                        },
+                        {
+                            "branch": [
+                                {
+                                    "type": "task",
+                                    "name": "Test subcomponent 2"
+                                }
+                            ]
+                        },
+                        {
+                            "branch": [
+                                {
+                                    "type": "task",
+                                    "name": "Test subcomponent 3"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "task",
+            "name": "Assemble subcomponents"
+        }
+    ],
+    "endEvent": {
+        "name": "Machine assembled"
+    }
+}

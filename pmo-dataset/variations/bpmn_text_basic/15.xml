@@ -1,0 +1,25 @@
+<process>
+    <activity role="" action="Schedule compliance audit" objects="" id="activity1"/>
+    <parallelGateway id="parallelgateway1">
+        <branch condition="" id="branch1">
+            <activity role="" action="Conduct self-assessment" objects="" id="activity2"/>
+        </branch>
+        <branch condition="" id="branch2">
+            <activity role="" action="Gather evidence" objects="" id="activity3"/>
+        </branch>
+        <branch condition="" id="branch3">
+            <activity role="" action="Prepare documentation" objects="" id="activity4"/>
+        </branch>
+    </parallelGateway>
+    <activity role="" action="Conduct external audit" objects="" id="activity5"/>
+    <activity role="" action="Identify gaps or issues" objects="" id="activity6"/>
+    <activity role="" action="Make necessary corrections or improvements" objects="" id="activity7"/>
+    <activity role="" action="Conduct final audit" objects="" id="activity8"/>
+    <exclusiveGateway id="exclusivegateway1">
+        <branch condition="" id="branch4">
+            <activity role="" action="Award certification" objects="" id="activity9"/>
+            <activity role="" action="Issue official documents" objects="" id="activity10"/>
+        </branch>
+        <branch condition="" id="branch5"/>
+    </exclusiveGateway>
+</process>

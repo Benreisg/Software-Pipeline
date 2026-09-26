@@ -1,0 +1,38 @@
+digraph G {
+  rankdir=LR;  
+  node [shape=box];
+
+  "Storage management" -> "Read order";
+  "Read order" -> "ExclusiveGateway_2";
+  "Check if product is\nin stock" -> "Is in stock?";
+  "Is in stock?" -> "Withdraw the Product\nfrom warehouse" [label="Yes"];
+  "Is in stock?" -> "Reorder from\nwholesaler" [label="No"];
+  "Reorder from\nwholesaler" -> "Waiting until\narrives (handling\nsystem)";
+  "Waiting until\narrives (handling\nsystem)" -> "Arrived after more\nthan ten days?";
+  "Demand delivery\ndelay penalty from\nthe wholesaler" -> "ExclusiveGateway_1";
+  "Arrived after more\nthan ten days?" -> "Demand delivery\ndelay penalty from\nthe wholesaler" [label="Yes"];
+  "Withdraw the Product\nfrom warehouse" -> "Check if the whole\norder is ready for\nshipment";
+  "Register in stock\nmanagement system" -> "Check if the whole\norder is ready for\nshipment";
+  "Check if the whole\norder is ready for\nshipment" -> "Order is ready for\nshipment?";
+  "Shipping the order" -> "Order was shipped";
+  "ExclusiveGateway_1" -> "Register in stock\nmanagement system";
+  "ExclusiveGateway_2" -> "Check if product is\nin stock";
+  "Order is ready for\nshipment?" -> "ExclusiveGateway_2" [label="No"];
+  "Arrived after more\nthan ten days?" -> "ExclusiveGateway_1" [label="No"];
+  "ParallelGateway_2" -> "Shipping the order";
+  "ParallelGateway_1" -> "Courier is requested";
+  "Order is ready for\nshipment?" -> "ParallelGateway_1" [label="Yes"];
+  "Packing the products" -> "ParallelGateway_2";
+  "Courier is requested" -> "ParallelGateway_2";
+  "ParallelGateway_1" -> "Packing the products";
+
+  "Storage management" [shape=circle];
+  "Order was shipped" [shape=circle, penwidth=4];
+  "Is in stock?" [shape=diamond];
+  "Arrived after more\nthan ten days?" [shape=diamond];
+  "Order is ready for\nshipment?" [shape=diamond];
+  "ExclusiveGateway_1" [label="X", shape=diamond];
+  "ExclusiveGateway_2" [label="X", shape=diamond];
+  "ParallelGateway_1" [label="+", shape=diamond];
+  "ParallelGateway_2" [label="+", shape=diamond];
+}

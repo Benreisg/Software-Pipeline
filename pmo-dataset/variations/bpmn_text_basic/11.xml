@@ -1,0 +1,50 @@
+<process>
+    <activity role="" action="Customer signs up" objects="" id="activity1"/>
+    <activity role="" action="Generate account" objects="" id="activity2"/>
+    <parallelGateway id="parallelgateway1">
+        <branch condition="" id="branch1">
+            <activity role="" action="Assign access" objects="" id="activity3"/>
+        </branch>
+        <branch condition="" id="branch2">
+            <activity role="" action="Set automatic triggers for billing cycles" objects="" id="activity4"/>
+        </branch>
+    </parallelGateway>
+    <loopGateway id="loopgateway1">
+        <branch condition="Loop condition" id="branch3">
+            <parallelGateway id="parallelgateway2">
+                <branch condition="" id="branch4">
+                    <activity role="" action="Send renewal notifications" objects="" id="activity5"/>
+                </branch>
+                <branch condition="" id="branch5">
+                    <activity role="" action="Send regular updates" objects="" id="activity6"/>
+                </branch>
+                <branch condition="" id="branch6">
+                    <activity role="" action="Send product enhancements" objects="" id="activity7"/>
+                </branch>
+            </parallelGateway>
+        </branch>
+    </loopGateway>
+    <exclusiveGateway id="exclusivegateway1">
+        <branch condition="" id="branch7"/>
+        <branch condition="" id="branch8">
+            <activity role="" action="Customer submits cancellation request" objects="" id="activity8"/>
+            <parallelGateway id="parallelgateway3">
+                <branch condition="" id="branch9">
+                    <activity role="" action="Deactivate subscription" objects="" id="activity9"/>
+                </branch>
+                <branch condition="" id="branch10">
+                    <exclusiveGateway id="exclusivegateway2">
+                        <branch condition="" id="branch11">
+                            <activity role="" action="apply refund" objects="" id="activity10"/>
+                        </branch>
+                        <branch condition="" id="branch12">
+                            <activity role="" action="apply charges" objects="" id="activity11"/>
+                        </branch>
+                        <branch condition="" id="branch13"/>
+                    </exclusiveGateway>
+                    <activity role="" action="Settle final account balance" objects="" id="activity12"/>
+                </branch>
+            </parallelGateway>
+        </branch>
+    </exclusiveGateway>
+</process>

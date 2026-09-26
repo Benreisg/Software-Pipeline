@@ -1,0 +1,42 @@
+graph LR
+	classDef endEvent stroke-width:3px
+	Task_1["Select items"]
+	Task_2["Set payment method"]
+	Task_3["Select free reward"]
+	Task_4["Deliver items"]
+	Task_5["Pay"]
+	Task_6["Login"]
+	Task_7["Return items"]
+	Task_8["Complete installment\nagreement"]
+	StartNoneEvent_1(("start"))
+	EndNoneEvent_1(("end")):::endEvent
+	ExclusiveGateway_1{"X"}
+	ExclusiveGateway_2{"X"}
+	ExclusiveGateway_3{"X"}
+	ExclusiveGateway_4{"X"}
+	ParallelGateway_1{"+"}
+	ParallelGateway_2{"+"}
+	ParallelGateway_3{"+"}
+	ParallelGateway_4{"+"}
+
+	ExclusiveGateway_2 --> Task_7
+	StartNoneEvent_1 --> Task_6
+	Task_3 --> ParallelGateway_3
+	Task_8 --> ExclusiveGateway_1
+	ExclusiveGateway_1 --> ParallelGateway_3
+	ParallelGateway_2 --> Task_3
+	Task_1 --> ParallelGateway_2
+	ParallelGateway_3 --> ExclusiveGateway_3
+	Task_2 --> ParallelGateway_1
+	ParallelGateway_4 --> Task_1
+	Task_7 --> ExclusiveGateway_3
+	ExclusiveGateway_3 --> Task_4
+	ExclusiveGateway_4 --> Task_8
+	Task_6 --> ParallelGateway_4
+	ParallelGateway_1 --> ExclusiveGateway_4
+	ExclusiveGateway_2 --> EndNoneEvent_1
+	Task_5 --> ExclusiveGateway_1
+	ParallelGateway_2 --> ParallelGateway_1
+	ExclusiveGateway_4 --> Task_5
+	Task_4 --> ExclusiveGateway_2
+	ParallelGateway_4 --> Task_2

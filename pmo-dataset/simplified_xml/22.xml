@@ -1,0 +1,109 @@
+<definitions Definitions_1>
+    <collaboration Collaboration_1>
+        <participant Pool_1> (Recourse Clerk)
+          - processRef: Process_Pool_1
+        </participant>
+    </collaboration>
+    <process Process_Pool_1> (Recourse Clerk)
+        <task Task_1 (check case)/>
+        <task Task_2 (send request for payment)/>
+        <task Task_3 (close case)/>
+        <task Task_4 (send reminder)/>
+        <task Task_5 (check reasoning)/>
+        <task Task_6 (close case)/>
+        <task Task_7 (hand over to collection agency)/>
+        <task Task_8 (make booking)/>
+        <task Task_9 (close case)/>
+        <startMessageEvent StartMessageEvent_1 (probable recourse detected)/>
+        <endNoneEvent EndNoneEvent_1 (case closed)/>
+        <endNoneEvent EndNoneEvent_2 (case closed)/>
+        <endNoneEvent EndNoneEvent_3 (case open)/>
+        <endNoneEvent EndNoneEvent_4 (case closed)/>
+        <intermediateMessageEventCatching IntermediateMessageEventCatching_1 (disagreement letter received)/>
+        <intermediateTimerEvent IntermediateTimerEvent_1 (Reminder is due)/>
+        <intermediateMessageEventCatching IntermediateMessageEventCatching_2 (Money received)/>
+        <exclusivegatewayGateway ExclusiveGateway_1 (recourse possible?)/>
+        <exclusivegatewayGateway ExclusiveGateway_2 (OK?)/>
+        <eventbasedgatewayGateway EventBasedGateway_1/>
+        <sequenceFlow SequenceFlow_1>
+          - sourceRef: StartMessageEvent_1
+          - targetRef: Task_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_2>
+          - sourceRef: Task_1
+          - targetRef: ExclusiveGateway_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_3> (yes)
+          - sourceRef: ExclusiveGateway_1
+          - targetRef: Task_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_4> (no)
+          - sourceRef: ExclusiveGateway_1
+          - targetRef: Task_3
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_5>
+          - sourceRef: Task_3
+          - targetRef: EndNoneEvent_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_6>
+          - sourceRef: Task_2
+          - targetRef: Task_4
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_7>
+          - sourceRef: Task_4
+          - targetRef: EventBasedGateway_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_8>
+          - sourceRef: EventBasedGateway_1
+          - targetRef: IntermediateMessageEventCatching_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_9>
+          - sourceRef: IntermediateMessageEventCatching_1
+          - targetRef: Task_5
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_10>
+          - sourceRef: Task_5
+          - targetRef: ExclusiveGateway_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_11> (yes)
+          - sourceRef: ExclusiveGateway_2
+          - targetRef: Task_6
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_12>
+          - sourceRef: Task_6
+          - targetRef: EndNoneEvent_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_13>
+          - sourceRef: EventBasedGateway_1
+          - targetRef: IntermediateTimerEvent_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_14>
+          - sourceRef: IntermediateTimerEvent_1
+          - targetRef: Task_7
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_15> (no)
+          - sourceRef: ExclusiveGateway_2
+          - targetRef: Task_7
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_16>
+          - sourceRef: Task_7
+          - targetRef: EndNoneEvent_3
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_17>
+          - sourceRef: EventBasedGateway_1
+          - targetRef: IntermediateMessageEventCatching_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_18>
+          - sourceRef: IntermediateMessageEventCatching_2
+          - targetRef: Task_8
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_19>
+          - sourceRef: Task_8
+          - targetRef: Task_9
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_20>
+          - sourceRef: Task_9
+          - targetRef: EndNoneEvent_4
+        </sequenceFlow>
+    </process>
+</definitions>

@@ -1,0 +1,34 @@
+graph LR
+	ExclusiveGateway_6{"X"} --> Task_8["apply refund"]
+	Task_11["Set automatic triggers for billing cycles"] --> ParallelGateway_5{"+"}
+	Task_5["Send regular updates"] --> ParallelGateway_2{"+"}
+	ParallelGateway_1{"+"} --> Task_1["Assign access"]
+	ExclusiveGateway_6 --> Task_3["apply charges"]
+	ExclusiveGateway_4{"X"} --> ParallelGateway_4{"+"}
+	ParallelGateway_4 --> Task_9["Send renewal notifications"]
+	Task_4["Generate account"] --> ParallelGateway_1
+	ExclusiveGateway_1{"X"} --> ExclusiveGateway_3{"X"}
+	ParallelGateway_6{"+"} --> ExclusiveGateway_2{"X"}
+	Task_3 --> ExclusiveGateway_5{"X"}
+	Task_12["Send product enhancements"] --> ParallelGateway_2
+	ParallelGateway_4 --> Task_5
+	ParallelGateway_5 --> ExclusiveGateway_4
+	Task_1 --> ParallelGateway_5
+	Task_7["Settle final account balance"] --> ParallelGateway_6
+	ExclusiveGateway_3 --> ExclusiveGateway_2
+	StartEvent_1(("start")) --> Task_10["Customer signs up"]
+	ExclusiveGateway_6 --> ExclusiveGateway_5
+	ExclusiveGateway_1 --> ExclusiveGateway_4
+	ParallelGateway_3{"+"} --> Task_6["Deactivate subscription"]
+	ParallelGateway_1 --> Task_11
+	ExclusiveGateway_2 --> EndEvent_1(("end"))
+	Task_9 --> ParallelGateway_2
+	ExclusiveGateway_3 --> Task_2["Customer submits cancellation request"]
+	ParallelGateway_3 --> ExclusiveGateway_6
+	Task_2 --> ParallelGateway_3
+	Task_8 --> ExclusiveGateway_5
+	ExclusiveGateway_5 --> Task_7
+	ParallelGateway_2 --> ExclusiveGateway_1
+	Task_6 --> ParallelGateway_6
+	ParallelGateway_4 --> Task_12
+	Task_10 --> Task_4

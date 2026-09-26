@@ -1,0 +1,288 @@
+{
+    "tasks": [
+        {
+            "id": "Task_1",
+            "name": "customer waits until bank confirms payment",
+            "type": "Task"
+        },
+        {
+            "id": "Service_1",
+            "name": "customer credentials being checked by system",
+            "type": "Service"
+        },
+        {
+            "id": "Service_2",
+            "name": "Payment is prepared by system",
+            "type": "Service"
+        },
+        {
+            "id": "Service_3",
+            "name": "Shipment is prepared by system",
+            "type": "Service"
+        },
+        {
+            "id": "Service_4",
+            "name": "order is being finished by system",
+            "type": "Service"
+        },
+        {
+            "id": "Manual_1",
+            "name": "customer logs into E-Shop",
+            "type": "Manual"
+        },
+        {
+            "id": "Manual_2",
+            "name": "customer selects a product",
+            "type": "Manual"
+        },
+        {
+            "id": "Manual_3",
+            "name": "customer adds product to shopping cart",
+            "type": "Manual"
+        },
+        {
+            "id": "Manual_4",
+            "name": "customer saves product",
+            "type": "Manual"
+        },
+        {
+            "id": "Manual_5",
+            "name": "customer checks if product was already selected",
+            "type": "Manual"
+        },
+        {
+            "id": "Manual_6",
+            "name": "customer enters payment data",
+            "type": "Manual"
+        },
+        {
+            "id": "Manual_7",
+            "name": "customer enters shipping address",
+            "type": "Manual"
+        },
+        {
+            "id": "Manual_8",
+            "name": "customer enters an independent billing adress",
+            "type": "Manual"
+        }
+    ],
+    "events": [
+        {
+            "id": "StartNoneEvent_1",
+            "name": "Open E-Shop Homepage",
+            "type": "StartNoneEvent"
+        },
+        {
+            "id": "EndNoneEvent_1",
+            "name": "Close E-Shop Homepage",
+            "type": "EndNoneEvent"
+        }
+    ],
+    "gateways": [
+        {
+            "id": "ExclusiveGateway_1",
+            "name": "succesful login?",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_2",
+            "name": "has customer selected all desired products?",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_3",
+            "name": "if shipping adress == billing adress?",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_4",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_5",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_6",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ParallelGateway_1",
+            "name": "",
+            "type": "ParallelGateway"
+        },
+        {
+            "id": "ParallelGateway_2",
+            "name": "",
+            "type": "ParallelGateway"
+        },
+        {
+            "id": "ParallelGateway_3",
+            "name": "",
+            "type": "ParallelGateway"
+        },
+        {
+            "id": "ParallelGateway_4",
+            "name": "",
+            "type": "ParallelGateway"
+        }
+    ],
+    "pools": [],
+    "sequenceFlows": [
+        {
+            "id": "SequenceFlow_1",
+            "sourceRef": "StartNoneEvent_1",
+            "targetRef": "Manual_1"
+        },
+        {
+            "id": "SequenceFlow_2",
+            "sourceRef": "Manual_1",
+            "targetRef": "Service_1"
+        },
+        {
+            "id": "SequenceFlow_3",
+            "sourceRef": "Service_1",
+            "targetRef": "ExclusiveGateway_1"
+        },
+        {
+            "id": "SequenceFlow_4",
+            "sourceRef": "Manual_2",
+            "targetRef": "Manual_3"
+        },
+        {
+            "id": "SequenceFlow_5",
+            "sourceRef": "Manual_3",
+            "targetRef": "Manual_4"
+        },
+        {
+            "id": "SequenceFlow_6",
+            "sourceRef": "Manual_4",
+            "targetRef": "Manual_5"
+        },
+        {
+            "id": "SequenceFlow_7",
+            "sourceRef": "Manual_5",
+            "targetRef": "ExclusiveGateway_2"
+        },
+        {
+            "id": "SequenceFlow_8",
+            "sourceRef": "ParallelGateway_1",
+            "targetRef": "Service_2"
+        },
+        {
+            "id": "SequenceFlow_9",
+            "sourceRef": "ParallelGateway_1",
+            "targetRef": "Service_3"
+        },
+        {
+            "id": "SequenceFlow_10",
+            "sourceRef": "ParallelGateway_2",
+            "targetRef": "Service_4"
+        },
+        {
+            "id": "SequenceFlow_11",
+            "sourceRef": "Manual_6",
+            "targetRef": "ParallelGateway_3"
+        },
+        {
+            "id": "SequenceFlow_12",
+            "sourceRef": "Service_2",
+            "targetRef": "ParallelGateway_4"
+        },
+        {
+            "id": "SequenceFlow_13",
+            "sourceRef": "Service_3",
+            "targetRef": "ParallelGateway_4"
+        },
+        {
+            "id": "SequenceFlow_14",
+            "sourceRef": "ParallelGateway_4",
+            "targetRef": "Manual_6"
+        },
+        {
+            "id": "SequenceFlow_15",
+            "sourceRef": "ParallelGateway_3",
+            "targetRef": "Manual_7"
+        },
+        {
+            "id": "SequenceFlow_16",
+            "sourceRef": "Manual_7",
+            "targetRef": "ExclusiveGateway_3"
+        },
+        {
+            "id": "SequenceFlow_17",
+            "sourceRef": "Manual_8",
+            "targetRef": "ExclusiveGateway_4"
+        },
+        {
+            "id": "SequenceFlow_18",
+            "sourceRef": "ExclusiveGateway_4",
+            "targetRef": "ParallelGateway_2"
+        },
+        {
+            "id": "SequenceFlow_19",
+            "sourceRef": "ExclusiveGateway_3",
+            "targetRef": "ExclusiveGateway_4",
+            "condition": "Yes"
+        },
+        {
+            "id": "SequenceFlow_20",
+            "sourceRef": "ExclusiveGateway_3",
+            "targetRef": "Manual_8",
+            "condition": "No"
+        },
+        {
+            "id": "SequenceFlow_21",
+            "sourceRef": "ExclusiveGateway_2",
+            "targetRef": "ParallelGateway_1",
+            "condition": "Yes"
+        },
+        {
+            "id": "SequenceFlow_22",
+            "sourceRef": "Service_4",
+            "targetRef": "ExclusiveGateway_5"
+        },
+        {
+            "id": "SequenceFlow_23",
+            "sourceRef": "ExclusiveGateway_5",
+            "targetRef": "EndNoneEvent_1"
+        },
+        {
+            "id": "SequenceFlow_24",
+            "sourceRef": "ExclusiveGateway_6",
+            "targetRef": "Manual_2"
+        },
+        {
+            "id": "SequenceFlow_25",
+            "sourceRef": "ExclusiveGateway_1",
+            "targetRef": "ExclusiveGateway_6",
+            "condition": "Yes"
+        },
+        {
+            "id": "SequenceFlow_26",
+            "sourceRef": "ParallelGateway_3",
+            "targetRef": "Task_1"
+        },
+        {
+            "id": "SequenceFlow_27",
+            "sourceRef": "Task_1",
+            "targetRef": "ParallelGateway_2"
+        },
+        {
+            "id": "SequenceFlow_28",
+            "sourceRef": "ExclusiveGateway_2",
+            "targetRef": "ExclusiveGateway_6",
+            "condition": "No"
+        },
+        {
+            "id": "SequenceFlow_29",
+            "sourceRef": "ExclusiveGateway_1",
+            "targetRef": "ExclusiveGateway_5",
+            "condition": "No"
+        }
+    ],
+    "messageFlows": []
+}

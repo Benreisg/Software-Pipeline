@@ -1,0 +1,60 @@
+graph LR
+	classDef endEvent stroke-width:3px
+	Task_1["Complete orientation"]
+	Task_2["Conduct initial\nphone interviews"]
+	Task_3["Conduct a virtual\ninterview"]
+	Task_4["Begin onboarding\nprocess"]
+	Task_5["Identify need for\nnew hire"]
+	Task_6["Choose candidate"]
+	Task_7["Collect resumes"]
+	Task_8["Extend offer"]
+	Task_9["Complete training"]
+	Task_10["Complete paperwork"]
+	Task_11["Invite candidates\nfor interviews"]
+	Task_12["Post job description"]
+	Task_13["Create job\ndescription"]
+	Task_14["Screen resumes"]
+	Task_15["Negotiate salary"]
+	Task_16["Conduct an in-person\ninterview"]
+	StartNoneEvent_1(("start"))
+	EndNoneEvent_1(("end")):::endEvent
+	ExclusiveGateway_1{"X"}
+	ExclusiveGateway_2{"X"}
+	ExclusiveGateway_3{"X"}
+	ExclusiveGateway_4{"X"}
+	ExclusiveGateway_5{"X"}
+	ExclusiveGateway_6{"X"}
+	ParallelGateway_1{"+"}
+	ParallelGateway_2{"+"}
+
+	Task_12 --> Task_7
+	Task_6 --> Task_8
+	Task_15 --> ExclusiveGateway_3
+	Task_14 --> Task_2
+	Task_2 --> Task_11
+	ExclusiveGateway_2 --> Task_6
+	ExclusiveGateway_6 --> ExclusiveGateway_5
+	ParallelGateway_1 --> Task_1
+	Task_1 --> ParallelGateway_2
+	ParallelGateway_1 --> Task_10
+	ExclusiveGateway_1 --> Task_3
+	Task_8 --> ExclusiveGateway_6
+	ParallelGateway_2 --> EndNoneEvent_1
+	ExclusiveGateway_1 --> Task_16
+	ExclusiveGateway_3 --> ExclusiveGateway_4
+	Task_16 --> ExclusiveGateway_2
+	Task_3 --> ExclusiveGateway_2
+	ParallelGateway_1 --> Task_9
+	Task_7 --> Task_14
+	ExclusiveGateway_2 --> ExclusiveGateway_1
+	Task_9 --> ParallelGateway_2
+	Task_13 --> Task_12
+	Task_11 --> ExclusiveGateway_1
+	Task_10 --> ParallelGateway_2
+	ExclusiveGateway_4 --> Task_15
+	ExclusiveGateway_5 --> Task_4
+	ExclusiveGateway_3 --> ExclusiveGateway_5
+	ExclusiveGateway_6 --> ExclusiveGateway_4
+	Task_5 --> Task_13
+	StartNoneEvent_1 --> Task_5
+	Task_4 --> ParallelGateway_1

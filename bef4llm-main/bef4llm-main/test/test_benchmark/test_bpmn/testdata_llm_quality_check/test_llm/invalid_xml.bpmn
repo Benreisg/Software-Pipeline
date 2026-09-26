@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:collaboration id="Collaboration_0geryc1">
+    <bpmn:participant ref="Dispatch of goods Computer Hardware Shop" name="Dispatch of goods&#10;Computer Hardware Shop" processRef="Process_1"/>
+    <bpmn:participant ref="Prepare for picking up goods" name="Prepare for picking up goods" processRef="Process_2"/>
+  </bpmn:collaboration>
+
+  <bpmn:process id="Process_1" isExecutable="false">
+    <!-- Write Application -->
+    <bpmn:participant ref="Employer" name="Employer" processRef="Process_1"/>
+    <bpmn:participant ref="Company" name="Company" processRef="Process_2"/>
+    <bpmn:process ref="WriteApplication" fromRef="Employer" toRef="Company" name="Write Application" processRef="Process_2"/>
+    
+    <!-- Receive Offer -->
+    <bpmn:participant ref="Company" name="Company" processRef="Process_2"/>
+    <bpmn:participant ref="Company" name="Company" processRef="Process_3"/>
+    <bpmn:process ref="ReceiveOffer" fromRef="Company" toRef="Company" name="Receive Offer" processRef="Process_4"/>
+    
+    <!-- Confirm Receipt and Rate -->
+    <bpmn:participant ref="Employer" name="Employer" processRef="Process_1"/>
+    <bpmn:participant ref="Company" name="Company" processRef="Process_3"/>
+    <bpmn:process ref="ConfirmReceiptRate" fromRef="Employer" toRef="Company" name="Confirm Receipt and Rate" processRef="Process_5"/>
+    
+    <!-- Rate Company -->
+    <bpmn:participant ref="Employer" name="Employer" processRef="Process_1"/>
+    <bpmn:participant ref="Company" name="Company" processRef="Process_3"/>
+    <bpmn:process ref="RateCompany" fromRef="Employer" toRef="Company" name="Rate Company" processRef="Process_8"/>
+    
+    <!-- Rate Employee -->
+    <bpmn:participant ref="Company" name="Company" processRef="Process_2"/>
+    <bpmn:participant ref="Company" name="Company" processRef="Process_9"/>
+    <bpmn:process ref="RateEmployee" fromRef="Company" toRef="Company" name="Rate Employee" processRef="Process_10"/>
+    
+    <!-- Company Review -->
+    <bpmn:participant ref="Company" name="Company" processRef="Process_3"/>
+    <bpmn:participant ref="Company" name="Company" processRef="Process_9"/>
+    <bpmn:process ref="CompanyReview" fromRef="Company" toRef="Company" name="Company Review" processRef="Process_11"/>
+    
+    <!-- Termination or Continue -->
+    <bpmn:participant ref="Employer" name="Employer" processRef="Process_1"/>
+    <bpmn:participant ref="Company" name="Company" processRef="Process_2"/>
+    <bpmn:process ref="TerminationOrContinue" fromRef="Employer" toRef="Company" name="Terminate or Continue" processRef="Process_12"/>
+  </bpmn:process>
+</bpmn:definitions>

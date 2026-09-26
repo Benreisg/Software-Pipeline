@@ -1,0 +1,102 @@
+<definitions Definitions_1>
+    <process Process_1>
+        <task Task_1 (Customer brings a defective computer)/>
+        <task Task_2 (CRS checks the defect)/>
+        <task Task_3 (CRS hands out a repair cost calculation)/>
+        <task Task_4 (Client takes her computer home unrepaired)/>
+        <task Task_5 (Check the hardware)/>
+        <task Task_6 (Check the software)/>
+        <task Task_7 (Proper system functionality is tested)/>
+        <task Task_8 (Repair is finished)/>
+        <task Task_9 (Repair the hardware)/>
+        <task Task_10 (Configure the software)/>
+        <startNoneEvent StartNoneEvent_1/>
+        <endNoneEvent EndNoneEvent_1/>
+        <exclusivegatewayGateway ExclusiveGateway_1/>
+        <exclusivegatewayGateway ExclusiveGateway_2/>
+        <exclusivegatewayGateway ExclusiveGateway_3/>
+        <exclusivegatewayGateway ExclusiveGateway_4/>
+        <parallelgatewayGateway ParallelGateway_1/>
+        <parallelgatewayGateway ParallelGateway_2/>
+        <sequenceFlow SequenceFlow_1>
+          - sourceRef: StartNoneEvent_1
+          - targetRef: Task_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_2>
+          - sourceRef: Task_1
+          - targetRef: Task_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_3>
+          - sourceRef: Task_2
+          - targetRef: Task_3
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_4>
+          - sourceRef: Task_3
+          - targetRef: ExclusiveGateway_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_5>
+          - sourceRef: ParallelGateway_1
+          - targetRef: Task_5
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_6>
+          - sourceRef: ParallelGateway_1
+          - targetRef: Task_6
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_7>
+          - sourceRef: Task_8
+          - targetRef: ExclusiveGateway_4
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_8>
+          - sourceRef: Task_5
+          - targetRef: Task_9
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_9>
+          - sourceRef: Task_7
+          - targetRef: ExclusiveGateway_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_10>
+          - sourceRef: Task_6
+          - targetRef: Task_10
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_11>
+          - sourceRef: ParallelGateway_2
+          - targetRef: Task_7
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_12>
+          - sourceRef: ExclusiveGateway_3
+          - targetRef: ParallelGateway_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_13>
+          - sourceRef: Task_9
+          - targetRef: ParallelGateway_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_14>
+          - sourceRef: Task_10
+          - targetRef: ParallelGateway_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_15>
+          - sourceRef: ExclusiveGateway_4
+          - targetRef: EndNoneEvent_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_16>
+          - sourceRef: Task_4
+          - targetRef: ExclusiveGateway_4
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_17> (costs are not acceptable)
+          - sourceRef: ExclusiveGateway_1
+          - targetRef: Task_4
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_18> (costs are acceptable)
+          - sourceRef: ExclusiveGateway_1
+          - targetRef: ExclusiveGateway_3
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_19> (error is detected)
+          - sourceRef: ExclusiveGateway_2
+          - targetRef: ExclusiveGateway_3
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_20> (no error)
+          - sourceRef: ExclusiveGateway_2
+          - targetRef: Task_8
+        </sequenceFlow>
+    </process>
+</definitions>

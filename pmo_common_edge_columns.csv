@@ -1,0 +1,23 @@
+column,description
+item,PMo item id — the same file stem on both sides
+profile,"What manipulations.json changed in this item: 'rename only', 'edges only', 'mixed' or 'none'"
+n_rename,Label changes applied to this item
+n_add_edge,Sequence flows added to this item
+n_remove_edge,Sequence flows removed from this item
+common_nodes_edges,The metric: 1 - (unmatched nodes + unmatched edges) / (|FOc| + |FOg| + |Fc| + |Fg|). 1.0 = every node and every edge matched.
+common_nodes,The node half alone: 2*matched nodes / (|FOc| + |FOg|). Must be 1.0 on an item whose only changes are edges.
+common_edges,The edge half alone: 2*matched edges / (|Fc| + |Fg|). Must be 1.0 on an item whose only changes are renames.
+expected_full,"Which half the manipulation profile says must be 1.0 — 'common_edges', 'common_nodes', 'both' or '' when the item was changed in both dimensions"
+check,ok / VIOLATION — whether expected_full actually is 1.0
+n_nodes_manipulated,"Compared nodes (non-gateway flow objects), manipulated side"
+n_nodes_original,"Compared nodes, original side"
+n_nodes_matched,|M^opt_Sem| — node pairs bound by the optimal matching
+n_edges_manipulated,"Contracted skeleton edges, manipulated side"
+n_edges_original,"Contracted skeleton edges, original side"
+n_edges_matched,Candidate edges whose mapped endpoints and flow type exist in the original
+n_unmatched_nodes,Numerator term: nodes of both sides left unmatched
+n_unmatched_edges,Numerator term: edges of both sides left unmatched
+bef_common_percentage,"BEF4LLM's own column for the same pair, joined from their run when available. Constant 1.0 by construction — this is the reference that could not validate anything."
+manipulated_path,The scored manipulated .dot
+original_path,The PMo original .dot it was compared against
+note,"Why a row has no value — a model that does not parse, or no original for the item"

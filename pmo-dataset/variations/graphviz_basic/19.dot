@@ -1,0 +1,37 @@
+digraph G {
+  rankdir=LR;  
+  node [shape=box];
+
+  "ExclusiveGateway_2" -> "Return items";
+  "start" -> "Login";
+  "Select free reward" -> "ParallelGateway_3";
+  "Complete installment agreement" -> "ExclusiveGateway_1";
+  "ExclusiveGateway_1" -> "ParallelGateway_3";
+  "ParallelGateway_2" -> "Select free reward";
+  "Select items" -> "ParallelGateway_2";
+  "ParallelGateway_3" -> "ExclusiveGateway_3";
+  "Set payment method" -> "ParallelGateway_1";
+  "ParallelGateway_4" -> "Select items";
+  "Return items" -> "ExclusiveGateway_3";
+  "ExclusiveGateway_3" -> "Deliver items";
+  "ExclusiveGateway_4" -> "Complete installment agreement";
+  "Login" -> "ParallelGateway_4";
+  "ParallelGateway_1" -> "ExclusiveGateway_4";
+  "ExclusiveGateway_2" -> "end";
+  "Pay" -> "ExclusiveGateway_1";
+  "ParallelGateway_2" -> "ParallelGateway_1";
+  "ExclusiveGateway_4" -> "Pay";
+  "Deliver items" -> "ExclusiveGateway_2";
+  "ParallelGateway_4" -> "Set payment method";
+
+  "start" [shape=circle, label="start"];
+  "end" [shape=circle, label="end"];
+  "ExclusiveGateway_1" [shape=diamond, label="X"];
+  "ExclusiveGateway_2" [shape=diamond, label="X"];
+  "ExclusiveGateway_3" [shape=diamond, label="X"];
+  "ExclusiveGateway_4" [shape=diamond, label="X"];
+  "ParallelGateway_1" [shape=diamond, label="+"];
+  "ParallelGateway_2" [shape=diamond, label="+"];
+  "ParallelGateway_3" [shape=diamond, label="+"];
+  "ParallelGateway_4" [shape=diamond, label="+"];
+}

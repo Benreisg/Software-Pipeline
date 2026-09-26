@@ -1,0 +1,22 @@
+{
+    "startEvent": {
+        "name": ""
+    },
+    "process": [
+        {
+            "type": "task",
+            "name": "INQ transmits the transaction data request"
+        },
+        {
+            "type": "task",
+            "name": "IP checks the request of the INQ"
+        },
+        {
+            "type": "task",
+            "name": "IP answers the question of the INQ"
+        }
+    ],
+    "endEvent": {
+        "name": ""
+    }
+}

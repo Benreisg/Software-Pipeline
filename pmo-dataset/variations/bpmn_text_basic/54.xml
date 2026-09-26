@@ -1,0 +1,5 @@
+<process>
+    <activity role="" action="INQ transmits the transaction data request" objects="" id="activity1"/>
+    <activity role="" action="IP checks the request of the INQ" objects="" id="activity2"/>
+    <activity role="" action="IP answers the question of the INQ" objects="" id="activity3"/>
+</process>

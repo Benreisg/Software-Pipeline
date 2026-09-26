@@ -1,0 +1,186 @@
+{
+    "tasks": [
+        {
+            "id": "User_1",
+            "name": "Send a report to the fridge service center",
+            "type": "User"
+        },
+        {
+            "id": "User_2",
+            "name": "Rate Service Facility",
+            "type": "User"
+        },
+        {
+            "id": "User_3",
+            "name": "Describe the symptoms",
+            "type": "User"
+        },
+        {
+            "id": "Service_1",
+            "name": "Schedule an appointment for fridge repair",
+            "type": "Service"
+        },
+        {
+            "id": "Service_2",
+            "name": "Select local service facility",
+            "type": "Service"
+        },
+        {
+            "id": "Manual_1",
+            "name": "Confirm that fridge is okay",
+            "type": "Manual"
+        },
+        {
+            "id": "Manual_2",
+            "name": "Repair the fridge",
+            "type": "Manual"
+        },
+        {
+            "id": "Manual_3",
+            "name": "Collect fridge type data",
+            "type": "Manual"
+        }
+    ],
+    "events": [
+        {
+            "id": "StartNoneEvent_1",
+            "name": "Fridge makes strange noises",
+            "type": "StartNoneEvent"
+        },
+        {
+            "id": "EndNoneEvent_1",
+            "name": "Repair process over",
+            "type": "EndNoneEvent"
+        },
+        {
+            "id": "IntermediateTimerEvent_1",
+            "name": "Wait until service facility arrives",
+            "type": "IntermediateTimerEvent"
+        }
+    ],
+    "gateways": [
+        {
+            "id": "ExclusiveGateway_1",
+            "name": "Submit a rating?",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_2",
+            "name": "Additional parts needed?",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_3",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ParallelGateway_1",
+            "name": "",
+            "type": "ParallelGateway"
+        },
+        {
+            "id": "ParallelGateway_2",
+            "name": "",
+            "type": "ParallelGateway"
+        }
+    ],
+    "pools": [],
+    "sequenceFlows": [
+        {
+            "id": "SequenceFlow_1",
+            "sourceRef": "User_2",
+            "targetRef": "EndNoneEvent_1"
+        },
+        {
+            "id": "SequenceFlow_2",
+            "sourceRef": "Manual_1",
+            "targetRef": "ExclusiveGateway_1"
+        },
+        {
+            "id": "SequenceFlow_3",
+            "sourceRef": "User_1",
+            "targetRef": "Service_2"
+        },
+        {
+            "id": "SequenceFlow_4",
+            "sourceRef": "Service_1",
+            "targetRef": "IntermediateTimerEvent_1"
+        },
+        {
+            "id": "SequenceFlow_5",
+            "sourceRef": "IntermediateTimerEvent_1",
+            "targetRef": "Manual_2"
+        },
+        {
+            "id": "SequenceFlow_6",
+            "sourceRef": "Manual_2",
+            "targetRef": "ExclusiveGateway_2"
+        },
+        {
+            "id": "SequenceFlow_7",
+            "sourceRef": "Service_2",
+            "targetRef": "ExclusiveGateway_3"
+        },
+        {
+            "id": "SequenceFlow_8",
+            "sourceRef": "ExclusiveGateway_3",
+            "targetRef": "Service_1"
+        },
+        {
+            "id": "SequenceFlow_9",
+            "sourceRef": "ParallelGateway_1",
+            "targetRef": "User_3"
+        },
+        {
+            "id": "SequenceFlow_10",
+            "sourceRef": "ParallelGateway_1",
+            "targetRef": "Manual_3"
+        },
+        {
+            "id": "SequenceFlow_11",
+            "sourceRef": "ExclusiveGateway_2",
+            "targetRef": "Manual_1",
+            "condition": "No. Fridge is repaired"
+        },
+        {
+            "id": "SequenceFlow_12",
+            "sourceRef": "ExclusiveGateway_1",
+            "targetRef": "User_2",
+            "condition": "Yes"
+        },
+        {
+            "id": "SequenceFlow_13",
+            "sourceRef": "Manual_3",
+            "targetRef": "ParallelGateway_2"
+        },
+        {
+            "id": "SequenceFlow_14",
+            "sourceRef": "ParallelGateway_2",
+            "targetRef": "User_1"
+        },
+        {
+            "id": "SequenceFlow_15",
+            "sourceRef": "User_3",
+            "targetRef": "ParallelGateway_2"
+        },
+        {
+            "id": "SequenceFlow_16",
+            "sourceRef": "StartNoneEvent_1",
+            "targetRef": "ParallelGateway_1"
+        },
+        {
+            "id": "SequenceFlow_17",
+            "sourceRef": "ExclusiveGateway_1",
+            "targetRef": "EndNoneEvent_1",
+            "condition": "No"
+        },
+        {
+            "id": "SequenceFlow_18",
+            "sourceRef": "ExclusiveGateway_2",
+            "targetRef": "ExclusiveGateway_3",
+            "condition": "Yes. Fridge is not repaired"
+        }
+    ],
+    "messageFlows": []
+}

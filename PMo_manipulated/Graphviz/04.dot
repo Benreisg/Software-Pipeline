@@ -1,0 +1,40 @@
+digraph G {
+  rankdir=LR;  
+  node [shape=box];
+
+  "ParallelGateway_5" -> "Analyze performance\nfor future\noptimization";
+  "ParallelGateway_3" -> "Select promotion\nchannels";
+  "ParallelGateway_5" -> "ParallelGateway_4";
+  "ParallelGateway_6" -> "Collect leads in CRM\nsystem";
+  "ExclusiveGateway_1" -> "ParallelGateway_4";
+  "Track performance in\nreal-time" -> "ParallelGateway_5";
+  "ParallelGateway_3" -> "Layout visuals";
+  "Define campaign\nobjectives" -> "ParallelGateway_3";
+  "ExclusiveGateway_2" -> "ExclusiveGateway_1";
+  "Promotion period\nends" -> "ParallelGateway_2";
+  "Select promotion\nchannels" -> "ParallelGateway_1";
+  "ExclusiveGateway_2" -> "Sales teams follows\nup on leads";
+  "Analyze performance\nfor future\noptimization" -> "ParallelGateway_2";
+  "Collect leads in CRM\nsystem" -> "ExclusiveGateway_2";
+  "Layout visuals" -> "ParallelGateway_1";
+  "ParallelGateway_1" -> "Launch campaign";
+  "Launch campaign" -> "ParallelGateway_6";
+  "ParallelGateway_2" -> "end";
+  "ParallelGateway_4" -> "Promotion period\nends";
+  "ParallelGateway_6" -> "Track performance in\nreal-time";
+  "start" -> "Define campaign\nobjectives";
+  "Sales teams follows\nup on leads" -> "ExclusiveGateway_1";
+  "Create content" -> "ParallelGateway_1";
+  "ParallelGateway_3" -> "Create content";
+
+  "start" [shape=circle];
+  "end" [shape=circle, penwidth=4];
+  "ExclusiveGateway_1" [label="X", shape=diamond];
+  "ExclusiveGateway_2" [label="X", shape=diamond];
+  "ParallelGateway_1" [label="+", shape=diamond];
+  "ParallelGateway_2" [label="+", shape=diamond];
+  "ParallelGateway_3" [label="+", shape=diamond];
+  "ParallelGateway_4" [label="+", shape=diamond];
+  "ParallelGateway_5" [label="+", shape=diamond];
+  "ParallelGateway_6" [label="+", shape=diamond];
+}

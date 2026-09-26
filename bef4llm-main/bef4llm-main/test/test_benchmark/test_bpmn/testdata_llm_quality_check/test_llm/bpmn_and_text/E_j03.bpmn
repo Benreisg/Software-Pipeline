@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:process id="WorkAccidentProcess" isExecutable="false">
+    <bpmn:laneSet>
+      <bpmn:lane id="EmployeeLane" name="Employee">
+        <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_ReportWorkAccident</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_ReportAlmostAccident</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="EmployerLane" name="Employer">
+        <bpmn:flowNodeRef>Task_ReceiveReport</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_ReportToLabourInspectorate</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_ReportToAccidentInsuranceProvider</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="AccidentInsuranceProviderLane" name="Accident Insurance Provider">
+        <bpmn:flowNodeRef>Task_ReceiveReportFromEmployer</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_ProcessClaim</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="SelfEmployedLane" name="Self-Employed">
+        <bpmn:flowNodeRef>Task_ReportAccidentToInsuranceProvider</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="StudentLane" name="Student/Schoolchild">
+        <bpmn:flowNodeRef>Task_ReportAccidentToDirectorate</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="StartEvent_1" name="Work Accident Occurs">
+      <bpmn:outgoing>SequenceFlow_1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_1" sourceRef="StartEvent_1" targetRef="Task_ReportWorkAccident"/>
+    <bpmn:task id="Task_ReportWorkAccident" name="Report Work Accident to Employer">
+      <bpmn:incoming>SequenceFlow_1</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_2</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="SequenceFlow_2" sourceRef="Task_ReportWorkAccident" targetRef="Task_ReceiveReport"/>
+    <bpmn:task id="Task_ReceiveReport" name="Receive Report from Employee">
+      <bpmn:incoming>SequenceFlow_2</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_3</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="SequenceFlow_3" sourceRef="Task_ReceiveReport" targetRef="Task_ReportToLabourInspectorate"/>
+    <bpmn:task id="Task_ReportToLabourInspectorate" name="Report to Labour Inspectorate (if necessary)">
+      <bpmn:incoming>SequenceFlow_3</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_4</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="SequenceFlow_4" sourceRef="Task_ReportToLabourInspectorate" targetRef="Task_ReportToAccidentInsuranceProvider"/>
+    <bpmn:task id="Task_ReportToAccidentInsuranceProvider" name="Report to Accident Insurance Provider">
+      <bpmn:incoming>SequenceFlow_4</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_5</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="SequenceFlow_5" sourceRef="Task_ReportToAccidentInsuranceProvider" targetRef="Task_ReceiveReportFromEmployer"/>
+    <bpmn:task id="Task_ReceiveReportFromEmployer" name="Receive Report from Employer">
+      <bpmn:incoming>SequenceFlow_5</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_6</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="SequenceFlow_6" sourceRef="Task_ReceiveReportFromEmployer" targetRef="Task_ProcessClaim"/>
+    <bpmn:task id="Task_ProcessClaim" name="Process Claim">
+      <bpmn:incoming>SequenceFlow_6</bpmn:incoming>
+    </bpmn:task>
+    <bpmn:task id="Task_ReportAlmostAccident" name="Report Almost Accident to Employer">
+      <bpmn:incoming>SequenceFlow_7</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_8</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="SequenceFlow_7" sourceRef="StartEvent_1" targetRef="Task_ReportAlmostAccident"/>
+    <bpmn:sequenceFlow id="SequenceFlow_8" sourceRef="Task_ReportAlmostAccident" targetRef="Task_ReceiveReport"/>
+    <bpmn:task id="Task_ReportAccidentToInsuranceProvider" name="Report Accident to Insurance Provider (Self-Employed)">
+      <bpmn:incoming>SequenceFlow_9</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_10</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="SequenceFlow_9" sourceRef="StartEvent_1" targetRef="Task_ReportAccidentToInsuranceProvider"/>
+    <bpmn:sequenceFlow id="SequenceFlow_10" sourceRef="Task_ReportAccidentToInsuranceProvider" targetRef="Task_ReceiveReportFromEmployer"/>
+    <bpmn:task id="Task_ReportAccidentToDirectorate" name="Report Accident to Directorate (Student/Schoolchild)">
+      <bpmn:incoming>SequenceFlow_11</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_12</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="SequenceFlow_11" sourceRef="StartEvent_1" targetRef="Task_ReportAccidentToDirectorate"/>
+    <bpmn:sequenceFlow id="SequenceFlow_12" sourceRef="Task_ReportAccidentToDirectorate" targetRef="Task_ReceiveReportFromEmployer"/>
+  </bpmn:process>
+</bpmn:definitions>

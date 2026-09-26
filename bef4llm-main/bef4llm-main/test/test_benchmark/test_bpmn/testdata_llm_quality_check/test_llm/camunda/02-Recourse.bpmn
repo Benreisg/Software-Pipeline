@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:process id="Process_1" isExecutable="false">
+    <bpmn:laneSet>
+      <bpmn:lane id="Lane_1" name="Recourse Handling">
+        <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_GetInformation</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>ExclusiveGateway_CheckRecourse</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_SendRequestForPayment</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_MakeReminder</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>ExclusiveGateway_ReceiveMoney</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_MakeBooking</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_CloseCase</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>ExclusiveGateway_Disagreement</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_CheckReasoning</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>ExclusiveGateway_ForwardToCollectionAgency</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_ForwardToCollectionAgency</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="StartEvent_1" name="Start Recourse Handling">
+      <bpmn:outgoing>SequenceFlow_1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_1" sourceRef="StartEvent_1" targetRef="Task_GetInformation" />
+    <bpmn:task id="Task_GetInformation" name="Get Information about Insurant">
+      <bpmn:incoming>SequenceFlow_1</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_2</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="SequenceFlow_2" sourceRef="Task_GetInformation" targetRef="ExclusiveGateway_CheckRecourse" />
+    <bpmn:exclusiveGateway id="ExclusiveGateway_CheckRecourse" name="Check Recourse Possibility">
+      <bpmn:incoming>SequenceFlow_2</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_3</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_4</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="SequenceFlow_3" name="Recourse Possible" sourceRef="ExclusiveGateway_CheckRecourse" targetRef="Task_SendRequestForPayment" />
+    <bpmn:sequenceFlow id="SequenceFlow_4" name="No Recourse" sourceRef="ExclusiveGateway_CheckRecourse" targetRef="EndEvent_CloseCase" />
+    <bpmn:task id="Task_SendRequestForPayment" name="Send Request for Payment to Insurant">
+      <bpmn:incoming>SequenceFlow_3</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_5</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="SequenceFlow_5" sourceRef="Task_SendRequestForPayment" targetRef="Task_MakeReminder" />
+    <bpmn:task id="Task_MakeReminder" name="Make Reminder">
+      <bpmn:incoming>SequenceFlow_5</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_6</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="SequenceFlow_6" sourceRef="Task_MakeReminder" targetRef="ExclusiveGateway_ReceiveMoney" />
+    <bpmn:exclusiveGateway id="ExclusiveGateway_ReceiveMoney" name="Receive Money">
+      <bpmn:incoming>SequenceFlow_6</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_7</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_8</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="SequenceFlow_7" name="Money Received" sourceRef="ExclusiveGateway_ReceiveMoney" targetRef="Task_MakeBooking" />
+    <bpmn:sequenceFlow id="SequenceFlow_8" name="No Money Received" sourceRef="ExclusiveGateway_ReceiveMoney" targetRef="ExclusiveGateway_Disagreement" />
+    <bpmn:task id="Task_MakeBooking" name="Make Booking">
+      <bpmn:incoming>SequenceFlow_7</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_9</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="SequenceFlow_9" sourceRef="Task_MakeBooking" targetRef="EndEvent_CloseCase" />
+    <bpmn:endEvent id="EndEvent_CloseCase" name="Close Case">
+      <bpmn:incoming>SequenceFlow_4</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_9</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:exclusiveGateway id="ExclusiveGateway_Disagreement" name="Disagreement">
+      <bpmn:incoming>SequenceFlow_8</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_10</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_11</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="SequenceFlow_10" name="Disagreement Received" sourceRef="ExclusiveGateway_Disagreement" targetRef="Task_CheckReasoning" />
+    <bpmn:sequenceFlow id="SequenceFlow_11" name="Deadline Reached" sourceRef="ExclusiveGateway_Disagreement" targetRef="Task_ForwardToCollectionAgency" />
+    <bpmn:task id="Task_CheckReasoning" name="Check Reasoning of Disagreement">
+      <bpmn:incoming>SequenceFlow_10</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_12</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="SequenceFlow_12" sourceRef="Task_CheckReasoning" targetRef="ExclusiveGateway_ForwardToCollectionAgency" />
+    <bpmn:exclusiveGateway id="ExclusiveGateway_ForwardToCollectionAgency" name="Forward to Collection Agency">
+      <bpmn:incoming>SequenceFlow_12</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_13</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_14</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="SequenceFlow_13" name="Forward to Collection Agency" sourceRef="ExclusiveGateway_ForwardToCollectionAgency" targetRef="Task_ForwardToCollectionAgency" />
+    <bpmn:sequenceFlow id="SequenceFlow_14" name="Close Case" sourceRef="ExclusiveGateway_ForwardToCollectionAgency" targetRef="EndEvent_CloseCase" />
+    <bpmn:task id="Task_ForwardToCollectionAgency" name="Forward to Collection Agency">
+      <bpmn:incoming>SequenceFlow_11</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_13</bpmn:incoming>
+    </bpmn:task>
+  </bpmn:process>
+</bpmn:definitions>

@@ -1,0 +1,26 @@
+<process>
+    <activity role="" action="Receive customer inquiry" objects="" id="activity1"/>
+    <parallelGateway id="parallelgateway1">
+        <branch condition="" id="branch1">
+            <activity role="" action="Address customer concerns or questions" objects="" id="activity2"/>
+        </branch>
+        <branch condition="" id="branch2">
+            <activity role="" action="Collect customer information" objects="" id="activity3"/>
+        </branch>
+    </parallelGateway>
+    <exclusiveGateway id="exclusivegateway1">
+        <branch condition="" id="branch3"/>
+        <branch condition="" id="branch4">
+            <activity role="" action="Guide customer in selecting product/service" objects="" id="activity4"/>
+            <activity role="" action="Provide quote" objects="" id="activity5"/>
+            <exclusiveGateway id="exclusivegateway2">
+                <branch condition="" id="branch5"/>
+                <branch condition="" id="branch6">
+                    <activity role="" action="Place order" objects="" id="activity6"/>
+                    <activity role="" action="Record order in system" objects="" id="activity7"/>
+                    <activity role="" action="Send order confirmation to customer" objects="" id="activity8"/>
+                </branch>
+            </exclusiveGateway>
+        </branch>
+    </exclusiveGateway>
+</process>

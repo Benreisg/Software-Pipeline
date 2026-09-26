@@ -1,0 +1,57 @@
+graph LR
+	classDef endEvent stroke-width:3px
+	Task_1["customer waits until\nbank confirms\npayment"]
+	Service_1["customer credentials\nbeing checked by\nsystem"]
+	Service_2["Payment is prepared\nby system"]
+	Service_3["Shipment is prepared\nby system"]
+	Service_4["order is being\nfinished by system"]
+	Manual_1["customer logs into\nE-Shop"]
+	Manual_2["customer selects a\nproduct"]
+	Manual_3["customer adds\nproduct to shopping\ncart"]
+	Manual_4["customer saves\nproduct"]
+	Manual_5["customer checks if\nproduct was already\nselected"]
+	Manual_6["customer enters\npayment data"]
+	Manual_7["customer enters\nshipping address"]
+	Manual_8["customer enters an\nindependent billing\nadress"]
+	StartNoneEvent_1(("Open E-Shop Homepage"))
+	EndNoneEvent_1(("Close E-Shop\nHomepage")):::endEvent
+	ExclusiveGateway_1{"succesful login?"}
+	ExclusiveGateway_2{"has customer\nselected all desired\nproducts?"}
+	ExclusiveGateway_3{"if shipping adress\n== billing adress?"}
+	ExclusiveGateway_4{"X"}
+	ExclusiveGateway_5{"X"}
+	ExclusiveGateway_6{"X"}
+	ParallelGateway_1{"+"}
+	ParallelGateway_2{"+"}
+	ParallelGateway_3{"+"}
+	ParallelGateway_4{"+"}
+
+	StartNoneEvent_1 --> Manual_1
+	Manual_1 --> Service_1
+	Service_1 --> ExclusiveGateway_1
+	Manual_2 --> Manual_3
+	Manual_3 --> Manual_4
+	Manual_4 --> Manual_5
+	Manual_5 --> ExclusiveGateway_2
+	ParallelGateway_1 --> Service_2
+	ParallelGateway_1 --> Service_3
+	ParallelGateway_2 --> Service_4
+	Manual_6 --> ParallelGateway_3
+	Service_2 --> ParallelGateway_4
+	Service_3 --> ParallelGateway_4
+	ParallelGateway_4 --> Manual_6
+	ParallelGateway_3 --> Manual_7
+	Manual_7 --> ExclusiveGateway_3
+	Manual_8 --> ExclusiveGateway_4
+	ExclusiveGateway_4 --> ParallelGateway_2
+	ExclusiveGateway_3 -->|"Yes"| ExclusiveGateway_4
+	ExclusiveGateway_3 -->|"No"| Manual_8
+	ExclusiveGateway_2 -->|"Yes"| ParallelGateway_1
+	Service_4 --> ExclusiveGateway_5
+	ExclusiveGateway_5 --> EndNoneEvent_1
+	ExclusiveGateway_6 --> Manual_2
+	ExclusiveGateway_1 -->|"Yes"| ExclusiveGateway_6
+	ParallelGateway_3 --> Task_1
+	Task_1 --> ParallelGateway_2
+	ExclusiveGateway_2 -->|"No"| ExclusiveGateway_6
+	ExclusiveGateway_1 -->|"No"| ExclusiveGateway_5

@@ -1,0 +1,17 @@
+graph LR
+	StartEvent_1(("start")) --> Task_7["File complaint"]
+	ExclusiveGateway_3{"X"} --> Task_1["Resolve complaint"]
+	Task_1 --> ExclusiveGateway_4{"X"}
+	ExclusiveGateway_4 --> Task_4["Provide feedback"]
+	ExclusiveGateway_1{"X"} --> EndEvent_1(("end"))
+	ExclusiveGateway_4 --> ExclusiveGateway_1
+	ExclusiveGateway_2{"X"} --> Task_2["Approve and notify customer"]
+	Task_8["Reject and notify customer"] --> ExclusiveGateway_3
+	Task_5["Log complaint"] --> Task_6["Assign complaint to relevant department"]
+	Task_9["Review complaint details"] --> ExclusiveGateway_2
+	Task_4 --> ExclusiveGateway_1
+	Task_7 --> Task_5
+	ExclusiveGateway_2 --> Task_8
+	Task_3["Process reimbursement"] --> ExclusiveGateway_3
+	Task_2 --> Task_3
+	Task_6 --> Task_9

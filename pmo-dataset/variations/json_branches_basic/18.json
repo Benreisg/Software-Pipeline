@@ -1,0 +1,253 @@
+{
+    "startEvent": {
+        "name": "start"
+    },
+    "process": [
+        {
+            "type": "task",
+            "name": "Submit application online"
+        },
+        {
+            "type": "task",
+            "name": "Review application and documents"
+        },
+        {
+            "type": "xor",
+            "condition": "",
+            "branches": [
+                {
+                    "branch": [
+                        {
+                            "type": "task",
+                            "name": "Notify applicant of missing documents"
+                        },
+                        {
+                            "type": "task",
+                            "name": "Provide missing documents"
+                        }
+                    ]
+                },
+                {
+                    "branch": []
+                }
+            ]
+        },
+        {
+            "type": "parallel",
+            "branches": [
+                {
+                    "branch": [
+                        {
+                            "type": "task",
+                            "name": "Evaluate application by admissions committee"
+                        }
+                    ]
+                },
+                {
+                    "branch": [
+                        {
+                            "type": "task",
+                            "name": "Process fees or waivers"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "xor",
+            "condition": "",
+            "branches": [
+                {
+                    "branch": [
+                        {
+                            "type": "task",
+                            "name": "Send rejection letter"
+                        }
+                    ]
+                },
+                {
+                    "branch": [
+                        {
+                            "type": "task",
+                            "name": "Send acceptance letter"
+                        },
+                        {
+                            "type": "xor",
+                            "condition": "",
+                            "branches": [
+                                {
+                                    "branch": [
+                                        {
+                                            "type": "task",
+                                            "name": "Cancel application"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "branch": [
+                                        {
+                                            "type": "task",
+                                            "name": "Confirm enrollment"
+                                        },
+                                        {
+                                            "type": "parallel",
+                                            "branches": [
+                                                {
+                                                    "branch": [
+                                                        {
+                                                            "type": "task",
+                                                            "name": "Send orientation materials"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "branch": [
+                                                        {
+                                                            "type": "task",
+                                                            "name": "Set up IT accounts"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "xor",
+                                            "condition": "",
+                                            "branches": [
+                                                {
+                                                    "branch": [
+                                                        {
+                                                            "type": "task",
+                                                            "name": "Assist with visa processing"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "branch": []
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "parallel",
+                                            "branches": [
+                                                {
+                                                    "branch": [
+                                                        {
+                                                            "type": "task",
+                                                            "name": "Meet with academic advisor"
+                                                        },
+                                                        {
+                                                            "type": "task",
+                                                            "name": "Select courses"
+                                                        },
+                                                        {
+                                                            "type": "task",
+                                                            "name": "Resolve schedule conflicts"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "branch": [
+                                                        {
+                                                            "type": "task",
+                                                            "name": "Obtain student ID card"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "loop",
+                                            "condition": "Loop condition",
+                                            "body": [
+                                                {
+                                                    "type": "task",
+                                                    "name": "Begin attending classes"
+                                                },
+                                                {
+                                                    "type": "xor",
+                                                    "condition": "",
+                                                    "branches": [
+                                                        {
+                                                            "branch": []
+                                                        },
+                                                        {
+                                                            "branch": [
+                                                                {
+                                                                    "type": "task",
+                                                                    "name": "Add/drop courses"
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "type": "task",
+                                                    "name": "Post grades"
+                                                },
+                                                {
+                                                    "type": "task",
+                                                    "name": "Review grades online"
+                                                },
+                                                {
+                                                    "type": "xor",
+                                                    "condition": "",
+                                                    "branches": [
+                                                        {
+                                                            "branch": [
+                                                                {
+                                                                    "type": "task",
+                                                                    "name": "Submit appeal form"
+                                                                },
+                                                                {
+                                                                    "type": "task",
+                                                                    "name": "Meet with appeals committee"
+                                                                },
+                                                                {
+                                                                    "type": "task",
+                                                                    "name": "Await decision"
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "branch": []
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "xor",
+                                            "condition": "",
+                                            "branches": [
+                                                {
+                                                    "branch": [
+                                                        {
+                                                            "type": "task",
+                                                            "name": "Withdraw"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "branch": [
+                                                        {
+                                                            "type": "task",
+                                                            "name": "Graduate"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "endEvent": {
+        "name": "end"
+    }
+}

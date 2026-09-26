@@ -1,0 +1,42 @@
+digraph G {
+  rankdir=LR;  
+  node [shape=box];
+
+  "notify social security" -> "ParallelGateway_2";
+  "notify employer" -> "ParallelGateway_2";
+  "ParallelGateway_2" -> "receive confirmation from employer";
+  "do maternity/paternity leave" -> "decide if extend leave or return to work";
+  "decide if extend leave or return to work" -> "ExclusiveGateway_1";
+  "ExclusiveGateway_1" -> "return to job";
+  "StartEvent" -> "ParallelGateway_3";
+  "ParallelGateway_3" -> "fetch information about financial support";
+  "ParallelGateway_3" -> "fetch information about leave models";
+  "fetch information about financial support" -> "ParallelGateway_4";
+  "fetch information about leave models" -> "ParallelGateway_4";
+  "ParallelGateway_4" -> "select appropriate model";
+  "ExclusiveGateway_2" -> "apply for financial support";
+  "apply for financial support" -> "ExclusiveGateway_3";
+  "decide if apply for financial support" -> "ExclusiveGateway_2";
+  "ExclusiveGateway_2" -> "ExclusiveGateway_3";
+  "receive confirmation from employer" -> "check if all necessary documents gathered";
+  "check if all necessary documents gathered" -> "ExclusiveGateway_4";
+  "ExclusiveGateway_4" -> "do maternity/paternity leave";
+  "ParallelGateway_1" -> "notify employer";
+  "ParallelGateway_1" -> "notify social security";
+  "ExclusiveGateway_4" -> "prepare necessary documents for leave";
+  "ExclusiveGateway_3" -> "prepare necessary documents for leave";
+  "prepare necessary documents for leave" -> "ParallelGateway_1";
+  "select appropriate model" -> "decide if apply for financial support";
+  "ExclusiveGateway_1" -> "prepare necessary documents for leave";
+
+  "StartEvent" [shape=circle, label=""];
+  "return to job" [shape=circle, label="return to job"];
+  "ExclusiveGateway_1" [shape=diamond, label="X"];
+  "ExclusiveGateway_2" [shape=diamond, label="X"];
+  "ExclusiveGateway_3" [shape=diamond, label="X"];
+  "ExclusiveGateway_4" [shape=diamond, label="X"];
+  "ParallelGateway_1" [shape=diamond, label="+"];
+  "ParallelGateway_2" [shape=diamond, label="+"];
+  "ParallelGateway_3" [shape=diamond, label="+"];
+  "ParallelGateway_4" [shape=diamond, label="+"];
+}

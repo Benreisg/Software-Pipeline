@@ -1,0 +1,44 @@
+digraph G {
+  rankdir=LR;  
+  node [shape=box];
+
+  "start" -> "Identify idea for\nnew item or\nimprovement";
+  "ParallelGateway_1" -> "Conduct feasibility\nstudies";
+  "Test safety" -> "ParallelGateway_2";
+  "Refine mock-up" -> "ExclusiveGateway_4";
+  "Approve prototype\nfor further\ndevelopment" -> "ExclusiveGateway_2";
+  "Identify idea for\nnew item or\nimprovement" -> "ParallelGateway_1";
+  "ParallelGateway_1" -> "Conduct initial\nresearch";
+  "Conduct initial\nresearch" -> "ParallelGateway_4";
+  "ExclusiveGateway_4" -> "ParallelGateway_3";
+  "ExclusiveGateway_3" -> "Discard prototype";
+  "ParallelGateway_3" -> "Test functionality";
+  "ExclusiveGateway_3" -> "Approve prototype\nfor further\ndevelopment";
+  "Conduct feasibility\nstudies" -> "ParallelGateway_4";
+  "ParallelGateway_3" -> "Test safety";
+  "ExclusiveGateway_1" -> "Refine mock-up";
+  "ExclusiveGateway_1" -> "ExclusiveGateway_3";
+  "ParallelGateway_3" -> "Test market\npotential";
+  "Select promising\ndesign" -> "Build prototype";
+  "Build prototype" -> "ExclusiveGateway_4";
+  "ExclusiveGateway_2" -> "end";
+  "ParallelGateway_4" -> "Draft design\nconcepts";
+  "Collect feedback\nfrom testing phase" -> "ExclusiveGateway_1";
+  "ParallelGateway_2" -> "Collect feedback\nfrom testing phase";
+  "Draft design\nconcepts" -> "Select promising\ndesign";
+  "Test functionality" -> "ParallelGateway_2";
+  "Test market\npotential" -> "ParallelGateway_2";
+  "Discard prototype" -> "ExclusiveGateway_2";
+  "ParallelGateway_4" -> "Build prototype";
+
+  "start" [shape=circle];
+  "end" [shape=circle, penwidth=4];
+  "ExclusiveGateway_1" [label="X", shape=diamond];
+  "ExclusiveGateway_2" [label="X", shape=diamond];
+  "ExclusiveGateway_3" [label="X", shape=diamond];
+  "ExclusiveGateway_4" [label="X", shape=diamond];
+  "ParallelGateway_1" [label="+", shape=diamond];
+  "ParallelGateway_2" [label="+", shape=diamond];
+  "ParallelGateway_3" [label="+", shape=diamond];
+  "ParallelGateway_4" [label="+", shape=diamond];
+}

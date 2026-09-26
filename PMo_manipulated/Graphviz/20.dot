@@ -1,0 +1,41 @@
+digraph G {
+  rankdir=LR;  
+  node [shape=box];
+
+  "ParallelGateway_3" -> "Manager submits\norder ticket to\nkitchen";
+  "ExclusiveGateway_2" -> "ExclusiveGateway_1";
+  "Manager takes down\nthe order" -> "ParallelGateway_3";
+  "Guest calls room\nservice" -> "Manager takes down\nthe order";
+  "ParallelGateway_3" -> "Manager assigns\norder to waiter";
+  "Manager assigns\norder to waiter" -> "ParallelGateway_2";
+  "ParallelGateway_3" -> "ExclusiveGateway_3";
+  "ParallelGateway_2" -> "Waiter prepares\nnonalcoholic drinks";
+  "Waiter debits\nguest's account" -> "end";
+  "Waiter returns to\nroom-service station" -> "ExclusiveGateway_2";
+  "Waiter prepares\nnonalcoholic drinks" -> "ParallelGateway_1";
+  "ParallelGateway_2" -> "Waiter readies cart";
+  "ExclusiveGateway_1" -> "Waiter debits\nguest's account";
+  "ExclusiveGateway_4" -> "ParallelGateway_1";
+  "Kitchen prepares\nfood" -> "ParallelGateway_1";
+  "ExclusiveGateway_3" -> "Manager gives order\nto sommelier";
+  "start" -> "Guest calls room\nservice";
+  "Waiter delivers\norder to guest's\nroom" -> "Waiter returns to\nroom-service station";
+  "Manager submits\norder ticket to\nkitchen" -> "Kitchen prepares\nfood";
+  "ParallelGateway_1" -> "Waiter delivers\norder to guest's\nroom";
+  "Sommelier fetches\nwine and prepare\nalcoholic beverages" -> "ExclusiveGateway_4";
+  "Manager gives order\nto sommelier" -> "Sommelier fetches\nwine and prepare\nalcoholic beverages";
+  "Waiter waits/delays\ndebiting" -> "ExclusiveGateway_1";
+  "Waiter readies cart" -> "ParallelGateway_1";
+  "ExclusiveGateway_3" -> "ExclusiveGateway_4";
+  "Waiter returns to\nroom-service station" -> "Waiter debits\nguest's account";
+
+  "start" [shape=circle];
+  "end" [shape=circle, penwidth=4];
+  "ExclusiveGateway_1" [label="X", shape=diamond];
+  "ExclusiveGateway_2" [label="X", shape=diamond];
+  "ExclusiveGateway_3" [label="X", shape=diamond];
+  "ExclusiveGateway_4" [label="X", shape=diamond];
+  "ParallelGateway_1" [label="+", shape=diamond];
+  "ParallelGateway_2" [label="+", shape=diamond];
+  "ParallelGateway_3" [label="+", shape=diamond];
+}

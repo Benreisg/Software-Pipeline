@@ -1,0 +1,47 @@
+digraph G {
+  rankdir=LR;  
+  node [shape=box];
+
+  "New order received" -> "ExclusiveGateway_3";
+  "Order Lego brick\nsets" -> "Give the lego sets\nto the children";
+  "Give the lego sets\nto the children" -> "Sort the parts into\ncontainers";
+  "Components remained?" -> "ExclusiveGateway_1" [label="Yes"];
+  "ExclusiveGateway_1" -> "Container empty?";
+  "ExclusiveGateway_2" -> "Build the next\nsubcomponent";
+  "Build the next\nsubcomponent" -> "Components remained?";
+  "Container empty?" -> "Reorder parts" [label="Yes"];
+  "Reorder parts" -> "ExclusiveGateway_2";
+  "Container empty?" -> "ExclusiveGateway_2" [label="No"];
+  "ParallelGateway_1" -> "Test subcomponent 1";
+  "ParallelGateway_1" -> "Test subcomponent 4";
+  "Test subcomponent 4" -> "ParallelGateway_2";
+  "Test subcomponent 3" -> "ParallelGateway_2";
+  "Test subcomponent 1" -> "ParallelGateway_2";
+  "ParallelGateway_2" -> "All tests\nsuccessfull?";
+  "Assemble\nsubcomponents" -> "Machine assembled";
+  "Test subcomponent 2" -> "ParallelGateway_2";
+  "ExclusiveGateway_3" -> "Develop basic design";
+  "All tests\nsuccessfull?" -> "ExclusiveGateway_3" [label="No"];
+  "All tests\nsuccessfull?" -> "Assemble\nsubcomponents" [label="Yes"];
+  "Components remained?" -> "ParallelGateway_1" [label="No"];
+  "Develop basic design" -> "Brick sets\npreviously ordered?";
+  "Brick sets\npreviously ordered?" -> "Order Lego brick\nsets" [label="No"];
+  "Sort the parts into\ncontainers" -> "ExclusiveGateway_4";
+  "ExclusiveGateway_4" -> "ExclusiveGateway_1";
+  "Brick sets\npreviously ordered?" -> "ExclusiveGateway_4" [label="Yes"];
+  "ParallelGateway_1" -> "Test subcomponent 2";
+  "ParallelGateway_1" -> "Test subcomponent 3";
+
+  "New order received" [shape=circle];
+  "Machine assembled" [shape=circle, penwidth=4];
+  "ExclusiveGateway_1" [label="X", shape=diamond];
+  "Components remained?" [shape=diamond];
+  "Container empty?" [shape=diamond];
+  "ExclusiveGateway_2" [label="X", shape=diamond];
+  "All tests\nsuccessfull?" [shape=diamond];
+  "ExclusiveGateway_3" [label="X", shape=diamond];
+  "Brick sets\npreviously ordered?" [shape=diamond];
+  "ExclusiveGateway_4" [label="X", shape=diamond];
+  "ParallelGateway_1" [label="+", shape=diamond];
+  "ParallelGateway_2" [label="+", shape=diamond];
+}

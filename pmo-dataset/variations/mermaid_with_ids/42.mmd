@@ -1,0 +1,37 @@
+graph LR
+	classDef endEvent stroke-width:3px
+	User_1["Send a report to the\nfridge service\ncenter"]
+	User_2["Rate Service\nFacility"]
+	User_3["Describe the\nsymptoms"]
+	Service_1["Schedule an\nappointment for\nfridge repair"]
+	Service_2["Select local service\nfacility"]
+	Manual_1["Confirm that fridge\nis okay"]
+	Manual_2["Repair the fridge"]
+	Manual_3["Collect fridge type\ndata"]
+	StartNoneEvent_1(("Fridge makes strange\nnoises"))
+	EndNoneEvent_1(("Repair process over")):::endEvent
+	IntermediateTimerEvent_1((("Wait until service\nfacility arrives")))
+	ExclusiveGateway_1{"Submit a rating?"}
+	ExclusiveGateway_2{"Additional parts\nneeded?"}
+	ExclusiveGateway_3{"X"}
+	ParallelGateway_1{"+"}
+	ParallelGateway_2{"+"}
+
+	User_2 --> EndNoneEvent_1
+	Manual_1 --> ExclusiveGateway_1
+	User_1 --> Service_2
+	Service_1 --> IntermediateTimerEvent_1
+	IntermediateTimerEvent_1 --> Manual_2
+	Manual_2 --> ExclusiveGateway_2
+	Service_2 --> ExclusiveGateway_3
+	ExclusiveGateway_3 --> Service_1
+	ParallelGateway_1 --> User_3
+	ParallelGateway_1 --> Manual_3
+	ExclusiveGateway_2 -->|"No. Fridge is\nrepaired"| Manual_1
+	ExclusiveGateway_1 -->|"Yes"| User_2
+	Manual_3 --> ParallelGateway_2
+	ParallelGateway_2 --> User_1
+	User_3 --> ParallelGateway_2
+	StartNoneEvent_1 --> ParallelGateway_1
+	ExclusiveGateway_1 -->|"No"| EndNoneEvent_1
+	ExclusiveGateway_2 -->|"Yes. Fridge is not\nrepaired"| ExclusiveGateway_3

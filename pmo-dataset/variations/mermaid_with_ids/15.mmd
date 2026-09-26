@@ -1,0 +1,37 @@
+graph LR
+	classDef endEvent stroke-width:3px
+	Task_1["Conduct\nself-assessment"]
+	Task_2["Make necessary\ncorrections or\nimprovements"]
+	Task_3["Issue official\ndocuments"]
+	Task_4["Conduct external\naudit"]
+	Task_5["Award certification"]
+	Task_6["Schedule compliance\naudit"]
+	Task_7["Identify gaps or\nissues"]
+	Task_8["Prepare\ndocumentation"]
+	Task_9["Gather evidence"]
+	Task_10["Conduct final audit"]
+	StartNoneEvent_1(("start"))
+	EndNoneEvent_1(("end")):::endEvent
+	ExclusiveGateway_1{"X"}
+	ExclusiveGateway_2{"X"}
+	ParallelGateway_1{"+"}
+	ParallelGateway_2{"+"}
+
+	Task_9 --> ParallelGateway_2
+	ParallelGateway_1 --> Task_1
+	Task_3 --> ExclusiveGateway_2
+	ParallelGateway_2 --> Task_4
+	ExclusiveGateway_2 --> EndNoneEvent_1
+	ExclusiveGateway_1 --> Task_5
+	Task_7 --> Task_2
+	Task_4 --> Task_7
+	Task_6 --> ParallelGateway_1
+	Task_8 --> ParallelGateway_2
+	Task_1 --> ParallelGateway_2
+	Task_5 --> Task_3
+	StartNoneEvent_1 --> Task_6
+	Task_2 --> Task_10
+	ParallelGateway_1 --> Task_9
+	ExclusiveGateway_1 --> ExclusiveGateway_2
+	ParallelGateway_1 --> Task_8
+	Task_10 --> ExclusiveGateway_1

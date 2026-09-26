@@ -1,0 +1,24 @@
+graph LR
+	classDef endEvent stroke-width:4px
+	
+	StartNoneEvent_1(("Start")) --> User_1["Determine properties"]
+	User_1 --> ParallelGateway_1{"+"}
+	ParallelGateway_1 --> Service_1["Order parts"]
+	ParallelGateway_1 --> Service_2["Order parts"]
+	Service_1 --> ParallelGateway_2{"+"}
+	Service_2 --> ParallelGateway_2
+	ParallelGateway_2 --> User_2["Check delivery of\nordered parts"]
+	User_2 --> ExclusiveGateway_1{"Parts arrived ?"}
+	ExclusiveGateway_1 -->|"No"| User_2
+	ExclusiveGateway_1 -->|"Yes"| User_3["Perform Inspection"]
+	User_3 --> Service_4["Assemble the parts"]
+	Service_4 --> Service_5["Send updates"]
+	Service_5 --> User_4["Send first saw"]
+	User_4 --> ExclusiveGateway_2{"Customer Approval ?"}
+	ExclusiveGateway_2 -->|"No"| User_5["Cancel production of\nthe remaining order"]
+	User_5 --> EndNoneEvent_1(("End")):::endEvent
+	ExclusiveGateway_2 -->|"Yes"| Service_6["Produce the\nremaining order"]
+	Service_6 --> User_6["Send the remaining\norder"]
+	User_6 --> EndNoneEvent_1
+	ParallelGateway_1 --> Service_3["Order parts"]
+	Service_3 --> ParallelGateway_2

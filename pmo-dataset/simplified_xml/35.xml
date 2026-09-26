@@ -1,0 +1,106 @@
+<definitions Definitions_1>
+    <process Process_1>
+        <task User_1 (Determine properties)/>
+        <task User_2 (Check delivery of ordered parts)/>
+        <task User_3 (Perform Inspection)/>
+        <task User_4 (Send first saw)/>
+        <task User_5 (Cancel production of the remaining order)/>
+        <task User_6 (Send the remaining order)/>
+        <task Service_1 (Order parts)/>
+        <task Service_2 (Order parts)/>
+        <task Service_3 (Order parts)/>
+        <task Service_4 (Assemble the parts)/>
+        <task Service_5 (Send updates)/>
+        <task Service_6 (Produce the remaining order)/>
+        <startNoneEvent StartNoneEvent_1 (Start)/>
+        <endNoneEvent EndNoneEvent_1 (End)/>
+        <exclusivegatewayGateway ExclusiveGateway_1 (Parts arrived ?)/>
+        <exclusivegatewayGateway ExclusiveGateway_2 (Customer Approval ?)/>
+        <parallelgatewayGateway ParallelGateway_1/>
+        <parallelgatewayGateway ParallelGateway_2/>
+        <sequenceFlow SequenceFlow_1>
+          - sourceRef: StartNoneEvent_1
+          - targetRef: User_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_2>
+          - sourceRef: User_1
+          - targetRef: ParallelGateway_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_3>
+          - sourceRef: ParallelGateway_1
+          - targetRef: Service_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_4>
+          - sourceRef: ParallelGateway_1
+          - targetRef: Service_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_5>
+          - sourceRef: Service_1
+          - targetRef: ParallelGateway_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_6>
+          - sourceRef: Service_2
+          - targetRef: ParallelGateway_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_7>
+          - sourceRef: ParallelGateway_2
+          - targetRef: User_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_8>
+          - sourceRef: User_2
+          - targetRef: ExclusiveGateway_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_9> (No)
+          - sourceRef: ExclusiveGateway_1
+          - targetRef: User_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_10> (Yes)
+          - sourceRef: ExclusiveGateway_1
+          - targetRef: User_3
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_11>
+          - sourceRef: User_3
+          - targetRef: Service_4
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_12>
+          - sourceRef: Service_4
+          - targetRef: Service_5
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_13>
+          - sourceRef: Service_5
+          - targetRef: User_4
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_14>
+          - sourceRef: User_4
+          - targetRef: ExclusiveGateway_2
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_15> (No)
+          - sourceRef: ExclusiveGateway_2
+          - targetRef: User_5
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_16>
+          - sourceRef: User_5
+          - targetRef: EndNoneEvent_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_17> (Yes)
+          - sourceRef: ExclusiveGateway_2
+          - targetRef: Service_6
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_18>
+          - sourceRef: Service_6
+          - targetRef: User_6
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_19>
+          - sourceRef: User_6
+          - targetRef: EndNoneEvent_1
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_20>
+          - sourceRef: ParallelGateway_1
+          - targetRef: Service_3
+        </sequenceFlow>
+        <sequenceFlow SequenceFlow_21>
+          - sourceRef: Service_3
+          - targetRef: ParallelGateway_2
+        </sequenceFlow>
+    </process>
+</definitions>

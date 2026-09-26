@@ -1,0 +1,35 @@
+<process>
+    <loopGateway id="loopgateway1">
+        <branch condition="Loop condition" id="branch1">
+            <activity role="" action="Check current inventory level" objects="" id="activity1"/>
+        </branch>
+    </loopGateway>
+    <exclusiveGateway id="exclusivegateway1">
+        <branch condition="" id="branch2">
+            <activity role="" action="Send a manual alert" objects="" id="activity2"/>
+        </branch>
+        <branch condition="" id="branch3">
+            <activity role="" action="Send an automated alert" objects="" id="activity3"/>
+        </branch>
+    </exclusiveGateway>
+    <activity role="" action="Place order with suppliers" objects="" id="activity4"/>
+    <activity role="" action="Update inventory system with expected delivery dates" objects="" id="activity5"/>
+    <activity role="" action="Receive stock" objects="" id="activity6"/>
+    <parallelGateway id="parallelgateway1">
+        <branch condition="" id="branch4">
+            <activity role="" action="Record stock in system" objects="" id="activity7"/>
+        </branch>
+        <branch condition="" id="branch5">
+            <activity role="" action="Inspect stock for quality" objects="" id="activity8"/>
+            <exclusiveGateway id="exclusivegateway2">
+                <branch condition="" id="branch6">
+                    <activity role="" action="Place stock on shelves" objects="" id="activity9"/>
+                </branch>
+                <branch condition="" id="branch7">
+                    <activity role="" action="Place stock in storage" objects="" id="activity10"/>
+                </branch>
+            </exclusiveGateway>
+        </branch>
+    </parallelGateway>
+    <activity role="" action="Update inventory levels" objects="" id="activity11"/>
+</process>

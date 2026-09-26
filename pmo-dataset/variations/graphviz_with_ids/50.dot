@@ -1,0 +1,28 @@
+digraph G {
+  rankdir=LR;  
+  node [shape=box];
+
+  "Task_1" [label="Claim is registered"];
+  "Task_2" [label="Claim is examined by\na claims officer"];
+  "Task_3" [label="Claims officer\nwrites a settlement\nrecommendation"];
+  "Task_4" [label="Recommendation is\nchecked by a senior\nclaims officer"];
+  "Task_5" [label="Senior claims\nofficer marks the\nclaim"];
+  "Task_6" [label="Claim is sent back"];
+  "Task_7" [label="Claim handling\nprocess proceeds"];
+  "StartNoneEvent_1" [shape=circle, label=""];
+  "EndNoneEvent_1" [shape=circle, penwidth=4, label=""];
+  "ExclusiveGateway_1" [shape=diamond, label="X"];
+  "ExclusiveGateway_2" [shape=diamond, label="X"];
+
+  "StartNoneEvent_1" -> "Task_1";
+  "Task_1" -> "Task_2";
+  "Task_3" -> "Task_4";
+  "Task_4" -> "Task_5";
+  "Task_5" -> "ExclusiveGateway_1";
+  "Task_2" -> "ExclusiveGateway_2";
+  "ExclusiveGateway_2" -> "Task_3";
+  "Task_6" -> "ExclusiveGateway_2";
+  "ExclusiveGateway_1" -> "Task_7" [label="OK"];
+  "ExclusiveGateway_1" -> "Task_6" [label="Not OK"];
+  "Task_7" -> "EndNoneEvent_1";
+}

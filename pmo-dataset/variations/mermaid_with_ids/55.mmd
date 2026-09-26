@@ -1,0 +1,83 @@
+graph LR
+	classDef endEvent stroke-width:3px
+	Task_1["Prepare implements"]
+	Task_2["Hand washing"]
+	Task_3["Get in sterile\nclothes"]
+	Task_4["Clean puncture area"]
+	Task_5["Drap puncture zone"]
+	Task_6["Ultrasound\nconfiguration"]
+	Task_7["Gel in probe"]
+	Task_8["Cover probe"]
+	Task_9["Put sterile gel"]
+	Task_10["Position probe"]
+	Task_11["Position patient"]
+	Task_12["Doppler\nidentification"]
+	Task_13["Anatomic\nidentification"]
+	Task_14["Compression\nidentification"]
+	Task_15["Anesthetize patient"]
+	Task_16["Puncture patient"]
+	Task_17["Check blood return"]
+	Task_18["Drop probe"]
+	Task_19["Remove syringe"]
+	Task_20["Guidewire install"]
+	Task_21["Remove trocar"]
+	Task_22["Check wire in long\naxis"]
+	Task_23["Check wire in short\naxis"]
+	Task_24["Check wire position"]
+	Task_25["Widen pathway"]
+	Task_26["Advance catheter"]
+	Task_27["Remove guidewire"]
+	Task_28["Check flow and\nreflow"]
+	Task_29["Check catheter\nposition"]
+	StartNoneEvent_1((" "))
+	EndNoneEvent_1((" ")):::endEvent
+	ExclusiveGateway_1{"Vein identification\nmethod"}
+	ExclusiveGateway_2{"X"}
+	ExclusiveGateway_3{"X"}
+	ExclusiveGateway_4{"X"}
+	ExclusiveGateway_5{"X"}
+	ExclusiveGateway_6{"Blood return correct\n?"}
+	ExclusiveGateway_7{"Wire in good\nposition ?"}
+
+	StartNoneEvent_1 --> Task_1
+	Task_1 --> Task_2
+	Task_2 --> Task_3
+	Task_3 --> Task_4
+	Task_4 --> Task_5
+	Task_5 --> Task_6
+	Task_6 --> Task_7
+	Task_7 --> Task_8
+	Task_8 --> Task_9
+	Task_9 --> Task_10
+	Task_10 --> Task_11
+	Task_11 --> ExclusiveGateway_1
+	ExclusiveGateway_1 --> Task_12
+	ExclusiveGateway_1 --> Task_13
+	ExclusiveGateway_1 --> Task_14
+	Task_12 --> ExclusiveGateway_2
+	Task_13 --> ExclusiveGateway_2
+	Task_14 --> ExclusiveGateway_2
+	Task_15 --> ExclusiveGateway_3
+	ExclusiveGateway_3 --> Task_16
+	Task_16 --> Task_17
+	ExclusiveGateway_2 --> Task_15
+	Task_18 --> Task_19
+	Task_19 --> Task_20
+	Task_20 --> Task_21
+	Task_21 --> ExclusiveGateway_4
+	ExclusiveGateway_4 --> Task_22
+	ExclusiveGateway_4 --> Task_23
+	Task_22 --> ExclusiveGateway_5
+	Task_23 --> ExclusiveGateway_5
+	ExclusiveGateway_5 --> Task_24
+	Task_17 --> ExclusiveGateway_6
+	Task_24 --> ExclusiveGateway_7
+	ExclusiveGateway_6 -->|"No"| ExclusiveGateway_3
+	ExclusiveGateway_7 -->|"No"| ExclusiveGateway_3
+	ExclusiveGateway_6 -->|"Yes"| Task_18
+	ExclusiveGateway_7 -->|"Yes"| Task_25
+	Task_25 --> Task_26
+	Task_26 --> Task_27
+	Task_27 --> Task_28
+	Task_28 --> Task_29
+	Task_29 --> EndNoneEvent_1

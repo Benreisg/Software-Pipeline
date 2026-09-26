@@ -1,0 +1,51 @@
+digraph G {
+  rankdir=LR;  
+  node [shape=box];
+
+  "Food order decided" -> "Select type of order";
+  "Select type of order" -> "Menu or just the\nburger ?";
+  "Select type of\nbeverage" -> "ParallelGateway_1";
+  "ParallelGateway_1" -> "Prepare beverage";
+  "ParallelGateway_1" -> "Select side";
+  "Prepare beverage" -> "ParallelGateway_2";
+  "Select side" -> "ParallelGateway_2";
+  "Prepare potato\nwedges" -> "ExclusiveGateway_1";
+  "Prepare French fries" -> "ExclusiveGateway_1";
+  "Fries or wedges ?" -> "Prepare potato\nwedges" [label="Potato wedges"];
+  "Fries or wedges ?" -> "Prepare French fries" [label="French fries"];
+  "ParallelGateway_2" -> "Fries or wedges ?";
+  "Select menu" -> "Select type of\nbeverage";
+  "Select burger" -> "ExclusiveGateway_2";
+  "Menu or just the\nburger ?" -> "Select menu" [label="With menu"];
+  "ExclusiveGateway_1" -> "ExclusiveGateway_2";
+  "ParallelGateway_3" -> "ExclusiveGateway_3";
+  "30 seconds" -> "Check status";
+  "Check status" -> "Is burger ready ?";
+  "Deliver via conveyor\nbelt" -> "Food delivered";
+  "ExclusiveGateway_3" -> "Update status";
+  "Update status" -> "30 seconds";
+  "ParallelGateway_4" -> "Notify customer";
+  "Notify customer" -> "Deliver via conveyor\nbelt";
+  "Menu or just the\nburger ?" -> "Select burger" [label="Burger only"];
+  "Is burger ready ?" -> "ExclusiveGateway_3" [label="No"];
+  "Is burger ready ?" -> "ParallelGateway_4" [label="Yes"];
+  "ParallelGateway_3" -> "Prepare burger";
+  "Make payment" -> "Enter customer's\nname";
+  "Enter customer's\nname" -> "ParallelGateway_3";
+  "ExclusiveGateway_2" -> "Make payment";
+  "ParallelGateway_2" -> "Prepare potato\nwedges";
+
+  "Food order decided" [shape=circle];
+  "Food delivered" [shape=circle, penwidth=4];
+  "30 seconds" [shape=doublecircle];
+  "Menu or just the\nburger ?" [shape=diamond];
+  "Fries or wedges ?" [shape=diamond];
+  "ExclusiveGateway_1" [label="X", shape=diamond];
+  "ExclusiveGateway_2" [label="X", shape=diamond];
+  "ExclusiveGateway_3" [label="X", shape=diamond];
+  "Is burger ready ?" [shape=diamond];
+  "ParallelGateway_1" [label="+", shape=diamond];
+  "ParallelGateway_2" [label="+", shape=diamond];
+  "ParallelGateway_3" [label="+", shape=diamond];
+  "ParallelGateway_4" [label="+", shape=diamond];
+}

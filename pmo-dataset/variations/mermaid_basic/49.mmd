@@ -1,0 +1,21 @@
+graph LR
+	StartEvent_1((" ")) --> Task_1["Customer brings a defective computer"]
+	Task_1 --> Task_2["CRS checks the defect"]
+	Task_2 --> Task_3["CRS hands out a repair cost calculation"]
+	Task_3 --> ExclusiveGateway_1{"X"}
+	ParallelGateway_1{"+"} --> Task_5["Check the hardware"]
+	ParallelGateway_1 --> Task_6["Check the software"]
+	Task_8["Repair is finished"] --> ExclusiveGateway_4{"X"}
+	Task_5 --> Task_9["Repair the hardware"]
+	Task_7["Proper system functionality is tested"] --> ExclusiveGateway_2{"X"}
+	Task_6 --> Task_10["Configure the software"]
+	ParallelGateway_2{"+"} --> Task_7
+	ExclusiveGateway_3{"X"} --> ParallelGateway_1
+	Task_9 --> ParallelGateway_2
+	Task_10 --> ParallelGateway_2
+	ExclusiveGateway_4 --> EndEvent_1((" "))
+	Task_4["Client takes her computer home unrepaired"] --> ExclusiveGateway_4
+	ExclusiveGateway_1 -->|"costs are not acceptable"| Task_4
+	ExclusiveGateway_1 -->|"costs are acceptable"| ExclusiveGateway_3
+	ExclusiveGateway_2 -->|"error is detected"| ExclusiveGateway_3
+	ExclusiveGateway_2 -->|"no error"| Task_8

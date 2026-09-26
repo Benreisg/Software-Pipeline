@@ -1,0 +1,22 @@
+digraph G {
+  rankdir=LR;  
+  node [shape=box];
+
+  "StartEvent" -> "Employee submits a vacation request";
+  "Employee submits a vacation request" -> "Requirement is registered";
+  "Requirement is registered" -> "Employee's supervisor receive the request";
+  "Employee's supervisor receive the request" -> "Supervisor approve or reject the request";
+  "Supervisor approve or reject the request" -> "ExclusiveGateway_1";
+  "Notification is generated to the HR Representative" -> "HR Representative complete the respective management procedures";
+  "HR Representative complete the respective management procedures" -> "ExclusiveGateway_2";
+  "ExclusiveGateway_2" -> "EndEvent";
+  "ExclusiveGateway_1" -> "Application is returned to employee" [label="rejected"];
+  "ExclusiveGateway_1" -> "Notification is generated to the HR Representative" [label="approved"];
+  "Application is returned to employee" -> "Employee can check rejection reasons";
+  "Employee can check rejection reasons" -> "ExclusiveGateway_2";
+
+  "StartEvent" [shape=circle, label=""];
+  "EndEvent" [shape=circle, label=""];
+  "ExclusiveGateway_1" [shape=diamond, label="X"];
+  "ExclusiveGateway_2" [shape=diamond, label="X"];
+}

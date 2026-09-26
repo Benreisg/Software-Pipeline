@@ -1,0 +1,211 @@
+{
+    "tasks": [
+        {
+            "id": "User_1",
+            "name": "Determine properties",
+            "type": "User"
+        },
+        {
+            "id": "User_2",
+            "name": "Check delivery of ordered parts",
+            "type": "User"
+        },
+        {
+            "id": "User_3",
+            "name": "Perform Inspection",
+            "type": "User"
+        },
+        {
+            "id": "User_4",
+            "name": "Send first saw",
+            "type": "User"
+        },
+        {
+            "id": "User_5",
+            "name": "Cancel production of the remaining order",
+            "type": "User"
+        },
+        {
+            "id": "User_6",
+            "name": "Send the remaining order",
+            "type": "User"
+        },
+        {
+            "id": "Service_1",
+            "name": "Order parts",
+            "type": "Service"
+        },
+        {
+            "id": "Service_2",
+            "name": "Order parts",
+            "type": "Service"
+        },
+        {
+            "id": "Service_3",
+            "name": "Order parts",
+            "type": "Service"
+        },
+        {
+            "id": "Service_4",
+            "name": "Assemble the parts",
+            "type": "Service"
+        },
+        {
+            "id": "Service_5",
+            "name": "Send updates",
+            "type": "Service"
+        },
+        {
+            "id": "Service_6",
+            "name": "Produce the remaining order",
+            "type": "Service"
+        }
+    ],
+    "events": [
+        {
+            "id": "StartNoneEvent_1",
+            "name": "Start",
+            "type": "StartNoneEvent"
+        },
+        {
+            "id": "EndNoneEvent_1",
+            "name": "End",
+            "type": "EndNoneEvent"
+        }
+    ],
+    "gateways": [
+        {
+            "id": "ExclusiveGateway_1",
+            "name": "Parts arrived ?",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_2",
+            "name": "Customer Approval ?",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ParallelGateway_1",
+            "name": "",
+            "type": "ParallelGateway"
+        },
+        {
+            "id": "ParallelGateway_2",
+            "name": "",
+            "type": "ParallelGateway"
+        }
+    ],
+    "pools": [],
+    "sequenceFlows": [
+        {
+            "id": "SequenceFlow_1",
+            "sourceRef": "StartNoneEvent_1",
+            "targetRef": "User_1"
+        },
+        {
+            "id": "SequenceFlow_2",
+            "sourceRef": "User_1",
+            "targetRef": "ParallelGateway_1"
+        },
+        {
+            "id": "SequenceFlow_3",
+            "sourceRef": "ParallelGateway_1",
+            "targetRef": "Service_1"
+        },
+        {
+            "id": "SequenceFlow_4",
+            "sourceRef": "ParallelGateway_1",
+            "targetRef": "Service_2"
+        },
+        {
+            "id": "SequenceFlow_5",
+            "sourceRef": "Service_1",
+            "targetRef": "ParallelGateway_2"
+        },
+        {
+            "id": "SequenceFlow_6",
+            "sourceRef": "Service_2",
+            "targetRef": "ParallelGateway_2"
+        },
+        {
+            "id": "SequenceFlow_7",
+            "sourceRef": "ParallelGateway_2",
+            "targetRef": "User_2"
+        },
+        {
+            "id": "SequenceFlow_8",
+            "sourceRef": "User_2",
+            "targetRef": "ExclusiveGateway_1"
+        },
+        {
+            "id": "SequenceFlow_9",
+            "sourceRef": "ExclusiveGateway_1",
+            "targetRef": "User_2",
+            "condition": "No"
+        },
+        {
+            "id": "SequenceFlow_10",
+            "sourceRef": "ExclusiveGateway_1",
+            "targetRef": "User_3",
+            "condition": "Yes"
+        },
+        {
+            "id": "SequenceFlow_11",
+            "sourceRef": "User_3",
+            "targetRef": "Service_4"
+        },
+        {
+            "id": "SequenceFlow_12",
+            "sourceRef": "Service_4",
+            "targetRef": "Service_5"
+        },
+        {
+            "id": "SequenceFlow_13",
+            "sourceRef": "Service_5",
+            "targetRef": "User_4"
+        },
+        {
+            "id": "SequenceFlow_14",
+            "sourceRef": "User_4",
+            "targetRef": "ExclusiveGateway_2"
+        },
+        {
+            "id": "SequenceFlow_15",
+            "sourceRef": "ExclusiveGateway_2",
+            "targetRef": "User_5",
+            "condition": "No"
+        },
+        {
+            "id": "SequenceFlow_16",
+            "sourceRef": "User_5",
+            "targetRef": "EndNoneEvent_1"
+        },
+        {
+            "id": "SequenceFlow_17",
+            "sourceRef": "ExclusiveGateway_2",
+            "targetRef": "Service_6",
+            "condition": "Yes"
+        },
+        {
+            "id": "SequenceFlow_18",
+            "sourceRef": "Service_6",
+            "targetRef": "User_6"
+        },
+        {
+            "id": "SequenceFlow_19",
+            "sourceRef": "User_6",
+            "targetRef": "EndNoneEvent_1"
+        },
+        {
+            "id": "SequenceFlow_20",
+            "sourceRef": "ParallelGateway_1",
+            "targetRef": "Service_3"
+        },
+        {
+            "id": "SequenceFlow_21",
+            "sourceRef": "Service_3",
+            "targetRef": "ParallelGateway_2"
+        }
+    ],
+    "messageFlows": []
+}

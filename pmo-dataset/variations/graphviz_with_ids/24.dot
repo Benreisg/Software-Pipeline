@@ -1,0 +1,117 @@
+digraph G {
+  rankdir=LR;  
+  node [shape=box];
+
+  "Task_1" [label="Enter restaurant"];
+  "Task_2" [label="Choose dish"];
+  "Task_3" [label="Place order"];
+  "Task_4" [label="Pay money"];
+  "Task_5" [label="Take buzzer"];
+  "Task_6" [label="Get meal"];
+  "Task_7" [label="Eat meal"];
+  "Task_8" [label="Enter order"];
+  "Task_9" [label="Collect money"];
+  "Task_10" [label="Set up buzzer"];
+  "Task_11" [label="Hand over buzzer"];
+  "Task_12" [label="Inform chef"];
+  "Task_13" [label="Set off buzzer"];
+  "Task_14" [label="Hand over meal"];
+  "Task_15" [label="Call guest"];
+  "Task_16" [label="Prepare meal"];
+  "Task_17" [label="Place meal in hatch"];
+  "Task_18" [label="Inform employee"];
+  "StartNoneEvent_1" [shape=circle, label="Hunger noticed"];
+  "EndNoneEvent_1" [shape=circle, penwidth=4, label="Not hungry anymore"];
+  "IntermediateConditionalEvent_1" [shape=doublecircle, label="wait for turn"];
+  "IntermediateMessageEventCatching_1" [shape=doublecircle, label="Meal ready"];
+  "StartMessageEvent_1" [shape=circle, label="Order received"];
+  "EndNoneEvent_2" [shape=circle, penwidth=4, label="Order processed"];
+  "IntermediateMessageEventCatching_2" [shape=doublecircle, label="Meal ready"];
+  "IntermediateMessageEventCatching_3" [shape=doublecircle, label="Guest appears"];
+  "IntermediateTimerEvent_1" [shape=doublecircle, label="5 minutes"];
+  "StartMessageEvent_2" [shape=circle, label="Meal needed"];
+  "EndNoneEvent_3" [shape=circle, penwidth=4, label="Meal prepared"];
+  "EventBasedGateway_1" [shape=diamond, label="E"];
+
+  "StartNoneEvent_1" -> "Task_1";
+  "Task_1" -> "Task_2";
+  "Task_2" -> "IntermediateConditionalEvent_1";
+  "IntermediateConditionalEvent_1" -> "Task_3";
+  "Task_3" -> "Task_4";
+  "Task_4" -> "Task_5";
+  "Task_5" -> "IntermediateMessageEventCatching_1";
+  "IntermediateMessageEventCatching_1" -> "Task_6";
+  "Task_6" -> "Task_7";
+  "Task_7" -> "EndNoneEvent_1";
+  "StartMessageEvent_1" -> "Task_8";
+  "Task_8" -> "Task_9";
+  "Task_9" -> "Task_10";
+  "Task_10" -> "Task_11";
+  "Task_11" -> "Task_12";
+  "Task_12" -> "IntermediateMessageEventCatching_2";
+  "IntermediateMessageEventCatching_2" -> "Task_13";
+  "Task_13" -> "EventBasedGateway_1";
+  "EventBasedGateway_1" -> "IntermediateMessageEventCatching_3";
+  "IntermediateMessageEventCatching_3" -> "Task_14";
+  "Task_14" -> "EndNoneEvent_2";
+  "EventBasedGateway_1" -> "IntermediateTimerEvent_1";
+  "IntermediateTimerEvent_1" -> "Task_15";
+  "Task_15" -> "EventBasedGateway_1";
+  "StartMessageEvent_2" -> "Task_16";
+  "Task_16" -> "Task_17";
+  "Task_17" -> "Task_18";
+  "Task_18" -> "EndNoneEvent_3";
+  "Task_3" -> "StartMessageEvent_1" [style=dashed, arrowhead=open];
+  "Task_9" -> "Task_4" [style=dashed, arrowhead=open];
+  "Task_4" -> "Task_9" [style=dashed, arrowhead=open];
+  "Task_11" -> "Task_5" [style=dashed, arrowhead=open];
+  "Task_13" -> "IntermediateMessageEventCatching_1" [style=dashed, arrowhead=open];
+  "Task_6" -> "IntermediateMessageEventCatching_3" [style=dashed, arrowhead=open];
+  "Task_14" -> "Task_6" [style=dashed, arrowhead=open];
+  "Task_12" -> "StartMessageEvent_2" [style=dashed, arrowhead=open];
+  "Task_18" -> "IntermediateMessageEventCatching_2" [style=dashed, arrowhead=open];
+  "Task_15" -> "Pool_1" [style=dashed, arrowhead=open];
+
+  subgraph "cluster_Pool_1" {
+    label="Guest food\nconsumption";
+      "Task_1";
+      "Task_2";
+      "Task_3";
+      "Task_4";
+      "Task_5";
+      "Task_6";
+      "Task_7";
+      "StartNoneEvent_1";
+      "EndNoneEvent_1";
+      "IntermediateConditionalEvent_1";
+      "IntermediateMessageEventCatching_1";
+    "Pool_1" [shape=point, style=invis];
+  }
+
+  subgraph "cluster_Pool_2" {
+    label="Employee order\nprocessing";
+      "Task_8";
+      "Task_9";
+      "Task_10";
+      "Task_11";
+      "Task_12";
+      "Task_13";
+      "Task_14";
+      "Task_15";
+      "StartMessageEvent_1";
+      "EndNoneEvent_2";
+      "IntermediateMessageEventCatching_2";
+      "IntermediateMessageEventCatching_3";
+      "IntermediateTimerEvent_1";
+      "EventBasedGateway_1";
+  }
+
+  subgraph "cluster_Pool_3" {
+    label="Chef meal\npreparation";
+      "Task_16";
+      "Task_17";
+      "Task_18";
+      "StartMessageEvent_2";
+      "EndNoneEvent_3";
+  }
+}

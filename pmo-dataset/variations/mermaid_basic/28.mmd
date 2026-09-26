@@ -1,0 +1,36 @@
+graph LR
+	StartEvent_1(("Internship process is started")) --> Task_1["Register for internship"]
+	ExclusiveGateway_5{"X"} --> Task_5["Enter hobbies"]
+	Task_5 --> ExclusiveGateway_6{"X"}
+	Task_12["Recieve offer"] --> ExclusiveGateway_1{"Accept offer?"}
+	ExclusiveGateway_2{"X"} --> Task_12
+	Task_7["Deny offer"] --> ExclusiveGateway_2
+	Task_8["Publish your application"] --> ExclusiveGateway_2
+	ParallelGateway_2{"+"} --> Task_6["Accept offer"]
+	ParallelGateway_2 --> Task_13["Invalidate all other offers"]
+	Task_6 --> ParallelGateway_1{"+"}
+	Task_13 --> ParallelGateway_1
+	Task_9["Begin internship"] --> ParallelGateway_3{"+"}
+	ExclusiveGateway_5 --> Task_4["Enter experience"]
+	ExclusiveGateway_5 --> Task_3["Enter expected income"]
+	Task_4 --> ExclusiveGateway_6
+	Task_3 --> ExclusiveGateway_6
+	ParallelGateway_3 --> Task_10["Write at least 3 status updates every week"]
+	ParallelGateway_3 --> Task_15["Recieve 3 status updates from the company"]
+	Task_15 --> ParallelGateway_4{"+"}
+	Task_10 --> ParallelGateway_4
+	ExclusiveGateway_3{"Recommend company?"} -->|"Yes"| Task_14["Recommend company to a list of friends via twitter api"]
+	ParallelGateway_1 --> Task_9
+	Task_11["End internship"] --> ExclusiveGateway_3
+	Task_1 --> ParallelGateway_5{"+"}
+	ParallelGateway_4 --> Task_11
+	ParallelGateway_5 --> Task_2["Enter topic"]
+	ExclusiveGateway_6 --> ParallelGateway_6{"+"}
+	Task_2 --> ParallelGateway_6
+	ParallelGateway_5 --> ExclusiveGateway_5
+	ParallelGateway_6 --> Task_8
+	ExclusiveGateway_1 -->|"No"| Task_7
+	ExclusiveGateway_1 -->|"Yes"| ParallelGateway_2
+	ExclusiveGateway_3 -->|"No"| ExclusiveGateway_4{"X"}
+	ExclusiveGateway_4 --> EndEvent_1(("Internship succesful"))
+	Task_14 --> ExclusiveGateway_4

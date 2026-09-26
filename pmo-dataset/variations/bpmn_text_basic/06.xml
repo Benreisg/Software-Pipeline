@@ -1,0 +1,33 @@
+<process>
+    <exclusiveGateway id="exclusivegateway1">
+        <branch condition="" id="branch1">
+            <activity role="" action="Customer places order online" objects="" id="activity1"/>
+        </branch>
+        <branch condition="" id="branch2">
+            <activity role="" action="Customer places order over the phone" objects="" id="activity2"/>
+        </branch>
+    </exclusiveGateway>
+    <activity role="" action="Generate and send order confirmation" objects="" id="activity3"/>
+    <parallelGateway id="parallelgateway1">
+        <branch condition="" id="branch3">
+            <activity role="" action="Generate shipping label" objects="" id="activity4"/>
+        </branch>
+        <branch condition="" id="branch4">
+            <activity role="" action="Pick and pack items" objects="" id="activity5"/>
+        </branch>
+    </parallelGateway>
+    <activity role="" action="Hand over order to logistics provider" objects="" id="activity6"/>
+    <activity role="" action="Send tracking information to customer" objects="" id="activity7"/>
+    <loopGateway id="loopgateway1">
+        <branch condition="Loop condition" id="branch5">
+            <activity role="" action="Monitor shipment" objects="" id="activity8"/>
+        </branch>
+    </loopGateway>
+    <activity role="" action="Successful delivery" objects="" id="activity9"/>
+    <exclusiveGateway id="exclusivegateway2">
+        <branch condition="" id="branch6">
+            <activity role="" action="Process customer feedback or returns" objects="" id="activity10"/>
+        </branch>
+        <branch condition="" id="branch7"/>
+    </exclusiveGateway>
+</process>

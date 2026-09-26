@@ -1,0 +1,14 @@
+# Local key slots; never commit this file after adding real API keys.
+api_keys.py
+
+# Run output
+runs/
+
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.venv*/
+.pytest_cache/
+.env
+.env.*

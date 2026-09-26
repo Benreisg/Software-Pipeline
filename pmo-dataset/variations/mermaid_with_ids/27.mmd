@@ -1,0 +1,80 @@
+graph LR
+	classDef endEvent stroke-width:3px
+	Service_1["Run diagnostics/find\nproblems"]
+	Service_2["Notify labor\ninspectorate"]
+	Service_3["Notify insurance"]
+	Service_4["Notify insurance\nabout the death"]
+	Manual_1["Schedule safety\ntraining"]
+	Manual_2["Inform employer"]
+	Manual_3["Stay informed about\nthe person's\ncondition"]
+	Manual_4["Fix the problem"]
+	Manual_5["Identify potential\nissues"]
+	Manual_6["Inform relatives"]
+	Manual_7["Fix the threat"]
+	StartNoneEvent_1(("Issue occurs"))
+	EndNoneEvent_1(("Issue resolved")):::endEvent
+	ExclusiveGateway_1{"Type of event?"}
+	ExclusiveGateway_2{"Death or serious\ninjury?"}
+	ExclusiveGateway_3{"Safety authorities\ninformed?"}
+	ExclusiveGateway_4{"X"}
+	ExclusiveGateway_5{"X"}
+	ExclusiveGateway_6{"Person insured?"}
+	ExclusiveGateway_7{"X"}
+	ExclusiveGateway_8{"X"}
+	ExclusiveGateway_9{"Is the person dead?\n(Death as a result\nof an accident)"}
+	ExclusiveGateway_10{"X"}
+	ExclusiveGateway_11{"Did the person die\nand was insured?"}
+	ExclusiveGateway_12{"X"}
+	ExclusiveGateway_13{"Employee training\nreqired?"}
+	ExclusiveGateway_14{"X"}
+	ExclusiveGateway_15{"X"}
+	ExclusiveGateway_16{"More issues?"}
+	ExclusiveGateway_17{"X"}
+	ExclusiveGateway_18{"More issues?"}
+	ParallelGateway_1{"+"}
+	ParallelGateway_2{"+"}
+
+	StartNoneEvent_1 --> Manual_2
+	ExclusiveGateway_2 -->|"No"| ExclusiveGateway_5
+	ExclusiveGateway_2 -->|"Yes"| Manual_6
+	Service_2 --> ExclusiveGateway_4
+	ExclusiveGateway_3 -->|"No"| Service_2
+	ExclusiveGateway_3 -->|"Yes"| ExclusiveGateway_4
+	ParallelGateway_1 --> ExclusiveGateway_6
+	Service_3 --> ExclusiveGateway_7
+	ParallelGateway_1 --> ExclusiveGateway_3
+	ExclusiveGateway_4 --> ParallelGateway_2
+	ExclusiveGateway_7 --> ParallelGateway_2
+	ExclusiveGateway_6 -->|"Yes"| Service_3
+	Manual_2 --> ExclusiveGateway_1
+	ExclusiveGateway_8 --> EndNoneEvent_1
+	ExclusiveGateway_5 --> ExclusiveGateway_8
+	ParallelGateway_2 --> ExclusiveGateway_9
+	ExclusiveGateway_10 --> ExclusiveGateway_5
+	ExclusiveGateway_9 -->|"Yes"| ExclusiveGateway_10
+	Manual_3 --> ExclusiveGateway_11
+	ExclusiveGateway_12 --> ExclusiveGateway_10
+	Service_4 --> ExclusiveGateway_12
+	ExclusiveGateway_11 -->|"Yes"| Service_4
+	Manual_1 --> ExclusiveGateway_14
+	ExclusiveGateway_13 -->|"No"| ExclusiveGateway_14
+	ExclusiveGateway_13 -->|"Yes"| Manual_1
+	ExclusiveGateway_1 -->|"Event that almost\nled to an accident"| ExclusiveGateway_2
+	ExclusiveGateway_14 --> ExclusiveGateway_8
+	Service_1 --> ExclusiveGateway_15
+	ExclusiveGateway_15 --> Manual_4
+	Manual_4 --> ExclusiveGateway_16
+	ExclusiveGateway_16 -->|"No"| ExclusiveGateway_8
+	ExclusiveGateway_16 -->|"Yes"| ExclusiveGateway_15
+	ExclusiveGateway_17 --> Manual_7
+	Manual_7 --> ExclusiveGateway_18
+	ExclusiveGateway_18 -->|"Yes"| ExclusiveGateway_17
+	Manual_5 --> ExclusiveGateway_17
+	ExclusiveGateway_9 -->|"No"| Manual_3
+	ExclusiveGateway_1 -->|"Defect in protective\nsystem"| ExclusiveGateway_13
+	ExclusiveGateway_6 -->|"No"| ExclusiveGateway_7
+	ExclusiveGateway_1 -->|"Accident at work"| Service_1
+	ExclusiveGateway_1 -->|"Serious/imminent\nthreat to safety"| Manual_5
+	Manual_6 --> ParallelGateway_1
+	ExclusiveGateway_18 --> ExclusiveGateway_8
+	ExclusiveGateway_11 -->|"No"| ExclusiveGateway_12

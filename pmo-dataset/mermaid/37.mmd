@@ -1,0 +1,33 @@
+graph LR
+	classDef endEvent stroke-width:4px
+	
+	StartNoneEvent_1(("Contract project\nreceived")) --> ExclusiveGateway_1{"X"}
+	ExclusiveGateway_1 --> User_1["Query the next shop"]
+	Service_1["Create a list of the\nparts"] --> ExclusiveGateway_3{"X"}
+	User_1 --> User_2["Ask about quantity,\nprice and deadline"]
+	User_2 --> ExclusiveGateway_2{"Terms acceptable?"}
+	ExclusiveGateway_2 -->|"No"| ExclusiveGateway_3
+	ExclusiveGateway_2 -->|"Yes"| Service_1
+	ExclusiveGateway_3 --> ExclusiveGateway_4{"More parts needed?"}
+	ExclusiveGateway_4 -->|"Yes"| ExclusiveGateway_1
+	ExclusiveGateway_4 -->|"No"| ParallelGateway_1{"+"}
+	ParallelGateway_1 --> Manual_1["Receive first batch\nof parts"]
+	ParallelGateway_1 --> Manual_2["Receive second batch\nof parts"]
+	ParallelGateway_1 --> Manual_3["Receive third batch\nof parts"]
+	Manual_1 --> ComplexGateway_1{"First parts arrived"}
+	Manual_2 --> ComplexGateway_1
+	Manual_3 --> ComplexGateway_1
+	ComplexGateway_1 --> Manual_4["Start/Continue\nbuilding"]
+	Manual_4 --> ExclusiveGateway_5{"Any stock falls?"}
+	ExclusiveGateway_5 -->|"Yes"| ExclusiveGateway_7{"How much is the\nstock fall?"}
+	Service_3["Reorder the part as\nfast as possible"] --> ExclusiveGateway_8{"X"}
+	Service_2["Reorder the cheapest\npart"] --> ExclusiveGateway_8
+	Manual_5["Complain to the\nfriends"] --> ExclusiveGateway_8
+	ExclusiveGateway_8 --> ExclusiveGateway_6{"X"}
+	ExclusiveGateway_5 -->|"No"| ExclusiveGateway_6
+	ExclusiveGateway_7 -->|"Below 5"| Service_2
+	ExclusiveGateway_7 -->|"Below 3"| Service_3
+	ExclusiveGateway_7 -->|"Zero"| Manual_5
+	ExclusiveGateway_6 --> ExclusiveGateway_9{"Contract fullfilled?"}
+	ExclusiveGateway_9 -->|"No"| Manual_4
+	ExclusiveGateway_9 -->|"Yes"| EndNoneEvent_1(("Project completed")):::endEvent

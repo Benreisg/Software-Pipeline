@@ -1,0 +1,124 @@
+{
+    "tasks": [
+        {
+            "id": "Task_1",
+            "name": "Claim is registered",
+            "type": "Task"
+        },
+        {
+            "id": "Task_2",
+            "name": "Claim is examined by a claims officer",
+            "type": "Task"
+        },
+        {
+            "id": "Task_3",
+            "name": "Claims officer writes a settlement recommendation",
+            "type": "Task"
+        },
+        {
+            "id": "Task_4",
+            "name": "Recommendation is checked by a senior claims officer",
+            "type": "Task"
+        },
+        {
+            "id": "Task_5",
+            "name": "Senior claims officer marks the claim",
+            "type": "Task"
+        },
+        {
+            "id": "Task_6",
+            "name": "Claim is sent back",
+            "type": "Task"
+        },
+        {
+            "id": "Task_7",
+            "name": "Claim handling process proceeds",
+            "type": "Task"
+        }
+    ],
+    "events": [
+        {
+            "id": "StartNoneEvent_1",
+            "name": "",
+            "type": "StartNoneEvent"
+        },
+        {
+            "id": "EndNoneEvent_1",
+            "name": "",
+            "type": "EndNoneEvent"
+        }
+    ],
+    "gateways": [
+        {
+            "id": "ExclusiveGateway_1",
+            "name": "",
+            "type": "ExclusiveGateway"
+        },
+        {
+            "id": "ExclusiveGateway_2",
+            "name": "",
+            "type": "ExclusiveGateway"
+        }
+    ],
+    "pools": [],
+    "sequenceFlows": [
+        {
+            "id": "SequenceFlow_1",
+            "sourceRef": "StartNoneEvent_1",
+            "targetRef": "Task_1"
+        },
+        {
+            "id": "SequenceFlow_2",
+            "sourceRef": "Task_1",
+            "targetRef": "Task_2"
+        },
+        {
+            "id": "SequenceFlow_3",
+            "sourceRef": "Task_3",
+            "targetRef": "Task_4"
+        },
+        {
+            "id": "SequenceFlow_4",
+            "sourceRef": "Task_4",
+            "targetRef": "Task_5"
+        },
+        {
+            "id": "SequenceFlow_5",
+            "sourceRef": "Task_5",
+            "targetRef": "ExclusiveGateway_1"
+        },
+        {
+            "id": "SequenceFlow_6",
+            "sourceRef": "Task_2",
+            "targetRef": "ExclusiveGateway_2"
+        },
+        {
+            "id": "SequenceFlow_7",
+            "sourceRef": "ExclusiveGateway_2",
+            "targetRef": "Task_3"
+        },
+        {
+            "id": "SequenceFlow_8",
+            "sourceRef": "Task_6",
+            "targetRef": "ExclusiveGateway_2"
+        },
+        {
+            "id": "SequenceFlow_9",
+            "sourceRef": "ExclusiveGateway_1",
+            "targetRef": "Task_7",
+            "condition": "OK"
+        },
+        {
+            "id": "SequenceFlow_10",
+            "sourceRef": "ExclusiveGateway_1",
+            "targetRef": "Task_6",
+            "condition": "Not OK"
+        },
+        {
+            "id": "SequenceFlow_11",
+            "sourceRef": "Task_7",
+            "targetRef": "EndNoneEvent_1"
+        }
+    ],
+    "messageFlows": []
+}

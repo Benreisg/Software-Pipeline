@@ -1,0 +1,73 @@
+<process>
+    <activity role="" action="Place order" objects="" id="activity1"/>
+    <activity role="" action="Record order details" objects="" id="activity2"/>
+    <activity role="" action="Process payment" objects="" id="activity3"/>
+    <exclusiveGateway id="exclusivegateway1">
+        <branch condition="" id="branch1">
+            <activity role="" action="Check stock availability" objects="" id="activity4"/>
+            <exclusiveGateway id="exclusivegateway2">
+                <branch condition="" id="branch2">
+                    <activity role="" action="Initiate back-order" objects="" id="activity5"/>
+                    <activity role="" action="Inform customer about delay" objects="" id="activity6"/>
+                    <activity role="" action="Receive back-order" objects="" id="activity7"/>
+                </branch>
+                <branch condition="" id="branch3"/>
+            </exclusiveGateway>
+            <activity role="" action="Pick items from warehouse" objects="" id="activity8"/>
+            <activity role="" action="Perform quality control checks" objects="" id="activity9"/>
+            <parallelGateway id="parallelgateway1">
+                <branch condition="" id="branch4">
+                    <activity role="" action="Package items" objects="" id="activity10"/>
+                    <exclusiveGateway id="exclusivegateway3">
+                        <branch condition="" id="branch5"/>
+                        <branch condition="" id="branch6">
+                            <activity role="" action="Gift wrap items" objects="" id="activity11"/>
+                        </branch>
+                    </exclusiveGateway>
+                </branch>
+                <branch condition="" id="branch7">
+                    <activity role="" action="Prepare shipping documents and labels" objects="" id="activity12"/>
+                </branch>
+                <branch condition="" id="branch8">
+                    <exclusiveGateway id="exclusivegateway4">
+                        <branch condition="" id="branch9"/>
+                        <branch condition="" id="branch10">
+                            <activity role="" action="Prepare documentation for international orders" objects="" id="activity13"/>
+                        </branch>
+                    </exclusiveGateway>
+                </branch>
+            </parallelGateway>
+            <activity role="" action="Dispatch order" objects="" id="activity14"/>
+            <parallelGateway id="parallelgateway2">
+                <branch condition="" id="branch11">
+                    <activity role="" action="Update inventory levels" objects="" id="activity15"/>
+                </branch>
+                <branch condition="" id="branch12">
+                    <activity role="" action="Send shipping confirmation to customer" objects="" id="activity16"/>
+                </branch>
+            </parallelGateway>
+            <activity role="" action="Confirm delivery" objects="" id="activity17"/>
+            <activity role="" action="Send follow-up email" objects="" id="activity18"/>
+            <exclusiveGateway id="exclusivegateway5">
+                <branch condition="" id="branch13">
+                    <activity role="" action="Customer reports issue" objects="" id="activity19"/>
+                    <activity role="" action="Send return shipping label" objects="" id="activity20"/>
+                    <activity role="" action="Receive returned items" objects="" id="activity21"/>
+                    <activity role="" action="Inspect returned items" objects="" id="activity22"/>
+                    <exclusiveGateway id="exclusivegateway6">
+                        <branch condition="" id="branch14">
+                            <activity role="" action="Process refund" objects="" id="activity23"/>
+                        </branch>
+                        <branch condition="" id="branch15">
+                            <activity role="" action="Process replacement" objects="" id="activity24"/>
+                        </branch>
+                    </exclusiveGateway>
+                </branch>
+                <branch condition="" id="branch16"/>
+            </exclusiveGateway>
+        </branch>
+        <branch condition="" id="branch17">
+            <activity role="" action="Notify about failed payment" objects="" id="activity25"/>
+        </branch>
+    </exclusiveGateway>
+</process>
