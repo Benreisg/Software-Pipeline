@@ -1,9 +1,0 @@
-Metadata-Version: 2.4
-Name: epmc_llm
-Version: 1.0
-Home-page: git@gitlab-iwi.dfki.de/pfeiffer/epmc_llm.git
-Requires-Python: >=3.11
-Requires-Dist: setuptools
-Dynamic: home-page
-Dynamic: requires-dist
-Dynamic: requires-python

@@ -1,9 +1,0 @@
-graph LR
-	StartEvent_1((" ")) --> Task_1["MSPN sends a dismissal to MSPO"]
-	Task_1 --> Task_2["MSPO reviews the dismissal"]
-	Task_2 --> ExclusiveGateway_1{"X"}
-	ExclusiveGateway_1 --> Task_3["MSPO rejects the dismissal of the MSPN"]
-	ExclusiveGateway_1 --> Task_4["MSPO confirms the dismissal of the MSPN"]
-	Task_3 --> ExclusiveGateway_2{"X"}
-	Task_4 --> ExclusiveGateway_2
-	ExclusiveGateway_2 --> EndEvent_1((" "))
