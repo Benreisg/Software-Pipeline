@@ -42,12 +42,15 @@ aggregators separately (`compute_syntax_score`, `compute_score_per_group`, …),
 and for the semantic class — whose aggregators are welded to the computation —
 the three `*_similarity()` methods are stubbed out *after* they have run, so
 its own `semantic_quality_check()` executes over the state it just produced.
-`--verify` re-scores a few items the naive way and asserts the two agree.
+`--verify` re-scores a few items with fresh objects and checks every metric
+and aggregate against the single-pass result.
 
 ── The semantic columns are a self-comparison ───────────────────────────────
-Each model is compared with itself, exactly as in `score_pmo_dataset.py`. Under
-this project's port that yields 1.0 on all seven metrics. Under the supplied
-code it does **not**: the three natural-language metrics come out at 0.5,
+Each model is compared with itself, exactly as in `score_pmo_dataset.py`. The
+DOT port currently scores five semantic metrics: its graph edit distance and
+common-nodes/edges are 1.0 on self-comparisons, while its three natural-language
+metrics are around 0.5. Under the supplied code the three natural-language
+metrics also come out at 0.5,
 because the published formula divides the summed similarity by
 `|FO_c| + |FO_g|` and the paper multiplies that sum by 2 (Table A.17) while the
 code does not — a perfect self-match therefore scores n/(n+n). The number is a
@@ -80,6 +83,8 @@ def _load_bef4llm(src: str):
     from bef4llm.process_models.importer.bpmn_importer import load_diagram_from_xml
     from bef4llm.semantic_quality.semantic_quality_check import SemanticQualityCheckBPMN
     from bef4llm.semantic_quality.similarity.language_similarity.lanuage_utils import Language
+    from bef4llm.semantic_quality.similarity.language_similarity.natural_language_similarity import semantic_similarity
+    from bef4llm.process_models.graph_representation.node_types import Event, Task
     from bef4llm.synactic_quality.synactic_quality_check import SyntacticQualityCheckBPMN
     from bef4llm.validation.validation import validate_bpmn
     return dict(
@@ -88,7 +93,105 @@ def _load_bef4llm(src: str):
         Sem=SemanticQualityCheckBPMN, Language=Language,
         SynM=Sytax_Mistakes, PragM=Pragmatic_Metrics, PragG=Pragmatic_Subgroups,
         SemM=Similarity_Metrics, SemG=Similarity_Groups,
+        sem_sim=semantic_similarity, Task=Task, Event=Event,
     )
+
+
+# ── common nodes and edges, computed correctly on BEF4LLM's graphs ──────────
+# Their `strucural_similarity` calls `common_percentage_similarity(matching=…)`
+# with the default `edges=False`, over a matching built at `threshold=0.0` that
+# puts *every* task and event into the dict. `__compute_sn` then only asks
+# whether a node id is in that dict, so the value is |N1|+|N2| / |N1|+|N2| = 1.0
+# for any two models. The published column is therefore replaced by the printed
+# formula (Table A.17), evaluated on the graphs their importer builds and with
+# their own `semantic_similarity` as the node similarity:
+#
+#     1 - (unmatched nodes + unmatched edges) / (|N1| + |N2| + |E1| + |E2|)
+#
+# Nodes are tasks and events (the domain of their matching); every other node
+# is contracted away, its predecessors wired to its successors, as their
+# `__compute_nodes_edges` does for gateways. The matching is injective — the
+# assignment maximising total similarity, zero-similarity pairs dropped — and
+# is held by position, not by node id, so shared ids cannot collide. An edge is
+# matched when its mapped endpoints carry an edge of the same flow type.
+# The value the supplied code returned is kept as `*_bef4llm_raw`.
+
+def _contracted(graph, B: Dict[str, Any]):
+    """Tasks and events of `graph`, every other node bridged over."""
+    import networkx as nx
+
+    keep = set(B["Task"].__members__) | set(B["Event"].__members__)
+    g = nx.DiGraph()
+    g.add_nodes_from(graph.nodes(data=True))
+    for u, v, data in graph.edges(data=True):
+        g.add_edge(u, v, type=str(getattr(data.get("type"), "value",
+                                          data.get("type"))))
+    for node, data in list(g.nodes(data=True)):
+        if data.get("type") in keep:
+            continue
+        preds = [p for p in g.predecessors(node) if p != node]
+        succs = [s for s in g.successors(node) if s != node]
+        g.remove_node(node)
+        for p in preds:
+            for s in succs:
+                if not g.has_edge(p, s):
+                    g.add_edge(p, s, type="sequenceFlow")
+    return g
+
+
+def common_nodes_and_edges(graph1, graph2, B: Dict[str, Any]) -> Dict[str, float]:
+    """The metric and its two halves for one pair of BEF4LLM process graphs."""
+    import numpy as np
+    from scipy.optimize import linear_sum_assignment
+
+    g1, g2 = _contracted(graph1, B), _contracted(graph2, B)
+    n1, n2 = list(g1.nodes), list(g2.nodes)
+    sim = B["sem_sim"](lang=B["Language"].ENGLISH)
+    weights = np.zeros((len(n1), len(n2)))
+    for i, a in enumerate(n1):
+        for j, b in enumerate(n2):
+            weights[i, j] = sim(g1.nodes[a], g2.nodes[b])
+
+    mapping: Dict[Any, Any] = {}
+    if weights.size:
+        rows, cols = linear_sum_assignment(weights, maximize=True)
+        mapping = {n1[i]: n2[j] for i, j in zip(rows, cols) if weights[i, j] > 0.0}
+
+    edges_matched = sum(
+        1 for u, v, data in g1.edges(data=True)
+        if u in mapping and v in mapping
+        and g2.has_edge(mapping[u], mapping[v])
+        and g2[mapping[u]][mapping[v]]["type"] == data["type"])
+
+    nodes_total = len(n1) + len(n2)
+    edges_total = g1.number_of_edges() + g2.number_of_edges()
+    total = nodes_total + edges_total
+    matched = 2 * len(mapping) + 2 * edges_matched
+    return {
+        "common_percentage": matched / total if total else 1.0,
+        "common_nodes": 2 * len(mapping) / nodes_total if nodes_total else 1.0,
+        "common_edges": 2 * edges_matched / edges_total if edges_total else 1.0,
+    }
+
+
+def _fix_common_percentage(sem, model_path: Path, reference_path: Path,
+                           B: Dict[str, Any], row: Dict[str, Any]) -> None:
+    """Replace their constant with the correct value, before the aggregators run.
+
+    Computed on freshly loaded graphs, because the check class mutates the ones
+    it holds. The value is written into `sem.similarity_metrics`, so the group
+    and dimension scores that `semantic_quality_check()` reads off that state
+    aggregate the corrected metric, not the constant.
+    """
+    key = B["SemM"].common_percentage.value
+    group = B["SemG"].graph_structure.value
+    fixed = common_nodes_and_edges(B["load"](str(model_path)).process_graph,
+                                   B["load"](str(reference_path)).process_graph, B)
+    raw = sem.similarity_metrics[group].get(key)
+    row[f"bef_sem_{key}_bef4llm_raw"] = None if raw is None else float(raw)
+    row["bef_sem_common_nodes"] = fixed["common_nodes"]
+    row["bef_sem_common_edges"] = fixed["common_edges"]
+    sem.similarity_metrics[group][key] = fixed["common_percentage"]
 
 
 def score_semantic_pair(generated: Path, reference: Path,
@@ -119,11 +222,13 @@ def score_semantic_pair(generated: Path, reference: Path,
     sem = B["Sem"](model=load(str(generated)),
                    reference_model=load(str(reference)),
                    lang=B["Language"].ENGLISH)
-    sem_m = sem.semantic_quality_check_metric_results()
+    sem.semantic_quality_check_metric_results()
     _noop = lambda *a, **k: None                                  # noqa: E731
     sem.natural_language_similarity = _noop
     sem.strucural_similarity = _noop
     sem.behavioural_similarity = _noop
+    _fix_common_percentage(sem, generated, reference, B, row)
+    sem_m = sem.semantic_quality_check_metric_results()
     row["bef_sem_score"] = sem.semantic_quality_check()
     sem_g = sem.semantic_quality_check_detailed()
     for group in B["SemG"]:
@@ -228,7 +333,7 @@ def score_one(path: Path, B: Dict[str, Any]) -> Dict[str, Any]:
     # ── semantic: each model against itself ──
     sem = B["Sem"](model=load(str(path)), reference_model=load(str(path)),
                    lang=B["Language"].ENGLISH)
-    sem_m = sem.semantic_quality_check_metric_results()
+    sem.semantic_quality_check_metric_results()
     # The aggregators recompute the whole similarity pass; stub the three
     # computation steps now that they have run, so the class aggregates the
     # results it already holds instead of spending another ~30 s on them.
@@ -236,6 +341,8 @@ def score_one(path: Path, B: Dict[str, Any]) -> Dict[str, Any]:
     sem.natural_language_similarity = _noop
     sem.strucural_similarity = _noop
     sem.behavioural_similarity = _noop
+    _fix_common_percentage(sem, path, path, B, row)
+    sem_m = sem.semantic_quality_check_metric_results()
     row["bef_sem_score"] = sem.semantic_quality_check()
     sem_g = sem.semantic_quality_check_detailed()
     for group in B["SemG"]:
@@ -249,11 +356,11 @@ def score_one(path: Path, B: Dict[str, Any]) -> Dict[str, Any]:
 
 
 def verify(path: Path, B: Dict[str, Any], row: Dict[str, Any]) -> List[str]:
-    """Re-score one item the naive way and report any disagreement.
+    """Re-score one item with fresh objects and report any disagreement.
 
     The naive way is what the module docstring avoids for cost: a fresh
-    instance per public method, each recomputing from scratch. If the
-    single-pass path in `score_one` is faithful, every aggregate matches.
+    instance per public method, each recomputing from scratch. Compare every
+    individual metric as well as all group and dimension aggregates.
     """
     load, problems = B["load"], []
 
@@ -265,20 +372,47 @@ def verify(path: Path, B: Dict[str, Any], row: Dict[str, Any]) -> List[str]:
 
     _cmp("syn_score", row["bef_syn_score"],
          B["Syn"](load(str(path))).syntax_check())
+    naive_syn = B["Syn"](load(str(path))).syntax_check_metric_results()
+    for metric in B["SynM"]:
+        _cmp(f"syn_{metric.value}", row[f"bef_syn_{metric.value}"],
+             naive_syn.get(metric.value))
+
     _cmp("prag_score", row["bef_prag_score"],
          B["Prag"](load(str(path))).pragmatic_quality_check())
     naive_groups = B["Prag"](load(str(path))).pragmatic_quality_check_detailed()
     for group in B["PragG"]:
         _cmp(f"prag_group_{group.value}", row[f"bef_prag_group_{group.value}"],
              naive_groups.get(group.value))
-    _cmp("sem_score", row["bef_sem_score"],
-         B["Sem"](model=load(str(path)), reference_model=load(str(path)),
-                  lang=B["Language"].ENGLISH).semantic_quality_check())
+    naive_prag = B["Prag"](load(str(path)))
+    naive_banded = naive_prag.pragmatic_quality_check_metric_results()
+    naive_raw = {k: v for group in naive_prag.metric_scores.values()
+                 for k, v in group.items()}
+    for metric in B["PragM"]:
+        _cmp(f"prag_{metric.value}", row[f"bef_prag_{metric.value}"],
+             naive_raw.get(metric.value))
+        _cmp(f"prag_{metric.value}_score",
+             row[f"bef_prag_{metric.value}_score"],
+             naive_banded.get(metric.value))
+
+    # The naive path returns their unfixed common_percentage, so it is held
+    # against the `_bef4llm_raw` column, and the two aggregates it feeds (the
+    # dimension score and the graph-structure group) are not compared.
+    fixed_key = B["SemM"].common_percentage.value
+    fixed_group = B["SemG"].graph_structure.value
     naive_sem_g = B["Sem"](model=load(str(path)), reference_model=load(str(path)),
                            lang=B["Language"].ENGLISH).semantic_quality_check_detailed()
     for group in B["SemG"]:
+        if group.value == fixed_group:
+            continue
         _cmp(f"sem_group_{group.value}", row[f"bef_sem_group_{group.value}"],
              naive_sem_g.get(group.value))
+    naive_sem = B["Sem"](model=load(str(path)), reference_model=load(str(path)),
+                         lang=B["Language"].ENGLISH).semantic_quality_check_metric_results()
+    for metric in B["SemM"]:
+        column = f"bef_sem_{metric.value}"
+        if metric.value == fixed_key:
+            column += "_bef4llm_raw"
+        _cmp(f"sem_{metric.value}", row[column], naive_sem.get(metric.value))
     return problems
 
 
@@ -297,8 +431,8 @@ def main() -> None:
                          "directory instead of --bpmn-dir (the basic-variation "
                          "pairing has both sides under the same item id)")
     ap.add_argument("--verify", type=int, default=0, metavar="N",
-                    help="re-score the first N items the naive way and assert "
-                         "the single-pass aggregates match")
+                    help="re-score the first N items with fresh objects and "
+                         "assert all metrics and aggregates match")
     args = ap.parse_args()
 
     import pandas as pd
@@ -336,9 +470,11 @@ def main() -> None:
 
     if args.verify:
         print(f"\n[verify] {args.verify} item(s) re-scored the naive way: "
-              + ("all aggregates match" if not problems else "MISMATCH"), flush=True)
+              + ("all metrics and aggregates match" if not problems else "MISMATCH"), flush=True)
         for problem in problems:
             print(f"  ! {problem}", flush=True)
+        if problems:
+            raise RuntimeError("BEF4LLM verification disagreed: " + "; ".join(problems))
 
     df = pd.DataFrame(rows)
     lead = ["item_id", "bef_xsd_valid", "bef_syn_score", "bef_prag_score",
